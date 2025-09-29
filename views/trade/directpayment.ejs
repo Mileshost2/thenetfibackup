@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Payment</title>
+    <link rel="stylesheet" href="/stylesheets/user/payment.css">
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-money-bill-transfer headericon"></i> <small>Direct Payment</small></span>
+                <span class="headerinnerspan"><a href="/dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+        </div>
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="depositbox2">
+                <div id="depositmethodbox">
+                        
+                        <div class="depositmethodboxclass">
+
+                            <span>
+                                <p>Transaction Method:</p> 
+                                <small class="accounttype"><%= wallet.tradeCurrency %></small>
+                            </span>
+
+                            <span class="" id="">
+                                <small class="ps-text">This is your account's <%= wallet.tradeCurrency.toLowerCase()%> address.</small>
+                                <input type="text" class="form-control" id="copy" value="<%= depositmethod.depositaddress %>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" readonly>
+                                
+                            </span>
+
+                            <span class="depositimgbox">
+                                <p><%= depositmethod.depositmethodname %> Wallet QR Code:</p>
+                                <% for (let img of depositmethod.depositqrcode) { %> 
+                                    <img src="<%= img.url %>" class="depositmethodimg" alt="Wallet QR Code">
+                                  <% } %>
+                            </span>
+
+                            
+
+                            <span class="depositmethodboxaction">
+                                <button class="btn btn-primary" onclick="myFunction()">Copy <%= depositmethod.depositmethodname %> Address </button>
+
+                                <form action="/wallet/<%= wallet.id %>/direct-deposit" method="post" class="paymentform">
+
+                                    <span class="paymentformgroup">
+                                        <label for="amount">Enter the amount you wish to fund this wallet with:</label>
+                                        <span class="paymentforminputgroup"><i class="fas fa-dollar-sign"></i><input type="number" placeholder="Amount" class="paymentforminput" name="amount" required></span>
+                                    </span>
+                                    <button class="btn btn-success">Proceed</button>
+
+                                </form>
+                            </span>             
+                        </div>
+                </div>
+        </div>
+
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

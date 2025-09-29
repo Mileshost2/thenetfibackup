@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hilton Philadelphia City Avenue</title>
+    <link rel="stylesheet" href="/stylesheets/user/projects.css">
+    
+</head>
+<body>
+    <%- partial('../partials/usernav')%>
+
+    <div class="contentbox"> 
+        <div class="pageheader">
+            <a href="/dashboard/real-estate"><i class="fas fa-arrow-left"></i> Back to projects.</a>
+        </div>
+       
+        <div class="projectbox1">
+            <div class="custom-carousel">
+                <div class="custom-carousel-inner">
+                    <div class="custom-carousel-item active">
+                        <img src="/img/projects/project5a.png" alt="Image 1">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project5b.png" alt="Image 2">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project5c.png" alt="Image 3">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project5d.png" alt="Image 4">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project5e.png" alt="Image 5">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project5f.png" alt="Image 6">
+                    </div>
+                </div>
+                <div class="custom-carousel-indicators">
+                    <span class="custom-indicator active"></span>
+                    <span class="custom-indicator"></span>
+                    <span class="custom-indicator"></span>
+                    <span class="custom-indicator"></span>
+                    <span class="custom-indicator"></span>
+                    <span class="custom-indicator"></span>
+                </div>
+                <button class="custom-carousel-control custom-prev">&#10094;</button>
+                <button class="custom-carousel-control custom-next">&#10095;</button>
+            </div>
+
+            <div class="projectbox1inner">
+                <h3>Hilton Philadelphia City Avenue</h3>
+                <p>
+                    Discounted acquisition of a recently renovated hotel property in Philadelphia with below-market, assumable debt.
+                </p>
+            </div>
+        </div>
+
+    
+        <div class="projectinfobox">
+            <div class="innerprojectinfobox">
+                <div class="infobox infobox1">
+                    <div class="projectinfo">
+                        <h5>Property Overview</h5>
+                        <p>
+                            Hilton City Line is a dual-branded 329-key hotel asset that operates under The Hilton and Homewood Suites flags. The Sponsor has secured a discounted purchase price with a highly accretive deal structure, acquiring a majority equity interest from the current owner of the Property at an attractive cost basis. Seeking to capitalize on the recovery of the Philadelphia hospitality sector, along with assuming the existing below-market, fixed-rate debt on the Property, the deal presents potentially favorable timing to invest in the rebounding market and asset class. In addition, the potential to sell the Property unencumbered by the franchise agreements, which expire at the end of the target hold period, may provide an opportune exit strategy.
+                        </p>
+                    </div>
+
+                    <div class="projectinfo">
+                        <h5>Why This Property:</h5>
+                        
+                        <ul>
+                            <li>
+                                We view the acquisition terms as compelling for this deal – most notably the discounted purchase price that is ~$5M less than competing offers (~$10MM less after taking into account closing costs and capex) and the Property's assumable below market, fixed-rate debt.
+                            </li>
+                            <li>
+                                We observe a strong positive trend in recent revenue metrics, with net operating income up 10% year-to-date compared to budget projections and tracking well towards the projected 2025 exit NOI, conservatively underwritten at 85% of 2019 (pre-pandemic) numbers.
+                            </li>
+                            <li>
+                                The hotel will be unencumbered by the current Hilton brand agreement at the end of the 2.25 year target hold period, potentially making it more attractive to buyers.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="projectinfo">
+                        <h5>Why This Sponsor:</h5>
+                        
+                        <ul>
+                            <li>
+                                We believe DoveHill is a suitable Sponsor for this deal given their singular focus on hospitality (20 portfolio assets).
+                            </li>
+                            <li>
+                                A family connection to the Seller helped the Sponsor out-position other bidders and secure the Property with attractive terms, including assuming the in-place debt.
+                            </li>
+                            <li>
+                                Previously headquartered in Philadelphia, the Sponsor has intimate knowledge of the local market and this asset specifically.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="projectinfo">
+                        <h5>Project Breakdown:</h5>
+                        
+                        <span class="projectbreakdown">
+                            <small>TYPE:</small>
+                            <p>Hospitality</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>ACRES:</small>
+                            <p>1.90</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>STRATEGY:</small>
+                            <p>Growth & Income</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>OBJECTIVE:</small>
+                            <p>Value-add</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>MINIMUM:</small>
+                            <p>$90K</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>ROI:</small>
+                            <p>27% Daily</p>
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- <div class="infobox infobox2">
+
+                </div> -->
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+    
+
+
+
+
+
+<script>
+    const prevButton = document.querySelector('.custom-prev');
+const nextButton = document.querySelector('.custom-next');
+const carouselInner = document.querySelector('.custom-carousel-inner');
+const indicators = document.querySelectorAll('.custom-indicator');
+
+let index = 0;
+
+function showSlide(i) {
+    if (i >= indicators.length) i = 0;
+    if (i < 0) i = indicators.length - 1;
+
+    carouselInner.style.transform = `translateX(-${i * 100}%)`;
+
+    indicators.forEach((indicator, idx) => {
+        indicator.classList.toggle('active', idx === i);
+    });
+
+    index = i;
+}
+
+prevButton.addEventListener('click', () => {
+    showSlide(index - 1);
+});
+
+nextButton.addEventListener('click', () => {
+    showSlide(index + 1);
+});
+
+indicators.forEach((indicator, idx) => {
+    indicator.addEventListener('click', () => {
+        showSlide(idx);
+    });
+});
+
+// Optionally, you can start the carousel with automatic sliding
+setInterval(() => {
+    showSlide(index + 1);
+}, 5000); // Change slide every 5 seconds
+
+</script>
+    <script src="/script/app.js"></script>
+</body>
+</html>

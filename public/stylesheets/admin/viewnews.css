@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#taskbox {
+    width: 100%;
+    padding: 20px;
+}
+
+#innertaskbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.taskcontentbox {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+    color: var(--foreground);
+    padding: 20px;
+    margin: 10px 0;
+}
+
+.boxtitle {
+    border-bottom: 4px solid rgb(0, 128, 55);
+}
+
+.boxtitle p {
+    margin: 0;
+}
+
+/* .boxcontent {
+    
+} */
+
+.actionbox {
+    margin-top: 10px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.actionbtn {
+    margin: 5px 0;
+    width: 100%;
+}
+
+.taskform {
+    width: 100%;
+}
+
+.formgroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.taskforminput {
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.taskform button {
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .taskcontentbox {
+        width: 100%;
+    }
+    .actionbox {
+        width: 100%;
+    }
+    
+}
+
+.imagescontainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#carouselExampleControls {
+    width: 80%;
+}
+
+#carouselExampleControls img {
+    width: 100%;
+}

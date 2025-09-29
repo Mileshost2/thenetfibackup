@@ -1,0 +1,718 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    /* background-color: #5e5c5c; */
+}
+
+/* Chrome, Safari, Edge, Opera hide number input arrow*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+#pageintrobox {
+    width: 100%;
+    padding: 10px;
+}
+
+#innerpageintrobox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#innerpageintrobox p {
+    margin: 0;
+}
+
+.modal {
+    color: black !important;
+}
+
+.modal-backdrop {
+    display: none;
+}
+
+
+#navbarcontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    /* color: white !important; */
+    background-color: var( --navbarcontainer);
+    color: var( --navLinksColor) !important;
+    /* background-color: #2b2a2a; */
+    margin: 0;
+    position: fixed;
+    width: 100vw;
+    height: 80px;
+    z-index: 1000;
+    border-bottom: 1px solid var(--foreground);
+}
+
+.dark-mode-toggle {
+    z-index: 100;
+    top: 1em;
+    right: 1em;
+    /* color: var(--foreground); */
+    color: black !important;
+    /* border: 2px solid var(--foreground); */
+    border: none;
+    /* padding: 4px; */
+    background: transparent;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    padding: 0 !important;
+  }
+  
+  .dark-mode-toggle svg {
+      /* color: var(--foreground); */
+      color: black !important;
+  }
+
+#navinner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    width: 100px;
+    /* flex-grow: 1; */
+}
+
+/* .logobox {
+    width: 250px;
+} */
+
+#logo {
+    width: 70px;
+    height: auto;
+    z-index: 100;
+}
+
+.hoverscale {
+    padding: 10px 20px;
+    width: 100%;
+    color: black;
+    text-decoration: none;
+}
+
+
+.hoverscale:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    color: black;
+}
+
+#toggleButton {
+    background-color: transparent;
+    /* border: 1px solid var(--foreground); */
+    border: none;
+}
+
+#toggleButton i {
+    color: var(--foreground);
+}
+
+#iconContainer {
+    display: none;
+    position: absolute;
+    top: 70px; /* Adjust as needed */
+    right: 20px;
+    background-color: white; /* Optional: for better visibility */
+    color: black !important;
+    border: 1px solid #ccc; /* Optional: for better visibility */
+    z-index: 1000; /* Ensure it is above other elements */
+  }
+
+  .gr {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    transition: 0.5s;
+    margin: 5px 0;
+  }
+
+  .gr small {
+    margin-left: 15px !important;
+}
+
+#iconContainer small {
+    margin-left: 8px;
+    color: black !important;
+}
+  .icon-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: black !important;
+    width: 200px;
+  }
+  .icon-column i {
+    margin: 10px 0;
+    color: black !important;
+    /* font-size: 24px; */
+  }
+
+  .borderbottom {
+    width: 100%;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.profilepic {
+    width: 30px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+/* .profiledropdown {
+    width: max-content;
+} */
+
+/* .dropdownBtn {
+    background-color: transparent; 
+    border: none;
+    color: var(--navLinksColor);
+}
+
+.dropdownBtn:hover {
+    background-color: var( --navLinksIconBgColor); 
+    
+}
+
+.dropdownBtn.show {
+    background-color: var( --navLinksIconBgColor);
+}
+
+.dropdownMenu {
+    background-color: var( --navLinksIconBgColor);
+    margin-top: 20px;
+    width: 200px;
+    color: white;
+}
+
+.show {
+    background-color: var( --navLinksIconBgColor);
+    color: white;
+} */
+
+
+
+.dropdownMenu li {
+    margin: 4px 0;
+}
+
+.dropdown-item {
+    color: white;
+}
+
+.navcontrolbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 140px;
+}
+
+.navtoggle, .fa-telegram {
+    color: var(--navLinksColor);
+    font-size: 1.2em;
+    cursor: pointer;
+    
+} 
+
+.navbar {
+    width: 250px;
+    /* float:right; */
+    /* display: none; */
+}
+
+.hide-navbar {
+    display: none;
+}
+
+/* .show-navbar {
+    display: block;
+} */
+
+.profilepicbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 0.5px dotted rgb(124, 123, 123);
+}
+
+.profilepicbox img{
+    width: 100px;
+    border-radius: 50%;
+}
+
+.profilepicbox small {
+    margin: 15px 0;
+}
+
+.navcontent {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    z-index: 20;
+    top: 80px;
+    /* background-color: #2b2a2a; */
+    /* background-color: var( --navcontentBgColor); */
+    background-color: var( --navbarcontainer);
+    padding-top: 30px;
+    overflow: auto;
+    /* border-right: 4px solid rgb(26, 104, 182); */
+    border-right: 1px solid var(--foreground);
+}
+
+
+.navlinks {
+    color: var( --navLinksColor) !important;
+    /* color: white !important; */
+    text-decoration: none;
+    padding: 5px 10px;
+    width: 100%;
+    margin: 3px 0;
+    font-size: 0.8em;
+}
+
+.navlinks i {
+    margin-right: 5px;
+}
+
+.navlinks:hover {
+    cursor: pointer;
+    /* background-color: #202020d5; */
+    background-color: var( --navLinksHover);
+}
+
+.links-icons {
+    padding: 10px;
+    border-radius: 50%;
+    /* background-color: #383737; */
+    background-color: var( --navLinksIconBgColor);
+    font-size: 0.8em;
+    color: white !important;
+}
+
+#logoutform {
+    width: 100%;
+}
+
+#logoutform button {
+    width: 100%;
+    padding: 10px;
+    color: white !important;
+}
+
+#logoutform i {
+    color: white !important;
+}
+
+
+.transbg {
+    background-color: transparent !important;
+    border: none;
+}
+
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+    width: 100%;
+    background-color: transparent;
+    color: var( --navLinksColor) !important;
+    /* color: white !important; */
+    cursor: pointer;
+    border: none;
+    outline: none;
+    margin: 3px 0;
+    font-size: 0.8em;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+.accordion i {
+    margin-right: 10px;
+}
+
+.accordionlinks {
+    /* color: rgb(255, 255, 255); */
+    color: var( --navLinksColor);
+    text-decoration: none;
+    margin: 3px 0;
+    font-size: 0.8em;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.accordionlinks i {
+    margin-right: 10px;
+}
+
+.accordionlinks:hover {
+    color: var( --navLinksColor);
+    cursor: pointer;
+    background-color: var( --navLinksHover);
+    /* background-color: #202020d5; */
+}
+
+  .accordion:after {
+    content: '\02C3'; /* Unicode character for "right arrowhead" sign (>) */
+    font-size: 15px;
+    color: #777;
+    float: right;
+    margin-left: 55px;
+  }
+  
+  .navactive:after {
+    content: "\02C5"; /* Unicode character for "down arrowhead" sign () */
+  }
+
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .navactive, .accordion:hover {
+    color: white;
+    /* background-color: #2d3257; */
+    /* background-color: #202020d5; */
+    background-color: var( --navLinksHover);
+  }
+
+  .navactive {
+    /* border-left: 4px solid rgb(0, 0, 0); */
+  }
+  
+  /* Style the accordion panel. Note: hidden by default */
+  .panel {
+    padding: 0 18px;
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    /* background-color: #3b3b3b; */
+    /* background-color: var( --navLinksIconBgColor); */
+    margin-top: 0;
+    /* border-left: 4px solid rgb(0, 0, 0); */
+    width: 100%;
+}
+
+  .contentbox {
+    margin-left: 250px;
+    padding-top: 80px;
+    transition: 0.5s;
+  }
+
+  .fullcontentbox {
+    margin-left: 0;
+  }
+
+
+@media (max-width:800px) {
+    .navbar {
+        display: none;
+    }
+    
+    .show-navbar {
+        display: block;
+    }
+
+    .contentbox {
+        margin-left: 0;
+    }
+}
+
+@media (max-width:640px) {
+    .profiledropdown .profilename {
+        display: none;
+    }
+}
+
+@media (max-width:) {
+    #navbarcontainer {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+    }
+    #navinner {
+        width: 100%;
+        margin-top: 10px;
+    }
+    #navinner .dropdown {
+        margin: 10px;
+    }
+    .contentbox {
+        padding-top: 180px !important;
+    }
+    .navcontent {
+        top: 110px;
+    }
+}
+
+@media (max-width:) {
+    .contentbox {
+        padding-top: 200px !important;
+    }
+    .navcontent {
+        top: 140px;
+    }
+}
+
+
+.navcontent::-webkit-scrollbar{
+    width: 10px;
+}
+
+.navcontent::-webkit-scrollbar-track {
+    -webkit-box-shadow:inset 0 0 10px rgba(0, 0, 0, 0.459)
+}
+
+.navcontent::-webkit-scrollbar-thumb {
+    -webkit-box-shadow:inset 0 0 10px rgba(0, 0, 0, 0.534)
+}
+
+
+
+
+
+
+    #intro {
+        display: flex;
+        flex-direction: row;
+        font-family: 'Oswald', sans-serif;
+        color: white;
+    }
+
+    #introbox {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 10px 20px;
+        width: 100%;
+        align-items: center;
+    }
+
+    #introbox p {
+        margin: 0;
+    }
+
+    .introboxinner1 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .introboxinner1 i {
+        color: white;
+        background-color: dodgerblue;
+        padding: 10px;
+        border-radius: 6px;
+        margin: 0 20px;
+        font-size: 1.6em;
+    }
+
+    .introboxinner2 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: black;
+        margin: 0 10px;
+    }
+
+    .introboxinner2 a {
+        color: black;
+    }
+
+
+    .introboxinner2 a:hover {
+        color: rgb(17, 109, 202);
+    }
+
+    /* #introbox span {
+        color: white;
+    } */
+
+    @media (max-width: 400px) {
+    
+    .introboxinner2 {
+        display: none;
+    }
+        
+    }
+
+    .flashbox {
+        width: 100%;
+        padding: 10px 20px;
+    }
+    
+        /* The alert message box */
+    .flashboxsuccess-alert {
+        padding: 10px 30px;
+        background-color: #07bd68;
+        border: 1px solid #058046;
+        border-radius: 5px;
+        color: white;
+        margin: 15px 0;
+        }
+        
+        /* The close button */
+        .flashboxsuccess-closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+        }
+        
+        /* When moving the mouse over the close button */
+        .flashboxsuccess-closebtn:hover {
+        color: black;
+        }
+    
+    .flashboxerror-alert {
+        padding: 10px 30px;
+        background-color: #f44336; /* Red */
+        border: 1px solid rgb(165, 9, 9);
+        border-radius: 5px;
+        color: white;
+        margin: 15px 0;
+        }
+        
+        /* The close button */
+        .flashboxerror-closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+        }
+        
+        /* When moving the mouse over the close button */
+        .flashboxerror-closebtn:hover {
+        color: black;
+        }
+    
+    
+#header {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border-bottom: 1px solid var(--foreground);
+    }
+    
+    #headerinner {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        font-family: 'Oswald', sans-serif;
+        color: var(--foreground);
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .headerinnerspan {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .headericon{
+        color: var(--foreground);
+        font-size: 1.7em;
+        margin-left: 5px;
+        display: none;
+    }
+
+    #headerinner small {
+        font-size: 0.9em;
+    }
+
+        .acctDetails {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+            border-bottom: 0.5px dotted rgb(124, 123, 123);
+        }
+        
+        .acctDetails span {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8em;
+            margin: 5px;
+            padding: 0 5px;
+        }
+        
+        .acctDetails span p {
+            margin: 0;
+        }
+        
+        .accounttype {
+            padding: 4px 10px;
+            border-radius: 4px;
+            background-color: rgb(255, 136, 0);
+            color: white;
+        }
+        
+        .unverifiedstat {
+            padding: 4px 10px;
+            border-radius: 4px;
+            background-color: rgb(207, 22, 8);
+            color: white;
+        }
+        
+        .verifiedstat {
+            padding: 4px 10px;
+            border-radius: 4px;
+            background-color: rgb(7, 146, 211);
+            color: white;
+        }
+        
+        .pendingstat {
+            padding: 4px 10px;
+            border-radius: 4px;
+            background-color: rgb(72, 155, 83);
+            color: white;
+        }

@@ -1,0 +1,67 @@
+/* Ensure your styles apply to the select elements */
+.inputselect select {
+    width: 50% !important; /* Override the default width */
+    border-radius: 5px 0 0 5px !important; /* Apply your border-radius */
+    height: 38px; /* Match the height of your input field */
+    border: 1px solid #ced4da; /* Match your border color */
+    padding: 6px 12px; /* Match your padding */
+    font-size: 16px; /* Match your font size */
+}
+
+/* Override the default Select2 container styling */
+.select2-container--default .select2-selection--single {
+    border-radius: 5px 0 0 5px !important;
+    border-color: #ced4da !important;
+    height: 38px !important; /* Match your desired height */
+    line-height: 1.5 !important;
+
+    display: flex;
+    align-items: center;
+    background-color: var(--background) !important;
+    color: var(--foreground) !important;
+    border-color: rgba(128, 128, 128, 0.7) !important;
+}
+
+/* Override the Select2 dropdown styling */
+.select2-dropdown {
+    border-radius: 5px 0 0 5px !important;
+    border-color: #ced4da !important;
+}
+
+/* Override the styling for the dropdown results */
+.select2-results__option {
+    padding: 6px 12px; /* Match your padding */
+    font-size: 16px; /* Match your font size */
+}
+
+/* Override the styling for the selected item */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+   line-height: 38px !important; /* Match this to the height of the select box */
+    padding-left: 10px !important; /* Adjust padding for horizontal alignment */
+    height: 38px !important; /* Ensure it matches the height of the select box */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start; /* Change to center if you want the text centered horizontally too */
+}
+
+/* Adjust the dropdown arrow */
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 38px !important; /* Match this to your input field height */
+    display: flex;
+    align-items: center;
+}
+
+
+
+.select2-container--default .select2-dropdown {
+   border-radius: 5px !important;
+    margin-top: 10px;
+    background-color: var(--background) !important;
+    color: var(--foreground) !important;
+    width: 300px !important; /* Set the width to 80% of the viewport width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    
+}
+
+
+

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap');
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/stylesheets/user/payment.css" !>
+    <title>Deposit</title>
+</head>
+<body>
+
+    <%- include('../partials/usernav')%>
+    
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"> <small>Deposit</small> <i class="fa-solid fa-money-bill-transfer headericon"></i></span>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="depositbox2">
+            <div id="depositmethodbox">
+                    
+                    <div class="depositmethodboxclass">
+
+                        <span>
+                            <p>Transaction Method:</p> 
+                            <small class="accounttype"><%= depositmethod.depositmethodname %> </small>
+                        </span>
+
+                        <span>
+                            <p>Amount:</p> 
+                            <small>$<%= deposit.amount.toLocaleString() %></small>
+                        </span>
+
+                        <span class="depositimgbox">
+                            <p><%= depositmethod.depositmethodname %> Wallet QR Code:</p>
+                            <% for (let img of depositmethod.depositqrcode) { %> 
+                                <img src="<%= img.url %> " class="depositmethodimg" alt="Wallet QR Code">
+                              <% } %>
+                        </span>
+
+                        <span class="" id="">
+                            <p><%= depositmethod.depositmethodname %> Wallet Address:</p>
+                            <input type="text" class="form-control" id="copy" value="<%= depositmethod.depositaddress %>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" readonly>
+                            
+                        </span>
+
+                        <span class="depositmethodboxaction">
+                            <button class="btn btn-primary" onclick="myFunction()">Copy <%= depositmethod.depositmethodname %> Address </button>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#uploadForm">
+                                    <i class="fa-solid fa-pen"></i> Submit Receipt
+                                </button>
+                        </span>  
+                        <div class="modal fade" id="uploadForm" tabindex="-1" aria-labelledby="uploadFormLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="uploadFormLabel">Upload Receipt</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/user/payment/<%= deposit.id %>?_method=PUT" method="post" enctype="multipart/form-data">
+                                        <p>Please upload a screenshot/picture of your transaction to enable us confirm it quickly.</p>
+                                        <input type="text" class="form-control" id="" name="address" value="<%= depositmethod.depositaddress %>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" hidden>
+                        
+                                         <input type="file" name="depositproof" class="form-control" id="inputGroupFile02" required>
+                                         <button class="btn btn-success modalbtn" type="submit">Upload</button>
+                                      
+                                    </form>
+                                </div>
+                            </div>
+                            </div>
+                        </div>             
+                    </div>
+            </div>
+    </div>
+
+     </div>
+
+    
+    
+
+     <script src="/script/app.js"></script>
+</body>
+</html>

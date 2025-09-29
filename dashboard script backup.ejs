@@ -1,0 +1,238 @@
+<script>
+    document.getElementById('investedamount').addEventListener('input', validateInputs);
+    document.getElementById('takeprofit').addEventListener('input', validateInputs);
+    document.getElementById('stoploss').addEventListener('input', validateInputs);
+
+    function validateInputs() {
+        const investedAmount = parseFloat(document.getElementById('investedamount').value);
+        const takeProfit = parseFloat(document.getElementById('takeprofit').value);
+        const stopLoss = parseFloat(document.getElementById('stoploss').value);
+
+        const margin = investedAmount * 0.05;
+        
+        // Reset border colors
+        document.getElementById('stoploss').style.borderColor = '';
+        document.getElementById('stoploss').style.boxShadow = '';
+        document.getElementById('takeprofit').style.borderColor = '';
+        document.getElementById('takeprofit').style.boxShadow = '';
+        
+        // Validate Stop Loss
+        if (!isNaN(stopLoss) && stopLoss > investedAmount - margin) {
+            document.getElementById('stoploss').style.borderColor = 'red';
+            document.getElementById('stoploss').style.boxShadow = '0 0 5px 5px rgba(255, 0, 0, 0.759)';
+        }
+        
+        // Validate Take Profit
+        if (!isNaN(takeProfit) && takeProfit <= investedAmount + margin) {
+            document.getElementById('takeprofit').style.borderColor = 'red';
+            document.getElementById('takeprofit').style.boxShadow = '0 0 5px 5px rgba(255, 0, 0, 0.759)';
+        }
+    }
+
+</script>
+
+<script>
+  $('#tradetype').on('change', function() {
+    const tradeType = $(this).val();
+
+fetch(`/get-currencies/${tradeType}`)
+    .then(response => response.json())
+    .then(data => {
+        const currencySelect = $('#currency');
+        currencySelect.empty(); // Clear existing options
+
+        // Add the default "Select Asset" option
+        const defaultOption = new Option('Select Asset', '', true, false);
+        currencySelect.append(defaultOption);
+
+        data.forEach(trade => {
+             // Check if tradeType is 'Stocks'
+             let optionValue;
+                if (tradeType === 'Stocks') {
+                    optionValue = trade.tradeSymbol; // Set value to tradeSymbol
+                } else {
+                    optionValue = trade.tradeCurrency; // Set value to tradeCurrency
+                }
+
+
+            // Create option with tradeCurrency as the value
+            const option = new Option(trade.tradeCurrency, optionValue, false, false);
+
+            // Set a custom data attribute for tradeSymbol
+            $(option).data('tradeSymbol', trade.tradeSymbol);
+
+            currencySelect.append(option);
+        });
+
+        // Update the Select2 dropdown with custom formatting
+        currencySelect.select2({
+            templateResult: formatState,
+            templateSelection: formatState
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching currencies:', error);
+        alert('Failed to load currencies. Please try again later.');
+    });
+});
+
+
+function formatState(state) {
+    if (!state.id) {
+        return state.text; // Return text for placeholder (no id)
+    }
+
+    // Find the option element that matches the current state.id
+    const $option = $(`#currency option[value="${state.id}"]`);
+    const tradeSymbol = $option.data('tradeSymbol'); // Retrieve tradeSymbol from data attribute
+
+    const $state = $(
+        `<span><img src="/img/assets/${tradeSymbol.toLowerCase()}.svg" alt="${state.text}" style="width: 20px; height: 20px; vertical-align: middle;" /> ${state.text}</span>`
+    );
+    return $state;
+}
+
+
+
+let tradingWidget;
+
+    // Function to initialize the TradingView widget
+    function initializeWidget(symbol) {
+        if (tradingWidget) {
+            tradingWidget.remove(); // Remove the existing widget
+        }
+
+        tradingWidget = new TradingView.widget({
+            "width": "100%",
+            "height": "100%",
+            "symbol": symbol,
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "light",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "rgba(0, 0, 0, 0)",
+            "enable_publishing": false,
+            "allow_symbol_change": true,
+            "container_id": "tradingview_1a2b3c4d"
+        });
+    }
+
+    // Function to update the TradingView widget with the selected tradeSymbol
+    function updateTradingViewWidget() {
+        const tradeType = $('#tradetype').val(); // Get the current tradeType
+        const selectedOption = $('#currency').find(':selected');
+        const tradeSymbol = selectedOption.data('tradeSymbol'); // Get tradeSymbol from the selected option
+
+        if (tradeSymbol) {
+            let fullSymbol;
+            if (tradeType === 'Crypto') {
+                fullSymbol = `BINANCE:${tradeSymbol}USD`; // Compare with USD for Crypto
+            } else {
+                fullSymbol = tradeSymbol; // Use the tradeSymbol directly for other types
+            }
+            initializeWidget(fullSymbol); // Pass the fullSymbol to the TradingView widget
+        } else {
+            alert('Please select a valid trading symbol.');
+        }
+    }
+
+    // Example usage: update when the select changes or when a button is clicked
+    $('#currency').on('change', updateTradingViewWidget);
+
+</script>
+
+<script>
+    const cryptoMapping = {
+    'Bitcoin': 'bitcoin',
+    'Ethereum': 'ethereum',
+    'Litecoin': 'litecoin',
+    'Polygon': 'matic-network',
+    'Dash': 'dash',
+    'Orion Protocol': 'orion-protocol',
+    'Tether': 'tether',
+    'USD Coin': 'usd-coin',
+    'Polkadot': 'polkadot',
+    'Ripple': 'ripple',
+    'Cardano': 'cardano',
+    'Dogecoin': 'dogecoin',
+    'Solana': 'solana',
+    'Aurora': 'aurora',
+    'Boring DAO': 'boringdao',
+    'Bitcoin Cash': 'bitcoin-cash',
+    'AAVE': 'aave',
+    'Shiba Inu': 'shiba-inu',
+    'Dai': 'dai',
+    'Origin Protocol': 'origin-protocol',
+    'Tron': 'tron'
+};
+
+
+  // Event listener for when the user changes the trade type (Crypto, Forex, Stocks)
+$('#tradetype').on('change', function() {
+    const tradeType = $(this).val();
+    const assetPriceElement = $('.displayprice'); // Selects the <small>$0</small> span
+
+    // Clear the current asset price
+    assetPriceElement.text("$0");
+
+    // Fetch and display the price when the asset is selected
+    $('#currency').on('change', function() {
+        const asset = $(this).val();
+        
+        const selectedCrypto = $(this).val(); // This gets the selected cryptocurrency name from the select element
+    const tradeType = $('#tradetype').val(); // Get the selected trade type (Crypto, Forex, Stocks)
+
+    if (tradeType === 'Crypto') {
+        const cryptoId = cryptoMapping[selectedCrypto];
+        if (cryptoId) {
+            const apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${cryptoId}&vs_currencies=usd`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const price = data[cryptoId].usd;
+                    $('.displayprice').text(`$${price}`);
+                })
+                .catch(error => console.error('Error fetching asset price:', error));
+        } else {
+            console.error('Selected cryptocurrency not found in mapping.');
+        }
+        } else if (tradeType === "Forex") {
+            // For Forex, using ExchangeRate-API
+            const baseCurrency = asset.substring(0, 3); // Extracts the base currency (e.g., GBP from GBPUSD)
+            const targetCurrency = asset.substring(3);  // Extracts the target currency (e.g., USD from GBPUSD)
+            apiUrl = `https://v6.exchangerate-api.com/v6/d92788cf8915bf9175829158/latest/${baseCurrency}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.conversion_rates && data.conversion_rates[targetCurrency]) {
+                        const price = data.conversion_rates[targetCurrency];
+                        assetPriceElement.text(`$${price}`);
+                    } else {
+                        console.error('Error: Forex data not found');
+                    }
+                })
+                .catch(error => console.error('Error fetching asset price:', error));
+
+        } else if (tradeType === "Stocks") {
+            // For Stocks, using Alpha Vantage API
+            apiUrl = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${asset}&apikey=YOUR_API_KEY`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data["Global Quote"] && data["Global Quote"]["05. price"] !== undefined) {
+                        const price = data["Global Quote"]["05. price"];
+                        assetPriceElement.text(`$${parseFloat(price).toFixed(2)}`);
+                    } else {
+                        console.error('Error: Stock data not found');
+                    }
+                })
+                .catch(error => console.error('Error fetching asset price:', error));
+        }
+    });
+});
+
+</script>

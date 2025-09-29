@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+    <link rel="stylesheet" href="/stylesheets/user/dashboard.css">
+    <link rel="stylesheet" href="/stylesheets/customselectstyle.css">
+    <style>
+        .activedashboardlink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activedashboardlink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+        
+        .flashbox {
+            padding: 0 20px !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+  <div class="contentbox">
+    
+
+    <!-- <div id="header">
+        <div id="headerinner">
+            <span class="headerinnerspan"> <small>Home</small>  <i class="fas fa-home headericon"></i></span>
+        </div>
+    </div> -->
+    
+    <div class="flashbox">
+        <% if(success && success.length) { %>
+               <div class="flashboxsuccess-alert flash-message">
+                   <%= success %> 
+                   <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                   
+               </div>
+           <% } %> 
+       
+           <% if(error && error.length) { %>
+                   <div class="flashboxerror-alert flash-message">
+                       <%= error %> 
+                       <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+           <% } %> 
+    </div>
+   
+
+    <div id="welcbox">
+        <div class="innerwelcbox">
+            <h5>Welcome, <%= user.firstname %> <%= user.lastname %>!</h5>
+        </div>
+    </div>
+
+    <% if (user.verificationstatus === 'Not Verified') { %> 
+
+        <div class="verificationbox">
+            <div class="innerverificationbox">
+                <span>Your account is not yet verified. Please 
+                    <button type="button" class="verifyBtn" data-bs-toggle="modal" data-bs-target="#verifymodal">
+                        Click Here!
+                    </button>
+                    to verify your account.
+                </span>
+            </div>
+        </div>
+
+         <!-- Modal -->
+         <div class="modal fade" id="verifymodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Verify Account</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please upload a Government Licensed document to verify your account.</p>
+                        <p>Accepted documents are
+                            <ul>
+                                <li>Driver's License</li>
+                                <li>Passport </li>
+                                <li>Social Security Card</li>
+                            </ul>
+                        </p>
+                        <form action="/verify/<%= user.id %>?_method=PUT" method="post" id="div2form" enctype="multipart/form-data">
+                            <select name="documenttype" class="forminput" style="width: 100%;" required>
+                                <option value="" selected>Document Type</option>
+                                <option value="Driver's License">Driver's License</option>
+                                <option value="Passport">Passport</option>
+                                <option value="Social Security Card">Social Security Card</option>
+                            </select>
+                            <div class="input-group formdiv mt-2">
+                                <input type="file" class="form-control"  name="verificationdocument" placeholder="Select Document" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+                                <button class="btn btn-success" type="submit" id="inputGroupFileAddon04">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    <% } else if (user.verificationstatus === 'Pending') { %> 
+
+        <div class="verificationbox">
+            <div class="innerverificationbox">
+                <span>
+                    Your verification request has been submitted. <br> Please wait while we verify your document.
+                </span>
+            </div>
+        </div>
+    <% } %> 
+
+    <% if (user.verificationstatus === 'Not Verified') { %> 
+    <div id="alertbox">
+        <div id="inneralertbox">
+            <div class="alert">
+                <img src="/img/sad.png" alt="" class="alertimg">
+                <p class="alerttext">Account not activated. Upload your documents for identity verification.</p>
+            </div>
+        </div>
+    </div>
+    <% } else if (user.acctstatus === 'Suspended') { %> 
+        <div id="alertbox">
+            <div id="inneralertbox">
+                <div class="alert">
+                    <img src="/img/exclamation.png" alt="" class="alertimg">
+                    <p class="alerttext">Your account was suspended.</p>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="notificationcontainer">
+        <div class="innernotificationcontainer">
+
+            <% if (unreadmsg.length > 0) { %>
+                <% if (unreadmsg.length === 1) { %> 
+                    <span class="notification">
+                        <a href="/notifications">You have <%= unreadmsg.length %> new notification.</a>
+                    </span>
+                <% } else if (unreadmsg.length > 1) { %>
+                    <span class="notification">
+                        <a href="/notifications">You have <%= unreadmsg.length %> new notifications.</a>
+                    </span>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+
+    <div id="dashboardbox1">
+        <div id="innerdashboardbox1">
+                <div class="dahboardactinfobox">
+                    <div class="dahboardactinfobox-pricebox">
+                        <small>Total Balance</small>
+                        <% if (user.wallet === 0) { %>
+                            <span class="pricetag">$0.00</span>
+                        <% } else { %>
+                              <span class="pricetag">$<%= user.wallet.toLocaleString() %> </span>
+                        <% } %>
+                    </div>
+                    <div>
+                        <button class="dashboardactinfo-btn">Live Account</button>
+                    </div>
+                </div>
+
+                <div class="dahboardactinfobox2">
+                    <div class="tradingprogressbox">
+                        <span>Trading Progress</span>
+                        <span>0%</span>
+                    </div>
+
+                    <div class="tradingborder"></div>
+                </div>
+        </div>
+    </div>
+
+    <div id="assetbox">
+        <div id="innerassetbox">
+            <h6>Enter Trade</h6>
+            <div id="assetinner">
+                
+                <div id="tradebox">
+                    <div class="button-container" id="tradebtnbox">
+                        <button id="buybtn" class="tradebtn" onclick="showContainer('buy-form', 'buybtn')">Buy</button>
+                        <button id="sellbtn" class="tradebtn" onclick="showContainer('sell-form', 'sellbtn')">Sell</button>
+                        <button id="convertbtn" class="tradebtn" onclick="showContainer('convert-form', 'convertbtn')">Convert</button>
+                    </div>
+                    <form action="/dashboard/enter-trade" method="post"  class="tradeform trade-form" id="buy-form">
+                        <p>Buy Order</p>
+                      <span class="tradeformgroup">
+                        <label for="tradetype">Type:</label>
+                        <select name="tradetype" class="form-control tradetype" id="tradetype" required>
+                          <option value="">Select Type</option>
+                          <option value="Crypto">Crypto</option>
+                          <option value="Forex">Forex</option>
+                          <option value="Stocks">Stocks</option>
+                        </select>
+                      </span>
+
+                      <span class="tradeforminputselectgroup">
+                        <label for="">Amount ($):</label>
+                        <span class="inputselect">
+                            <select name="currency" class="form-control currency" id="currency" required>
+                                <option value="">Select Asset</option>
+                              </select>
+                          <input class="form-control" type="number" placeholder="Amount ($)" name="investedamount" value="" id="investedamount" required>
+                          
+                          
+                        </span>
+                        <span class="assetinfo">
+                          <span><small>Current Balance</small>  <small>$<%= user.wallet.toLocaleString() %></small></span>
+                          <span><small>Current <small id="buydisplayasset">Asset</small> Price</small>  <small class="displayprice">$0</small></span>
+                        </span>
+                        </span>
+
+                        <div class="tradeformdoublegroup">
+                            <span class="tradeformgroup">
+                                <label for="takeprofit">Take Profit ($)</label>
+                                <input class="form-control takeprofit" type="number" placeholder="Set TP" name="takeprofit" id="takeprofit">
+                            </span>
+                            <span class="tradeformgroup">
+                                <label for="stoploss">Stop Loss ($)</label>
+                                <input class="form-control stoploss" type="number" placeholder="Set SL" name="stoploss" value="" id="stoploss">
+                            </span>
+                        </div>
+
+                        <span class="tradeformgroup">
+                          <label for="duration">Duration</label>
+                          <select name="duration"class="form-control duration" id="duration" required>
+                              <option value="">Select Duration</option>
+                              <option value="30 Minutes">30 Minutes</option>
+                              <option value="1 Hour">1 Hour</option>
+                              <option value="2 Hours">2 Hours</option>
+                              <option value="3 Hours">3 Hours</option>
+                              <option value="6 Hours">6 Hours</option>
+                              <option value="12 Hours">12 Hours</option>
+                              <option value="24 Hours">24 Hours</option>
+                              <option value="1 Day">1 Day</option>
+                              <option value="2 Days">2 Days</option>
+                              <option value="3 Days">3 Days</option>
+                              <option value="4 Days">4 Days</option>
+                              <option value="5 Days">5 Days</option>
+                              <option value="6 Days">6 Days</option>
+                              <option value="1 Week">1 Week</option>
+                              <option value="2 Weeks">2 Weeks</option>
+                              <option value="3 Weeks">3 Weeks</option>
+                              <option value="1 Month">1 Month</option>
+                              <option value="3 Months">3 Months</option>
+                              <option value="6 Months">6 Months</option>
+                              <option value="9 Months">9 Months</option>
+                              <option value="1 Year">1 Year</option>
+                              <option value="2 Years">2 Years</option>
+                          </select>
+                      </span>
+
+                      <input type="hidden" value="Buy" name="ordertype" class="ordertype" id="buyordertype">
+
+                        <button class="tradebtn btn btn-primary tradeformgroup">Place Trade</button>
+
+                        
+                    </form>
+
+                    <form action="/dashboard/enter-trade" method="post"  class="tradeform trade-form" id="sell-form">
+                        <p>Sell Order</p>
+                        <span class="tradeformgroup">
+                          <label for="tradetype2">Type:</label>
+                          <select name="tradetype" class="form-control tradetype" id="tradetype2" required>
+                            <option value="">Select Type</option>
+                            <option value="Crypto">Crypto</option>
+                            <option value="Forex">Forex</option>
+                            <option value="Stocks">Stocks</option>
+                          </select>
+                        </span>
+  
+                        <span class="tradeforminputselectgroup">
+                          <label for="">Amount ($):</label>
+                          <span class="inputselect">
+                              <select name="currency" class="form-control currency" id="currency2" required>
+                                  <option value="">Select Asset</option>
+                                </select>
+                            <input class="form-control" type="number" placeholder="Amount ($)" name="investedamount" value="" id="investedamount2" required>
+                            
+                            
+                          </span>
+                          <span class="assetinfo">
+                            <span><small>Current Balance</small>  <small>$<%= user.wallet.toLocaleString() %></small></span>
+                            <span><small>Current <small id="selldisplayasset">Asset</small> Price</small>  <small class="displayprice2">$0</small></span>
+                          </span>
+                          </span>
+  
+                          <div class="tradeformdoublegroup">
+                              <span class="tradeformgroup">
+                                  <label for="takeprofit2">Take Profit ($)</label>
+                                  <input class="form-control takeprofit" type="number" placeholder="Set TP" name="takeprofit" id="takeprofit2">
+                              </span>
+                              <span class="tradeformgroup">
+                                  <label for="stoploss2">Stop Loss ($)</label>
+                                  <input class="form-control stoploss" type="number" placeholder="Set SL" name="stoploss" value="" id="stoploss2">
+                              </span>
+                          </div>
+  
+                          <span class="tradeformgroup">
+                            <label for="duration2">Duration</label>
+                            <select name="duration"class="form-control duration" id="duration2" required>
+                                <option value="">Select Duration</option>
+                                <option value="30 Minutes">30 Minutes</option>
+                                <option value="1 Hour">1 Hour</option>
+                                <option value="2 Hours">2 Hours</option>
+                                <option value="3 Hours">3 Hours</option>
+                                <option value="6 Hours">6 Hours</option>
+                                <option value="12 Hours">12 Hours</option>
+                                <option value="24 Hours">24 Hours</option>
+                                <option value="1 Day">1 Day</option>
+                                <option value="2 Days">2 Days</option>
+                                <option value="3 Days">3 Days</option>
+                                <option value="4 Days">4 Days</option>
+                                <option value="5 Days">5 Days</option>
+                                <option value="6 Days">6 Days</option>
+                                <option value="1 Week">1 Week</option>
+                                <option value="2 Weeks">2 Weeks</option>
+                                <option value="3 Weeks">3 Weeks</option>
+                                <option value="1 Month">1 Month</option>
+                                <option value="3 Months">3 Months</option>
+                                <option value="6 Months">6 Months</option>
+                                <option value="9 Months">9 Months</option>
+                                <option value="1 Year">1 Year</option>
+                                <option value="2 Years">2 Years</option>
+                            </select>
+                        </span>
+  
+                        <input type="hidden" value="Sell" name="ordertype" class="ordertype" id="sellordertype">
+  
+                          <button class="tradebtn btn btn-primary tradeformgroup">Place Trade</button>
+  
+                          
+                      </form>
+
+                      <form action="" method=""  class="tradeform trade-form" id="convert-form">
+                        <p>Convert Asset</p>
+  
+                        <span class="tradeforminputselectgroup">
+                            <span>From:</span>
+                            <span class="inputselect">
+                                <select name="" class="form-control" id="from-currency" required>
+                                    <option value="">Select Asset</option>
+                                        <% for (let asset of alltrades) { %>
+                                            <option value="<%= asset.tradeCurrency %>" data-image="/img/assets/<%= asset.tradeSymbol %>.svg"><img src="/img/assets/<%= asset.tradeSymbol %>.svg" alt="<%= asset.tradeSymbol %>" style="width: 20px; height: 20px; vertical-align: middle;" /><%= asset.tradeCurrency %></option>
+                                        <% } %>
+                                    </select>
+                                    
+                                <input class="form-control" type="number" placeholder="Amount" name="" value="" id="from-amount" required>
+                            </span>
+                            <!-- <input type="text" id="from-cryptotype" readonly> -->
+
+                            <span class="assetinfo">
+                                <span><p>Current <small class="displayfrom-currencysymbol">Asset</small> Price</p>  <p class="displayfrom-currencyprice">$0.00</p></span>
+                                <span><p class="displayfrom-amount">0.00</p>  <p class="displayfrom-currencyusdvalue">$0</p></span>
+                            </span>
+                        </span>
+
+                        <span class="tradeforminputselectgroup">
+                            <span>To:</span>
+                            <span class="inputselect">
+                                <select name="" class="form-control" id="to-currency" required>
+                                    <option value="">Select Asset</option>
+                                        <% for (let asset of alltrades) { %>
+                                            <option value="<%= asset.tradeCurrency %>" data-image="/img/assets/<%= asset.tradeSymbol %>.svg"><img src="/img/assets/<%= asset.tradeSymbol %>.svg" alt="<%= asset.tradeSymbol %>" style="width: 20px; height: 20px; vertical-align: middle;" /><%= asset.tradeCurrency %></option>
+                                        <% } %>
+                                    </select>
+                                    
+                                <input class="form-control" type="number" placeholder="Amount" name="" value="" id="to-amount" required readonly>
+                            </span>
+                            <!-- <input type="text" id="to-cryptotype" readonly> -->
+
+                            <span class="assetinfo">
+                                <span><p>Current <small class="displayto-currencysymbol">Asset</small> Price</p>  <p class="displayto-currencyprice">$0.00</p></span>
+                                <!-- <span><p><small class="displayto-amount">0.00</small></p>  <p class="displayto-currencyusdvalue">$0</p></span> -->
+                            </span>
+                        </span>
+
+                        <button type="button" class="tradebtn btn btn-secondary tradeformgroup">Convert</button>
+                      </form>
+                </div>
+
+                <div id="assetwidgetbox">
+                    <div class="tradingview-widget-container">
+                        <div id="tradingview_1a2b3c4d"></div>
+                        <script src="https://s3.tradingview.com/tv.js"></script>
+                        <script>
+                        new TradingView.widget(
+                        {
+                        "width": "100%",
+                        "height": "100%",
+                        "symbol": "BINANCE:BTCUSD",
+                        "interval": "D",
+                        "timezone": "Etc/UTC",
+                        "theme": "light",
+                        "style": "1",
+                        "locale": "en",
+                        "toolbar_bg": "rgba(0, 0, 0, 0)",
+                        "enable_publishing": false,
+                        "allow_symbol_change": true,
+                        "container_id": "tradingview_1a2b3c4d"
+                        }
+                        );
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="acctsummarybox">
+        <div id="inneracctsummarybox">
+            <div class="containerheader">
+                <span>Account Summary</span>
+            </div>
+            <div class="summarybox">
+                <div class="acctsummary">
+                    <div class="summaryimgbox">
+                        <img src="/img/wallet.svg" alt="">
+                    </div>
+                    <div class="summaryinfo">
+                        <small>Total Profits</small>
+                        <% if (user.totalprofits === 0) { %>
+                            <span class="pricetag">$0.00</span>
+                          <% } else { %>
+                              <span class="pricetag">$<%= user.totalprofits.toLocaleString() %></span>
+                          <% } %>
+                    </div>
+                </div>
+
+                <div class="acctsummary">
+                    <div class="summaryimgbox">
+                        <img src="/img/deposit.svg" alt="">
+                    </div>
+                    <div class="summaryinfo">
+                        <small>Total Deposits</small>
+                        <% if (user.totaldeposits === 0) { %>
+                            <span class="pricetag">$0.00</span>
+                          <% } else { %>
+                              <span class="pricetag">$<%= user.totaldeposits.toLocaleString() %> </span>
+                          <% } %>
+                    </div>
+                </div>
+
+                <div class="acctsummary">
+                    <div class="summaryimgbox">
+                        <img src="/img/withdraw.svg" alt="">
+                    </div>
+                    <div class="summaryinfo">
+                        <small>Total Withdrawals</small>
+                        <% if (!pendingwithdrawal) { %>
+                            <span class="pricetag">$0.00</span>
+                          <% } else { %>
+                              <span class="pricetag">$<%= pendingwithdrawal.amount.toLocaleString() %> </span>
+                          <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="investmentbox">
+        <div class="innerinvestmentbox">
+            <div class="boxtitle">
+                <h6>Opened Trades</h6>
+            </div>
+            <div class="activeinvestment">
+                <% if (dashboardtrade.length === 0 ) { %>
+                    <p>You have no running trade.</p>
+                <% } else { %>
+                    <% for (investment of dashboardtrade) { %>
+                        <a href="/dashboard/traded-asset/<%= investment.id %>" class="investment">
+                            <span>
+                                <p><%= investment.investmentType%></p>
+                                <small>Trade Type</small>
+                            </span>
+
+                            <span>
+                                <p><%= investment.tradedCurrency%></p>
+                                <small>Traded Asset</small>
+                            </span>
+
+                            <span>
+                                <p class="investmentpricetag">$<%= investment.investedamount.toLocaleString()%></p>
+                                <small>Amount Traded</small>
+                            </span>
+
+                            <span>
+                                <p class="investmentpricetag">$<%= investment.investmentprofit.toLocaleString()%></p>
+                                <small>Profit</small>
+                            </span>
+
+                        </a>
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<!-- MODALS -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <small>Our system will automatically convert your USD into selected asset.</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+    function showContainer(containerId, buttonId) {
+    // Get all asset containers
+    const containers = document.querySelectorAll('.tradeform');
+
+    // Hide all containers
+    containers.forEach(container => {
+        container.style.display = 'none';
+    });
+
+    // Show the selected container
+    document.getElementById(containerId).style.display = 'flex';
+
+    // Remove active class from all buttons
+    const buttons = document.querySelectorAll('.button-container button');
+    buttons.forEach(button => {
+        button.classList.remove('active');
+    });
+
+    // Add active class to the clicked button
+    document.getElementById(buttonId).classList.add('active');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    showContainer('buy-form', 'buybtn');
+});
+</script>
+
+<script>
+    $(document).ready(function() {
+    $('#from-currency').select2({
+        // Custom template for displaying options in the dropdown
+        templateResult: function(option) {
+            if (!option.id) { return option.text; } // Placeholder option
+            var imgSrc = $(option.element).data('image'); // Get the image source from data attribute
+            var $option = $(
+                '<span><img src="' + imgSrc + '" style="width: 20px; height: 20px; vertical-align: middle;" /> ' + option.text + '</span>'
+            );
+            return $option;
+        },
+        // Custom template for displaying the selected item
+        templateSelection: function(option) {
+            if (!option.id) { return option.text; } // Placeholder option
+            var imgSrc = $(option.element).data('image'); // Get the image source from data attribute
+            var $selection = $(
+                '<span><img src="' + imgSrc + '" style="width: 20px; height: 20px; vertical-align: middle;" /> ' + option.text + '</span>'
+            );
+            return $selection;
+        }
+    });
+});
+
+$(document).ready(function() {
+    $('#to-currency').select2({
+        // Custom template for displaying options in the dropdown
+        templateResult: function(option) {
+            if (!option.id) { return option.text; } // Placeholder option
+            var imgSrc = $(option.element).data('image'); // Get the image source from data attribute
+            var $option = $(
+                '<span><img src="' + imgSrc + '" style="width: 20px; height: 20px; vertical-align: middle;" /> ' + option.text + '</span>'
+            );
+            return $option;
+        },
+        // Custom template for displaying the selected item
+        templateSelection: function(option) {
+            if (!option.id) { return option.text; } // Placeholder option
+            var imgSrc = $(option.element).data('image'); // Get the image source from data attribute
+            var $selection = $(
+                '<span><img src="' + imgSrc + '" style="width: 20px; height: 20px; vertical-align: middle;" /> ' + option.text + '</span>'
+            );
+            return $selection;
+        }
+    });
+});
+</script>
+    
+    
+
+  <script src="/script/app.js"></script>
+  <!-- buy script -->
+  <script src="/script/dashboard.js"></script>
+  <!-- sell script -->
+  <script src="/script/dashboard3.js"></script>
+    <!-- convert script -->
+  <script src="/script/dashboard2.js"></script>
+</body>
+</html>

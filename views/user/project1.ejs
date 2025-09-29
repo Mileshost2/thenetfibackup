@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Store</title>
+    <link rel="stylesheet" href="/stylesheets/user/projects.css">
+    
+</head>
+<body>
+    <%- partial('../partials/usernav')%>
+
+    <div class="contentbox"> 
+        <div class="pageheader">
+            <a href="/dashboard/real-estate"><i class="fas fa-arrow-left"></i> Back to projects.</a>
+        </div>
+       
+        <div class="projectbox1">
+            <div class="custom-carousel">
+                <div class="custom-carousel-inner">
+                    <div class="custom-carousel-item active">
+                        <img src="/img/projects/project1a.png" alt="Image 1">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project1b.png" alt="Image 2">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project1c.png" alt="Image 3">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project1d.png" alt="Image 4">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project1e.png" alt="Image 5">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project1f.png" alt="Image 6">
+                    </div>
+                </div>
+                <div class="custom-carousel-indicators">
+                    <span class="custom-indicator active"></span>
+                    <span class="custom-indicator"></span>
+                    <span class="custom-indicator"></span>
+                    <span class="custom-indicator"></span>
+                    <span class="custom-indicator"></span>
+                    <span class="custom-indicator"></span>
+                </div>
+                <button class="custom-carousel-control custom-prev">&#10094;</button>
+                <button class="custom-carousel-control custom-next">&#10095;</button>
+            </div>
+
+            <div class="projectbox1inner">
+                <h3>Go Store It Nashville</h3>
+                <p>Class A self-storage development in one of Nashville's fastest growing suburbs with constrained supply and a high barrier to entry.</p>
+            </div>
+        </div>
+
+    
+        <div class="projectinfobox">
+            <div class="innerprojectinfobox">
+                <div class="infobox infobox1">
+                    <div class="projectinfo">
+                        <h5>Property Overview</h5>
+                        <p>
+                            Go Store It Nashville is a ground-up, self-storage development opportunity presented by Madison Capital Group. The Project is located in Franklin, TN, a rapidly expanding submarket (five-year population growth projection of 9%) located approximately 25 miles south of Nashville. When complete, the Class A property will include 1,286 climate-controlled units and be managed by Go Store It, a wholly-owned subsidiary of Madison Capital.
+                        </p>
+                    </div>
+
+                    <div class="projectinfo">
+                        <h5>Why This Property:</h5>
+                        
+                        <ul>
+                            <li>
+                                We believe this deal could be well-positioned to capitalize on the significant population growth in Franklin, TN, as one of the first-to-market self-storage assets in the burgeoning submarket.
+                            </li>
+                            <li>
+                                Franklin’s multifamily inventory has more than doubled since 2010, a strong potential indication of new, unmet self-storage demand in the submarket.
+                            </li>
+                            <li>
+                                Only one competitor exists within a 3-mile radius, currently in lease-up, with a rigorous process to secure approvals from the city creating a higher barrier to entry
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="projectinfo">
+                        <h5>Why This Sponsor:</h5>
+                        
+                        <ul>
+                            <li>
+                                Madison’s in-house management company, Go Store It, with nearly 100 self-storage facilities across the U.S., has deep industry and market knowledge to draw upon to potentially drive revenue and operational efficiency, in our view.
+                            </li>
+                            <li>
+                                Using their in-house general contractor also generally enables Madison to have more control over timelines and costs.
+                            </li>
+                            <li>
+                                Madison’s co-investment of 25% is significant compared to the average sponsor’s contribution on the Marketplace and reflects their conviction in the deal.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="projectinfo">
+                        <h5>Project Breakdown:</h5>
+                        
+                        <span class="projectbreakdown">
+                            <small>TYPE:</small>
+                            <p>Self Storage</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>ACRES:</small>
+                            <p>3.02</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>STRATEGY:</small>
+                            <p>Fixed Income</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>OBJECTIVE:</small>
+                            <p>Value-add</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>MINIMUM:</small>
+                            <p>$50K</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>ROI:</small>
+                            <p>15% Daily</p>
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- <div class="infobox infobox2">
+
+                </div> -->
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+    
+
+
+
+
+
+<script>
+    const prevButton = document.querySelector('.custom-prev');
+const nextButton = document.querySelector('.custom-next');
+const carouselInner = document.querySelector('.custom-carousel-inner');
+const indicators = document.querySelectorAll('.custom-indicator');
+
+let index = 0;
+
+function showSlide(i) {
+    if (i >= indicators.length) i = 0;
+    if (i < 0) i = indicators.length - 1;
+
+    carouselInner.style.transform = `translateX(-${i * 100}%)`;
+
+    indicators.forEach((indicator, idx) => {
+        indicator.classList.toggle('active', idx === i);
+    });
+
+    index = i;
+}
+
+prevButton.addEventListener('click', () => {
+    showSlide(index - 1);
+});
+
+nextButton.addEventListener('click', () => {
+    showSlide(index + 1);
+});
+
+indicators.forEach((indicator, idx) => {
+    indicator.addEventListener('click', () => {
+        showSlide(idx);
+    });
+});
+
+// Optionally, you can start the carousel with automatic sliding
+setInterval(() => {
+    showSlide(index + 1);
+}, 5000); // Change slide every 5 seconds
+
+</script>
+    <script src="/script/app.js"></script>
+</body>
+</html>

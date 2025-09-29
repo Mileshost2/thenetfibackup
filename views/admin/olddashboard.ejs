@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/stylesheets/admin/dashboard.css">
+    
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+  <div class="contentbox">
+    <!-- <div id="btcwidget">
+    </div> -->
+
+    <div id="header">
+        <div id="headerinner">
+            <span class="headerinnerspan"> <small>Dashboard</small></span>
+        </div>
+      </div>
+
+    <div class="flashbox">
+        <% if(success && success.length) { %>
+               <div class="flashboxsuccess-alert flash-message">
+                   <%= success %> 
+                   <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                   
+               </div>
+           <% } %> 
+       
+           <% if(error && error.length) { %>
+                   <div class="flashboxerror-alert flash-message">
+                       <%= error %> 
+                       <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+           <% } %> 
+    </div>
+
+    <div class="notificationcontainer" id="notificationcontainer">
+        <div class="innernotificationcontainer">
+            <% if (verificationrequest.length > 0) { %> 
+                <span class="notification">
+                    <a href="/admin/admin.verificationrequests">You have <%= verificationrequest.length %> new verification request(s).</a>
+                </span>
+            <% } %>
+
+            <% if (deposits.length > 0) { %> 
+                <span class="notification">
+                   <a href="/admin/admin.deposit-req"> You have <%= deposits.length %> new deposit request(s).</a>
+                </span>
+            <% } %>
+
+            <% if (walletdeposits.length > 0) { %> 
+                <span class="notification">
+                   <a href="/admin/admin.deposit-req"> You have <%= walletdeposits.length %> new crypto wallet deposit request(s).</a>
+                </span>
+            <% } %>
+
+            <% if (withdrawals.length > 0) { %> 
+                <span class="notification">
+                    <a href="/admin/admin.withdrawal-req">You have <%= withdrawals.length %> new withdrawal request(s).</a>
+                </span>
+            <% } %>
+        </div>
+    </div>
+
+    <div id="overviewbox">
+        <div class="overviewinnerbox">
+            <div class="overviewboxes bgGreen">
+                <i class="fa-solid fa-user"></i>
+                <div class="inneroverviewboxes">
+                    <span><%= admins.length %></span>
+                    <small>Active Admin Accounts</small>
+                </div>
+            </div>
+
+            <div class="overviewboxes bgOrangeRed">
+                <i class="fa-solid fa-users"></i>
+                <div class="inneroverviewboxes">
+                    <span><%= clients.length %> </span>
+                    <a href="/admin/admin.clients">Clients</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes bgBlue">
+                <i class="fa-solid fa-line-chart"></i>
+                <div class="inneroverviewboxes">
+                    <span><%= Investments.length %></span>
+                <a href="/admin/admin.investment">Active Investments</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes bgRed">
+                <i class="fas fa-check-circle"></i>
+                <div class="inneroverviewboxes">
+                    <p><%= verificationrequest.length %> </p>
+                    <a href="/admin/admin.verificationrequests">Verification Requests</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes bgDogeBlue">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                <div class="inneroverviewboxes">
+                    <span><%= deposits.length %> </span>
+                <a href="/admin/admin.deposit-req">Deposit Requests</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes bgOrange">
+                <i class="fas fa-wallet"></i>
+                <div class="inneroverviewboxes">
+                    <span><%= withdrawals.length %> </span>
+                    <a href="/admin/admin.withdrawal-req">Withdrawal Requests</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div id="div2">
+        <div id="div2box">
+            <div class="div2boxes">
+                <p><%= clients.length %> </p>
+                <a href="/admin/admin.clients">REGISTERED ACCOUNTS</a>
+            </div>
+            <div class="div2boxes">
+                <p><%= Investments.length %></p>
+                <a href="/admin/admin.investment">ACTIVE INVESTMENTS</a>
+            </div>
+            <div class="div2boxes">
+                <p><%= verificationrequest.length %> </p>
+                <a href="/admin/admin.verificationrequests">VERIFICATION REQUESTS</a>
+            </div>
+            <div class="div2boxes">
+                <p><%= deposits.length %> </p>
+                <a href="/admin/admin.deposit-req">DEPOSIT REQUESTS</a>
+            </div>
+            <div class="div2boxes">
+                <p><%= withdrawals.length %> </p>
+                <a href="/admin/admin.withdrawal-req">WITHDRAWAL  REQUESTS</a>
+            </div>
+        </div>
+    </div> -->
+  </div>
+    
+  <!-- <script>
+    function vanishFlashMessage() {
+         const messageElements = document.querySelectorAll('.flash-message');
+         if (messageElements) {
+            messageElements.forEach(element => {
+                setTimeout(() => {
+                element.remove();
+                }, 3000); 
+            });
+         }
+        
+}
+ </script> -->
+ 
+  <script src="/script/app.js"></script>
+</body>
+</html>

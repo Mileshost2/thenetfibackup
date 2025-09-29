@@ -1,0 +1,434 @@
+body {
+    padding: 0;
+    margin: 0;
+    /* background-color: #26394d !important; */
+}
+
+.modal, .modal-header {
+    color: black;
+}
+
+/* #pageintrobox {
+    width: 100%;
+    padding: 10px;
+}
+
+#innerpageintrobox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#innerpageintrobox p {
+    margin: 0;
+} */
+
+#methodbox {
+    width: 100%;
+    padding: 10px 20px;
+}
+
+#innermethodbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.bankoption {
+    display: none;
+}
+
+.cryptooption {
+    display: none;
+}
+
+
+#transactionformbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+}
+
+#transactionform {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+@media (max-width:520px) {
+    #transactionform {
+        width: 100%;
+    }
+}
+
+#transactionform input[type="number"]::-webkit-outer-spin-button,
+#transactionform input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.transactionformgroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+}
+
+/* Hide the actual file input */
+#file-input {
+    display: none;
+}
+
+/* Style the label to look like a div */
+.custom-file-upload label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    padding: 40px 0;
+    border: 1px dashed var(--foreground);
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+
+
+
+#depositbox {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+
+.depositboxinner {
+    width: 340px;
+    border: 1.5px solid rgb(14, 98, 255);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.depositboxinner p {
+    margin: 0;
+}
+
+.depositboxinner span {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.depositbtnbox {
+    border-top: 2px solid gray;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.depositbtn {
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    background-color: var( --clr-whiteToDodgerblue) !important;
+    border: 1px solid var( --clr-whiteToDodgerblue) !important;
+    color: var( --clr-dodgerblueColorToWhite) !important;
+    transition: 0.4s !important;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.depositbtn:hover {
+    background-color: var( --clr-dodgerblueColorToWhite) !important;
+    border: 1px solid rgb(8, 105, 202) !important;
+    color: var( --clr-whiteToDodgerblue) !important;
+}
+
+#depositform {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+#depositform p {
+    text-align: center;
+    color: black;
+}
+
+#depositform span {
+    width: 94%;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid black;
+}
+
+.depositformselect {
+    width: 94%;
+    margin: 10px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    /* color: var(--foreground); */
+}
+
+.depositformselect option {
+    color: black;
+}
+
+.depositforminput {
+    flex-grow: 1;
+    margin: 10px;
+    border: none;
+    outline: none;
+    /* color: var(--foreground); */
+    background-color: transparent;
+}
+
+.depositforminput::placeholder {
+    /* color: var(--foreground); */
+}
+
+#depositform button {
+    color: white;
+    background-color: rgb(23, 97, 209);
+    padding: 8px 16px;
+    transition: 0.5s;
+    display: block;
+    width: 100px;
+    border: none;
+    border-radius: 4px;
+}
+
+#depositform button:hover {
+    background-color: rgb(192, 15, 15);
+}
+
+
+@media (max-width:500px) {
+    .depositboxinner {
+        width: 100%;
+    } 
+}
+@media (max-width:270px) {
+    #depositbox {
+        padding: 0 10px;
+    }
+    .depositboxinner {
+        font-size: 0.8em;
+    } 
+    .depositbtnbox button {
+        font-size: 0.8em;
+    }
+}
+
+
+
+
+#deposithistory {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 0.8em;
+    padding: 20px 10px;
+}
+
+#deposithistorybox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+    padding: 30px 20px;
+}
+
+#deposithistory p {
+    color: var(--foreground);
+}
+
+#tablecontainer {
+    width: 100%;
+    overflow-x: auto;
+    
+}
+
+#historytable {
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+    font-size:0.85em;
+}
+
+
+#historytable thead th {
+    position: sticky;
+    background-color: transparent;
+    top: 0;
+    border-bottom: 1px solid var( --clr-tableBorderColor);
+    padding: 10px 20px;
+    font-weight: lighter;
+    /* border-right: 1px solid black; */
+}
+
+#historytable td {
+    border-bottom: 1px solid var( --clr-tableBorderColor);
+    padding: 10px 20px;
+    font-weight: lighter;
+}
+
+/*
+#historytable tr:nth-child(even) {
+    color: black;
+}
+
+#historytable tr:nth-child(odd) {
+    color: black;
+} */
+
+/* #historytable tr:hover td {
+    color: rgb(35, 113, 190);
+    cursor: pointer;
+    background-color: floralwhite;
+} */
+
+
+
+.uploadproofbtn {
+    background-color: rgb(211, 21, 21);
+    color: white !important;
+    border: none;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    white-space: nowrap;   
+}
+
+.uploadproofbtn:hover {
+    background-color: rgb(141, 10, 10);
+}
+
+@media (max-width:500px) {
+    #deposit {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0;
+    }
+}
+
+/* @media (max-width:330px) {
+    #historytable {
+        width: 300px;
+    } 
+    #box {
+        width: 300px;
+    }
+    #historytable-div {
+        width: 80%;
+    }
+}  */
+
+#infodiv {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#infodivinner {
+    width: 90%;
+}
+
+#tablecontainer::-webkit-scrollbar{
+    width: 10px;
+}
+
+#tablecontainer::-webkit-scrollbar-track {
+    -webkit-box-shadow:inset 0 0 10px rgba(0, 0, 0, 0.459)
+}
+
+#tablecontainer::-webkit-scrollbar-thumb {
+    -webkit-box-shadow:inset 0 0 10px rgba(0, 0, 0, 0.534)
+}
+
+
+#walletbox {
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.walletboxinner {
+    width: 94%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(41, 177, 86, 0.774);
+    border: 2px solid rgb(42, 121, 68);
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+.amountspan {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    color: white;
+}
+
+.walletamountspan {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    color: white;
+}
+
+.amountspan small, .walletamountspan small{
+    color: white;
+    font-size: 0.9em;
+    
+}
+
+.amountspan p, .walletamountspan p {
+    
+    margin: 0;
+    margin-left: 10px;
+    color: rgb(255, 234, 43);
+}
+
+.walletamount {
+    font-size: 1.5em;
+}

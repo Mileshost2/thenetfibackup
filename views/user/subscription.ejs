@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription</title>
+    <link rel="stylesheet" href="/stylesheets/user/signal.css">
+    <style>
+        .activesubscriptionlink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activesubscriptionlink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+
+        <div id="pageintrobox">
+            <div id="innerpageintrobox">
+                <h5>Subscription</h5>
+                <p>Subscribe to plans and earn profits.</p>
+                
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="signalsbox">
+            <div id="innersignalsbox">
+                <h6>Subscription Plans</h6>
+
+                <div id="signalslist">
+                    <% for (let i=0; i<subscriptionplans.length; i++) { %>
+                        <div class="signalcard">
+                            <div class="signalcardgroup signalcardheader">
+                                <p><%=  subscriptionplans[i].name%></p>
+                            </div>
+
+                            <div class="signalcardgroup">
+                                <span>Minimum Amount:</span>
+                                <p class="signalpricetag">$<%=  subscriptionplans[i].minamount.toLocaleString()%></p>
+                            </div>
+
+                            <div class="signalcardgroup3">
+                                <span class="signalcardgroup3-span">
+                                    <span>Duration:</span>
+                                    <p><%=  subscriptionplans[i].duration%></p>
+                                </span>
+                                <span class="signalcardgroup3-span">
+                                    <span>ROI:</span>
+                                    <p class="signalroitag"><%=  subscriptionplans[i].roi%></p>
+                                </span>
+                                <span class="signalcardgroup3-span">
+                                    <span>Maximum Amount:</span>
+                                    <p class="signalpricetag">$<%=  subscriptionplans[i].maxamount.toLocaleString()%></p>
+                                </span>
+                            </div>
+
+
+                            <!-- <div class="signalcardgroup">
+                                <% if (user.subscribedSignalId === subscriptionplans[i].id )  { %>
+                                    <span class="suscribedtag">Current Signal</span>
+                                <% } %>
+                            </div> -->
+
+
+                            
+                            <div class="signalactionbox">
+                                <% if (user.subscribedSubscriptionId === subscriptionplans[i].id )  { %>
+                                        <button type="button" class="btn btn-success">
+                                            Active Subscription
+                                        </button>
+
+                                <% } else { %>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editsignal<%= i %>">
+                                            Subscribe
+                                        </button>
+    
+                                    <div class="modal fade" id="editsignal<%= i %>" tabindex="-1" aria-labelledby="editsignal<%= i %>Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <form action="/dashboard/subscription/<%= subscriptionplans[i].id %>" method="post" id="div2form" enctype="multipart/form-data">
+                                                    <span class="mt-2 mb-2">
+                                                        <p>Proceed to pay the subscription fee of within $<%= subscriptionplans[i].minamount.toLocaleString() %> - $<%= subscriptionplans[i].maxamount.toLocaleString() %> and submit a payment receipt.</p>
+                                                    </span>
+
+                                                    <div class="transactionformgroup">
+                                                        <span>Amount:</span>
+                                                        <input type="number" class="form-control" id="amount" name="amount" placeholder="Amount" aria-label="Amount" required>
+                                                    </div>
+
+                                                    <span class="transactionformgroup">
+                                                        <label for="depositmethodname">Payment Method:</label>
+                                                        <select name="depositmethodname" id="depositmethodname" class="form-control" required>
+                                                            <option value="" selected>Choose Method</option>
+                                                             <% for (let depositmethod of depositmethods) { %>
+                                                                 <option value="<%=depositmethod.depositmethodname%>"><%=depositmethod.depositmethodname%></option>
+                                                             <% } %>
+                                                        </select>
+                                                    </span>
+                            
+                                                    <span class="transactionformgroup">
+                                                        <label for="depositaddress">Address:</label>
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" class="form-control" id="depositaddress" name="depositaddress" placeholder="Address" aria-label="Address" aria-describedby="basic-addon2" readonly required>
+                                                            <div class="input-group-append">
+                                                              <span class="input-group-text" id="basic-addon2" style="height: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center; background-color: dodgerblue; border-radius: 0 5px 5px 0;" onclick="copyTextFunction()"><i class="fa fa-copy" style="color: white;"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </span>
+
+                                                    <span class="transactionformgroup">
+                                                        <label for="">QR Code:</label>
+                            
+                                                        <img id="depositqrcode" style="width: 80%; margin-top: 5px;" alt="Select deposit method" />
+                                                    </span>
+                            
+                                                    <span class="transactionformgroup">
+                                                        <label for="">Payment Receipt:</label>
+                                                        <div class="custom-file-upload">
+                                                            <label for="file-input">
+                                                                <i class="fas fa-upload"></i>
+                                                                <span>Click to upload a file.</span>
+                                                                <span>Max size 1mb.</span>
+                                                                <span>(PNG or JPG)</span>
+                                                            </label>
+                                                            <input type="file" accept=".png, .jpg, .jpeg" name="transactionproof" class="" id="file-input" required>
+                                                            <p id="file-name" style="margin-top: 3px;"></p>
+                                                            <p id="file-error" style="color: red; display: none;">File size must be less than 1MB.</p>
+                            
+                                                        </div>
+                                                    </span>
+                                                    
+                                                    <button type="submit" class="btn btn-primary">Proceed</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+    
+                                <% } %>
+                               
+                            </div>
+
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+
+      
+    
+
+
+        <div id="deposithistory">
+            <div id="deposithistorybox">
+             <p>SUBSCRIPTION HISTORY</p>
+             <div id="tablecontainer">
+                 <table id="historytable">
+                     <thead>
+                       <tr>
+                         <th>S/N</th>
+                         <th>Date</th>
+                         <th>Subscription</th>
+                         <th>Amount</th>
+                         <th>Status</th>
+                       </tr>
+                     </thead>
+          
+                     <tbody>
+                         <% if (deposits.length < 1 ) { %>
+                             <td colspan="4">You are yet to suscribe to any signal.</td>
+                         <% } else { %>
+                             <% for (let deposit of deposits) {%>
+                                 <tr>
+                                   <td><li></td>
+                                     <td><%= deposit.transactiondate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %>, <%= deposit.transactiondate.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= deposit.transactiondate.toISOString().split('T')[0] %></td>
+                                   <td><%= deposit.narration %> </td>
+                                   <td>$<%= deposit.amount.toLocaleString() %></td>
+                                   <td><%= deposit.status %></td>
+                                 </tr>
+                                 <% } %> 
+                         <% } %> 
+                     </tbody>
+                   </table>
+             </div>
+            </div>
+         </div>
+    </div>
+    
+    <script>
+        function copyTextFunction() {
+         var copyText = document.getElementById("depositaddress");
+         copyText.select();
+         copyText.setSelectionRange(0, 99999);
+        navigator.clipboard
+        .writeText(copyText.value)
+        .then(() => {
+            alert("successfully copied");
+        })
+        .catch(() => {
+            alert("something went wrong");
+        });
+    }
+    </script>
+    <script>
+        document.getElementById('file-input').addEventListener('change', function() {
+        const file = this.files[0]; // Get the first file
+        const maxSize = 1 * 1024 * 1024; // 1MB in bytes
+        const fileNameElement = document.getElementById('file-name');
+        const fileErrorElement = document.getElementById('file-error');
+    
+        if (file) {
+            if (file.size > maxSize) {
+                fileErrorElement.style.display = 'block'; // Show error message
+                this.value = ''; // Clear the file input
+                fileNameElement.textContent = ''; // Clear the file name display
+            } else {
+                fileErrorElement.style.display = 'none'; // Hide error message
+                fileNameElement.textContent = `Selected file: ${file.name}`; // Show the file name
+            }
+        } else {
+            fileNameElement.textContent = ''; // Clear the file name display if no file is selected
+        }
+    });
+    
+    </script>
+
+
+<script>
+    const methodSelect = document.getElementById('depositmethodname');
+    methodSelect.addEventListener('change', handleFindMethod);
+
+    function handleFindMethod(event) {
+  const selectedMethod = event.target.value;
+
+  fetch(`/api/depositmethods/${selectedMethod}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data); // Log the entire data object
+      console.log(data.depositmethodname, data.depositaddress, data.depositqrcode); // Log individual values
+      
+      document.getElementById('depositaddress').value = data.depositaddress;
+
+        // Check if depositqrcode is an array and has at least one item
+        if (Array.isArray(data.depositqrcode) && data.depositqrcode.length > 0) {
+            const qrCodeUrl = data.depositqrcode[0].url; // Access the first element of the array
+            const qrCodeImg = document.getElementById('depositqrcode');
+            if (qrCodeImg) {
+                qrCodeImg.src = qrCodeUrl; // Set the QR code image source
+            }
+        } else {
+            console.error('No QR code URL available.');
+        }
+
+    })
+    .catch(error => {
+      console.error('Error fetching deposit method data:', error);
+      // Handle error, e.g., display an error message to the user
+    });
+}
+
+
+</script>
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

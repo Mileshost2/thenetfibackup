@@ -1,0 +1,88 @@
+/* #footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: black; 
+}
+
+#footerbox1 {
+    width: 80%;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.footerboxes {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+#logo {
+    width: 200px;
+}
+
+.footerboxes p {
+    color: white;
+    font-family: 'Bakbak One', cursive;
+}
+
+.footerboxes span {
+    color: white;
+}
+
+.footerlinks {
+    text-decoration: none;
+    color: dodgerblue;
+    transition: 0.7s;
+}
+
+.footerlinks:hover {
+    color: dodgerblue;
+    text-decoration: underline;
+}
+
+#footerbox2 {
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width:950px) {
+    #footerbox1 {
+        width: 100%;
+        padding: 0 10px;
+    }
+    .footerboxes {
+        width: 25%;
+    }
+}
+
+@media (max-width:780px) {
+    #footerbox1 {
+        flex-direction: column;
+    }
+    .footerboxes {
+        width: 80%;
+        margin-left: 20px;
+    }
+} */
+
+
+.in-footer-warning {
+    padding: 0 28px 6px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+}
+
+.in-footer-warning h5 {
+    margin-top: -9px;
+    margin-left: -8px;
+}
+
+.in-footer-warning h5 span {
+    background-color: #463a5c;
+    padding-left: 8px;
+    padding-right: 8px;
+}

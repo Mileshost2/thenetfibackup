@@ -1,0 +1,223 @@
+.inner-box .shape {
+    background: #6c65f6 !important;
+}
+
+.custombg1 {
+    background-color: rgb(38, 37, 39);
+    color: white !important;
+    padding-top: 50px !important;
+    padding-bottom: 40px !important;
+}
+
+.custombg1 p, .custombg1 small, .custombg1 b, .custombg1 h1, .custombg1 h2, .custombg1 h3, .custombg1 h4, .custombg1 h5 {
+    color: white !important;
+}
+
+.custombg1 span {
+    color: orangered !important;
+}
+
+.custombg1 .icon-box {
+    background-color: orangered !important;
+}
+
+
+.custombg2 {
+    background-color: rgb(115, 0, 255);
+    color: white !important;
+    margin-top: 20px;
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+}
+
+.custombg2 p, .custombg2 small, .custombg2 b, .custombg2 h1, .custombg2 h2, .custombg2 h3, .custombg2 h4, .custombg2 h5, .custombg2 a {
+    color: white !important;
+}
+
+.custombg2 .counsolve-read-btn {
+    display: none;
+}
+
+.custombg2 span {
+    background-color: transparent;
+    color: rgb(255, 255, 255) !important;
+}
+
+.custombg2 span a {
+    color: rgb(0, 0, 0) !important;
+}
+
+.custombg3 {
+    background-color: rgba(40, 40, 67, 0.515);
+}
+
+.custombg3 .te-bn-subtitle {
+    color: black;
+}
+
+.custombg3 .te_title {
+    color: black;
+}
+
+
+.planbox {
+    padding: 30px 20px;
+    background-color: rgb(38, 37, 39);
+    margin-bottom: 20px;
+    border-radius: 45px;
+}
+
+.planbox h3 {
+    text-align: center;
+    margin: 10px 0;
+    color: white;
+}
+
+.innerplanbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.plan {
+    width: 300px;
+    padding: 20px;
+    margin: 10px 5px;
+    border-radius: 10px;
+    background-color: orangered;
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+}
+
+.plangroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0;
+    border-bottom: 3px solid white;
+    align-items: center;
+}
+
+.noborder{
+    border-bottom: none;
+}
+
+.plangroup small {
+    word-wrap: none;
+    color: white;
+    font-size: 0.7em;
+}
+
+.plangroup p {
+    color: white;
+}
+
+@media (max-width:320px) {
+    .planbox {
+        width: 100%;
+    }
+}
+
+.videodiv {
+    padding: 0;
+}
+
+.video-section .video-inner {
+    padding-bottom: 20px;
+}
+
+@media (max-width:1200px) {
+    .video-section .video-inner {
+        padding-top: 100px;
+    }
+}
+
+.custombg4 {
+    background-color: rgb(124, 188, 252);
+}
+
+.padding10px {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+@media (max-width:800px) {
+    .working-block-one .town-feature-section {
+        top: 10 !important;
+        margin-bottom: 30px;
+    }
+    
+    .lower-content.marginbottom::before {
+        margin-bottom: 180px;
+    }
+    
+    .working-block-one .inner-box .lower-content h2 {
+        margin-bottom: 20px;
+        margin-top: 0;
+    }
+    
+    .extramarginbottom {
+    }
+    
+    .working-block-one .inner-box .image-box .image img {
+        margin-top: 50px !important;
+    }
+    
+    .working-block-one .inner-box .image-box .image:before {
+        top: 20px !important;
+    }
+    
+    .marginbottom {
+        margin-bottom: 60px;
+    }
+    
+}
+
+.project-section {
+    padding-top: 40px !important;
+}
+
+
+
+.certbox {
+    width: 100%;
+    padding: 50px 30px;
+}
+
+.innercertbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.certlist {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.certlist img {
+    margin: 10px;
+    width: 300px;
+    height: auto;
+}
+
+@media (max-width:690px) {
+    .certlist {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .certlist img {
+        width: auto;
+    }
+}
+
+
+

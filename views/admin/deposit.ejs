@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Requests</title>
+    <link rel="stylesheet" href="/stylesheets/admin/deposithistory.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+      <div id="header">
+        <div id="headerinner">
+            <span class="headerinnerspan"><i class="fa-solid fa-money-bill-transfer headericon"></i> <small>Deposits</small></span>
+            <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+        </div>
+      </div>
+
+        <div class="flashbox">
+          <% if(success && success.length) { %>
+                 <div class="flashboxsuccess-alert">
+                     <%= success %> 
+                     <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                     
+                 </div>
+             <% } %> 
+         
+             <% if(error && error.length) { %>
+                     <div class="flashboxerror-alert">
+                         <%= error %> 
+                         <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                         
+                     </div>
+             <% } %> 
+             
+      </div>
+
+        <div class="deposithistory">
+           <div class="deposithistorybox">
+            <p>DEPOSIT REQUESTS</p>
+            <div class="tablecontainer">
+                <table class="historytable">
+                    <thead>
+                        <tr>
+                          <th></th>
+                          <th>Date</th>
+                         <th>Amount</th>
+                         <th>Deposit Method</th>
+                         <th>Action</th>
+                        </tr>
+                      </thead>
+          
+                      <tbody>
+                        <% if (deposits.length > 0) { %> 
+                          <% for (let deposit of deposits) {%>
+                            <tr>
+                              <td><li></td>
+                                <td><%= deposit.transactiondate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %>, <%= deposit.transactiondate.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= deposit.transactiondate.toISOString().split('T')[0] %></td>
+                                <td>$<%= deposit.amount.toLocaleString() %></td>
+                                <td><%= deposit.transactionmethod %> </td>
+                                <td>
+                                    <a href="/admin/admin.view-deposit/<%= deposit.id%>" class="btn btn-success">View</a>
+                                </td>
+                            </tr>
+                          <% } %> 
+                        <% } else { %>
+                          <td colspan="5">No pending deposit.</td>
+                        <% } %>
+                      </tbody>
+                  </table>
+            </div>
+           </div>
+        </div>
+
+        <div class="deposithistory">
+          <div class="deposithistorybox">
+           <p>ACCOUNT UPGRADE PAYMENTS</p>
+           <div class="tablecontainer">
+               <table class="historytable">
+                   <thead>
+                       <tr>
+                         <th></th>
+                         <th>Date</th>
+                         <th>Amount</th>
+                         <th>Deposit Method</th>
+                         <th>Action</th>
+                       </tr>
+                     </thead>
+         
+                     <tbody>
+                       <% if (upgradefee.length > 0) { %> 
+                       <% for (let deposit of upgradefee ) { %>
+                           <tr>
+                             <td><li></td>
+                             <td><%= deposit.transactiondate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %>, <%= deposit.transactiondate.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= deposit.transactiondate.toISOString().split('T')[0] %></td>
+                             <td>$<%= deposit.amount.toLocaleString() %></td>
+                             <td><%= deposit.transactionmethod %> </td>
+                             <td>
+                                 <a href="/admin/admin.view-deposit/<%= deposit.id%>" class="btn btn-success">View</a>
+                             </td>
+                           </tr>
+                       <% } %>
+                       <% } else { %>
+                         <td colspan="5">No pending account upgrade payments.</td>
+                       <% } %>
+                     </tbody>
+                 </table>
+           </div>
+          </div>
+       </div>
+
+       <div class="deposithistory">
+        <div class="deposithistorybox">
+         <p>SIGNAL/SUBSCRIPTION PAYMENTS</p>
+         <div class="tablecontainer">
+             <table class="historytable">
+                 <thead>
+                     <tr>
+                       <th></th>
+                       <th>Date</th>
+                       <th>Amount</th>
+                       <th>Deposit Method</th>
+                       <th>Action</th>
+                     </tr>
+                   </thead>
+       
+                   <tbody>
+                     <% if (signalfee.length > 0) { %> 
+                     <% for (let deposit of signalfee ) { %>
+                         <tr>
+                           <td><li></td>
+                           <td><%= deposit.transactiondate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %>, <%= deposit.transactiondate.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= deposit.transactiondate.toISOString().split('T')[0] %></td>
+                           <td>$<%= deposit.amount.toLocaleString() %></td>
+                           <td><%= deposit.transactionmethod %> </td>
+                           <td>
+                               <a href="/admin/admin.view-deposit/<%= deposit.id%>" class="btn btn-success">View</a>
+                           </td>
+                         </tr>
+                     <% } %>
+                     <% } else { %>
+                       <td colspan="5">No pending account upgrade payments.</td>
+                     <% } %>
+                   </tbody>
+               </table>
+         </div>
+        </div>
+     </div>
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

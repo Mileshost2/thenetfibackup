@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Staking</title>
+    <link rel="stylesheet" href="/stylesheets/user/stakehistory.css">
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-line-chart headericon"></i> <small>Investments</small></span>
+                <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+          </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div class="deposithistory">
+            <div class="deposithistorybox">
+             <p>ACTIVE STAKES</p>
+             <div class="tablecontainer">
+                 <table class="historytable">
+                     <thead>
+                         <tr>
+                           <th></th>
+                           <th>Date</th>
+                           <th>Client</th>
+                           <th>Asset Staked</th>
+                           <th>USD Equivalent</th>
+                           <th>Reward</th>
+                           <th>Status</th>
+                           <th>Action</th>
+                         </tr>
+                       </thead>
+           
+                       <tbody>
+                        <% if (activestakedcrypto.length > 0 ) { %> 
+                            <% for (let client of clients ) { %> 
+                                <% for (let asset of client.staker) {%>
+                                    <% if (asset.status == 'Active') { %>
+                                        <tr>
+                                            <td><li></td>
+                                            <td><%= asset.startDate %></td>
+                                            <td><%= client.firstname %> </td>
+                                            <td><%= asset.cryptoAmountStaked %> <%= asset.cryptoType %></td>
+                                            <td>$<%= asset.usdAmountStaked.toLocaleString() %> </td>
+                                            <td>$<%= asset.investmentprofit.toLocaleString() %></td>
+                                            
+                                            <td><%= asset.status %></td>
+                                            <td><a href="/admin/admin.staked-asset/<%= client.id %>/<%= asset.id %>" class="btn btn-success" >View</a></td>
+                                            
+                                    
+                                        </tr>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        <% } else { %> 
+                            <td colspan="8">
+                                No active staking contract .
+                            </td>
+                        <% } %>
+         
+                       </tbody>
+                   </table>
+             </div>
+            </div>
+         </div>
+
+
+         <div class="deposithistory">
+            <div class="deposithistorybox">
+             <p>INACTIVE STAKES</p>
+             <div class="tablecontainer">
+                 <table class="historytable">
+                     <thead>
+                         <tr>
+                           <th></th>
+                           <th>Date</th>
+                           <th>Client</th>
+                           <th>Asset Staked</th>
+                           <th>USD Equivalent</th>
+                           <th>Reward</th>
+                           <th>Status</th>
+                           <th>Action</th>
+                         </tr>
+                       </thead>
+           
+                       <tbody>
+                        <% if (completedstakedcrypto.length > 0 ) { %> 
+                            <% for (let client of clients ) { %> 
+                                <% for (let asset of client.staker) {%>
+                                    <% if (asset.status == 'Completed') { %>
+                                        <tr>
+                                            <td><li></td>
+                                            <td><%= asset.startDate %></td>
+                                            <td><%= client.firstname %> </td>
+                                            <td><%= asset.cryptoAmountStaked %> <%= asset.cryptoType %></td>
+                                            <td>$<%= asset.usdAmountStaked.toLocaleString() %> </td>
+                                            <td>$<%= asset.investmentprofit.toLocaleString() %></td>
+                                            
+                                            <td><%= asset.status %></td>
+                                            <td><a href="/admin/admin.staked-asset/<%= client.id %>/<%= asset.id %>" class="btn btn-success" >View</a></td>
+                                            
+                                    
+                                        </tr>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        <% } else { %> 
+                            <td colspan="8">
+                                No inactive staking contract .
+                            </td>
+                        <% } %>
+         
+                       </tbody>
+                   </table>
+             </div>
+            </div>
+         </div>
+
+       
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stake</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/user/realestate.css">
+    <style>
+        .activestakelink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activestakelink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+
+        <div id="pageintrobox">
+            <div id="innerpageintrobox">
+                <h5>Stake</h5>
+                <p>Earn profits from staking and manage your staking history.</p>
+                
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="projectsbox">
+            <div id="innerprojectsbox">
+                <h6>Pools</h6>
+
+                <div id="projectslist">
+                        <div class="projectcard">
+                            <div class="projectassetbox">
+                                <img src="/img/ton.png" class="assetlogo" alt="ton">
+                                <span>
+                                    <p>Ethereum</p>
+                                    <small>ETH</small>
+                                </span>
+                            </div>
+                            
+                            <div class="projectcardspangroup3">
+                                <span class="projectcardspangroup3-span">
+                                    <small>Minimum</small>
+                                    <p class="">5,000 USD worth of ETH</p>
+                                    <!-- <b class="usdbalance" style="display: none;">5000</b> -->
+                
+                                    <p class="ethereumprice cryptopricetag"> </p>
+                                </span>
+                                <span class="projectcardspangroup3-span">
+                                    <small>ROI</small>
+                                    <p>6.5% Daily</p>
+                                </span>
+                                <span class="projectcardspangroup3-span">
+                                    <small>Duration</small>
+                                    <p>Minimum of 4 Months</p>
+                                </span>
+                            </div>
+
+                            <div class="projectactionbox">
+                                <!-- <form action="/dashboard/stake" method="post" class="projectactionbox" id="">
+                                    <input type="text" value="Ethereum" name="currency" hidden>
+                                    <input type="number" class="form-control" name="amount" placeholder="Enter Amount to Stake" required>
+                                    <button type="submit" class="btn btn-primary">Stake</button>
+
+                                </form> -->
+                                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#stakeEthModal">
+                                    Stake
+                                </button>
+
+                                <div class="modal fade" id="stakeEthModal" tabindex="-1" aria-labelledby="stakeEthModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <form action="/dashboard/stake" method="post" id="stakeform">
+
+                                                <input type="text" value="Ethereum" name="currency" hidden>
+
+                                                <div class="stakeformgroup mt-2">
+                                                    <label for="currency">Amount ($):
+                                                        <div class="infopopup-container">
+                                                            <button type="button" class="" style="margin-left: 3px; border: none; outline: none; background-color: transparent;" onclick="togglePopup()">
+                                                                <i class="fas fa-info-circle" style="font-size: 17px; cursor: pointer; color: #333;"></i>
+                                                            </button>
+                                                            <div class="infopopup" id="myPopup">Our system will automatically convert your USD into the selected asset.</div>
+                                                        </div>
+                                                        
+                                                        <!-- <i class="fas fa-info-circle" data-toggle="modal" data-bs-target="#infoModal" style="margin-left: 5px; font-size: 24px; cursor: pointer;"></i> -->
+                                                    </label>
+                                                    <input class="form-control" type="number" placeholder="Amount" name="amount" value="" id="investedamount" required>
+                                                </div>
+
+                                                <div class="stakeinfo">
+                                                    <p>Account Balance:</p>
+                                                    <p>$<%= user.wallet.toLocaleString() %></p>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <label for="duration">Duration:</label>
+                                                    <select name="duration"class="form-control" id="duration" required>
+                                                        <option value="">Select Duration</option>
+                                                        <option value="4 Months">4 Months</option>
+                                                        <option value="6 Months">6 Months</option>
+                                                        <option value="9 Months">9 Months</option>
+                                                        <option value="1 Year">1 Year</option>
+                                                        <option value="2 Years">2 Years</option>
+                                                        <option value="3 Years">3 Years</option>
+                                                        <option value="4 Years">4 Years</option>
+                                                        <option value="5 Years">5 Years</option>
+                                                        <option value="6 Years">6 Years</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <label for="roi">ROI (%) </label>
+                                                    <input class="form-control" type="text" placeholder="" name="roi" value="6.5% Daily" id="roi" required readonly>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <span>Total returns after staking session + initial capital ($):</span>
+                                                    <input type="amount" class="form-control" id="expectedincome" name="expectedincome" placeholder="Expected Income" aria-label="Expected Income" required readonly>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary mt-3 w-100">Proceed</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="projectcard">
+                            <div class="projectassetbox">
+                                <img src="/img/matic.png" class="assetlogo" alt="ton">
+                                <span>
+                                    <p>Polygon</p>
+                                    <small>MATIC</small>
+                                </span>
+                            </div>
+                            
+                            <div class="projectcardspangroup3">
+                                <span class="projectcardspangroup3-span">
+                                    <small>Minimum</small>
+                                    <p class="">4,000 USD worth of MATIC</p>
+                                    <!-- <b class="usdbalance" style="display: none;">5000</b> -->
+                
+                                    <p class="polygonprice cryptopricetag"> </p>
+                                </span>
+                                <span class="projectcardspangroup3-span">
+                                    <small>ROI</small>
+                                    <p>6% Daily</p>
+                                </span>
+                                <span class="projectcardspangroup3-span">
+                                    <small>Duration</small>
+                                    <p>Minimum of 4 Months</p>
+                                </span>
+                            </div>
+                            
+                            <div class="projectactionbox">
+                                <!-- <form action="/dashboard/stake" method="post" class="projectactionbox" id="">
+                                    <input type="text" value="Matic" name="currency" hidden>
+                                    <input type="number" class="form-control" name="amount" placeholder="Enter Amount to Stake" required>
+                                    <button type="submit" class="btn btn-primary">Stake</button>
+
+                                </form> -->
+                                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#stakeMaticModal">
+                                    Stake
+                                </button>
+
+                                <div class="modal fade" id="stakeMaticModal" tabindex="-1" aria-labelledby="stakeMaticModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <form action="/dashboard/stake" method="post" id="stakeform">
+
+                                                <input type="text" value="Matic" name="currency" hidden>
+
+                                                <div class="stakeformgroup mt-2">
+                                                    <label for="investedamount2">Amount ($):
+                                                        <div class="infopopup-container">
+                                                            <button type="button" class="" style="margin-left: 3px; border: none; outline: none; background-color: transparent;" onclick="togglePopup2()">
+                                                                <i class="fas fa-info-circle" style="font-size: 17px; cursor: pointer; color: #333;"></i>
+                                                            </button>
+                                                            <div class="infopopup" id="myPopup2">Our system will automatically convert your USD into the selected asset.</div>
+                                                        </div>
+                                                        
+                                                        <!-- <i class="fas fa-info-circle" data-toggle="modal" data-bs-target="#infoModal" style="margin-left: 5px; font-size: 24px; cursor: pointer;"></i> -->
+                                                    </label>
+                                                    <input class="form-control" type="number" placeholder="Amount" name="amount" value="" id="investedamount2" required>
+                                                </div>
+
+                                                <div class="stakeinfo">
+                                                    <p>Account Balance:</p>
+                                                    <p>$<%= user.wallet.toLocaleString() %></p>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <label for="duration2">Duration:</label>
+                                                    <select name="duration"class="form-control" id="duration2" required>
+                                                        <option value="">Select Duration</option>
+                                                       <option value="">Select Duration</option>
+                                                        <option value="4 Months">4 Months</option>
+                                                        <option value="6 Months">6 Months</option>
+                                                        <option value="9 Months">9 Months</option>
+                                                        <option value="1 Year">1 Year</option>
+                                                        <option value="2 Years">2 Years</option>
+                                                        <option value="3 Years">3 Years</option>
+                                                        <option value="4 Years">4 Years</option>
+                                                        <option value="5 Years">5 Years</option>
+                                                        <option value="6 Years">6 Years</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <label for="roi2">ROI (%) </label>
+                                                    <input class="form-control" type="text" placeholder="" name="roi" value="6% Daily" id="roi2" required readonly>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <span>Total returns after staking session + initial capital ($):</span>
+                                                    <input type="amount" class="form-control" id="expectedincome2" name="expectedincome" placeholder="Expected Income" aria-label="Expected Income" required readonly>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary mt-3 w-100">Proceed</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="projectcard">
+                            <div class="projectassetbox">
+                                <img src="/img/solana.png" class="assetlogo" alt="ton">
+                                <span>
+                                    <p>Solana</p>
+                                    <small>SOL</small>
+                                </span>
+                            </div>
+                            
+                            <div class="projectcardspangroup3">
+                                <span class="projectcardspangroup3-span">
+                                    <small>Minimum</small>
+                                    <p class="">5,000 USD worth of SOL</p>
+                                    <!-- <b class="usdbalance" style="display: none;">5000</b> -->
+                
+                                    <p class="solanaprice cryptopricetag"> </p>
+                                </span>
+                                <span class="projectcardspangroup3-span">
+                                    <small>ROI</small>
+                                    <p>6.5% Daily</p>
+                                </span>
+                                <span class="projectcardspangroup3-span">
+                                    <small>Duration</small>
+                                    <p>Minimum of 4 Months</p>
+                                </span>
+                            </div>
+                            
+                            <div class="projectactionbox">
+                                <!-- <form action="/dashboard/stake" method="post" class="projectactionbox" id="">
+                                    <input type="text" value="Solana" name="currency" hidden>
+                                    <input type="number" class="form-control" name="amount" placeholder="Enter Amount to Stake" required>
+                                    <button type="submit" class="btn btn-primary">Stake</button>
+
+                                </form> -->
+
+                                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#stakeSolanaModal">
+                                    Stake
+                                </button>
+
+                                <div class="modal fade" id="stakeSolanaModal" tabindex="-1" aria-labelledby="stakeSolanaModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <form action="/dashboard/stake" method="post" id="stakeform">
+
+                                                <input type="text" value="Solana" name="currency" hidden>
+
+                                                <div class="stakeformgroup mt-2">
+                                                    <label for="investedamount3">Amount ($):
+                                                        <div class="infopopup-container">
+                                                            <button type="button" class="" style="margin-left: 3px; border: none; outline: none; background-color: transparent;" onclick="togglePopup3()">
+                                                                <i class="fas fa-info-circle" style="font-size: 17px; cursor: pointer; color: #333;"></i>
+                                                            </button>
+                                                            <div class="infopopup" id="myPopup3">Our system will automatically convert your USD into the selected asset.</div>
+                                                        </div>
+                                                        
+                                                        <!-- <i class="fas fa-info-circle" data-toggle="modal" data-bs-target="#infoModal" style="margin-left: 5px; font-size: 24px; cursor: pointer;"></i> -->
+                                                    </label>
+                                                    <input class="form-control" type="number" placeholder="Amount" name="amount" value="" id="investedamount3" required>
+                                                </div>
+
+                                                <div class="stakeinfo">
+                                                    <p>Account Balance:</p>
+                                                    <p>$<%= user.wallet.toLocaleString() %></p>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <label for="duration3">Duration:</label>
+                                                    <select name="duration"class="form-control" id="duration3" required>
+                                                        <option value="">Select Duration</option>
+                                                       <option value="">Select Duration</option>
+                                                        <option value="4 Months">4 Months</option>
+                                                        <option value="6 Months">6 Months</option>
+                                                        <option value="9 Months">9 Months</option>
+                                                        <option value="1 Year">1 Year</option>
+                                                        <option value="2 Years">2 Years</option>
+                                                        <option value="3 Years">3 Years</option>
+                                                        <option value="4 Years">4 Years</option>
+                                                        <option value="5 Years">5 Years</option>
+                                                        <option value="6 Years">6 Years</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <label for="roi3">ROI (%) </label>
+                                                    <input class="form-control" type="text" placeholder="" name="roi" value="6.5% Daily" id="roi3" required readonly>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <span>Total returns after staking session + initial capital ($):</span>
+                                                    <input type="amount" class="form-control" id="expectedincome3" name="expectedincome" placeholder="Expected Income" aria-label="Expected Income" required readonly>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary mt-3 w-100">Proceed</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="projectcard">
+                            <div class="projectassetbox">
+                                <img src="/img/cardano.png" class="assetlogo" alt="ton">
+                                <span>
+                                    <p>Cardano</p>
+                                    <small>ADA</small>
+                                </span>
+                            </div>
+                            
+                            <div class="projectcardspangroup3">
+                                <span class="projectcardspangroup3-span">
+                                    <small>Minimum</small>
+                                    <p class="">5,000 USD worth of ADA</p>
+                                    <!-- <b class="usdbalance" style="display: none;">5000</b> -->
+                
+                                    <p class="cardanoprice cryptopricetag"> </p>
+                                </span>
+                                <span class="projectcardspangroup3-span">
+                                    <small>ROI</small>
+                                    <p>6.5% Daily</p>
+                                </span>
+                                <span class="projectcardspangroup3-span">
+                                    <small>Duration</small>
+                                    <p>Minimum of 4 Months</p>
+                                </span>
+                            </div>
+                            
+                            <div class="projectactionbox">
+                                <!-- <form action="/dashboard/stake" method="post" class="projectactionbox" id="">
+                                    <input type="text" value="Cardano" name="currency" hidden>
+                                    <input type="number" class="form-control" name="amount" placeholder="Enter Amount to Stake" required>
+                                    <button type="submit" class="btn btn-primary">Stake</button>
+
+                                </form> -->
+
+                                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#stakeCardanoModal">
+                                    Stake
+                                </button>
+
+                                <div class="modal fade" id="stakeCardanoModal" tabindex="-1" aria-labelledby="stakeCardanoModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <form action="/dashboard/stake" method="post" id="stakeform">
+
+                                                <input type="text" value="Cardano" name="currency" hidden>
+
+                                                <div class="stakeformgroup mt-2">
+                                                    <label for="investedamount4">Amount ($):
+                                                        <div class="infopopup-container">
+                                                            <button type="button" class="" style="margin-left: 3px; border: none; outline: none; background-color: transparent;" onclick="togglePopup4()">
+                                                                <i class="fas fa-info-circle" style="font-size: 17px; cursor: pointer; color: #333;"></i>
+                                                            </button>
+                                                            <div class="infopopup" id="myPopup4">Our system will automatically convert your USD into the selected asset.</div>
+                                                        </div>
+                                                        
+                                                        <!-- <i class="fas fa-info-circle" data-toggle="modal" data-bs-target="#infoModal" style="margin-left: 5px; font-size: 24px; cursor: pointer;"></i> -->
+                                                    </label>
+                                                    <input class="form-control" type="number" placeholder="Amount" name="amount" value="" id="investedamount4" required>
+                                                </div>
+
+                                                <div class="stakeinfo">
+                                                    <p>Account Balance:</p>
+                                                    <p>$<%= user.wallet.toLocaleString() %></p>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <label for="duration4">Duration:</label>
+                                                    <select name="duration"class="form-control" id="duration4" required>
+                                                        <option value="">Select Duration</option>
+                                                       <option value="">Select Duration</option>
+                                                        <option value="4 Months">4 Months</option>
+                                                        <option value="6 Months">6 Months</option>
+                                                        <option value="9 Months">9 Months</option>
+                                                        <option value="1 Year">1 Year</option>
+                                                        <option value="2 Years">2 Years</option>
+                                                        <option value="3 Years">3 Years</option>
+                                                        <option value="4 Years">4 Years</option>
+                                                        <option value="5 Years">5 Years</option>
+                                                        <option value="6 Years">6 Years</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <label for="roi4">ROI (%) </label>
+                                                    <input class="form-control" type="text" placeholder="" name="roi" value="6.5% Daily" id="roi4" required readonly>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <span>Total returns after staking session + initial capital ($):</span>
+                                                    <input type="amount" class="form-control" id="expectedincome4" name="expectedincome" placeholder="Expected Income" aria-label="Expected Income" required readonly>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary mt-3 w-100">Proceed</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                            </div>
+
+                            
+                        </div>
+
+                        <div class="projectcard">
+                            <div class="projectassetbox">
+                                <img src="/img/sui.png" class="assetlogo" alt="ton">
+                                <span>
+                                    <p>SUI</p>
+                                    <small>SUI</small>
+                                </span>
+                            </div>
+                            
+                            <div class="projectcardspangroup3">
+                                <span class="projectcardspangroup3-span">
+                                    <small>Minimum</small>
+                                    <p class="">5,000 USD worth of SUI</p>
+                                    <!-- <b class="usdbalance" style="display: none;">5000</b> -->
+                
+                                    <p class="suiprice cryptopricetag"> </p>
+                                </span>
+                                <span class="projectcardspangroup3-span">
+                                    <small>ROI</small>
+                                    <p>6.2% Daily</p>
+                                </span>
+                                <span class="projectcardspangroup3-span">
+                                    <small>Duration</small>
+                                    <p>Minimum of 4 Months</p>
+                                </span>
+                            </div>
+                            
+                            <div class="projectactionbox">
+                                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#stakeSuiModal">
+                                    Stake
+                                </button>
+
+                                <div class="modal fade" id="stakeSuiModal" tabindex="-1" aria-labelledby="stakeSuiModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <form action="/dashboard/stake" method="post" id="stakeform">
+
+                                                <input type="text" value="Sui" name="currency" hidden>
+
+                                                <div class="stakeformgroup mt-2">
+                                                    <label for="investedamount5">Amount ($):
+                                                        <div class="infopopup-container">
+                                                            <button type="button" class="" style="margin-left: 3px; border: none; outline: none; background-color: transparent;" onclick="togglePopup5()">
+                                                                <i class="fas fa-info-circle" style="font-size: 17px; cursor: pointer; color: #333;"></i>
+                                                            </button>
+                                                            <div class="infopopup" id="myPopup5">Our system will automatically convert your USD into the selected asset.</div>
+                                                        </div>
+                                                        
+                                                        <!-- <i class="fas fa-info-circle" data-toggle="modal" data-bs-target="#infoModal" style="margin-left: 5px; font-size: 24px; cursor: pointer;"></i> -->
+                                                    </label>
+                                                    <input class="form-control" type="number" placeholder="Amount" name="amount" value="" id="investedamount5" required>
+                                                </div>
+
+                                                <div class="stakeinfo">
+                                                    <p>Account Balance:</p>
+                                                    <p>$<%= user.wallet.toLocaleString() %></p>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <label for="duration5">Duration:</label>
+                                                    <select name="duration"class="form-control" id="duration5" required>
+                                                        <option value="">Select Duration</option>
+                                                       <option value="">Select Duration</option>
+                                                        <option value="4 Months">4 Months</option>
+                                                        <option value="6 Months">6 Months</option>
+                                                        <option value="9 Months">9 Months</option>
+                                                        <option value="1 Year">1 Year</option>
+                                                        <option value="2 Years">2 Years</option>
+                                                        <option value="3 Years">3 Years</option>
+                                                        <option value="4 Years">4 Years</option>
+                                                        <option value="5 Years">5 Years</option>
+                                                        <option value="6 Years">6 Years</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <label for="roi5">ROI (%) </label>
+                                                    <input class="form-control" type="text" placeholder="" name="roi" value="6.2% Daily" id="roi5" required readonly>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <span>Total returns after staking session + initial capital ($):</span>
+                                                    <input type="amount" class="form-control" id="expectedincome5" name="expectedincome" placeholder="Expected Income" aria-label="Expected Income" required readonly>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary mt-3 w-100">Proceed</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                            </div>
+
+
+                            
+                        </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div id="deposithistory">
+            <div id="deposithistorybox">
+             <p>STAKING POOL HISTORY</p>
+             <div id="tablecontainer">
+                 <table id="historytable">
+                     <thead>
+                       <tr>
+                         <th>S/N</th>
+                         <th>Date</th>
+                         <th>Coin</th>
+                         <th>Amount</th>
+                         <th>Status</th>
+                         <th>Action</th>
+                       </tr>
+                     </thead>
+          
+                     <tbody>
+                         <% if (investments.length < 1 ) { %>
+                             <td colspan="6">You are yet stake any coin.</td>
+                         <% } else { %>
+                             <% for (let investment of investments) {%>
+                                 <tr>
+                                   <td><li></td>
+                                     <td><%= investment.startDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %>, <%= investment.startDate.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= investment.startDate.toISOString().split('T')[0] %></td>
+                                   <td><%= investment.tradedCurrency %> </td>
+                                   <td>$<%= investment.investedamount.toLocaleString() %></td>
+                                   <td><%= investment.status %></td>
+                                   <td><a href="/dashboard/staked-asset/<%= investment.id %>">View Details</a></td>
+                                 </tr>
+                                 <% } %> 
+                         <% } %> 
+                     </tbody>
+                   </table>
+             </div>
+            </div>
+         </div>
+
+      
+    
+    </div>
+
+<script>
+    document.getElementById('investedamount').addEventListener('input', calculateExpectedIncome);
+    document.getElementById('duration').addEventListener('change', calculateExpectedIncome);
+
+    function calculateExpectedIncome() {
+        const amount = parseFloat(document.getElementById('investedamount').value);
+        const roi = parseFloat(document.getElementById('roi').value) / 100; // Convert percentage to decimal
+        const duration = document.getElementById('duration').value;
+
+        if (!amount || !duration) {
+            document.getElementById('expectedincome').value = '';
+            return;
+        }
+
+        let days = 0;
+        if (duration.includes('Days')) {
+            days = parseInt(duration);
+        } else if (duration.includes('Month')) {
+            days = parseInt(duration) * 30;
+        } else if (duration.includes('Year')) {
+            days = parseInt(duration) * 365;
+        }
+
+        const expectedIncome = amount + (roi * amount * days);
+        document.getElementById('expectedincome').value = expectedIncome.toFixed(2); // Round to 2 decimal places
+    }
+
+    document.getElementById('investedamount2').addEventListener('input', calculateExpectedIncome2);
+    document.getElementById('duration2').addEventListener('change', calculateExpectedIncome2);
+
+    function calculateExpectedIncome2() {
+        const amount = parseFloat(document.getElementById('investedamount2').value);
+        const roi = parseFloat(document.getElementById('roi2').value) / 100; // Convert percentage to decimal
+        const duration = document.getElementById('duration2').value;
+
+        if (!amount || !duration) {
+            document.getElementById('expectedincome2').value = '';
+            return;
+        }
+
+        let days = 0;
+        if (duration.includes('Days')) {
+            days = parseInt(duration);
+        } else if (duration.includes('Month')) {
+            days = parseInt(duration) * 30;
+        } else if (duration.includes('Year')) {
+            days = parseInt(duration) * 365;
+        }
+
+        const expectedIncome = amount + (roi * amount * days);
+        document.getElementById('expectedincome2').value = expectedIncome.toFixed(2); // Round to 2 decimal places
+    }
+
+    document.getElementById('investedamount3').addEventListener('input', calculateExpectedIncome3);
+    document.getElementById('duration3').addEventListener('change', calculateExpectedIncome3);
+
+    function calculateExpectedIncome3() {
+        const amount = parseFloat(document.getElementById('investedamount3').value);
+        const roi = parseFloat(document.getElementById('roi3').value) / 100; // Convert percentage to decimal
+        const duration = document.getElementById('duration3').value;
+
+        if (!amount || !duration) {
+            document.getElementById('expectedincome3').value = '';
+            return;
+        }
+
+        let days = 0;
+        if (duration.includes('Days')) {
+            days = parseInt(duration);
+        } else if (duration.includes('Month')) {
+            days = parseInt(duration) * 30;
+        } else if (duration.includes('Year')) {
+            days = parseInt(duration) * 365;
+        }
+
+        const expectedIncome = amount + (roi * amount * days);
+        document.getElementById('expectedincome3').value = expectedIncome.toFixed(2); // Round to 2 decimal places
+    }
+
+
+    document.getElementById('investedamount4').addEventListener('input', calculateExpectedIncome4);
+    document.getElementById('duration4').addEventListener('change', calculateExpectedIncome4);
+
+    function calculateExpectedIncome4() {
+        const amount = parseFloat(document.getElementById('investedamount4').value);
+        const roi = parseFloat(document.getElementById('roi4').value) / 100; // Convert percentage to decimal
+        const duration = document.getElementById('duration4').value;
+
+        if (!amount || !duration) {
+            document.getElementById('expectedincome4').value = '';
+            return;
+        }
+
+        let days = 0;
+        if (duration.includes('Days')) {
+            days = parseInt(duration);
+        } else if (duration.includes('Month')) {
+            days = parseInt(duration) * 30;
+        } else if (duration.includes('Year')) {
+            days = parseInt(duration) * 365;
+        }
+
+        const expectedIncome = amount + (roi * amount * days);
+        document.getElementById('expectedincome4').value = expectedIncome.toFixed(2); // Round to 2 decimal places
+    }
+
+
+    document.getElementById('investedamount5').addEventListener('input', calculateExpectedIncome5);
+    document.getElementById('duration5').addEventListener('change', calculateExpectedIncome5);
+
+    function calculateExpectedIncome5() {
+        const amount = parseFloat(document.getElementById('investedamount5').value);
+        const roi = parseFloat(document.getElementById('roi5').value) / 100; // Convert percentage to decimal
+        const duration = document.getElementById('duration5').value;
+
+        if (!amount || !duration) {
+            document.getElementById('expectedincome5').value = '';
+            return;
+        }
+
+        let days = 0;
+        if (duration.includes('Days')) {
+            days = parseInt(duration);
+        } else if (duration.includes('Month')) {
+            days = parseInt(duration) * 30;
+        } else if (duration.includes('Year')) {
+            days = parseInt(duration) * 365;
+        }
+
+        const expectedIncome = amount + (roi * amount * days);
+        document.getElementById('expectedincome5').value = expectedIncome.toFixed(2); // Round to 2 decimal places
+    }
+</script>
+
+<script>
+    function togglePopup() {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("infopopup-show");
+    }
+
+    // Close the popup if clicked outside
+    window.onclick = function(event) {
+        if (!event.target.matches('.infopopup-container button, .infopopup-container button i')) {
+            var popups = document.getElementsByClassName("infopopup");
+            for (var i = 0; i < popups.length; i++) {
+                var openPopup = popups[i];
+                if (openPopup.classList.contains('popup-show')) {
+                    openPopup.classList.remove('popup-show');
+                }
+            }
+        }
+    }
+
+    function togglePopup2() {
+        var popup = document.getElementById("myPopup2");
+        popup.classList.toggle("infopopup-show");
+    }
+
+    function togglePopup3() {
+        var popup = document.getElementById("myPopup3");
+        popup.classList.toggle("infopopup-show");
+    }
+
+    function togglePopup4() {
+        var popup = document.getElementById("myPopup4");
+        popup.classList.toggle("infopopup-show");
+    }
+
+    function togglePopup5() {
+        var popup = document.getElementById("myPopup5");
+        popup.classList.toggle("infopopup-show");
+    }
+
+</script>
+
+    <script>
+        // const usdAmount = 5000;
+        // Function to convert USD to Ethereum
+        function convertToEthereum(usdAmount, callback) {
+           // API endpoint for real-time conversion
+           const url = 'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd';
+    
+           // Make an AJAX request to fetch the exchange rate
+           $.getJSON(url, function (data) {
+               const exchangeRate = data.ethereum.usd; // Get the exchange rate
+               const ethereumAmount = usdAmount / exchangeRate; // Convert USD to Ethereum
+               callback(ethereumAmount); // Invoke the callback with the converted amount
+           });
+       }
+    
+       // Function to update the crypto balance
+       function updateEthereumBalance() {
+           const usdBalance = 5000;
+           convertToEthereum(usdBalance, function (ethereum) {
+               $('.ethereumprice').text(ethereum.toFixed(2) + ' ' + 'ETH'); // Update the cryptobalance span
+           });
+       }
+    
+       // Call the updateEthereumBalance function initially
+       updateEthereumBalance();
+
+
+       // Function to convert USD to Ethereum
+       function convertToPolygon(usdAmount, callback) {
+           // API endpoint for real-time conversion
+           const url = 'https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd';
+    
+           // Make an AJAX request to fetch the exchange rate
+           $.getJSON(url, function (data) {
+               const exchangeRate = data['matic-network'].usd; // Get the exchange rate
+               const polygonAmount = usdAmount / exchangeRate; // Convert USD to polygon
+               callback(polygonAmount); // Invoke the callback with the converted amount
+           });
+       }
+    
+       // Function to update the crypto balance
+       function updatePolygonBalance() {
+           const usdBalance = 4000;
+           convertToPolygon(usdBalance, function (polygon) {
+               $('.polygonprice').text(polygon.toFixed(2) + ' ' + 'MATIC'); // Update the cryptobalance span
+           });
+       }
+    
+       // Call the updatePolygonBalance function initially
+       updatePolygonBalance();
+
+
+       // Function to convert USD to Solana
+       function convertToSolana(usdAmount, callback) {
+           // API endpoint for real-time conversion
+           const url = 'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd';
+    
+           // Make an AJAX request to fetch the exchange rate
+           $.getJSON(url, function (data) {
+               const exchangeRate = data.solana.usd; // Get the exchange rate
+               const solanaAmount = usdAmount / exchangeRate; // Convert USD to Solana
+               callback(solanaAmount); // Invoke the callback with the converted amount
+           });
+       }
+    
+       // Function to update the crypto balance
+       function updateSolanaBalance() {
+           const usdBalance = 5000;
+           convertToSolana(usdBalance, function (solana) {
+               $('.solanaprice').text(solana.toFixed(2) + ' ' + 'SOL'); // Update the cryptobalance span
+           });
+       }
+    
+       // Call the updatePolygonBalance function initially
+       updateSolanaBalance();
+
+
+        // Function to convert USD to Solana
+        function convertToCardano(usdAmount, callback) {
+           // API endpoint for real-time conversion
+           const url = 'https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=usd';
+    
+           // Make an AJAX request to fetch the exchange rate
+           $.getJSON(url, function (data) {
+               const exchangeRate = data.cardano.usd; // Get the exchange rate
+               const cardanoAmount = usdAmount / exchangeRate; // Convert USD to cardano
+               callback(cardanoAmount); // Invoke the callback with the converted amount
+           });
+       }
+    
+       // Function to update the crypto balance
+       function updateCardanoBalance() {
+           const usdBalance = 5000;
+           convertToCardano(usdBalance, function (cardano) {
+               $('.cardanoprice').text(cardano.toFixed(2) + ' ' + 'ADA'); // Update the cryptobalance span
+           });
+       }
+    
+       // Call the updatePolygonBalance function initially
+       updateCardanoBalance();
+
+
+       // Function to convert USD to SUI Coin
+       function convertToSui(usdAmount, callback) {
+           // API endpoint for real-time conversion
+           const url = 'https://api.coingecko.com/api/v3/simple/price?ids=sui&vs_currencies=usd';
+    
+           // Make an AJAX request to fetch the exchange rate
+           $.getJSON(url, function (data) {
+               const exchangeRate = data.sui.usd; // Get the exchange rate
+               const suiAmount = usdAmount / exchangeRate; // Convert USD to sui
+               callback(suiAmount); // Invoke the callback with the converted amount
+           });
+       }
+    
+       // Function to update the crypto balance
+       function updateSuiBalance() {
+           const usdBalance = 5000;
+           convertToSui(usdBalance, function (sui) {
+               $('.suiprice').text(sui.toFixed(2) + ' ' + 'SUI'); // Update the cryptobalance span
+           });
+       }
+    
+       // Call the updatePolygonBalance function initially
+       updateSuiBalance();
+     </script>
+    <script src="/script/app.js"></script>
+</body>
+</html>

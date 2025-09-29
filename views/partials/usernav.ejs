@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+        </style>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+<link rel="stylesheet" href="/stylesheets/usernavbar.css">
+</head>
+<body>
+    <div id="navbarcontainer">
+        <div class="logobox">
+            <img src="/img/logo.png" id="logo" alt="Logo">
+        </div>
+
+        <div id="navinner">
+            <span class="navcontrolbox">
+                <i class="fa fa-bars navtoggle" aria-hidden="true"></i>
+        
+                
+
+                <a href="/notifications" class="notificationcounter">
+                    <i class="fas fa-bell"></i>
+                        <% if (unreadmsg.length > 0) { %>
+                            <span class="badge"><%= unreadmsg.length %></span>
+                        <% } %>
+                </a>
+
+                <div class="dropdown profiledropdown">
+                    <button class="btn btn-secondary dropdown-toggle dropdownBtn" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <% if (user.profilepicture.length === 0) { %> 
+                        <img src="/img/user.png" alt="" class="profilepic">
+                    <% } else { %> 
+                        <img src="<%= user.profilepicture[0].url %> " class="profilepic" alt="">
+                    <% } %> 
+                    <small class="profilename"><%= user.firstname %></small>
+                    </button>
+                    
+                    <ul class="dropdown-menu dropdown-menu-dark dropdownMenu" aria-labelledby="dropdownMenuButton2">
+                        <span class="acctDetails">
+                            <span>
+                                <p>Account Type:</p>
+                                <small class="accounttype"><%= user.accountType %></small>
+                            </span>
+            
+                            <span>
+                                <p>Account Status:</p>
+                                <% if (user.acctstatus === 'Not Active') { %> 
+                                    <small class="unverifiedstat"><%= user.acctstatus %></small>
+                                <% } else if (user.acctstatus === 'Active'){ %> 
+                                    <small class="verifiedstat"><%= user.acctstatus %></small>
+                                <% } else if (user.acctstatus === 'Suspended'){ %> 
+                                    <small class="unverifiedstat"><%= user.acctstatus %></small>
+                                <% } %> 
+                                
+                            </span>
+                        </span>
+                    <li><a class="dropdown-item" href="/profile"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a class="dropdown-item" href="/notifications"><i class="fas fa-bell"></i> My Notifications</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <span style="visibility: hidden;">
+                        <%- partial('../partials/darkmode')%>
+                    </span>
+                    </ul>
+                </div>
+            </span>
+            
+
+            
+        </div>
+
+    </div>
+    <div class="modal fade transbg" id="logout" tabindex="-1" aria-labelledby="logoutLabel" aria-hidden="true">
+        <div class="modal-dialog transbg">
+        <div class="modal-content transbg">
+            <div class="modal-body transbg">
+                <form action="/logout" class="" method="get" id="logoutform">
+                    <button type="submit" class="btn btn-danger mt-2">Proceed to Logout <i class="fas fa-sign-out-alt"></i></button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    
+    <div class="navbar">
+        <div class="navcontent">
+            <div class="sidebarlogobox">
+                <img src="/img/logo.png" id="sidebarlogo" alt="Logo">
+
+                
+
+                <i class="fa-solid fa-times navtoggle"></i>
+            </div>
+            <!-- <span class="profilepicbox">
+                
+                <% if (user.profilepicture.length === 0) { %> 
+                    <img src="/img/user.png" alt="" class="profilepic">
+                <% } else { %> 
+                    <img src="<%= user.profilepicture[0].url %> " class="profilepic" alt="">
+                <% } %> 
+                <small><%= user.firstname %> <%= user.lastname %></small>
+            </span> -->
+            <div class="homelinkbox">
+                <a href="/" class="homelink"><i class="fa-solid fa-arrow-left "></i></a>
+            </div>
+            
+            <a href="/dashboard " class="navlinks activedashboardlink"> <i class="fas fa-project-diagram links-icons"></i> <span>Dashboard</span></a>
+            <a href="/dashboard/markets" class="navlinks activeassetlink"> <i class="fas fa-exchange-alt links-icons"></i> <span>Markets</span></a>
+            <a href="/dashboard/deposit"  class="navlinks activedepositlink"><i class="fa-solid fa-money-bill-transfer links-icons"></i><span>Deposit</span></a>
+            <a href="/dashboard/withdrawal"  class="navlinks activewithdrawallink"><i class="fa-solid fa-wallet  links-icons"></i> <span>Withdrawal</span></a>
+            <a href="/dashboard/trades"  class="navlinks activetradelink"><i class="fas fa-donate links-icons"></i> <span>Trades</span></a>
+            <!-- <a href="/dashboard/markets"  class="navlinks activemarketslink"><i class="fas fa-tags links-icons"></i> <span>Markets</span></a> -->
+            <a href="/dashboard/stake"  class="navlinks activestakelink"><i class="fas fa-piggy-bank links-icons"></i> <span>Stake Coins</span></a>
+            <a href="/dashboard/copy-experts"  class="navlinks activeexpertlink"><i class="fas fa-user-tie links-icons"></i> <span>Copy Expert</span></a>
+            <a href="/dashboard/subscription"  class="navlinks activesubscriptionlink"><i class="fas fa-clipboard-check links-icons"></i> <span>Subscription</span></a>
+            <a href="/dashboard/trading-bots"  class="navlinks activesignallink"><i class="fas fa-signal links-icons"></i> <span>Trading Bots</span></a>
+            <a href="/dashboard/real-estate"  class="navlinks activerealestatelink"><i class="fas fa-building links-icons"></i> <span>Real Estate</span></a>
+            <a href="/dashboard/upgrade-account"  class="navlinks activeupgradelink"><i class="fas fa-arrow-up links-icons"></i> <span>Upgrade Account</span></a>
+            <a href="/dashboard/referral-dashboard"  class="navlinks activereflink"><i class="fas fa-users links-icons"></i> <span>Referral Dashboard</span></a>
+
+        </div>
+    </div>
+
+
+
+    <!-- <script src="/script/app.js"></script> -->
+
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+          this.classList.toggle("navactive");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+          } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+      });
+      }
+  </script>
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

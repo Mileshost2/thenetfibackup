@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Indices</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/user/forex.css">
+    <style>
+      .activeindiceslink {
+          background-color: var(--activesidebarlink) !important;
+          color: var(--background) !important;
+          padding: 5px !important;
+          margin: 0 5px !important;
+          width: 95% !important;
+          border-radius: 5px;
+      }
+
+      .activeindiceslink .links-icons {
+          background-color: transparent !important;
+          color: var(--background) !important;
+      }
+  </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+  <div class="contentbox">
+    <div id="pageintrobox">
+      <div id="innerpageintrobox">
+          <h5>Indices</h5>
+          <p>Earn profits from trading Indices.</p>
+          
+      </div>
+    </div>
+
+    <% if(success && success.length) { %>
+      <div class="flashbox">
+                <div class="flashboxsuccess-alert">
+                    <%= success %> 
+                    <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    
+                </div>
+      </div>
+    <% } %>          
+        
+    <% if(error && error.length) { %>
+      <div class="flashbox">
+                    <div class="flashboxerror-alert">
+                        <%= error %> 
+                        <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        
+                    </div>
+      </div>
+    <% } %>
+
+    <div id="widgetbox">
+        <div id="innerwidgetbox">
+            <div id="stock-container" class="cryptolistheader">
+                <b>Top Indices:</b>
+
+                <a href="/trade/spx" class="stock">
+                  <span class="stockinfo">
+                      <span class="stockimgbox">
+                          <img src="/img/indices/spx.png" alt="indices">
+                      </span>
+                      <span class="stockname">
+                          <p>S&P 500 Index</p>
+                          <small>SPX</small>
+                      </span>
+                  </span>
+                  <span class="stockprice">
+                    <p>0.00</p>
+                      <!-- <p>${displayprice} <small>USD</small></p> -->
+                      <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+                  </span>
+                </a>
+                
+                <a href="/trade/dji" class="stock">
+                  <span class="stockinfo">
+                      <span class="stockimgbox">
+                          <img src="/img/indices/dji.png" alt="indices">
+                      </span>
+                      <span class="stockname">
+                          <p>Dow Jones Industrial Average</p>
+                          <small>DJI</small>
+                      </span>
+                  </span>
+                  <span class="stockprice">
+                    <p>0.00</p>
+                      <!-- <p>${displayprice} <small>USD</small></p> -->
+                      <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+                  </span>
+              </a>
+
+              <a href="/trade/ixic" class="stock">
+                <span class="stockinfo">
+                    <span class="stockimgbox">
+                        <img src="/img/indices/ixic.png" alt="indices">
+                    </span>
+                    <span class="stockname">
+                        <p>Nasdaq Composite Index</p>
+                        <small>IXIC</small>
+                    </span>
+                </span>
+                <span class="stockprice">
+                  <p>0.00</p>
+                    <!-- <p>${displayprice} <small>USD</small></p> -->
+                    <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+                </span>
+            </a>
+          
+              <a href="/trade/ftse" class="stock">
+                <span class="stockinfo">
+                    <span class="stockimgbox">
+                        <img src="/img/indices/ftse.jpg" alt="indices">
+                    </span>
+                    <span class="stockname">
+                        <p>FTSE 100 Index</p>
+                        <small>FTSE</small>
+                    </span>
+                </span>
+                <span class="stockprice">
+                  <p>0.00</p>
+                    <!-- <p>${displayprice} <small>USD</small></p> -->
+                    <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+                </span>
+            </a>
+
+            <a href="/trade/dax" class="stock">
+              <span class="stockinfo">
+                  <span class="stockimgbox">
+                      <img src="/img/indices/dax.png" alt="indices">
+                  </span>
+                  <span class="stockname">
+                      <p>DAX 30 Index</p>
+                      <small>DAX</small>
+                  </span>
+              </span>
+              <span class="stockprice">
+                <p>0.00</p>
+                  <!-- <p>${displayprice} <small>USD</small></p> -->
+                  <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+              </span>
+          </a>
+         
+            <a href="/trade/cac" class="stock">
+              <span class="stockinfo">
+                  <span class="stockimgbox">
+                      <img src="/img/indices/cac.png" alt="indices">
+                  </span>
+                  <span class="stockname">
+                      <p>CAC 40 Index</p>
+                      <small>CAC</small>
+                  </span>
+              </span>
+              <span class="stockprice">
+                <p>0.00</p>
+                  <!-- <p>${displayprice} <small>USD</small></p> -->
+                  <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+              </span>
+          </a>
+
+          <a href="/trade/n225" class="stock">
+            <span class="stockinfo">
+                <span class="stockimgbox">
+                    <img src="/img/indices/n225.png" alt="indices">
+                </span>
+                <span class="stockname">
+                    <p>Nikkei 225 Index</p>
+                    <small>N225</small>
+                </span>
+            </span>
+            <span class="stockprice">
+              <p>0.00</p>
+                <!-- <p>${displayprice} <small>USD</small></p> -->
+                <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+            </span>
+        </a>
+
+        <a href="/trade/hsi" class="stock">
+          <span class="stockinfo">
+              <span class="stockimgbox">
+                  <img src="/img/indices/hsi.png" alt="indices">
+              </span>
+              <span class="stockname">
+                  <p>Hang Seng Index</p>
+                  <small>HSI</small>
+              </span>
+          </span>
+          <span class="stockprice">
+            <p>0.00</p>
+              <!-- <p>${displayprice} <small>USD</small></p> -->
+              <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+          </span>
+      </a>
+
+        <a href="/trade/asx" class="stock">
+          <span class="stockinfo">
+              <span class="stockimgbox">
+                  <img src="/img/indices/asx.png" alt="indices">
+              </span>
+              <span class="stockname">
+                  <p>S&P/ASX 200 Index</p>
+                  <small>ASX</small>
+              </span>
+          </span>
+          <span class="stockprice">
+            <p>0.00</p>
+              <!-- <p>${displayprice} <small>USD</small></p> -->
+              <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+          </span>
+      </a>
+
+      <a href="/trade/sse" class="stock">
+        <span class="stockinfo">
+            <span class="stockimgbox">
+                <img src="/img/indices/sse.png" alt="indices">
+            </span>
+            <span class="stockname">
+                <p>Shanghai Composite Index</p>
+                <small>SSE</small>
+            </span>
+        </span>
+        <span class="stockprice">
+          <p>0.00</p>
+            <!-- <p>${displayprice} <small>USD</small></p> -->
+            <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+        </span>
+    </a>
+            </div>
+        </div>
+    </div>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+  <script src="/script/app.js"></script>
+</body>
+</html>

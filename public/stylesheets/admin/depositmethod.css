@@ -1,0 +1,277 @@
+body {
+    padding: 0;
+    margin: 0;
+    /* background-color: #26394d !important; */
+}
+
+/* #div1 {
+    display: flex;
+    flex-direction: row;
+}
+
+#div1box {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    width: 90%;
+    align-items: center;
+}
+
+.mainicon {
+    color: white;
+    background-color: dodgerblue;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 0 20px;
+    font-size: 1.6em;
+}
+
+#div1boxinner {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#div1boxinner p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+#div1boxinner a {
+    color: var( --foreground);
+    text-decoration: none;
+}
+
+.dashspan {
+    color: grey;
+} */
+
+
+#div2, .div2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+#div2box, .div2box {
+    padding: 10px;
+    width: 94%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+}
+
+
+
+.div2boxinner {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#div2box p, .div2box p {
+    margin: 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var( --foreground)white;
+}
+
+.depositbtn {
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    background-color: transparent !important;
+    border: 1px solid rgb(8, 105, 202) !important;
+    color: rgb(8, 105, 202) !important;
+    transition: 0.4s !important;
+    margin: 10px 0;
+}
+
+.fa-plus {
+    color: rgb(8, 105, 202) !important;
+    margin: 0 5px;
+}
+
+.depositbtn:hover {
+    background-color: rgb(8, 105, 202) !important;
+    color: white !important;
+}
+
+.depositbtn:hover .fa-plus {
+    color: white !important;
+}
+
+.depositform {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+.depositform p {
+    text-align: center !important;
+    color: black !important;
+}
+
+.depositform span {
+    width: 94%;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid black;
+}
+
+.depositforminput {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    /* color: var(--foreground); */
+}
+
+.depositforminput option {
+    color: rgb(53, 53, 53);
+}
+
+.depositforminput::placeholder {
+    /* color: var(--foreground); */
+}
+
+.editformlabel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.editformlabel p {
+    font-size: 0.85em;
+    margin-bottom: 6px;
+}
+
+
+#depositbox2, .depositbox2 {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#depositmethodbox, .depositmethodbox {
+    width: 100%;
+    align-self: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0 20px;
+}
+
+.depositmethodboxclass {
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    width: 370px;
+    border: 1.5px solid rgb(255, 143, 14);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Oswald', sans-serif;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.depositmethodboxclass p {
+    margin: 0;
+}
+
+.depositmethodboxclass span {
+    margin: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+    word-break: break-word;
+}
+
+.depositimgbox {
+    border-top: 1.4px solid grey;
+    border-bottom: 1.4px solid grey;
+    padding: 5px;
+}
+
+.depositimg {
+    width: 150px;
+}
+
+.depositmethodimg {
+    width: 100%;
+}
+
+.depositmethodboxaction {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+.depositmethodboxaction button {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.modalbtn {
+    width: 100%;
+}
+
+
+
+#null, .null {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#null p, .null p {
+    color: white;
+    background-color: rgb(211, 49, 49);
+    text-align: center;
+    padding: 5px;
+    width: 80%;
+    border-radius: 6px;
+}
+
+
+@media (max-width:890px) {
+    #depositmethodbox, .depositmethodbox {
+        flex-direction: column;
+    }
+    .depositmethodboxclass {
+        width: 100%;
+        overflow-wrap: break-word;
+    }
+}

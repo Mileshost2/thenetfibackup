@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assets</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/user/assets.css">
+    <style>
+      .activeassetlink {
+          background-color: var(--activesidebarlink) !important;
+          color: var(--background) !important;
+          padding: 5px !important;
+          margin: 0 5px !important;
+          width: 95% !important;
+          border-radius: 5px;
+      }
+
+      .activeassetlink .links-icons {
+          background-color: transparent !important;
+          color: var(--background) !important;
+      }
+  </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+  <div class="contentbox">
+    <div id="pageintrobox">
+      <div id="innerpageintrobox">
+          <h5>Assets</h5>
+          <p>All assets available for trading.</p>
+          
+      </div>
+    </div>
+
+    <% if(success && success.length) { %>
+      <div class="flashbox">
+                <div class="flashboxsuccess-alert">
+                    <%= success %> 
+                    <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    
+                </div>
+      </div>
+    <% } %>          
+        
+    <% if(error && error.length) { %>
+      <div class="flashbox">
+                    <div class="flashboxerror-alert">
+                        <%= error %> 
+                        <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        
+                    </div>
+      </div>
+    <% } %>
+
+    <div id="widgetbox">
+        <div id="widgetactionbox">
+            <div class="search-container widetsearchbox">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-bar" onkeyup="filterAssets()" placeholder="Search assets...">
+            </div>
+
+            <div class="button-container">
+                <button id="btn-all" onclick="showContainer('allassets-container', 'btn-all')">All</button>
+                <button id="btn-crypto" onclick="showContainer('cryptoassets-container', 'btn-crypto')">Crypto</button>
+                <button id="btn-stocks" onclick="showContainer('stocksassets-container', 'btn-stocks')">Stocks</button>
+                <button id="btn-forex" onclick="showContainer('forexassets-container', 'btn-forex')">Forex</button>
+            </div>
+        </div>
+        
+        <div id="innerwidgetbox">
+            <div id="allassets-container" class="cryptolistheader">
+                <b>Top Assets:</b>
+                <div class="currencyhead">
+                    <span class="">
+                        <b>Asset</b>
+                    </span>
+                    <span class="">
+                        <b>Symbol</b>
+                    </span>
+                </div>
+                <div class="assetintro"><b>Crypto</b></div>
+                <% for (let trade of cryptotrades) { %>
+                    <a href="/trade/<%= trade.tradeSymbol.toLowerCase()%>" class="currency">
+                        <span class="currencyimgbox">
+                            <img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt="">
+                            <p><%= trade.tradeCurrency%></p>
+                        </span>
+                        <span class="currencyprice">
+                            <p><%= trade.tradeSymbol%></p>
+                        </span>
+                    </a>
+                <% } %>
+
+                <div class="assetintro"><b>Stocks</b></div>
+                <% for (let trade of stockstrades) { %>
+                    <a href="/trade/<%= trade.tradeSymbol.toLowerCase()%>" class="currency">
+                        <span class="currencyimgbox">
+                            <img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt="">
+                            <p><%= trade.tradeCurrency%></p>
+                        </span>
+                        <span class="currencyprice">
+                            <p><%= trade.tradeSymbol%></p>
+                        </span>
+                    </a>
+                <% } %>
+
+                <div class="assetintro"><b>Forex Pairs</b></div>
+                <% for (let trade of forextrades) { %>
+                    <a href="/trade/<%= trade.tradeSymbol.toLowerCase()%>" class="currency">
+                        <span class="currencyimgbox">
+                            <img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt="">
+                            <p><%= trade.tradeCurrency%></p>
+                        </span>
+                        <span class="currencyprice">
+                            <p><%= trade.tradeSymbol%></p>
+                        </span>
+                    </a>
+                <% } %>
+            </div>
+
+            <div id="cryptoassets-container" class="cryptolistheader">
+                <b>Crypto:</b>
+
+                <% for (let trade of cryptotrades) { %>
+                    <a href="/trade/<%= trade.tradeSymbol.toLowerCase()%>" class="currency">
+                        <span class="currencyimgbox">
+                            <img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt="">
+                            <p><%= trade.tradeCurrency%></p>
+                        </span>
+                        <span class="currencyprice">
+                            <p><%= trade.tradeSymbol%></p>
+                        </span>
+                    </a>
+                <% } %>
+            </div>
+
+            <div id="stocksassets-container" class="cryptolistheader">
+                <b>Stocks:</b>
+
+                <% for (let trade of stockstrades) { %>
+                    <a href="/trade/<%= trade.tradeSymbol.toLowerCase()%>" class="currency">
+                        <span class="currencyimgbox">
+                            <img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt="">
+                            <p><%= trade.tradeCurrency%></p>
+                        </span>
+                        <span class="currencyprice">
+                            <p><%= trade.tradeSymbol%></p>
+                        </span>
+                    </a>
+                <% } %>
+            </div>
+
+            <div id="forexassets-container" class="cryptolistheader">
+                <b>Forex Pairs:</b>
+
+                <% for (let trade of forextrades) { %>
+                    <a href="/trade/<%= trade.tradeSymbol.toLowerCase()%>" class="currency">
+                        <span class="currencyimgbox">
+                            <img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt="">
+                            <p><%= trade.tradeCurrency%></p>
+                        </span>
+                        <span class="currencyprice">
+                            <p><%= trade.tradeSymbol%></p>
+                        </span>
+                    </a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- <a class="currency">
+        <span class="currencyimgbox">
+            <img src="${displaybasecurrencyimg}" alt="">
+            <p>${displaycurrencypairs}</p>
+        </span>
+        <span class="currencyprice">
+            <p>${displayprice}</p>
+        </span>
+    </a> -->
+
+
+
+
+
+
+
+   
+
+
+<script>
+function showContainer(containerId, buttonId) {
+    // Get all asset containers
+    const containers = document.querySelectorAll('.cryptolistheader');
+
+    // Hide all containers
+    containers.forEach(container => {
+        container.style.display = 'none';
+    });
+
+    // Show the selected container
+    document.getElementById(containerId).style.display = 'block';
+
+    // Remove active class from all buttons
+    const buttons = document.querySelectorAll('.button-container button');
+    buttons.forEach(button => {
+        button.classList.remove('active');
+    });
+
+    // Add active class to the clicked button
+    document.getElementById(buttonId).classList.add('active');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    showContainer('allassets-container', 'btn-all');
+});
+
+function filterAssets() {
+    const input = document.getElementById('search-bar');
+    const filter = input.value.toUpperCase();
+
+    // Get the visible container; fallback to the 'allassets-container' if none is visible
+    const container = document.querySelector('.cryptolistheader:not([style*="display: none"])');
+                      
+    const assets = container.getElementsByClassName('currency');
+
+    for (let i = 0; i < assets.length; i++) {
+        const assetCurrency = assets[i].getElementsByTagName("p")[0].innerText.toUpperCase(); // tradeCurrency
+        const assetSymbol = assets[i].getElementsByTagName("p")[1].innerText.toUpperCase();   // tradeSymbol
+
+        if (assetCurrency.indexOf(filter) > -1 || assetSymbol.indexOf(filter) > -1) {
+            assets[i].style.display = "";
+        } else {
+            assets[i].style.display = "none";
+        }
+    }
+}
+
+
+</script>
+  <script src="/script/app.js"></script>
+</body>
+</html>

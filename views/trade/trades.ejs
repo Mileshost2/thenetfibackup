@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trades</title>
+    <link rel="stylesheet" href="/stylesheets/user/trades.css">
+    <style>
+        .activetradelink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activetradelink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+
+        <div id="pageintrobox">
+            <div id="innerpageintrobox">
+                <h5>Trades</h5>
+                <p>Your trading history.</p>
+                
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div class="investmentbox">
+            <div class="innerinvestmentbox">
+                <div class="boxtitle">
+                    <h6>Opened Trades</h6>
+                </div>
+                <div class="activeinvestment">
+                    <% if (openedtrades.length === 0 ) { %>
+                        <p>You have no opened trade.</p>
+                    <% } else { %>
+                        <% for (investment of openedtrades) { %>
+                            <% if (investment.investmentType === 'Staking') { %>
+                                <a href="/dashboard/staked-asset/<%= investment.id %>" class="investment">
+                                    <span>
+                                        <p><%= investment.investmentType%></p>
+                                        <small>Trade Type</small>
+                                    </span>
+        
+                                    <span>
+                                        <p><%= investment.tradedCurrency%></p>
+                                        <small>Traded Asset</small>
+                                    </span>
+        
+                                    <span>
+                                        <p class="investmentpricetag">$<%= investment.investedamount.toLocaleString()%></p>
+                                        <small>Amount Traded</small>
+                                    </span>
+        
+                                    <span>
+                                        <p class="investmentpricetag">$<%= investment.investmentprofit.toLocaleString()%></p>
+                                        <small>Profit</small>
+                                    </span>
+        
+                                </a>
+                            <% } else { %>
+                                <a href="/dashboard/trade/<%= investment.id %>" class="investment">
+                                    <span>
+                                        <p><%= investment.investmentType%></p>
+                                        <small>Trade Type</small>
+                                    </span>
+        
+                                    <span>
+                                        <p><%= investment.tradedCurrency%></p>
+                                        <small>Traded Asset</small>
+                                    </span>
+        
+                                    <span>
+                                        <p class="investmentpricetag">$<%= investment.investedamount.toLocaleString()%></p>
+                                        <small>Amount Traded</small>
+                                    </span>
+        
+                                    <span>
+                                        <p class="investmentpricetag">$<%= investment.investmentprofit.toLocaleString()%></p>
+                                        <small>Profit</small>
+                                    </span>
+        
+                                </a>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+            
+            <div class="innerinvestmentbox">
+                <div class="boxtitle">
+                    <h6>Closed Trades</h6>
+                </div>
+                <div class="activeinvestment">
+                    <% if (closedtrades.length === 0 ) { %>
+                        <p>You have no closed trade.</p>
+                    <% } else { %>
+                        <% for (investment of closedtrades) { %>
+                            <% if (investment.investmentType === 'Staking') { %>
+                                <a href="/dashboard/staked-asset/<%= investment.id %>" class="investment">
+                                    <span>
+                                        <p><%= investment.investmentType%></p>
+                                        <small>Trade Type</small>
+                                    </span>
+        
+                                    <span>
+                                        <p><%= investment.tradedCurrency%></p>
+                                        <small>Traded Asset</small>
+                                    </span>
+        
+                                    <span>
+                                        <p class="investmentpricetag">$<%= investment.investedamount.toLocaleString()%></p>
+                                        <small>Amount Traded</small>
+                                    </span>
+        
+                                    <span>
+                                        <p class="investmentpricetag">$<%= investment.investmentprofit.toLocaleString()%></p>
+                                        <small>Profit</small>
+                                    </span>
+        
+                                </a>
+                            <% } else { %>
+                                <a href="/dashboard/trade/<%= investment.id %>" class="investment">
+                                    <span>
+                                        <p><%= investment.investmentType%></p>
+                                        <small>Trade Type</small>
+                                    </span>
+        
+                                    <span>
+                                        <p><%= investment.tradedCurrency%></p>
+                                        <small>Traded Asset</small>
+                                    </span>
+        
+                                    <span>
+                                        <p class="investmentpricetag">$<%= investment.investedamount.toLocaleString()%></p>
+                                        <small>Amount Traded</small>
+                                    </span>
+        
+                                    <span>
+                                        <p class="investmentpricetag">$<%= investment.investmentprofit.toLocaleString()%></p>
+                                        <small>Profit</small>
+                                    </span>
+        
+                                </a>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+   
+
+
+      
+    
+    </div>
+    
+
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

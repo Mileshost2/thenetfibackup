@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Status</title>
+    <style>
+       
+    </style>
+    <link rel="stylesheet" href="/stylesheets/user/kyc.css">
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+    
+    <div class="contentbox">
+
+        <div id="pageintrobox">
+            <div id="innerpageintrobox">
+                <h5>Account Status</h5>
+                <!-- <p>Verify Your Information.</p> -->
+            </div>
+        </div>
+        
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="imgbox">
+            <div id="innerimgbox">
+                <% if (user.acctstatus === 'Suspended') { %>
+                    <img src="/img/times.png" alt="">
+                    <span class="imgcaptions">
+                        <p>Your account is currently suspended from using our services.</p>
+                    </span>
+                <% } %>
+            </div>
+        </div>
+    
+    </div>
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

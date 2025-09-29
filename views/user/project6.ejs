@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Mirage</title>
+    <link rel="stylesheet" href="/stylesheets/user/projects.css">
+    
+</head>
+<body>
+    <%- partial('../partials/usernav')%>
+
+    <div class="contentbox"> 
+        <div class="pageheader">
+            <a href="/dashboard/real-estate"><i class="fas fa-arrow-left"></i> Back to projects.</a>
+        </div>
+       
+        <div class="projectbox1">
+            <div class="custom-carousel">
+                <div class="custom-carousel-inner">
+                    <div class="custom-carousel-item active">
+                        <img src="/img/projects/project6a.png" alt="Image 1">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project6b.png" alt="Image 2">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project6c.png" alt="Image 3">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project6d.png" alt="Image 4">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project6e.png" alt="Image 5">
+                    </div>
+                    <div class="custom-carousel-item">
+                        <img src="/img/projects/project6f.png" alt="Image 6">
+                    </div>
+                </div>
+                <div class="custom-carousel-indicators">
+                    <span class="custom-indicator active"></span>
+                    <span class="custom-indicator"></span>
+                    <span class="custom-indicator"></span>
+                    <span class="custom-indicator"></span>
+                    <span class="custom-indicator"></span>
+                    <span class="custom-indicator"></span>
+                </div>
+                <button class="custom-carousel-control custom-prev">&#10094;</button>
+                <button class="custom-carousel-control custom-next">&#10095;</button>
+            </div>
+
+            <div class="projectbox1inner">
+                <h3>The Mirage - Texas State Student Housing</h3>
+                <p>
+                    A Texas State University student housing acquisition assuming below-market fixed-rate debt, with a renovation and rebranding strategy to seek higher rents and NOI.
+                </p>
+            </div>
+        </div>
+
+    
+        <div class="projectinfobox">
+            <div class="innerprojectinfobox">
+                <div class="infobox infobox1">
+                    <div class="projectinfo">
+                        <h5>Property Overview</h5>
+                        <p>
+                            The Mirage is an 816-bed, garden-style student housing asset located in San Marcos, TX, almost halfway between Austin and San Antonio along I-35. San Marcos is home to Texas State University (38,376 enrollment 2022-23), a university with a growing student body that has outpaced its current supply of student housing options, resulting in high occupancy rates and steady rent growth. The Sponsor acquired the asset on May 1st, 2023 and intends to implement a comprehensive value-add renovation strategy on all units, community amenities, and common areas that will position the Property, which sits directly along the campus shuttle route, to capture NOI upside given the excess demand for upgraded, proximate student housing options.
+                        </p>
+                    </div>
+
+
+                    <div class="projectinfo">
+                        <h5>Project Breakdown:</h5>
+                        
+                        <span class="projectbreakdown">
+                            <small>TYPE:</small>
+                            <p>Student Housing</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>ACRES:</small>
+                            <p>23.6</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>STRATEGY:</small>
+                            <p>Growth & Income</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>OBJECTIVE:</small>
+                            <p>Value-add</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>MINIMUM:</small>
+                            <p>$102K</p>
+                        </span>
+
+                        <span class="projectbreakdown">
+                            <small>ROI:</small>
+                            <p>29% Daily</p>
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- <div class="infobox infobox2">
+
+                </div> -->
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+    
+
+
+
+
+
+<script>
+    const prevButton = document.querySelector('.custom-prev');
+const nextButton = document.querySelector('.custom-next');
+const carouselInner = document.querySelector('.custom-carousel-inner');
+const indicators = document.querySelectorAll('.custom-indicator');
+
+let index = 0;
+
+function showSlide(i) {
+    if (i >= indicators.length) i = 0;
+    if (i < 0) i = indicators.length - 1;
+
+    carouselInner.style.transform = `translateX(-${i * 100}%)`;
+
+    indicators.forEach((indicator, idx) => {
+        indicator.classList.toggle('active', idx === i);
+    });
+
+    index = i;
+}
+
+prevButton.addEventListener('click', () => {
+    showSlide(index - 1);
+});
+
+nextButton.addEventListener('click', () => {
+    showSlide(index + 1);
+});
+
+indicators.forEach((indicator, idx) => {
+    indicator.addEventListener('click', () => {
+        showSlide(idx);
+    });
+});
+
+// Optionally, you can start the carousel with automatic sliding
+setInterval(() => {
+    showSlide(index + 1);
+}, 5000); // Change slide every 5 seconds
+
+</script>
+    <script src="/script/app.js"></script>
+</body>
+</html>

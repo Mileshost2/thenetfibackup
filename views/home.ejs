@@ -1,0 +1,1147 @@
+
+
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+  
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <title>
+Forex | Shares | Indices | Commodities | Cryptocurrencies  - TheNetFi
+</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="Classification" content="Business">
+    <meta name="coverage" content="Worldwide">
+    <meta name="distribution" content="Global">
+
+    <meta name="description" content="TheNetFi is your one-stop destination to trade CFDs across Forex, Shares, Indices, Commodities & Cryptocurrencies.">
+
+    <link rel="shortcut icon" href="/static/vendors/images/favicon.cbf2618ef349.png">
+
+    
+    <link type="text/css" href="/static/css/app.e7b0768fdabf360fa239.3a800150df04.css" rel="stylesheet" />
+    
+    <!-- Le javascript
+    ================================================== -->
+    
+    
+    <script src="https://TheNetFi.live/cdn.tiny.cloud/1/invalid-origin/tinymce/6.1.2-8/tinymce.min.html" referrerpolicy="origin"></script>
+    <script type="application/javascript">
+        tinymce.init({
+          selector: 'textarea',
+          plugins: 'image autolink lists media table paste',
+          toolbar: 'undo redo | styles | bold italic | addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+          toolbar_mode: 'floating',
+          tinycomments_mode: 'embedded',
+        });
+    </script>
+
+    <script src="https://TheNetFi.live/cdn.jsdelivr.net/npm/%40ryangjchandler/alpine-clipboard%402.x.x/dist/alpine-clipboard.html" defer></script>
+    
+
+    
+
+    
+  </head>
+
+  <body class="w-screen block" x-data="{ showBar : false, showNav : false }" hx-headers='{"X-CSRFToken": "RSYKwHSXf4N8UHCBHjUWqOeCJdoBIcCMsXsgqUQozqejFLdoyaDeBbb3TpLo8l4s"}' >
+
+
+
+    
+
+    
+    <header class="w-screen fixed z-50">
+      
+
+
+
+
+
+<div class="w-full px-3 md:px-24 md:flex hidden py-2 md:py-0 items-center bg-white justify-between">
+  <div class="flex items-center space-x-4">
+    <a href="/contact" class="hover:font-black duration-300 text-sm block">Contact</a>
+    <a href="/platforms" class="hover:font-black duration-300 text-sm block">Webtrader</a>
+    <a href="/funding" class="hover:font-black duration-300 text-sm block">Funding</a>
+    <a href="/register" class="hover:font-black duration-300 text-sm block">Pro Account</a>
+  </div>
+  <div class="flex space-x-6 relative items-center" x-data="{ open :  false }">
+    <div class="justify-items-center relative w-16">
+      <div @click="open = !open" class="flex items-center space-x-1 cursor-pointer hover:scale-105 duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 block" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M7 2a1 1 0 011 1v1h3a1 1 0 110 2H9.578a18.87 18.87 0 01-1.724 4.78c.29.354.596.696.914 1.026a1 1 0 11-1.44 1.389c-.188-.196-.373-.396-.554-.6a19.098 19.098 0 01-3.107 3.567 1 1 0 01-1.334-1.49 17.087 17.087 0 003.13-3.733 18.992 18.992 0 01-1.487-2.494 1 1 0 111.79-.89c.234.47.489.928.764 1.372.417-.934.752-1.913.997-2.927H3a1 1 0 110-2h3V3a1 1 0 011-1zm6 6a1 1 0 01.894.553l2.991 5.982a.869.869 0 01.02.037l.99 1.98a1 1 0 11-1.79.895L15.383 16h-4.764l-.724 1.447a1 1 0 11-1.788-.894l.99-1.98.019-.038 2.99-5.982A1 1 0 0113 8zm-1.382 6h2.764L13 11.236 11.618 14z" clip-rule="evenodd" />
+        </svg>
+        <span class="block font-bold text-sm">EN</span>
+      </div>
+     
+    </div>
+    <a href="/login" class="p-4 bg-[#1C417A] text-sm text-white font-bold hover:scale-105 duration-300">
+      Client Portal
+    </a>
+  </div>
+</div>
+
+      
+
+
+
+
+<header id="header" :class="{ 'fixed top-0 left-0 bg-primary/100 text-dark shadow-xl' : showBar, 'bg-primary/20' : !showBar }" @scroll.window="showBar = (window.pageYOffset > 20) ? true : false" class="z-50 w-screen justify-between text-white flex items-center px-3 md:px-24 py-5">
+  <a href="/" class="flex items-center">
+    <img src="/static/vendors/images/logo-dark.fd7e3b65ebcf.png" alt="Logo" class="h-14 object-contain">
+    <strong class="text-2xl font-black">TheNetFi</strong>
+  </a>
+
+  <nav class="items-center hidden space-x-8 font-semibold text-base md:flex">
+    <a href="/quick-start" class="block h-full hover:text-dark hover:font-black  duration-300 relative">
+      QUICK START
+    </a>
+    <a href="/trading" class="uppercase h-full hover:text-dark hover:font-black  duration-300">trading</a>
+    <a href="/platforms" class="uppercase h-full hover:text-dark hover:font-black  duration-300">platforms</a>
+    <a href="/about" target="__blank" class="uppercase h-full hover:text-dark hover:font-black  duration-300">Resources</a>
+    <!-- <a href="/en/about/" class="uppercase h-full hover:text-dark hover:font-black  duration-300">resources</a> -->
+    
+    <a href="/login" class="uppercase bg-dark text-white rounded-r-xl rounded-bl-xl p-3 hover:scale-105 hover:font-black duration-300">Open Live</a>
+    
+  </nav>
+
+  <div class="flex items-center space-x-3 md:hidden" x-data="{ open :  false }">
+    <div class="justify-items-center relative w-16">
+      <div @click="open = !open" class="flex items-center space-x-1 cursor-pointer hover:scale-105 duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 block" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M7 2a1 1 0 011 1v1h3a1 1 0 110 2H9.578a18.87 18.87 0 01-1.724 4.78c.29.354.596.696.914 1.026a1 1 0 11-1.44 1.389c-.188-.196-.373-.396-.554-.6a19.098 19.098 0 01-3.107 3.567 1 1 0 01-1.334-1.49 17.087 17.087 0 003.13-3.733 18.992 18.992 0 01-1.487-2.494 1 1 0 111.79-.89c.234.47.489.928.764 1.372.417-.934.752-1.913.997-2.927H3a1 1 0 110-2h3V3a1 1 0 011-1zm6 6a1 1 0 01.894.553l2.991 5.982a.869.869 0 01.02.037l.99 1.98a1 1 0 11-1.79.895L15.383 16h-4.764l-.724 1.447a1 1 0 11-1.788-.894l.99-1.98.019-.038 2.99-5.982A1 1 0 0113 8zm-1.382 6h2.764L13 11.236 11.618 14z" clip-rule="evenodd" />
+        </svg>
+        <span class="block font-bold text-sm">EN</span>
+      </div>
+      <div id="lang" :class="{ 'block duration-300' : open, 'hidden duration-300' : !open}" class="absolute space-y-1 z-30 top-10 w-full duration-500 right-0 bg-white px-2 md:16">
+        
+          <a @click="open = false" href="/quick-start" class="flex items-center text-center space-x-2 hover:text-gray-600 justify-items-center">
+            <img class="fill-current rounded-full w-4 h-4" src="/static/vendors/images/flags/jpg/en.jpg" alt="en flag" />
+            <span class="hover:text-variant-1 duration-300 flex items-center flex-none text-sm pt-1 font-black text-dark">EN</span>
+            <!-- <a href="" class="flex items-center space-x-2">
+            <img class="fill-current rounded-full w-4 h-4" src="/static/vendors/images/flags/jpg/en.jpg" alt="en flag" />
+            <span class="flex items-center flex-none text-sm pt-1 font-black">EN <svg class="w-4 h-4 pl-1 hover:mt-2 duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></span> -->
+          </a>
+        
+          <a @click="open = false" href="/" class="flex items-center text-center space-x-2 hover:text-gray-600 justify-items-center">
+            <img class="fill-current rounded-full w-4 h-4" src="/static/vendors/images/flags/jpg/es.jpg" alt="es flag" />
+            <span class="hover:text-variant-1 duration-300 flex items-center flex-none text-sm pt-1 font-black text-dark">ES</span>
+            <!-- <a href="" class="flex items-center space-x-2">
+            <img class="fill-current rounded-full w-4 h-4" src="/static/vendors/images/flags/jpg/en.jpg" alt="es flag" />
+            <span class="flex items-center flex-none text-sm pt-1 font-black">EN <svg class="w-4 h-4 pl-1 hover:mt-2 duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></span> -->
+          </a>
+        
+          <a @click="open = false" href="/" class="flex items-center text-center space-x-2 hover:text-gray-600 justify-items-center">
+            <img class="fill-current rounded-full w-4 h-4" src="/static/vendors/images/flags/jpg/fr.jpg" alt="fr flag" />
+            <span class="hover:text-variant-1 duration-300 flex items-center flex-none text-sm pt-1 font-black text-dark">FR</span>
+            <!-- <a href="" class="flex items-center space-x-2">
+            <img class="fill-current rounded-full w-4 h-4" src="/static/vendors/images/flags/jpg/en.jpg" alt="fr flag" />
+            <span class="flex items-center flex-none text-sm pt-1 font-black">EN <svg class="w-4 h-4 pl-1 hover:mt-2 duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></span> -->
+          </a>
+        
+          <a @click="open = false" href="/" class="flex items-center text-center space-x-2 hover:text-gray-600 justify-items-center">
+            <img class="fill-current rounded-full w-4 h-4" src="/static/vendors/images/flags/jpg/it.jpg" alt="it flag" />
+            <span class="hover:text-variant-1 duration-300 flex items-center flex-none text-sm pt-1 font-black text-dark">IT</span>
+            <!-- <a href="" class="flex items-center space-x-2">
+            <img class="fill-current rounded-full w-4 h-4" src="/static/vendors/images/flags/jpg/en.jpg" alt="it flag" />
+            <span class="flex items-center flex-none text-sm pt-1 font-black">EN <svg class="w-4 h-4 pl-1 hover:mt-2 duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></span> -->
+          </a>
+        
+          <a @click="open = false" href="/" class="flex items-center text-center space-x-2 hover:text-gray-600 justify-items-center">
+            <img class="fill-current rounded-full w-4 h-4" src="/static/vendors/images/flags/jpg/ru.jpg" alt="ru flag" />
+            <span class="hover:text-variant-1 duration-300 flex items-center flex-none text-sm pt-1 font-black text-dark">RU</span>
+            <!-- <a href="" class="flex items-center space-x-2">
+            <img class="fill-current rounded-full w-4 h-4" src="/static/vendors/images/flags/jpg/en.jpg" alt="ru flag" />
+            <span class="flex items-center flex-none text-sm pt-1 font-black">EN <svg class="w-4 h-4 pl-1 hover:mt-2 duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></span> -->
+          </a>
+        
+      </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 cursor-pointer" :class="{'text-dark duration-300' : showBar, 'text-white duration-300' : !showBar}" @click="showNav = !showNav" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </div>
+
+
+</header>
+<div class="hidden z-0 w-full bg-primary/50 items-center py-12 px-3 md:px-24 space-x-24 justify-between">
+  <div class="space-y-2">
+    <strong class="block text-3xl font-normal text-dark">
+      Trade with a<br><strong class="font-black">trusted forex<br>and CFD broker</strong>
+    </strong>
+    <div class="flex items-center space-x-4">
+      <a href="/login" class="bg-dark text-white rounded-r-xl rounded-bl-xl p-3">Open Live</a>
+      <a href="#" class="bg-variant text-white rounded-r-xl rounded-bl-xl p-3">Try Demo</a>
+    </div>
+  </div>
+  <div id="quick" class="hidden items-start space-x-14">
+    <ul>
+      <li class="font-black text-base">Introduction</li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Why TheNetFi?</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">What you can trade?</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Why is Forex Trading?</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Why are CFDs?</a>
+      </li>
+    </ul>
+    <ul>
+      <li class="font-black text-base">Your Account</li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Try a Demo</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Deposit Funds</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Withdraw Funds</a>
+      </li>
+    </ul>
+    <ul>
+      <li class="font-black text-base">Trading Platforms</li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">MetaTrader 4 (MT4)</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">MetaTrader 5 (MT5)</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Webtrader</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Social Trading</a>
+      </li>
+    </ul>
+  </div>
+  <div id="platform" class="hidden items-start space-x-14">
+    <ul>
+      <li class="font-black text-base">MT4 & MT5</li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">MetaTrader 4</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">MetaTrader 5</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Web Trader</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Social Trading</a>
+      </li>
+    </ul>
+    <ul>
+      <li class="font-black text-base">Iress</li>
+      <li>
+        <a href="https://iress.com/" class="text-sm hover:font-black duration-300">iress.com</a>
+      </li>
+      <li>
+        <a href="https://www.iress.com/software/mortgages/" class="text-sm hover:font-black duration-300">Iress Mortgages</a>
+      </li>
+      <li>
+        <a href="https://www.iress.com/software/trading-and-market-data/" class="text-sm hover:font-black duration-300">Iress Market Data</a>
+      </li>
+    </ul>
+  </div>
+  <div id="resources" class="hidden items-start space-x-14">
+    <ul>
+      <li class="font-black text-base">Company</li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">About Us</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">FAQs</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Regulation</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Documentation</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Exchange</a>
+      </li>
+    </ul>
+    <ul>
+      <li class="font-black text-base">Education</li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Trading Course Videos</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Webinar</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Podcast</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Events</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Ebooks</a>
+      </li>
+    </ul>
+    <ul>
+      <li class="font-black text-base">Help</li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">FAQ</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Support</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Call Book</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Traders Hub Blog</a>
+      </li>
+      <li>
+        <a href="#" class="text-sm hover:font-black duration-300">Live Support</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div :class="{ 'fixed top-0 left-0 z-30 translate-y-0 duration-300' : showNav, 'hidden duration-300 -translate-y-full' : !showNav }" class="md:hidden w-full space-y-2 h-screen pt-[20vh] bg-primary/90 relative">
+  <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute top-4 right-4 text-white hover:animate-spin hover:scale-105" viewBox="0 0 20 20" fill="currentColor">
+    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+  </svg> -->
+  <a href="/quick-start" class="py-2 text-center block  hover:text-dark hover:font-black  duration-300 relative">
+    QUICK START
+  </a>
+  <a href="/trading" class="uppercase py-2 text-center block  hover:text-dark hover:font-black  duration-300">trading</a>
+  <a href="/platforms" class="uppercase py-2 text-center block  hover:text-dark hover:font-black  duration-300">platforms</a>
+  <a href="/about" class="uppercase py-2 text-center block  hover:text-dark hover:font-black  duration-300">Resources</a>
+  <!-- <a href="/en/about/" class="uppercase py-2 text-center block  hover:text-dark hover:font-black  duration-300">resources</a> -->
+  
+  <a href="/register" class="uppercase bg-dark text-white rounded-r-xl rounded-bl-xl p-3 hover:scale-105 hover:font-black duration-300 flex justify-center items-center w-[60vw] mx-auto">Open Live</a>
+  
+</div>
+
+    </header>
+    
+
+    
+<!-- main slider -->
+<section class="relative w-screen h-screen bg-primary">
+
+  <!-- main slider -->
+  <div class="w-full h-full swiper main-swiper relative flex flex-row">
+    <div class="swiper-wrapper">
+
+      <!-- slides -->
+      <div class="swiper-slide w-full h-full relative object-cover flex flex-col items-center">
+        <div class="pt-24 md:pt-0 md:w-1/3 w-[70%] mx-auto md:left-24 absolute top-1/4">
+          <div class="mb-50 md:mb-0 text-white text-2xl md:text-5xl font-bold">
+            Performance Driven <span class="font-normal text-white/50">Technology &</span> Ultra-low <span class="font-normal text-white/50">Spreads</span>
+          </div>
+          <p style="font-style: italic" class="pt-5 pb-5 text-white">Trade the Global Markets with a Leading Forex Broker</p>
+          <a href="/register" class="bg-primary md:w-1/3 text-base hover:scale-105 text-dark py-3 px-4 rounded-r-md rounded-bl-md hover:font-bold duration-300">START TRADING</a>
+        </div>
+        <img src="/static/vendors/images/sliders/slide2.37bf0d47a308.jpg" alt="slider1" class="h-full w-auto object-cover block">
+      </div>
+
+      <!-- slides 2-->
+      <div class="swiper-slide w-full h-full relative object-cover flex flex-col items-center">
+        <div class="pt-24 md:pt-0 md:w-1/3 w-[70%] mx-auto md:left-24 absolute top-1/4">
+          <div class="mb-50 md:mb-0 text-white text-2xl md:text-5xl font-bold">
+            <span class="font-normal text-white/50">Trade</span> Forex, CFDs, Bonds, Commodities <span class="font-normal text-white/50">and more...</span>
+          </div>
+          <p style="font-style: italic" class="pt-5 pb-5 text-white">Start Trading in minutes</p>
+          <a href="/register" class="bg-dark md:w-1/3 text-base hover:scale-105 text-white py-3 px-4 rounded-r-md rounded-bl-md hover:font-bold duration-300">START TRADING</a>
+        </div>
+        <img src="/static/vendors/images/sliders/slide1.29d43200ff27.jpg" alt="slider2" class="h-full w-auto object-cover block">
+      </div>
+
+    </div>
+
+
+      <!-- previous button -->
+  <div class="absolute inset-y-0 left-2 md:left-12 z-10 flex items-center">
+    <button type="button" title="previous slide"  id="prev" class="bg-white -ml-2 lg:-ml-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
+      <svg viewBox="0 0 20 20" fill="currentColor" class="text-dark chevron-left w-6 h-6"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+    </button>
+  </div>
+
+  <!-- next nutton -->
+  <div class="absolute inset-y-0 right-4 md:right-14 z-10 flex items-center">
+    <button type="button" title="next slide" id="next" class="bg-white -mr-2 lg:-mr-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
+      <svg viewBox="0 0 20 20" fill="currentColor" class="text-dark chevron-right w-6 h-6"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+    </button>
+  </div>
+
+  <!-- slider scrollbar -->
+  <!-- <div class="swiper-scrollbar"></div> -->
+  </div>
+
+  <div class="absolute right-24 bottom-0 h-full z-30 align-middle justify-center hidden md:flex items-center">
+    <div class="h-min my-auto rounded-r-xl rounded-bl-xl w-56 py-5 px-6 bg-dark/70 divide-y-[0.3px] text-white items-center hidden md:flex md:flex-col justify-center space-y-5">
+      <div class="flex flex-col items-center text-xs md:text-sm font-normal text-center">
+        Tight Raw <br> Spreads from
+        <strong class="text-base md:text-4xl font-black">0.0 pips</strong>
+      </div>
+      <div class="flex flex-col pt-5 items-center text-xs md:text-sm font-normal text-center">
+        <strong class="text-base md:text-4xl font-black">$0</strong>
+        Commission-Free <br>Funding Options
+      </div>
+      <div class="flex flex-col pt-5 items-center text-xs md:text-sm font-normal text-center">
+        <strong class="text-base md:text-4xl font-black">500:1</strong>
+        Max Leverage
+      </div>
+      <div class="flex flex-col pt-5 items-center text-xs md:text-sm font-normal text-center">
+        <strong class="text-base md:text-4xl font-black">0.01</strong>
+        Micro-Lot Trading
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- price strip slider -->
+  <div class="w-full text-xl absolute bottom-0 left-0 z-30">
+    <div class="mb-14 w-[80%] mx-auto align-middle justify-center block md:hidden items-center">
+      <div class="flex items-center rounded-r-xl rounded-bl-xl py-5 px-6 bg-dark/70 divide-x-[0.3px] text-white justify-center space-x-5">
+        <div class="flex flex-col items-center text-xs md:text-sm font-normal text-center">
+          <strong class="text-xl md:text-4xl font-black">0.0 pips</strong>
+          Tight Raw <br> Spreads from
+        </div>
+        <div class="flex flex-col pl-5 items-center text-xs md:text-sm font-normal text-center">
+          <strong class="text-xl md:text-4xl font-black">$0</strong>
+          Commission-Free <br>Funding Options
+        </div>
+        <div class="flex flex-col pl-5 items-center text-xs md:text-sm font-normal text-center">
+          <strong class="text-xl md:text-4xl font-black">500:1</strong>
+          Max Leverage
+        </div>
+      </div>
+    </div>
+
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container bg-dark/80">
+      <div class="tradingview-widget-container__widget"></div>
+      <!-- <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/" rel="noopener" target="_blank"><span class="blue-text">Markets</span></a> by TradingView</div> -->
+      <script type="text/javascript" src="https://TheNetFi.com/s3.tradingview.com/external-embedding/embed-widget-ticker-tape.html" async>
+      {
+      "symbols": [
+        {
+          "proName": "FOREXCOM:SPXUSD",
+          "title": "S&P 500"
+        },
+        {
+          "proName": "FOREXCOM:NSXUSD",
+          "title": "US 100"
+        },
+        {
+          "proName": "FX_IDC:EURUSD",
+          "title": "EUR/USD"
+        },
+        {
+          "proName": "BITSTAMP:BTCUSD",
+          "title": "Bitcoin"
+        },
+        {
+          "proName": "BITSTAMP:ETHUSD",
+          "title": "Ethereum"
+        },
+        {
+          "description": "Euro USD",
+          "proName": "FX:EURUSD"
+        },
+        {
+          "description": "Aud Usd",
+          "proName": "FX:AUDUSD"
+        },
+        {
+          "description": "GBPJPY",
+          "proName": "OANDA:GBPJPY"
+        }
+      ],
+      "showSymbolLogo": true,
+      "colorTheme": "dark",
+      "isTransparent": true,
+      "displayMode": "adaptive",
+      "locale": "en"
+    }
+      </script>
+    </div>
+    <!-- TradingView Widget END -->
+  </div>
+
+</section>
+
+<!-- markets -->
+<section class="w-screen px-3 md:px-24 py-8 space-y-6">
+  <h3 class="text-center text-xl md:text-3xl text-dark font-bold"><span class="font-normal">What can you </span>trade with TheNetFi?</h3>
+  <div class="grid grid-cols-2 md:grid-cols-7 gap-3">
+    <div class="space-y-4 text-center">
+      <img src="/static/vendors/images/shares.85651f4dbd27.png" alt="forex image" class="block mx-auto">
+      <strong class="font-bold block">Forex</strong>
+      <p>60+ forex currency
+        pairs on MT4</p>
+    </div>
+    <div class="space-y-4 text-center">
+      <img src="/static/vendors/images/forex.741ca5c8d36a.png" alt="shares image" class="block mx-auto">
+      <strong class="font-bold block">Shares</strong>
+      <p>More than 10,000 stocks on global exchanges </p>
+    </div>
+    <div class="space-y-4 text-center">
+      <img src="/static/vendors/images/indices.cbeaa10932f6.png" alt="forex image" class="block mx-auto">
+      <strong class="font-bold block">Indices</strong>
+      <p>19 major global Indices</p>
+    </div>
+    <div class="space-y-4 text-center">
+      <img src="/static/vendors/images/commodities.7833912af4fc.png" alt="forex image" class="block mx-auto">
+      <strong class="font-bold block">Commodities</strong>
+      <p>Coffee, natural gas, corn & more</p>
+    </div>
+    <div class="space-y-4 text-center">
+      <img src="/static/vendors/images/bonds.c6e73048f078.png" alt="forex image" class="block mx-auto">
+      <strong class="font-bold block">Bonds</strong>
+      <p>US10YR & UK Long Gilt, Futures Gilt</p>
+    </div>
+    <div class="space-y-4 text-center">
+      <img src="/static/vendors/images/metals.133c6793ee56.png" alt="forex image" class="block mx-auto">
+      <strong class="font-bold block">Metals</strong>
+      <p>Gold, Oil, Silver & more</p>
+    </div>
+    <div class="space-y-4 text-center">
+      <img src="/static/vendors/images/digital.df91c2295804.png" alt="forex image" class="block mx-auto">
+      <strong class="font-bold block">Digital Currencies</strong>
+      <p>Bitcoin, Ethereum, Ripple, Bitcoin Cash, Litecoin</p>
+    </div>
+  </div>
+</section>
+
+<!-- truspilot -->
+<section class="w-screen items-center flex bg-dark text-white relative h-16 md:h-min">
+  <img src="/static/vendors/images/pilot-bg.794e02d50287.jpg" alt="pilot bg" class="object-cover h-full z-0">
+  <a href="https://uk.trustpilot.com/review/TheNetFi.com" class="absolute justify-center w-screen px-3 md:px-24 text-center items-center text-xs md:text-sm flex space-x-3">
+    <span class="text-xs hidden md:flex"> Our customers say</span>
+    <span class="text-base">Excellent</span>
+    <div class="flex items-center space-x-1">
+      <div class="p-2 bg-green-600 text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-5 md:w-5 " viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      </div>
+      <div class="p-2 bg-green-600 text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-5 md:w-5 " viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      </div>
+      <div class="p-2 bg-green-600 text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-5 md:w-5 " viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      </div>
+      <div class="p-2 bg-green-600 text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-5 md:w-5 " viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      </div>
+      <div class="p-2 bg-green-600 text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-5 md:w-5 " viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      </div>
+    </div>
+    <span class="text-xs hidden md:flex">4.9 out of 5 based on 2,958 reviews</span>
+    <span class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-5 md:w-5  text-green-600" viewBox="0 0 20 20" fill="currentColor">
+      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+    </svg>Trustpilot</span>
+  </a>
+</section>
+
+<!-- spreads -->
+<section class="w-screen px-3 md:px-24 py-8 md:py-24 bg-primary text-dark md:flex md:items-center md:justify-between jsutify-center items-center space-y-4 md:space-y-0">
+  <img src="/static/vendors/images/pips-new.8903a38e7f17.png" alt="spreads pip 0.0" class="object-cover w-full md:w-1/2">
+  <div class="w-full md:w-1/2">
+    <h4 class="text-3xl font-bold text-center">Tighter <span class="font-normal">spreads.</span></h4>
+    <h4 class="text-3xl font-bold mb-4 text-center">Faster <span class="font-normal">execution.</span></h4>
+    <ul class="space-y-2">
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>Trade on consistently low spreads from 0.0 pips**</p>
+      </li>
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>Fast execution from an NY4 server facility</p>
+      </li>
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>Top-tier liquidity and market leading pricing, 24/5</p>
+      </li>
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>No dealing desk and no requotes </p>
+      </li>
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>Access TheNetFi Trading Education</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- trader -->
+<section class="w-screen px-3 md:px-24 py-8 md:py-24 " style="background-image: url(/static/vendors/images/trader.ed0bab9ba6e7.jpg)">
+  <div class="w-full md:w-1/2">
+    <h4 class="text-3xl font-bold text-center">Learn and Trade what <span class="font-normal">you want.</span></h4>
+    <h4 class="text-3xl font-bold mb-4 text-center">When <span class="font-normal">you want.</span></h4>
+    <ul class="space-y-2">
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>Trade Forex, Indices, Shares & Commodities </p>
+      </li>
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>Access global markets 24 hours / 5 days</p>
+      </li>
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>Trade on the go with full mobile accessibility</p>
+      </li>
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>Multilingual customer support</p>
+      </li>
+    </ul>
+  </div>
+
+</section>
+
+<!-- trading platforms -->
+<section class="w-screen bg-black px-3 md:px-24 py-8 md:flex items-center text-left text-white">
+  <img src="/static/vendors/images/mt5.8be594b4f10a.png" alt="mt5 platform" class="object-cover w-full md:w-1/2">
+  <div class="w-full md:w-1/2">
+    <h4 class="text-3xl font-normal mb-4 text-center">Advanced <span class="font-bold">Trading Platforms and Financial Technology.</span></h4>
+    <ul class="space-y-2">
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>MetaTrader 4 (MT$) & MetaTrader 5 (MT5) and WebTrader and iRess apps for iPhone and Android</p>
+      </li>
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>Advanced portal to monitor your trading in real-time</p>
+      </li>
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>Super Virtual Private Servers Solutions (VPS) for Expert Advisors (EAs), Scalping and Auto-trading</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- copy trading -->
+<section class="w-screen bg-light px-3 md:px-24 py-8 md:flex items-center text-left text-dark">
+  <img src="/static/vendors/images/copy-trading.80d560c4f900.png" alt="copy trading platform" class="object-cover w-full md:w-1/2">
+  <div class="w-full md:w-1/2">
+    <h4 class="text-3xl font-bold mb-4 text-center">Copy Trading: <span class="font-normal">Follow top-performing traders.</span></h4>
+    <ul class="space-y-2">
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>Follow & copy top-performing traders</p>
+      </li>
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>Become a copier or a provider </p>
+      </li>
+      <li class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>No need to develop your own trading plan </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- copy trading -->
+<section class="w-screen bg-white px-3 md:px-24 pt-8 mb-8 items-center text-left text-dark relative">
+  <h4 class="text-3xl font-bold mb-4 text-center">Why TheNetFi Markets <br><span class="font-normal">is one of the world's most trusted.</span> <span class="font-bold">Forex Broker</span></h4>
+  <div class="pt-4 md:flex items-center z-10">
+    <img src="/static/vendors/images/broker.a784f910aa9d.png" alt="copy trading platform" class="block object-fit w-full md:w-1/2">
+    <div class="w-full md:w-1/2">
+      <ul class="space-y-3 block">
+        <li class="flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+          </svg>
+          <p>Globally Regulated</p>
+        </li>
+        <li class="flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+          </svg>
+          <p>Segregated Client Funds</p>
+        </li>
+        <li class="flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+          </svg>
+          <p>24/7 Multilingual Customer Support</p>
+        </li>
+        <li class="flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+          </svg>
+          <p>Consistently Tighter Spreads</p>
+        </li>
+        <li class="flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+          </svg>
+          <p>Personal Account Managers</p>
+        </li>
+        <li class="flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-none text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+          </svg>
+          <p>12 Years Trading Experience</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- <img src="/static/vendors/images/payments-bg.63a665671a62.jpg" alt="bg" class="absolute bottom-0 left-0 w-full z-0"> -->
+</section>
+
+<section class="w-screen px-3 md:px-24 py-8 md:py-24"  style="background-image: url(/static/vendors/images/award.cfde7ca58b81.jpg)">
+  <div class="w-full md:w-1/2 space-y-2">
+    <img src="/static/vendors/images/award-mb.d41d8cd98f00.png" alt="award bg" class="md:hidden w-full block object-contain">
+    <h4 class="md:flex text-center items-center font-normal text-3xl"><span class="block">A Forex Broker</span> <strong class="pl-2 font-bold block"> You can Trust</strong></h4>
+    <p class="text-justify md:text-left text-dark/60">
+      
+      Established and regulated since 2011, TheNetFi is a global Financial Technology services Foreign Exchange (Forex) and Contracts for Differences (CFD) broker. We pride ourselves on delivering an exceptional trading experience and have been awarded as the #1 Value Global Forex Broker* on multiple occasions. Forex traders understand the importance of trading with a regulated universal broker in the Forex market as it means that TheNetFi must adhere to some of the most stringent international regulations of the Australian Securities and Investment Commission (ASIC), the Cyprus Securities and Exchange Commission (CySEC), and the European Securities and Markets Authority (ESMA).
+      
+    </p>
+    <p class="text-justify md:text-left text-dark/60">
+      
+      Our success is centred around miscellaneous core values. Values that include providing competitive brokerage fees through tight spreads, ensuring lightning-fast execution, access to advanced trading platforms with an extensive portfolio of financial products, and exceptional customer service.
+      
+    </p>
+  </div>
+</section>
+
+<section class="bg-black text-white px-3 md:px-24 py-8 md:py-24">
+  <h4 class="font-bold text-2xl pb-4 md:text-3xl">Top Financial Technology Company <span class="font-normal"> in Australia</span></h4>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div>
+      <p>
+        One of the primary goals of TheNetFi is to provide the best product in the market. Our relationships with leading tier one financial institutions mean deep liquidity and tighter spreads for Forex traders. Combined with our 
+      </p>
+      <p>
+         model, traders can consistently trade from 0.0 pips on major currency pairs such as the EUR/USD, USD/JPY and GBP/USD.
+      </p>
+    </div>
+    <div>
+      <p>
+        
+        TheNetFi has developed a proud reputation as a Forex broker. In Australia, the company operates under an Australian Financial Services Licence (AFSL) and was awarded the '<span class="text-primary font-bold">Best Forex Broker Austrailia</span> award'.
+        
+      </p>
+      <img src="/static/vendors/images/australia.0d4b802a4449.png" class="md:hidden py-4" alt="australia award">
+    </div>
+    <div>
+      <p>
+        A zero restrictions policy means that TheNetFi provides the ideal conditions for scalping and those using Expert Advisors (EAs) to conduct their currency trading. Choice is another advantage that active traders can enjoy with TheNetFi as fintech platforms, MetaTrader 4 and MetaTrader 5 are included in our trading platform offering. 
+      </p>
+      <img src="/static/vendors/images/australia.0d4b802a4449.png" class="md:flex hidden py-4" alt="australia award">
+    </div>
+    <div>
+      <p>
+        
+        Specifically designed for the foreign exchange markets, the trading platforms provide all the financial-tools necessary to conduct both fundamental and technical analysis. The <a href="#" class="text-primary">Demo Account</a>  option allows traders to experience, get familiar with online trading and learn about Forex fundamentals such as base currency, FX pairs, charting tools, and volatility. You can develop your own trading strategies without making an initial deposit or being exposed to trading risks.
+        
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="w-screen bg-white px-3 md:px-24 py-8 md:py-24 md:flex md:items-center">
+  <img src="/static/vendors/images/nike.2e9d342dbfa9.png" class="py-4 md:w-1/2" alt="australia award">
+  <div class="md:w-1/2 w-full space-y-3">
+    <p>
+      
+      Although trading Forex is a key component of our business, TheNetFi also offer CFD trading in Shares, Metals, Commodities, Indices, Bonds & Digital Currencies. Traders can access more than 10,000+ tradable instruments across global financial markets using Iress, an advanced online trading software specifically designed for CFD trading.
+      
+    </p>
+    <p>
+      
+      CFD trading with an online broker allows you to access the biggest global exchanges and indices, including the Standard & Poor’s, NASDAQ and the New York Stock Exchange (NYSE) in the United States, and the Australian Stock Exchange (ASX) . Trade some of the world's largest companies.
+      
+    </p>
+  </div>
+</section>
+
+<section class="w-screen px-3 md:px-24 py-6">
+  <h4 class="text-center font-bold text-3xl">Liquidity Providers</h4>
+  <div class="swiper mySwiper py-6 w-full">
+    <div class="swiper-wrapper flex items-center space-x-4 w-full">
+      <div class="swiper-slide items-center flex flex-col"><img src="/static/vendors/images/pro/Barclays.11b994394fc9.png" alt="slide1"></div>
+      <div class="swiper-slide items-center flex flex-col"><img src="/static/vendors/images/pro/BNP-Paribas.bf117c54a340.png" alt="slide1"></div>
+      <div class="swiper-slide items-center flex flex-col"><img src="/static/vendors/images/pro/Citibank.4af66b8cc12a.png" alt="slide1"></div>
+      <div class="swiper-slide items-center flex flex-col"><img src="/static/vendors/images/pro/Commerzbank.79461f11fb38.png" alt="slide1"></div>
+      <div class="swiper-slide items-center flex flex-col"><img src="/static/vendors/images/pro/CS.7a8c61bf3c7b.png" alt="slide1"></div>
+      <div class="swiper-slide items-center flex flex-col"><img src="/static/vendors/images/pro/GS.dc37f945a91a.png" alt="slide1"></div>
+      <div class="swiper-slide items-center flex flex-col"><img src="/static/vendors/images/pro/HSBC.573c2fa29455.png" alt="slide1"></div>
+      <div class="swiper-slide items-center flex flex-col"><img src="/static/vendors/images/pro/JP-Morgan.c52f577fcbf3.png" alt="slide1"></div>
+      <div class="swiper-slide items-center flex flex-col"><img src="/static/vendors/images/pro/RBS.82360face54e.png" alt="slide1"></div>
+      <div class="swiper-slide items-center flex flex-col"><img src="/static/vendors/images/pro/SG.3141de28c674.png" alt="slide1"></div>
+      <div class="swiper-slide items-center flex flex-col"><img src="/static/vendors/images/pro/State-Street.a76c1344f640.png" alt="slide1"></div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</section>
+
+<section id="quickstart" class="w-screen bg-black px-3 md:px-24 py-8 md:py-24 text-white">
+  <p class="text-primary text-center text-xl">Start trading with TheNetFi</p>
+  <div class="text-center font-bold text-3xl">Fast account opening in 3 simple steps</div>
+  <div class="md:flex justify-center items-center md:space-x-2 space-y-2 md:space-y-0 text-center grid grid-cols-1 md:grid-cols-3">
+    <div class="flex-none mx-auto p-8 rounded-full text-center text-green-400 text-3xl"> <span class="mb-4 text-center w-14 h-14 flex flex-col rounded-full border-2 border-green-400 justify-center mx-auto">1</span> <div class="pl-8 space-y-2 text-white text-sm"><strong class="font-bold block">Register</strong><p class="block text-xs">Choose account type and complete our fast and secure application form </p></div></div>
+    <div class="flex-none mx-auto p-8 rounded-full text-center text-green-400 text-3xl"> <span class="mb-4 text-center w-14 h-14 flex flex-col rounded-full border-2 border-green-400 justify-center mx-auto">2</span> <div class="pl-8 space-y-2 text-white text-sm"><strong class="font-bold block">Fund</strong><p class="block text-xs">Fund your trading account using a wide range of funding methods</p></div></div>
+    <div class="flex-none mx-auto p-8 rounded-full text-center text-green-400 text-3xl"> <span class="mb-4 text-center w-14 h-14 flex flex-col rounded-full border-2 border-green-400 justify-center mx-auto">3</span> <div class="pl-8 space-y-2 text-white text-sm"><strong class="font-bold block">Trade</strong><p class="block text-xs">Start trading and access over 10,000+ instruments</p></div></div>
+  </div>
+  <a href="/register" class="py-2 px-6 bg-primary text-white text-base font-bold rounded-r-xl rounded-bl-xl mx-auto w-40 block hover:scale-105 duration-300 ease-linear">Join Today</a>
+</section>
+
+
+    
+    
+
+
+
+
+<div class="w-screen md:mb-16 px-3 md:px-24 divide-y-2 space-y-2 py-4">
+  <div class="pb-6 md:flex md:items-center md:justify-between">
+    <span class="block font-normal text-dark">
+      <strong class="font-black block">
+        Easy funding
+        & withdrawals:</strong>
+        <span class="block">No Deposit Fee.</span>
+    </span>
+    <div class="space-y-3">
+      <img class="hidden md:block" src="/static/vendors/images/payment-methods.d2bf74d13d16.png" alt="payment methods image">
+      <img class="md:hidden block" src="/static/vendors/images/payment-methods-mb.3ff4cb41eebd.png" alt="payment methods image">
+      <span class="block">For more deposits, withdrawals and funding information please <a href="/funding" class="text-primary hover:font-black duration-300 transition font-regular">click here</a></span>
+    </div>
+  </div>
+  <div class="space-y-4 pt-12">
+    <div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+      <div>
+        <strong class="font-black uppercase">Quick start</strong>
+        <ul class="text-dark/50">
+          <li>
+            <a href="/register" class="hover:font-black duration-300 transition font-regular">
+              Open An Account
+            </a>
+          </li>
+          <li>
+            <a href="/platforms" class="hover:font-black duration-300 transition font-regular">
+              Try a Demo
+            </a>
+          </li>
+          <li>
+            <a href="/login" class="hover:font-black duration-300 transition font-regular">
+              Client Portal
+            </a>
+          </li>
+          <li>
+            <a href="https://iress.com/" class="hover:font-black duration-300 transition font-regular">
+              Iress Login
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <strong class="font-black uppercase">Markets</strong>
+        <ul class="text-dark/50">
+          <li>
+            <a href="/about" class="hover:font-black duration-300 transition font-regular">
+              What is forex trading?
+            </a>
+          </li>
+          <li>
+            <a href="#" class="hover:font-black duration-300 transition font-regular">
+              What is CFDs?
+            </a>
+          </li>
+          <li>
+            <a href="/trading" class="hover:font-black duration-300 transition font-regular">
+              What you can trade
+            </a>
+          </li>
+          <li>
+            <a href="/trading" class="hover:font-black duration-300 transition font-regular">
+              Forex
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <strong class="font-black uppercase">Tools & Platforms</strong>
+        <ul class="text-dark/50">
+          <li>
+            <a href="/platforms" class="hover:font-black duration-300 transition font-regular">
+              MetaTrader 4 (MT4)
+            </a>
+          </li>
+          <li>
+            <a href="/platforms/mt5" class="hover:font-black duration-300 transition font-regular">
+              MetaTrader 5 (MT5)
+            </a>
+          </li>
+          <li>
+            <a href="https://iress.com/" class="hover:font-black duration-300 transition font-regular">
+              Iress
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <strong class="font-black uppercase">Trading Info</strong>
+        <ul class="text-dark/50">
+          <li>
+            <a href="/dashboard" class="hover:font-black duration-300 transition font-regular">
+              Deposit Funds?
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard" class="hover:font-black duration-300 transition font-regular">
+              Withdraw Funds
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard" class="hover:font-black duration-300 transition font-regular">
+              Margin Table
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard" class="hover:font-black duration-300 transition font-regular">
+              Forex Spreads
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <strong class="font-black uppercase">About Us</strong>
+        <ul class="text-dark/50">
+          <li>
+            <a href="/about" class="hover:font-black duration-300 transition font-regular">
+              What is TheNetFi
+            </a>
+          </li>
+          <li>
+            <a href="/faq" class="hover:font-black duration-300 transition font-regular">
+              FAQ
+            </a>
+          </li>
+          <li>
+            <a href="/contact" class="hover:font-black duration-300 transition font-regular">
+              Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <strong class="font-black uppercase">Regulation & License</strong>
+        <ul class="text-dark/50">
+          <li>
+            <a href="/legals/privacy" class="hover:font-black duration-300 transition font-regular">
+              Legal Documents
+            </a>
+          </li>
+          <li>
+            <a href="/contact" class="hover:font-black duration-300 transition font-regular">
+              Dispute Resolution
+            </a>
+          </li>
+          <li>
+            <a href="/legals/terms" class="hover:font-black duration-300 transition font-regular">
+              Regulation
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="md:flex md:justify-between md:items-center py-6">
+      <a href="/" class="flex items-center">
+        <img src="/static/vendors/images/logo-dark.fd7e3b65ebcf.png" alt="Logo" class="h-10 object-contain">
+        <strong class="text-xl font-black">TheNetFi</strong>
+      </a>
+      <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-6">
+        <div>
+          Email: <a href="mailto://support@thenetfi.com" class="text-primary hover:font-black duration-300"> support@thenetfi.com</a>
+        </div>
+        <!-- <div>
+          Social Media:
+          <span class="flex items-center text-primary hover:font-black duration-300">
+            <a href="https://www.facebook.com/TheNetFi/" class="mr-2">
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18 2H6a3 3 0 00-3 3v16a3 3 0 003 3h12a3 3 0 003-3V5a3 3 0 00-3-3zM6 4.995h12V19.005H6V4.995z" />
+                <path d="M12 18.01c-1.105 0-2-1.12-2-2.99 0-1.106.895-2 1.99-2 1.106 0 2 1.12 2 2.99 0 1.105-.895 2-1.99 2z" />
+              </svg>
+            </a>
+            <a href="https://twitter.com/TheNetFi" class="mr-2">
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/TheNetFi/" class="mr-2">
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/TheNetFi/" class="mr-2">
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+              </svg>
+            </a>
+          </span>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="space-y-4 pt-12">
+    <p class="text-dark/50 text-sm text-justify">
+      <strong>DISCLAIMER:</strong> The material on this website is intended for illustrative purposes and general information only. It does not constitute financial advice nor does it take into account your investment objectives, financial situation or particular needs. Commission, interest, platform fees, dividends, variation margin and other fees and charges may apply to financial products or services available from TheNetFi. The information in this website has been prepared without taking into account your personal objectives, financial situation or needs. You should consider the information in light of your objectives, financial situation and needs before making any decision about whether to acquire or dispose of any financial product. Contracts for Difference (CFDs) are derivatives and can be risky; When trading CFDs you do not own or have any rights to the CFDs underlying assets.
+    </p>
+    <p class="text-dark/50 text-sm text-justify">
+      TheNetFi recommends that you seek independent advice from an appropriately qualified person before deciding to invest in or dispose of a derivative. A Product Disclosure Statement for each of the financial products, as well as our TMD (Target Market Determination), are available from TheNetFi and can be obtained either from this website or on request from our offices and should be considered before entering into transactions with us. TheNetFi is a group of companies which include First Prudential Markets Ltd, a company authorised and regulated by the Australian Securities and Investments Commission (ASIC), Registered Address: Level 5, 10 Bridge Street, Sydney, NSW, 2000, Australia and First Prudential Markets Ltd (registration number HE 372179), a company authorised and regulated by the Cyprus Securities and Exchange Commission (CySEC Licence number 371/18, Registered Address: Griva Digeni, 109, Aigeo Court, 2nd floor, 3101, Limassol, Cyprus.
+    </p>
+    <div class="md:flex md:justify-between md:items-center space-y-2 md:space-y-0 text-sm md:text-base">
+      <div class="flex items-center justify-center md:justify-start">
+        <!-- <a href="/l" class="text-primary hover:font-bold duration-300 pr-1">Sitemap</a> -->
+        <span class="text-gray-500">&copy;  TheNetFi</span>
+      </div>
+      <div class="flex items-center justify-items-center bg-dark text-white md:bg-white md:text-dark py-2 md:py-0">
+        <a href="/legals/privacy" class="block text-gray-500 md:hover:text-dark hover:text-white hover:font-bold duration-300 text-center md:text-left w-1/2 md:w-auto">
+          Privacy Policy
+        </a>
+        <span class="text-gray-500 ml-2 mr-2">|</span>
+        <a href="/legals/terms" class="block text-gray-500 md:hover:text-dark hover:text-white hover:font-bold duration-300 text-center md:text-left w-1/2 md:w-auto">
+          Terms of Use
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    
+<%- partial('./partials/livechatwidget')%>
+
+    
+    <script type="text/javascript" src="/static/js/runtime.dd020376.9984fafca2c6.js" ></script>
+<script type="text/javascript" src="/static/js/259.205647a0.74c2f844d0fc.js" ></script>
+<script type="text/javascript" src="/static/js/app.f8c31c3d.bb4aa123e7d0.js" ></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.5"></script>
+
+    
+<script>
+  var providerswiper = new Swiper(".mySwiper", {
+    autoplay: {
+      delay: 2000,
+    },
+    slidesPerView: 6,
+    spaceBetween: 10,
+    // Responsive breakpoints
+    breakpoints: {
+      // when window width is >= 320px
+      320: {
+        slidesPerView: 1,
+        spaceBetween: 20
+      },
+      // when window width is >= 480px
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 30
+      },
+      // when window width is >= 640px
+      640: {
+        slidesPerView: 4,
+        spaceBetween: 40
+      }
+    },
+    loop: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>
+
+<script>
+  const mainswiper = new Swiper('.main-swiper', {
+    // Optional parameters
+    // direction: 'horizontal',
+    init: true,
+    autoplay: {
+      delay: 5000,
+    },
+    loop: true,
+    effect: "coverflow",
+
+    // If we need pagination
+
+    //pagination: {
+    //  el: '.swiper-pagination',
+    //},
+
+    // Navigation arrows
+    navigation: {
+      nextEl: '#next',
+      prevEl: '#prev',
+    },
+
+    // And if we need scrollbar
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
+  });
+</script>
+
+  </body>
+
+</html>

@@ -1,0 +1,135 @@
+body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#nftbox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#innernftbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+}
+
+#innernftbox p {
+    width: 400px;
+}
+
+.nftimg {
+    width: 80px;
+    margin: 10px 0;
+}
+
+.choicespan {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    width: 300px;
+}
+
+.connectbtn {
+    background-color: rgb(0, 140, 255);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.connectbtn:hover {
+    background-color: rgb(15, 113, 193);
+    color: white;
+}
+
+.manualbtn {
+    background-color: orangered;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.manualbtn:hover {
+    background-color: rgb(179, 60, 16);
+    color: white;
+}
+
+.scanbtn {
+    background-color: rgb(0, 81, 255);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    border: none;
+}
+
+.scanbtn:hover {
+    background-color: rgb(10, 53, 146);
+    color: white;
+}
+
+@media (max-width:420px) {
+    #innernftbox p {
+        width: 100%;
+    }
+}
+
+
+@media (max-width:320px) {
+    .choicespan {
+        width: 100%;
+    }
+}
+
+#scanbox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#innerscanbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+}
+
+.qrimg {
+    width: 200px;
+}
+
+.scancaptionbox {
+    padding: 20px 10px;
+}

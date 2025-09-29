@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal</title>
+    <link rel="stylesheet" href="/stylesheets/user/deposit.css">
+    <style>
+        .activewithdrawallink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activewithdrawallink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+        <div id="pageintrobox">
+            <div id="innerpageintrobox">
+                <h5>Withdraw</h5>
+                <p>Withdraw from your trading account.</p>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="methodbox">
+            <div id="innermethodbox">
+                <!-- <h6>Methods</h6> -->
+                <div id="transactionformbox">
+                    <!-- <span class="transactionformboxintro">Depositmethods</span> -->
+                    <form action="/dashboard/withdrawal" method="post" id="transactionform">
+                        <small>To make a withdrawal, select your balance, amount and verify the address you wish for payment to be made into.</small>
+                        
+                        <span class="transactionformgroup mt-5 mb-3">
+                            <label for="transactionmethod">Type:</label>
+                            <select name="transactionmethod" id="depositmethodname" class="form-control" required>
+                                <option value="" selected>Choose Method</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                                 <% for (let depositmethod of depositmethods) { %>
+                                     <option value="<%=depositmethod.depositmethodname%>"><%=depositmethod.depositmethodname%></option>
+                                 <% } %>
+                            </select>
+                        </span>
+
+                        <div class="bankoption">
+                            <span class="transactionformgroup">
+                                <label for="bankname">Bank Name:</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="bankname" name="bankname" placeholder="Enter Bank Name" required>
+                                   
+                                </div>
+                                  
+                            </span>
+    
+                            <span class="transactionformgroup">
+                                <label for="accountnumber">Account Number:</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" min="0" minlength="10" class="form-control" id="accountnumber" name="accountnumber" placeholder="Enter Account Number" required>
+                                   
+                                </div>
+                                  
+                            </span>
+
+                            <span class="transactionformgroup">
+                                <label for="routingcode">Routing Code:</label>
+                                <select name="routingcode" id="routingcode" class="form-control" required>
+                                    <option value="">Choose Code Type</option>
+                                    <option value="IBAN">IBAN</option>
+                                    <option value="SWIFT/BIC Code">SWIFT/BIC Code</option>
+                                </select>
+                            </span>
+
+                            <span class="transactionformgroup mt-2">
+                                <label for="routingnumber">Routing Number:</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" min="1" minlength="8" class="form-control" id="routingnumber" name="routingnumber" placeholder="Enter Routing Number" required>
+                                   
+                                </div>
+                                  
+                            </span>
+
+                        </div>
+
+                        <div class="cryptooption">
+                            <span class="transactionformgroup">
+                                <label for="withdrawaddress">Address:</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="withdrawaddress" name="withdrawaddress" placeholder="Address" aria-label="Address" aria-describedby="basic-addon2" required>
+                                   
+                                </div>
+                                  
+                            </span>
+                        </div>
+
+                        <span class="transactionformgroup">
+                            <label for="amount">Amount in USD:</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" name="amount" id="amount" placeholder="Amount" aria-label="Amount" aria-describedby="basic-addon2" required>
+                                <div class="input-group-append">
+                                  <span class="input-group-text" id="basic-addon2" style="height: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center; background-color: dodgerblue; color: white; border-radius: 0 5px 5px 0;">$</span>
+                                </div>
+                            </div>
+                              
+                        </span>
+
+                        <!-- <span class="transactionformgroup">
+                            <label for="convertedamount"><%= user.basecurrency %> Worth:</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="convertedamount" placeholder="" aria-label="" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                  <span class="input-group-text" id="basic-addon2" style="height: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center; background-color: dodgerblue; color: white; border-radius: 0 5px 5px 0;"><%= user.basecurrencysymbol %></span>
+                                </div>
+                            </div>
+                              
+                        </span> -->
+
+                        
+                        <button type="submit" class="btn btn-primary mt-3">Withdraw</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="deposithistory">
+           <div id="deposithistorybox">
+            <p>WITHDRAWAL HISTORY</p>
+            <div id="tablecontainer">
+                <table id="historytable">
+                    <thead>
+                        <tr>
+                          <th>S/N</th>
+                          <th>Date</th>
+                          <th>Withdrawal Method</th>
+                          <th>Destination</th>
+                          <th>Amount</th>
+                          <th>Status</th>
+                          
+                        </tr>
+                      </thead>
+         
+                    <tbody>
+                        <% if (withdrawal.length < 1 ) { %>
+                            <td colspan="6">No withdrawal has been made yet.</td>
+                        <% } else { %>
+                            <% for (let withdraw of withdrawal) {%>
+                                <tr>
+                                  <td><li></td>
+                                    <td><%= withdraw.transactiondate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %> <%= withdraw.transactiondate.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= withdraw.transactiondate.toISOString().split('T')[0] %>.</td>
+                                    <td><%= withdraw.transactionmethod %> </td>
+                                  <td>
+                                    <% if (withdraw.transactionmethod === 'Bank Transfer' ) { %>
+                                        <%= withdraw.accountnumber %>
+                                    <% } else { %>
+                                        <%= withdraw.withdrawaddress %>
+                                    <% } %>
+                                  </td>
+                                  <td>$<%= withdraw.amount.toLocaleString() %></td>
+                                  <td><%= withdraw.status %></td>
+                                </tr>
+                                <% } %> 
+                        <% } %>   
+                        
+                    </tbody>
+                  </table>
+            </div>
+           </div>
+        </div>
+    
+    </div>
+    
+
+
+
+    <!-- <script>
+        const amountInput = document.getElementById('amount');
+        const convertedAmountInput = document.getElementById('convertedamount');
+        const baseCurrency = '<%= user.basecurrency %>'; 
+    
+        let debounceTimeout;
+    
+        function fetchConversionRate() {
+            fetch('https://v6.exchangerate-api.com/v6/f845ca1e3b9a39c90cfc4eb5/latest/USD')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('API Response:', data);
+    
+                    if (!data.conversion_rates || !data.conversion_rates[baseCurrency]) {
+                        console.error(`Error: Conversion rate for ${baseCurrency} not found in API response.`);
+                        convertedAmountInput.value = 'Error';
+                        return;
+                    }
+    
+                    const conversionRate = data.conversion_rates[baseCurrency];
+                    const usdAmount = parseFloat(amountInput.value);
+                    
+                    if (!isNaN(usdAmount)) {
+                        const convertedAmount = usdAmount * conversionRate;
+                        convertedAmountInput.value = convertedAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    } else {
+                        convertedAmountInput.value = '';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching exchange rates:', error);
+                    convertedAmountInput.value = 'Error';
+                });
+        }
+    
+        amountInput.addEventListener('input', () => {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(fetchConversionRate, 500);
+        });
+    </script> -->
+    
+    
+    
+    <script>
+        document.getElementById('depositmethodname').addEventListener('change', function() {
+        const cryptoOption = document.querySelector('.cryptooption')
+        const bankNameInput = document.getElementById('bankname');
+        const accountNumberInput = document.getElementById('accountnumber');
+        const routingCodeInput = document.getElementById('routingcode');
+        const routingNumberInput = document.getElementById('routingnumber');
+        const withdrawAddressInput = document.getElementById('withdrawaddress');
+
+        const bankOption = document.querySelector('.bankoption');
+
+    if (this.value === 'Bank Transfer') {
+        bankOption.style.display = 'block';
+        cryptoOption.style.display= 'none';
+
+        bankNameInput.setAttribute('required', 'required');
+        accountNumberInput.setAttribute('required', 'required');
+        routingCodeInput.setAttribute('required', 'required');
+        routingNumberInput.setAttribute('required', 'required');
+
+        withdrawAddressInput.removeAttribute('required');
+
+
+    } else {
+        bankOption.style.display = 'none';
+        cryptoOption.style.display= 'block';
+
+        bankNameInput.removeAttribute('required');
+        accountNumberInput.removeAttribute('required');
+        routingCodeInput.removeAttribute('required');
+        routingNumberInput.removeAttribute('required');
+
+        withdrawAddressInput.setAttribute('required', 'required');
+
+
+    }
+});
+
+    </script>
+    <script src="/script/app.js"></script>
+</body>
+</html>

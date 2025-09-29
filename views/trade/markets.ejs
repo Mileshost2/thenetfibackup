@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assets</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/user/assets.css">
+    <style>
+      .activemarketslink {
+          background-color: var(--activesidebarlink) !important;
+          color: var(--background) !important;
+          padding: 5px !important;
+          margin: 0 5px !important;
+          width: 95% !important;
+          border-radius: 5px;
+      }
+
+      .activemarketslink .links-icons {
+          background-color: transparent !important;
+          color: var(--background) !important;
+      }
+  </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+  <div class="contentbox">
+    <div id="pageintrobox">
+      <div id="innerpageintrobox">
+          <h5>Assets</h5>
+          <p>All assets available for trading.</p>
+          
+      </div>
+    </div>
+
+    <% if(success && success.length) { %>
+      <div class="flashbox">
+                <div class="flashboxsuccess-alert">
+                    <%= success %> 
+                    <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    
+                </div>
+      </div>
+    <% } %>          
+        
+    <% if(error && error.length) { %>
+      <div class="flashbox">
+                    <div class="flashboxerror-alert">
+                        <%= error %> 
+                        <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        
+                    </div>
+      </div>
+    <% } %>
+
+    <div id="widgetbox">
+        <div id="widgetactionbox">
+            <div class="search-container widetsearchbox websearchbar">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-bar" onkeyup="filterAssets()" placeholder="Search assets...">
+            </div>
+
+            <div class="search-container widetsearchbox mobilesearchbar">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-bar2" onkeyup="filterAssets2()" placeholder="Search assets...">
+            </div>
+
+            <div class="button-container">
+                <button id="btn-all" onclick="showContainer('allassets-container', 'btn-all')">All</button>
+                <button id="btn-crypto" onclick="showContainer('cryptoassets-container', 'btn-crypto')">Crypto</button>
+                <button id="btn-stocks" onclick="showContainer('stocksassets-container', 'btn-stocks')">Stocks</button>
+                <button id="btn-forex" onclick="showContainer('forexassets-container', 'btn-forex')">Forex</button>
+            </div>
+        </div>
+        
+        <div id="innerwidgetbox">
+            <div id="allassets-container" class="cryptolistheader">
+                <div class="assettablebox">
+                    <div class="innerassettablebox">
+                     <p>ALL ASSETS</p>
+                     <div class="tablecontainer">
+                         <table class="assettable">
+                             <thead>
+                               <tr>
+                                 <th><i class="fa-solid fa-star"></i></th>
+                                 <th>Name</th>
+                                 <th>Symbol</th>
+                                 <th>Current Value</th>
+                                 <th>Estimated</th>
+                                 <th>Action</th>
+                               </tr>
+                             </thead>
+                  
+                             <tbody>
+                                 <% if (alltrades.length < 1 ) { %>
+                                     <td colspan="6">No assets available.</td>
+                                 <% } else { %>
+                                     <% for (let trade of alltrades) {%>
+                                         <tr class="coin">
+                                           <!-- <td><li class="fa-li-star"> </li></td> -->
+                                            <td><i class="fa-regular fa-star assetstar" onclick="toggleStar(this)"></i></td>
+                                            <td><img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt=""><%= trade.tradeCurrency%></td>
+                                           <td><%= trade.tradeSymbol%> </td>
+                                           <td>0.00 <%= trade.tradeSymbol%></td>
+                                           <td>$0.00</td>
+                                           <td>
+                                            <a href="/dashboard/assets" class="tradelink">Trade</a>
+                                           </td>
+                                         </tr>
+                                         <% } %> 
+                                 <% } %> 
+                             </tbody>
+                           </table>
+                     </div>
+                    </div>
+                 </div>
+
+                 <div class="mobiletable">
+                    <div>
+                        <p>All Markets</p>
+                    </div>
+                    <% for (let trade of alltrades) { %>
+                        <div class="currency">
+                            <span class="currencyimgbox">
+                                <span class="starspan">
+                                    <i class="fa-regular fa-star assetstar" onclick="toggleStar(this)"></i>
+                                </span>
+                                <span class="imgspan">
+                                    <img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt="">
+                                </span>
+                                <span class="infospan">
+                                    <p><%= trade.tradeCurrency%></p>
+                                    <small><%= trade.tradeSymbol%></small>
+                                </span>
+                            </span>
+                            <span class="pricespan">
+                                <% if (trade.tradeType === 'Forex'){ %>
+                                    <p>0.00</p>
+                                <% } else { %>
+                                    <p>$0.00</p>
+                                    <small>0.00 <%= trade.tradeSymbol%></small>
+                                <% } %>
+                                
+                            </span>
+                        </div>
+                    <% } %>
+                 </div>
+            </div>
+
+            <div id="cryptoassets-container" class="cryptolistheader">
+                <div class="assettablebox">
+                    <div class="innerassettablebox">
+                     <p>CRYPTO</p>
+                     <div class="tablecontainer">
+                         <table class="assettable">
+                             <thead>
+                               <tr>
+                                 <th><i class="fa-solid fa-star"></i></th>
+                                 <th>Name</th>
+                                 <th>Symbol</th>
+                                 <th>Current Value</th>
+                                 <th>Estimated</th>
+                                 <th>Action</th>
+                               </tr>
+                             </thead>
+                  
+                             <tbody>
+                                 <% if (cryptotrades.length < 1 ) { %>
+                                     <td colspan="6">No assets available.</td>
+                                 <% } else { %>
+                                     <% for (let trade of cryptotrades) {%>
+                                         <tr class="coin">
+                                           <!-- <td><li class="fa-li-star"> </li></td> -->
+                                            <td><i class="fa-regular fa-star assetstar" onclick="toggleStar(this)"></i></td>
+                                            <td><img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt=""><%= trade.tradeCurrency%></td>
+                                           <td><%= trade.tradeSymbol%> </td>
+                                           <td>0.00 <%= trade.tradeSymbol%></td>
+                                           <td>$0.00</td>
+                                           <td>
+                                            <a href="/dashboard/assets" class="tradelink">Trade</a>
+                                           </td>
+                                         </tr>
+                                         <% } %> 
+                                 <% } %> 
+                             </tbody>
+                           </table>
+                     </div>
+                    </div>
+                 </div>
+
+                 <div class="mobiletable">
+                    <div>
+                        <p>Crypto</p>
+                    </div>
+                    <% for (let trade of cryptotrades) { %>
+                        <div class="currency">
+                            <span class="currencyimgbox">
+                                <span class="starspan">
+                                    <i class="fa-regular fa-star assetstar" onclick="toggleStar(this)"></i>
+                                </span>
+                                <span class="imgspan">
+                                    <img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt="">
+                                </span>
+                                <span class="infospan">
+                                    <p><%= trade.tradeCurrency%></p>
+                                    <small><%= trade.tradeSymbol%></small>
+                                </span>
+                            </span>
+                            <span class="pricespan">
+                                <% if (trade.tradeType === 'Forex'){ %>
+                                    <p>0.00</p>
+                                <% } else { %>
+                                    <p>$0.00</p>
+                                    <small>0.00 <%= trade.tradeSymbol%></small>
+                                <% } %>
+                                
+                            </span>
+                        </div>
+                    <% } %>
+                 </div>
+            </div>
+
+            <div id="stocksassets-container" class="cryptolistheader">
+                <div class="assettablebox">
+                    <div class="innerassettablebox">
+                     <p>STOCKS</p>
+                     <div class="tablecontainer">
+                         <table class="assettable">
+                             <thead>
+                               <tr>
+                                 <th><i class="fa-solid fa-star"></i></th>
+                                 <th>Name</th>
+                                 <th>Symbol</th>
+                                 <th>Current Value</th>
+                                 <th>Estimated</th>
+                                 <th>Action</th>
+                               </tr>
+                             </thead>
+                  
+                             <tbody>
+                                 <% if (stockstrades.length < 1 ) { %>
+                                     <td colspan="6">No assets available.</td>
+                                 <% } else { %>
+                                     <% for (let trade of stockstrades) {%>
+                                         <tr class="coin">
+                                           <!-- <td><li class="fa-li-star"> </li></td> -->
+                                            <td><i class="fa-regular fa-star assetstar" onclick="toggleStar(this)"></i></td>
+                                            <td><img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt=""><%= trade.tradeCurrency%></td>
+                                           <td><%= trade.tradeSymbol%> </td>
+                                           <td>0.00 <%= trade.tradeSymbol%></td>
+                                           <td>$0.00</td>
+                                           <td>
+                                            <a href="/dashboard/assets" class="tradelink">Trade</a>
+                                           </td>
+                                         </tr>
+                                         <% } %> 
+                                 <% } %> 
+                             </tbody>
+                           </table>
+                     </div>
+                    </div>
+                 </div>
+
+                 <div class="mobiletable">
+                    <div>
+                        <p>Stocks</p>
+                    </div>
+                    <% for (let trade of stockstrades) { %>
+                        <div class="currency">
+                            <span class="currencyimgbox">
+                                <span class="starspan">
+                                    <i class="fa-regular fa-star assetstar" onclick="toggleStar(this)"></i>
+                                </span>
+                                <span class="imgspan">
+                                    <img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt="">
+                                </span>
+                                <span class="infospan">
+                                    <p><%= trade.tradeCurrency%></p>
+                                    <small><%= trade.tradeSymbol%></small>
+                                </span>
+                            </span>
+                            <span class="pricespan">
+                                <% if (trade.tradeType === 'Forex'){ %>
+                                    <p>0.00</p>
+                                <% } else { %>
+                                    <p>$0.00</p>
+                                    <small>0.00 <%= trade.tradeSymbol%></small>
+                                <% } %>
+                                
+                            </span>
+                        </div>
+                    <% } %>
+                 </div>
+            </div>
+
+            <div id="forexassets-container" class="cryptolistheader">
+                <div class="assettablebox">
+                    <div class="innerassettablebox">
+                     <p>FOREX PAIRS</p>
+                     <div class="tablecontainer">
+                         <table class="assettable">
+                             <thead>
+                               <tr>
+                                 <th><i class="fa-solid fa-star"></i></th>
+                                 <th>Name</th>
+                                 <th>Symbol</th>
+                                 <th>Current Price</th>
+                                 <th>Action</th>
+                               </tr>
+                             </thead>
+                  
+                             <tbody>
+                                 <% if (forextrades.length < 1 ) { %>
+                                     <td colspan="6">No assets available.</td>
+                                 <% } else { %>
+                                     <% for (let trade of forextrades) {%>
+                                         <tr class="coin">
+                                           <!-- <td><li class="fa-li-star"> </li></td> -->
+                                            <td><i class="fa-regular fa-star assetstar" onclick="toggleStar(this)"></i></td>
+                                            <td><img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt=""><%= trade.tradeCurrency%></td>
+                                           <td><%= trade.tradeSymbol%> </td>
+                                           <td>$0.00</td>
+                                           <td>
+                                            <a href="/dashboard/assets" class="tradelink">Trade</a>
+                                           </td>
+                                         </tr>
+                                         <% } %> 
+                                 <% } %> 
+                             </tbody>
+                           </table>
+                     </div>
+                    </div>
+                 </div>
+
+                 <div class="mobiletable">
+                    <div>
+                        <p>Forex Pairs</p>
+                    </div>
+                    <% for (let trade of forextrades) { %>
+                        <div class="currency">
+                            <span class="currencyimgbox">
+                                <span class="starspan">
+                                    <i class="fa-regular fa-star assetstar" onclick="toggleStar(this)"></i>
+                                </span>
+                                <span class="imgspan">
+                                    <img src="/img/assets/<%= trade.tradeSymbol%>.svg" class="assetimg" alt="">
+                                </span>
+                                <span class="infospan">
+                                    <p><%= trade.tradeCurrency%></p>
+                                    <small><%= trade.tradeSymbol%></small>
+                                </span>
+                            </span>
+                            <span class="pricespan">
+                                <% if (trade.tradeType === 'Forex'){ %>
+                                    <p>0.00</p>
+                                <% } else { %>
+                                    <p>$0.00</p>
+                                    <small>0.00 <%= trade.tradeSymbol%></small>
+                                <% } %>
+                                
+                            </span>
+                        </div>
+                    <% } %>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- <a class="currency">
+        <span class="currencyimgbox">
+            <img src="${displaybasecurrencyimg}" alt="">
+            <p>${displaycurrencypairs}</p>
+        </span>
+        <span class="currencyprice">
+            <p>${displayprice}</p>
+        </span>
+    </a> -->
+
+
+
+
+
+
+
+   
+
+<script>
+    function toggleStar(element) {
+        element.classList.toggle('fa-regular');
+        element.classList.toggle('fa-solid');
+        element.classList.toggle('goldcolorstar');
+    }
+</script>
+<script>
+function showContainer(containerId, buttonId) {
+    // Get all asset containers
+    const containers = document.querySelectorAll('.cryptolistheader');
+
+    // Hide all containers
+    containers.forEach(container => {
+        container.style.display = 'none';
+    });
+
+    // Show the selected container
+    document.getElementById(containerId).style.display = 'block';
+
+    // Remove active class from all buttons
+    const buttons = document.querySelectorAll('.button-container button');
+    buttons.forEach(button => {
+        button.classList.remove('active');
+    });
+
+    // Add active class to the clicked button
+    document.getElementById(buttonId).classList.add('active');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    showContainer('allassets-container', 'btn-all');
+});
+
+
+function filterAssets() {
+    // Get the search input value and convert it to lowercase
+    const input = document.getElementById('search-bar').value.toLowerCase();
+    console.log("Search Input:", input); // Debugging step
+
+    // Get all rows in the table
+    const rows = document.querySelectorAll('.assettable tbody tr');
+
+    // Loop through each row and check if it matches the search input
+    rows.forEach(row => {
+        // Get the tradeCurrency and tradeSymbol text content
+        const tradeCurrency = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+        const tradeSymbol = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+        console.log("Trade Currency:", tradeCurrency, "Trade Symbol:", tradeSymbol); // Debugging step
+
+        // Check if either tradeCurrency or tradeSymbol contains the search input
+        if (tradeCurrency.includes(input) || tradeSymbol.includes(input)) {
+            row.style.display = ''; // Show the row
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+}
+
+
+function filterAssets2() {
+    const input = document.getElementById('search-bar2');
+    const filter = input.value.toUpperCase();
+
+    // Get the visible container; fallback to the 'allassets-container' if none is visible
+    const container = document.querySelector('.cryptolistheader:not([style*="display: none"])');
+                      
+    const assets = container.getElementsByClassName('currency');
+
+    for (let i = 0; i < assets.length; i++) {
+        const assetCurrency = assets[i].getElementsByTagName("p")[0].innerText.toUpperCase(); // tradeCurrency
+        const assetSymbol = assets[i].getElementsByTagName("small")[1].innerText.toUpperCase();   // tradeSymbol
+
+        if (assetCurrency.indexOf(filter) > -1 || assetSymbol.indexOf(filter) > -1) {
+            assets[i].style.display = "";
+        } else {
+            assets[i].style.display = "none";
+        }
+    }
+}
+
+
+
+</script>
+  <script src="/script/app.js"></script>
+</body>
+</html>

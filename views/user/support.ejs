@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support</title>
+    <link rel="stylesheet" href="/stylesheets/user/affiliate.css">
+    <style>
+        .activesupportlink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activesupportlink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"> <small>Support</small>  <i class="fa-solid fa-phone headericon"></i></span>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="div2" style="margin-bottom:40px ;">
+            <div id="div2box">
+                <p>Need Help?</p>
+                <div class="div2boxinner">
+                    <span>You can reach us through any of the means below
+                        <ul>
+                            <li>
+                                <i class="fab fa-telegram" style="margin-right: 6px;"></i> info@fusionfinancialmarket.com
+                            </li>
+                            <!-- <li>
+                                <i class="fa-solid fa-phone" style="margin-right: 6px;"></i>  +1 (234) 567-8900
+                            </li> -->
+                            <li>
+                                <i class="fa-solid fa-building" style="margin-right: 6px;"></i> 24 Marcham Road Run, Craytown, LE16 2FG, UK.
+                            </li>
+
+                        </ul>
+                    <br> You can also click on the widget below to start a livechat with one of our customer care official.
+                    <%- include('../partials/livechatwidget')%>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

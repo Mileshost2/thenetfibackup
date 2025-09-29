@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/user/trade2.css">
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+  <div class="contentbox">
+    
+
+
+    <div class="flashbox">
+        <% if(success && success.length) { %>
+               <div class="flashboxsuccess-alert">
+                   <%= success %> 
+                   <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                   
+               </div>
+           <% } %> 
+       
+           <% if(error && error.length) { %>
+                   <div class="flashboxerror-alert">
+                       <%= error %> 
+                       <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+           <% } %> 
+           
+    </div>
+
+    <div id="currencybox">
+        <div id="innercurrencybox">
+            <div id="currencychartbox">
+                <div class="tradingview-widget-container">
+                    <div id="tradingview_1a2b3c4d"></div>
+                    <script src="https://s3.tradingview.com/tv.js"></script>
+                    <script>
+                    new TradingView.widget(
+                    {
+                      "width": "100%",
+                      "height": "100%",
+                      "symbol": "AMZN",
+                      "interval": "D",
+                      "timezone": "Etc/UTC",
+                      "theme": "light",
+                      "style": "1",
+                      "locale": "en",
+                      "toolbar_bg": "rgba(0, 0, 0, 0)",
+                      "enable_publishing": false,
+                      "allow_symbol_change": true,
+                      "container_id": "tradingview_1a2b3c4d"
+                    }
+                    );
+                    </script>
+                  </div>
+            </div>
+
+            <div id="currencyinfo">
+                <span class="currencytradeinfo">
+                    <span class="tradeinfobox">
+                        <b>Last Trade:</b>
+                        <span class="tradeinfoinnerbox">
+                            <small class="balinfo"><b>Invested Amount:</b></small>
+                            <small class="balinfo">
+                                <i class="fas fa-usd"></i> 
+                                <% if (wallet.lastinvestedamount === 0) { %> 
+                                    <b>0.00</b>
+                                <% } else { %> 
+                                    <b><%= wallet.lastinvestedamount.toLocaleString() %></b>
+                                <% } %> 
+                            </small>
+                        </span>
+                        <span class="tradeinfoinnerbox">
+                            <small class="balinfo"><b>Profit:</b></small>
+                            <small class="balinfo">
+                                <i class="fas fa-usd"></i> 
+                                <% if (wallet.lastinvestmentprofit === 0) { %> 
+                                    <b>0.00</b>
+                                <% } else { %> 
+                                    <b><%= wallet.lastinvestmentprofit.toLocaleString() %></b>
+                                <% } %> 
+                            </small>
+                        </span>
+                    </span>
+                    <span class="tradeinfobox">
+                        <b>Active Trade:</b>
+                        <span class="tradeinfoinnerbox">
+                            <small class="balinfo"><b>Invested Amount:</b></small>
+                            <small class="balinfo">
+                                <i class="fas fa-usd"></i> 
+                                <% if (wallet.currentinvestedamount === 0) { %> 
+                                    <b>0.00</b>
+                                <% } else { %> 
+                                    <b><%= wallet.currentinvestedamount.toLocaleString() %></b>
+                                <% } %> 
+                            </small>
+                        </span>
+                        <span class="tradeinfoinnerbox">
+                            <small class="balinfo"><b>Profit:</b></small>
+                            <small class="balinfo">
+                                <i class="fas fa-usd"></i> 
+                                <% if (wallet.currentinvestmentprofit === 0) { %> 
+                                    <b>0.00</b>
+                                <% } else { %> 
+                                    <b><%= wallet.currentinvestmentprofit.toLocaleString() %></b>
+                                <% } %> 
+                            </small>
+                        </span>
+                    </span>
+                    <span class="tradeinfobox">
+                        <span class="tradeinfoinnerbox tradestatus">
+                            <small class="balinfo"><b>Trade Status:</b></small>
+                            <small class="balinfo">
+                                <% if (wallet.status === "Active") { %> 
+                                    <b class="activestatus"><%= wallet.status %></b>
+                                <% } else if (wallet.status === "Inactive"){ %> 
+                                    <b class="inactivestatus"><%= wallet.status %></b>
+                                <% } %> 
+                            </small>
+                        </span>
+                        <span class="actionbox">
+                            <% if (wallet.status === "Active") { %> 
+                                <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#endModal">
+                                    <i class="fa-solid fa-wallet"></i> <b>End Trade</b>
+                                </button>
+                            <% } else if (wallet.status === "Inactive"){ %> 
+                                <a href="/trade/<%= wallet.id %>/activate" class="btn btn-primary depositbtn">Enter Trade</a>
+                            <% } %> 
+                            
+        
+                                <!-- Modal -->
+                                <div class="modal fade" id="startModal" tabindex="-1" aria-labelledby="startModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="deposittypebox">
+                                                <b>CLICK THE BUTTON TO PROCEED</b>
+                                                <form action="/trade/<%= wallet.id %>/activate" method="post" class="modalform">
+                                                    <button class="modalformbtn">Activate Trade</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="endModal" tabindex="-1" aria-labelledby="endModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="deposittypebox">
+                                                <b>
+                                                    Please contact your account's manager to end the trade as it is still in the early days of the trade cycle.
+                                                </b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+        
+                        </span>
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div id="trackerbox">
+        <div id="trackerbtnbox">
+            <button id="activityBtn" class="trackerbtn active">Activity</button>
+            <button id="tradeHistoryBtn" class="trackerbtn ">Trade History</button>
+        </div>
+        <div id="trackercontentbox">
+            <div class="deposithistory hidden" id="tradeHistoryDiv">
+                <div class="deposithistorybox">
+                 <p>TRADE HISTORY</p>
+                 <div class="tablecontainer">
+                     <table class="historytable">
+                         <thead>
+                           <tr>
+                             <th>S/N</th>
+                             <th>Date</th>
+                             <th>Trading Plan</th>
+                             <th>Amount</th>
+                             <th>Earnings</th>
+                             <th>Status</th>
+                           </tr>
+                         </thead>
+              
+                         <tbody>
+                             <% if (tradinghistory.length < 1 ) { %>
+                                 <td colspan="6">No trade has been entered yet.</td>
+                             <% } else { %>
+                                 <% for (let data of tradinghistory) {%>
+                                     <tr>
+                                       <td><li></td>
+                                        <td><%= data.startDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %> <%= data.startDate.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= data.startDate.toISOString().split('T')[0] %> </td>
+                                       <td><%= data.packagetype %> </td>
+                                       <td>$<%= data.investedamount.toLocaleString() %></td>
+                                       <td>$<%= data.investmentprofit.toLocaleString() %></td>
+                                       <td>
+                                            <% if (data.status === 'Active') { %>
+                                                 <b class="pendingstatus"><%= data.status %></b>
+                                            <% } else if (data.status === 'Completed'){ %>
+                                                <b class="activestatus"><%= data.status %></b>
+                                            <% } else if (data.status === 'Pending'){ %>
+                                                    <b class="inactivestatus"><%= data.status %></b>
+                                            <% } %> 
+                                       </td>
+                                     </tr>
+                                     <% } %> 
+                             <% } %> 
+                         </tbody>
+                       </table>
+                 </div>
+                </div>
+             </div>
+        
+             <div class="deposithistory " id="activityDiv">
+                <div class="deposithistorybox">
+                    <p>ACTIVITY</p>
+                    <div class="tablecontainer">
+                        <table class="historytable">
+                            <thead>
+                              <tr>
+                                <th>S/N</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                                <th>Amount</th>
+                                <!-- <th>Status</th> -->
+                              </tr>
+                            </thead>
+                 
+                            <tbody>
+                                <% if (tradetransactions.length < 1 ) { %>
+                                    <td colspan="4">No data for this trade yet.</td>
+                                <% } else { %>
+                                    <% for (let data of tradetransactions) {%>
+                                        <tr>
+                                          <td><li></td>
+                                           <td><%= data.date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %> <%= data.date.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= data.date.toISOString().split('T')[0] %> </td>
+                                          <td><%= data.action %> </td>
+                                          <td>$<%= data.amount.toLocaleString() %></td>
+                                          <!-- <td>
+                                               <% if (data.status === 'Pending') { %>
+                                                    <b class="pendingstatus"><%= data.status %></b>
+                                               <% } else if (data.status === 'Successful'){ %>
+                                                   <b class="activestatus"><%= data.status %></b>
+                                               <% } else if (data.status === 'Unsuccessful'){ %>
+                                                       <b class="inactivestatus"><%= data.status %></b>
+                                               <% } %> 
+                                          </td> -->
+                                        </tr>
+                                        <% } %> 
+                                <% } %> 
+                            </tbody>
+                          </table>
+                    </div>
+                   </div>
+             </div>
+        </div>
+    </div>
+
+    
+
+
+
+
+
+</div>
+
+
+<script>
+    const tradeHistoryBtn = document.getElementById('tradeHistoryBtn');
+    const activityBtn = document.getElementById('activityBtn');
+    const tradeHistoryDiv = document.getElementById('tradeHistoryDiv');
+    const activityDiv = document.getElementById('activityDiv');
+
+    tradeHistoryBtn.addEventListener('click', () => {
+        tradeHistoryDiv.style.display = 'block';
+        activityDiv.style.display = 'none';
+
+        tradeHistoryBtn.classList.add('active');
+        activityBtn.classList.remove('active');
+    });
+
+    activityBtn.addEventListener('click', () => {
+        tradeHistoryDiv.style.display = 'none';
+        activityDiv.style.display = 'block';
+
+        tradeHistoryBtn.classList.remove('active');
+        activityBtn.classList.add('active');
+    });
+</script>
+  <script src="/script/app.js"></script>
+</body>
+</html>

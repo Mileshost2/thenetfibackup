@@ -1,0 +1,506 @@
+body {
+    padding: 0;
+    margin: 0;
+    /* background-color: #26394d !important; */
+}
+
+/* #div1 {
+    display: flex;
+    flex-direction: row;
+}
+
+#div1box {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    width: 90%;
+    align-items: center;
+}
+
+.mainicon {
+    color: white;
+    background-color: dodgerblue;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 0 20px;
+    font-size: 1.6em;
+}
+
+#div1boxinner {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#div1boxinner p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+#div1boxinner a {
+    color: var( --foreground);
+    text-decoration: none;
+}
+
+.dashspan {
+    color: grey;
+} */
+
+.verificationbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.innerverificationbox {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 59, 59, 0.555);
+    border: 1px solid red;
+    border-radius: 6px;
+    color: white;
+    padding: 5px 10px;
+}
+
+.verifyBtn {
+    border: none;
+    background-color: transparent;
+    color: rgb(97, 238, 179);
+}
+
+#profilepicbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+#innerprofilepicbox{
+    padding: 10px 20px;
+    border-radius: 10px;
+    /* background-color: rgb(30, 146, 255); */
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#ppbox {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#ppbox img {
+    width: 200px;
+    border-radius: 50%;
+}
+
+#ppactions {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+@media (max-width:520px) {
+    #ppbox, #ppactions {
+       width: 94%;
+    }
+}
+
+@media (max-width:420px) {
+    #ppactions {
+       flex-direction: column;
+    }
+
+    #ppactions button {
+        margin: 5px 0;
+    }
+}
+
+.editBtn {
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* .accttype {
+    padding: 4px 20px;
+    border-radius: 4px;
+    background-color: orange;
+}
+
+.unverifiedstat {
+    padding: 4px 10px;
+    border-radius: 4px;
+    background-color: rgb(207, 22, 8);
+}
+
+.verifiedstat {
+    padding: 4px 10px;
+    border-radius: 4px;
+    background-color: rgb(7, 146, 211);
+}
+
+.pendingstat {
+    padding: 4px 10px;
+    border-radius: 4px;
+    background-color: rgb(72, 155, 83);
+} */
+
+.walletbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.innerwalletbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.connectbtn {
+    background-color: dodgerblue;
+    display: inline-block;
+    width: 100%;
+}
+
+.connectmodalbody {
+    background-color: rgb(26, 24, 24);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#connectoptbox {
+    width: 100%;
+    height: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-image: url('/img/orb.webm');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto; */
+}
+
+.wctitlespan {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.wclogo {
+    width: 30px;
+    margin-left: 5px;
+}
+
+.choicespan {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.manualbtn {
+    background-color: orangered;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.manualbtn:hover {
+    background-color: rgb(179, 60, 16);
+    color: white;
+}
+
+.scanbtn {
+    background-color: rgb(0, 81, 255);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.scanbtn:hover {
+    background-color: rgb(10, 53, 146);
+    color: white;
+}
+
+#accountprofilebox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#inneraccountprofilebox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.aboutbox {
+    width: 46%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    background-color: var( --clr-borderBoxColor);
+    color: white;
+    margin: 5px;
+}
+
+.profileheader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: var( --clr-darkBgToDodgerblue);
+    border-radius: 5px 5px 0 0;
+}
+
+.profilecontent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    color: var(--foreground);
+}
+
+.profilecontent small{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.accttype {
+    padding: 4px 10px;
+    border-radius: 4px;
+    background-color: rgb(255, 136, 0);
+    color: white;
+}
+
+.acctstat {
+    padding: 4px 10px;
+    border-radius: 4px;
+    background-color: rgb(19, 115, 241);
+    color: white;
+}
+
+.acctbal {
+    padding: 4px 10px;
+    border-radius: 4px;
+    background-color: rgb(24, 209, 132);
+    color: white;
+}
+
+.redbg {
+    padding: 4px 10px;
+    border-radius: 4px;
+    background-color: rgb(218, 20, 30);
+    color: white;
+}
+
+.profileinfobox {
+    width: 52%;
+    /* padding: 10px 20px;
+    border-radius: 10px; */
+    /* background-color: rgb(30, 146, 255); */
+    /* background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    margin: 5px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var( --clr-borderBoxColor);
+}
+
+.profileinfoboxheader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: var( --clr-darkBgToDodgerblue);
+    border-radius: 5px 5px 0 0;
+    color: white;
+}
+
+.profileinfoboxcontent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#profileimgbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.profilepicimg {
+    width: 200px;
+}
+
+#profileactionbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-between; */
+    margin-top: 5px;
+    padding: 0 10px;
+}
+
+.uploadbtn {
+    color: white;
+    width: 100%;
+    background-color: grey;
+    border-radius: 5px !important;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+.deletebtn {
+    color: white;
+    width: 100%;
+    background-color: grey;
+    border-radius: 5px !important;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+.profileform {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.profileformgroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.profileformgroup label {
+    font-size: 0.8em;
+}
+
+.profileforminput, .profileformselect {
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px dashed var(--foreground);
+    /* border-bottom: 1px solid black; */
+    background-color: transparent;
+    color: var(--foreground);
+}
+
+.profileforminput::placeholder {
+    color: var(--foreground);
+}
+
+/* .profileformselect {
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    color: var(--foreground);
+} */
+
+
+.profilebtnbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 20px 10px;
+}
+
+.profilebtn {
+    background-color: rgb(80, 78, 78);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    margin: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.active, .ppactive {
+    background-color: grey;
+}
+
+@media (max-width:760px) {
+    #inneraccountprofilebox{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .aboutbox, .profileinfobox {
+        width: 100%;
+    }
+    
+}
+
+@media (max-width:350px) {
+    .uploadbtn, .deletebtn {
+        font-size: 0.8em !important;
+    }
+    
+}

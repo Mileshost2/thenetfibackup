@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/stylesheets/admin/dashboard.css">
+    <style>
+        .activedashboardlink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activedashboardlink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+  <div class="contentbox">
+    <div id="header">
+        <div id="headerinner">
+            <span class="headerinnerspan"><i class="fas fa-project-diagram headericon"></i> <small>Dashboard</small></span>
+        </div>
+      </div>
+
+    <div class="flashbox">
+        <% if(success && success.length) { %>
+               <div class="flashboxsuccess-alert">
+                   <%= success %> 
+                   <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                   
+               </div>
+           <% } %> 
+       
+           <% if(error && error.length) { %>
+                   <div class="flashboxerror-alert">
+                       <%= error %> 
+                       <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+           <% } %> 
+           
+    </div>
+
+    <div class="notificationcontainer">
+        <div class="innernotificationcontainer">
+            <% if (verificationrequest.length > 0) { %> 
+                <span class="notification">
+                    <a href="/admin/admin.verificationrequests">You have <%= verificationrequest.length %> new verification request(s).</a>
+                </span>
+            <% } %>
+
+            <% if (deposits.length > 0) { %> 
+                <span class="notification">
+                   <a href="/admin/admin.deposit-req"> You have <%= deposits.length %> new deposit request(s).</a>
+                </span>
+            <% } %>
+
+            <% if (upgradefeepayment.length > 0) { %> 
+                <span class="notification">
+                   <a href="/admin/admin.deposit-req"> You have <%= upgradefeepayment.length %> pending account upgrade payment request(s).</a>
+                </span>
+            <% } %>
+
+            <% if (signalfee.length > 0) { %> 
+                <span class="notification">
+                   <a href="/admin/admin.deposit-req"> You have <%= signalfee.length %> pending signal/subscription payment request(s).</a>
+                </span>
+            <% } %>
+
+            <% if (withdrawals.length > 0) { %> 
+                <span class="notification">
+                    <a href="/admin/admin.withdrawal-req">You have <%= withdrawals.length %> new withdrawal request(s).</a>
+                </span>
+            <% } %>
+        </div>
+    </div>
+
+    <div id="overviewbox">
+        <div class="overviewinnerbox">
+            <div class="overviewboxes">
+                <span class="overviewboxiconbox bgGreen">
+                    <i class="fa-solid fa-user"></i>
+                </span>
+                <div class="inneroverviewboxes">
+                    <span><%= admins.length %></span>
+                    <small>Active Admin Accounts</small>
+                </div>
+            </div>
+
+            <div class="overviewboxes">
+                <span class="overviewboxiconbox bgRed">
+                    <i class="fa-solid fa-users"></i>
+                </span>
+                <div class="inneroverviewboxes">
+                    <span><%= clients.length %> </span>
+                    <a href="/admin/admin.clients">Total Users</a>
+                </div>
+            </div>
+            
+            <div class="overviewboxes">
+                <span class="overviewboxiconbox bgBlue">
+                    <i class="fas fa-check-circle"></i>
+                </span>
+                <div class="inneroverviewboxes">
+                    <span><%= verificationrequest.length %> </span>
+                    <a href="/admin/admin.verificationrequests">Verification Requests</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes">
+                <span class="overviewboxiconbox bgOrangeRed">
+                    <i class="fas fa-check-circle"></i>
+                </span>
+                <div class="inneroverviewboxes">
+                    <span><%= verifiedusers.length %> </span>
+                    <a href="/admin/admin.clients">Verified Users</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes">
+                <span class="overviewboxiconbox bgDogeBlue">
+                    <i class="fas fa-circle"></i>
+                </span>
+                <div class="inneroverviewboxes">
+                    <span><%= unverifiedusers.length %> </span>
+                    <a href="/admin/admin.clients">Unverified Users</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes">
+                <span class="overviewboxiconbox bgOrange">
+                    <i class="fas fa-ban"></i>
+                </span>
+                <div class="inneroverviewboxes">
+                    <span><%= suspendedusers.length %> </span>
+                    <a href="/admin/admin.clients">Suspended Users</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes">
+                <span class="overviewboxiconbox bgPurple">
+                    <i class="fa-solid fa-line-chart"></i>
+                </span>
+                <div class="inneroverviewboxes">
+                    <span><%= Investments.length %></span>
+                <a href="/admin/admin.investment">Active Investments</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes">
+                <span class="overviewboxiconbox bgGreen">
+                    <i class="fa-solid fa-chart-line"></i>
+                </span>
+                <div class="inneroverviewboxes">
+                    <span><%= totalinvestments.length %></span>
+                <a href="/admin/admin.investment">Total Investments</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes">
+                <span class="overviewboxiconbox bgOrange">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                </span>
+                <div class="inneroverviewboxes">
+                    <span><%= deposits.length %> </span>
+                <a href="/admin/admin.deposit-req">Deposit Requests</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes">
+                <span class="overviewboxiconbox bgRed">
+                    <i class="fas fa-dollar-sign"></i>
+                </span>
+                <div class="inneroverviewboxes">
+                    <span><%= totaldeposits.length %> </span>
+                <a href="/admin/admin.deposit-history">Approved Deposits</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes">
+                <span class="overviewboxiconbox bgPalePurple">
+                    <i class="fas fa-wallet"></i>
+                </span>
+                <div class="inneroverviewboxes">
+                    <span><%= withdrawals.length %> </span>
+                    <a href="/admin/admin.withdrawal-req">Withdrawal Requests</a>
+                </div>
+            </div>
+
+            <div class="overviewboxes">
+                <span class="overviewboxiconbox bgDogeBlue">
+                    <i class="fas fa-money-bill"></i>
+                </span>
+                <div class="inneroverviewboxes">
+                    <span><%= totalwithdrawals.length %> </span>
+                    <a href="/admin/admin.withdrawal-history">Total Withdrawals</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
+    
+
+  <script src="/script/app.js"></script>
+</body>
+</html>

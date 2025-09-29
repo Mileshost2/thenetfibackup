@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assets</title>
+    <link rel="stylesheet" href="/stylesheets/admin/clientinfo.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-wallet headericon"></i> <small>Assets</small></span>
+                <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+          </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div class="balbox">
+            <div class="innerbalbox">
+                <% for (i = 0; i < client.trades.length; i++) { %> 
+                    
+                    <span class="balspan">
+                        <span class="balcontainer">
+                            <b><%=  client.trades[i].tradeCurrency %>:</b>
+                            <span class="innerbalspan">
+                                <small class="balinfo"><b>Wallet Amount:</b></small>
+                                <small class="balinfo">
+                                    <i class="fas fa-usd"></i>
+                                <b>
+                                    <% if ( client.trades[i].currencyWallet === 0) { %> 
+                                        0.00
+                                    <% } else { %> 
+                                        <%=  client.trades[i].currencyWallet.toLocaleString() %>
+                                    <% } %> 
+                                </b> 
+                                </small>
+                            </span>
+                            <span class="innerbalspan">
+                                <small class="balinfo"><b>Trade Status:</b></small>
+                                <small class="balinfo">
+                                    <% if (client.trades[i].status === 'Inactive') { %> 
+                                        <b class="unverifiedstat"><%= client.trades[i].status %></b>
+                                    <% } else if (client.trades[i].status === 'Active'){ %> 
+                                        <b class="verifiedstat"><%= client.trades[i].status %></b>
+                                    <% } else if (client.trades[i].status === 'Pending'){ %> 
+                                        <b class="pendingstat"><%= client.trades[i].status %></b>
+                                    <% } %> 
+                                </small>
+                            </span>
+                            <span class="walletaddressbox">
+                                <small class="balinfo"><b><%= client.trades[i].tradeCurrency %> Address</b></small>
+                                <span class="innerbalspan">
+                                    <small class="balinfo walletaddress"><b><%=client.trades[i].cryptoAddress %></b></small>
+                                    <small class="balinfo"><i class="fa fa-pen"  data-bs-toggle="modal" data-bs-target="#editWallet<%=i%>"></i></small>
+
+                                     <!-- Modal -->
+                                            <div class="modal fade" id="editWallet<%=i%>" tabindex="-1" aria-labelledby="editWallet<%=i%>Label" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h5 class="modal-title" id="editWallet<%=i%>Label">Edit User's <%=client.trades[i].tradeCurrency %> Wallet</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="/admin/admin.clients/<%= client.id%>/edit-wallet/<%= client.trades[i].id%>?_method=PUT" class="passwordform" method="post">
+                                                            <div class="formgroup">
+                                                                <span>Enter Wallet's Address</span>
+                                                                <input type="text" name="cryptoAddress" value="<%=client.trades[i].cryptoAddress %>" placeholder="Wallet Address" required>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary">Update</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                </span>
+                            </span>
+                        </span>
+
+                        <span class="balcontainer">
+                            <b>Last Trade:</b>
+                            <span class="innerbalspan">
+                                <small class="balinfo"><b>Invested Amount:</b></small>
+                                <small class="balinfo">
+                                    <i class="fas fa-usd"></i> 
+                                    <% if (client.trades[i].lastinvestedamount === 0) { %> 
+                                        <b>0.00</b>
+                                    <% } else { %> 
+                                        <b><%= client.trades[i].lastinvestedamount.toLocaleString() %></b>
+                                    <% } %> 
+                                </small>
+                            </span>
+                            <span class="innerbalspan">
+                                <small class="balinfo"><b>Profit:</b></small>
+                                <small class="balinfo">
+                                    <i class="fas fa-usd"></i> 
+                                    <% if (client.trades[i].lastinvestmentprofit === 0) { %> 
+                                        <b>0.00</b>
+                                    <% } else { %> 
+                                        <b><%= client.trades[i].lastinvestmentprofit.toLocaleString() %></b>
+                                    <% } %> 
+                                </small>
+                            </span>
+                        </span>
+                        <span class="balcontainer">
+                            <b>Current Trade:</b>
+                            <span class="innerbalspan">
+                                <small class="balinfo"><b>Invested Amount:</b></small>
+                                <small class="balinfo">
+                                    <i class="fas fa-usd"></i> 
+                                    <% if (client.trades[i].currentinvestedamount === 0) { %> 
+                                        <b>0.00</b>
+                                    <% } else { %> 
+                                        <b><%= client.trades[i].currentinvestedamount.toLocaleString() %></b>
+                                    <% } %> 
+                                </small>
+                            </span>
+                            <span class="innerbalspan">
+                                <small class="balinfo"><b>Profit:</b></small>
+                                <small class="balinfo">
+                                    <i class="fas fa-usd"></i> 
+                                    <% if (client.trades[i].currentinvestmentprofit === 0) { %> 
+                                        <b>0.00</b>
+                                    <% } else { %> 
+                                        <b><%= client.trades[i].currentinvestmentprofit.toLocaleString() %></b>
+                                    <% } %> 
+                                </small>
+                            </span>
+                            <span class="actionbox">
+                                <% if (client.trades[i].status === "Active") { %>
+                                    <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#addProfitModal<%=[i] %>">
+                                        <i class="fa-solid fa-usd"></i> <b>Add Profits</b>
+                                    </button>
+
+                                    <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#endTradeModal<%=[i] %>">
+                                        <i class="fa-solid fa-stop"></i> <b>End Trade</b>
+                                    </button>
+                                <% } else if (client.trades[i].status === "Inactive"){ %> 
+                                    <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#startTradeModal<%=[i]%>">
+                                        <i class="fa-solid fa-wallet"></i> <b>Start Trade</b>
+                                    </button>
+                                <% } %> 
+                                
+            
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="startTradeModal<%=[i]%>" tabindex="-1" aria-labelledby="startTradeModal<%=[i]%>Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <div class="deposittypebox">
+                                                    <b>CLICK THE BUTTON TO PROCEED</b>
+                                                    <form action="/admin/admin.trade/<%= client.id %>/activate/<%= client.trades[i].id %>" method="post" class="modalform">
+                                                        <button class="modalformbtn">Activate Trade</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="endTradeModal<%=[i] %>" tabindex="-1" aria-labelledby="endTradeModal<%=[i] %>Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <div class="deposittypebox">
+                                                    <b>CLICK THE BUTTON TO PROCEED</b>
+                                                    <form action="/admin/admin.trade/<%= client.id%>/<%= client.trades[i].id%>/endtrade?_method=PUT" method="post" class="modalform">
+                                                        <button class="modalformbtn">End Trade</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="addProfitModal<%=[i] %>" tabindex="-1" aria-labelledby="addProfitModal<%=[i] %>Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <div class="deposittypebox">
+                                                    <b>Enter the amount to be added as profit</b>
+                                                    <form action="/admin/admin.trade/<%= client.id%>/<%=  client.trades[i].id%>?_method=PUT" method="post" class="modalform">
+                                                        <input type="number" name="addprofits" class="form-control" placeholder="Enter Amount" required>
+                                                        <button class="modalformbtn">Continue</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+            
+                            </span>
+                        </span>
+                    </span>
+        
+                <% } %>
+                
+               
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

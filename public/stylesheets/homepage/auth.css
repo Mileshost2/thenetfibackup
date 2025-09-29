@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+form .modal {
+  color: black;
+}
+
+.logoimg {
+    width: 120px;
+    margin: 20px 0;
+  }
+  
+  #authbox {
+    background-color: rgb(30, 30, 30);
+    color: white;
+  }
+  
+  .authtitle {
+    color: white !important;
+  }
+
+/* prealoader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Ensure preloader is on top */
+}
+  
+.preloaderimg {
+    width: 150px;
+    animation: fade 2s ease-in-out infinite alternate;
+  }
+  
+  /* #main-content {
+    display: none;
+  } */
+  
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+
+  .flashbox {
+    width: 100%;
+    padding: 10px 20px;
+}
+  
+    /* The alert message box */
+  .flashboxsuccess-alert {
+      padding: 10px 30px;
+      background-color: #07bd68;
+      border: 1px solid #058046;
+      border-radius: 5px;
+      color: white;
+      margin: 15px 0;
+    }
+    
+    /* The close button */
+    .flashboxsuccess-closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    /* When moving the mouse over the close button */
+    .flashboxsuccess-closebtn:hover {
+      color: black;
+    }
+  
+  .flashboxerror-alert {
+      padding: 10px 30px;
+      background-color: #f44336; /* Red */
+      border: 1px solid rgb(165, 9, 9);
+      border-radius: 5px;
+      color: white;
+      margin: 15px 0;
+    }
+    
+    /* The close button */
+    .flashboxerror-closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    /* When moving the mouse over the close button */
+    .flashboxerror-closebtn:hover {
+      color: black;
+    }

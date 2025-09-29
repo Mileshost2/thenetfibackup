@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="/stylesheets/user/dashboard.css">
+    <style>
+        .activedashboardlink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activedashboardlink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+        
+        .flashbox {
+            padding: 0 20px !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+  <div class="contentbox">
+    
+
+    <!-- <div id="header">
+        <div id="headerinner">
+            <span class="headerinnerspan"> <small>Home</small>  <i class="fas fa-home headericon"></i></span>
+        </div>
+    </div> -->
+    
+    <div class="flashbox">
+        <% if(success && success.length) { %>
+               <div class="flashboxsuccess-alert flash-message">
+                   <%= success %> 
+                   <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                   
+               </div>
+           <% } %> 
+       
+           <% if(error && error.length) { %>
+                   <div class="flashboxerror-alert flash-message">
+                       <%= error %> 
+                       <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+           <% } %> 
+    </div>
+   
+
+    <div id="welcbox">
+        <div class="innerwelcbox">
+            <h5>Welcome, <%= user.firstname %> <%= user.lastname %>!</h5>
+        </div>
+    </div>
+
+    <div class="dashboardoverviewbox">
+        <div class="innerdashboardoverviewbox">
+            <div class="">
+                <small>Wallet Balance</small>
+                <p class="coinbal">$<%= user.wallet.toLocaleString() %></p>
+                <small class="balinfo"><p class="cryptobalance"></p> <p>BTC</p></small>
+                <b class="usdbalance" style="display: none;"><%= user.wallet %></b>
+            </div>
+
+            <div class="overviewlinkbox">
+                <span class="actbtn">Live Account</span>
+            </div>
+
+        </div>
+    </div>
+
+    <% if (user.verificationstatus === 'Not Verified') { %> 
+
+        <div class="verificationbox">
+            <div class="innerverificationbox">
+                <span>Your account is not yet verified. Please 
+                    <button type="button" class="verifyBtn" data-bs-toggle="modal" data-bs-target="#verifymodal">
+                        Click Here!
+                    </button>
+                    to verify your account.
+                </span>
+            </div>
+        </div>
+
+         <!-- Modal -->
+         <div class="modal fade" id="verifymodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Verify Account</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please upload a Government Licensed document to verify your account.</p>
+                        <p>Accepted documents are
+                            <ul>
+                                <li>Driver's License</li>
+                                <li>Passport </li>
+                                <li>Social Security Card</li>
+                            </ul>
+                        </p>
+                        <form action="/verify/<%= user.id %>?_method=PUT" method="post" id="div2form" enctype="multipart/form-data">
+                            <select name="documenttype" class="forminput" style="width: 100%;" required>
+                                <option value="" selected>Document Type</option>
+                                <option value="Driver's License">Driver's License</option>
+                                <option value="Passport">Passport</option>
+                                <option value="Social Security Card">Social Security Card</option>
+                            </select>
+                            <div class="input-group formdiv mt-2">
+                                <input type="file" class="form-control"  name="verificationdocument" placeholder="Select Document" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+                                <button class="btn btn-success" type="submit" id="inputGroupFileAddon04">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    <% } else if (user.verificationstatus === 'Pending') { %> 
+
+        <div class="verificationbox">
+            <div class="innerverificationbox">
+                <span>
+                    Your verification request has been submitted. <br> Please wait while we verify your document.
+                </span>
+            </div>
+        </div>
+    <% } %> 
+
+    <% if (user.verificationstatus === 'Not Verified') { %> 
+    <div id="alertbox">
+        <div id="inneralertbox">
+            <div class="alert">
+                <img src="/img/sad.png" alt="" class="alertimg">
+                <p class="alerttext">Account not activated. Upload your documents for identity verification.</p>
+            </div>
+        </div>
+    </div>
+    <% } else if (user.acctstatus === 'Suspended') { %> 
+        <div id="alertbox">
+            <div id="inneralertbox">
+                <div class="alert">
+                    <img src="/img/exclamation.png" alt="" class="alertimg">
+                    <p class="alerttext">Your account was suspended.</p>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="notificationcontainer">
+        <div class="innernotificationcontainer">
+
+            <% if (unreadmsg.length > 0) { %>
+                <% if (unreadmsg.length === 1) { %> 
+                    <span class="notification">
+                        <a href="/notifications">You have <%= unreadmsg.length %> new notification.</a>
+                    </span>
+                <% } else if (unreadmsg.length > 1) { %>
+                    <span class="notification">
+                        <a href="/notifications">You have <%= unreadmsg.length %> new notifications.</a>
+                    </span>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+
+    <div id="dashboardsliderbox">
+        <div id="innerdashboardsliderbox">
+            <div id="slidercontainer">
+                <div class="slidercontainers">
+                    <img class="sliderimg" src="/img/dash1.jpg" alt="Forex">
+                    <span class="sliderimgoverlay">Trade Forex</span>
+                </div>
+    
+                <div class="slidercontainers">
+                    <img class="sliderimg" src="/img/dash2.jpg" alt="Forex">
+                    <span class="sliderimgoverlay">Trade Crypto</span>
+                </div>
+    
+                <div class="slidercontainers">
+                    <img class="sliderimg" src="/img/dash3.jpg" alt="Forex">
+                    <span class="sliderimgoverlay">Trade Stocks</span>
+                </div>
+    
+                <div class="slidercontainers">
+                    <img class="sliderimg" src="/img/dash4.jpg" alt="Forex">
+                    <span class="sliderimgoverlay">Trade Indices</span>
+                </div>
+            </div>
+            <div id="slider-indicators">
+                <span class="indicator active"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboardoverviewbox">
+        <div class="innerdashboardoverviewbox">
+            <div id="acctinfo">
+                <h6>Account Info</h6>
+                <div class="acctinfobox">
+                    <span class="acctinfospan">
+                        <p><span class="acctinfodot"></span> Total Balance:</p>
+                        <p>$<%= user.wallet.toLocaleString() %></p>
+                    </span>
+                    <span class="acctinfospan">
+                        <p><span class="acctinfodot"></span> Total Profit:</p>
+                        <p>$<%= user.totalprofits.toLocaleString() %></p>
+                    </span>
+                    <span class="acctinfospan">
+                        <p><span class="acctinfodot"></span> Total Referral Earnings:</p>
+                        <p>$<%= user.referralincomes.toLocaleString() %></p>
+                    </span>
+                    <span class="acctinfospan">
+                        <p><span class="acctinfodot"></span> Total Trades Entered:</p>
+                        <p><%= totalinvestments.length %></p>
+                    </span>
+                    <span class="acctinfospan">
+                        <p><span class="acctinfodot"></span> Total Deposits Made:</p>
+                        <p><%= deposits.length %></p>
+                    </span>
+                    <span class="acctinfospan">
+                        <p><span class="acctinfodot"></span> Total Withdrawal Requested:</p>
+                        <p><%= withdrawal.length %></p>
+                    </span>
+                    <span class="acctinfospan">
+                        <p><span class="acctinfodot"></span> Total Users Referred:</p>
+                        <p><%= user.referrals.length %></p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="assetbox">
+        <div id="innerassetbox">
+            <h6>Enter Trade</h6>
+            <div id="assetinner">
+                
+                <div id="tradebox">
+                    <form action="/dashboard/enter-trade" method="post"  class="tradeform">
+                        <span class="tradeformgroup">
+                            <label for="currency">Choose an Asset  
+                                <button type="button" class="" style="margin-left: 5px; border: none; outline: none; background-color: transparent;" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                    <i class="fas fa-info-circle" style="font-size: 17px; cursor: pointer; color: var(--foreground);"></i>                           
+                                </button>
+                                <!-- <i class="fas fa-info-circle" data-toggle="modal" data-bs-target="#infoModal" style="margin-left: 5px; font-size: 24px; cursor: pointer;"></i> -->
+                            </label>
+                            <select name="currency" class="form-control" id="currency" required>
+                                <% for (let asset of alltrades) { %>
+                                    <option value="<%= asset.tradeCurrency%>"><%= asset.tradeCurrency%></option>
+                                <% } %>
+                            </select>
+                        </span>
+                        
+                        <!-- <span class="tradeformgroup">
+                            <label for="plan">Choose Trading Plan</label>
+                            <select name="plan"class="form-control" id="plan" required>
+                                <option value="">Select Plan</option>
+                                <% for (let plan of tradingplans) { %>
+                                    <option value="<%= plan.packagename%>"><%= plan.packagename%></option>
+                                <% } %>
+                            </select>
+                        </span> -->
+                        <div class="tradeformdoublegroup">
+                            <span class="tradeformgroup">
+                                <label for="minamount">Minimum Amount ($)</label>
+                                <input class="form-control" type="text" name="minamount" value="$<%= quicktrade.minamount.toLocaleString() %>" id="minamount" readonly>
+                            </span>
+                            <span class="tradeformgroup">
+                                <label for="maxamount">Maximum Amount ($)</label>
+                                <input class="form-control" type="text" name="maxamount" value="$<%= quicktrade.maxamount.toLocaleString() %>" id="maxamount" readonly>
+                            </span>
+                        </div>
+                        <!-- <div class="tradeformdoublegroup">
+                            <span class="tradeformgroup">
+                                <label for="duration">Duration</label>
+                                <select name="plan"class="form-control" id="plan" required>
+                                    <option value="30 Minutes">30 Minutes</option>
+                                    <option value="1 Hour">1 Hour</option>
+                                    <option value="2 Hours">2 Hours</option>
+                                    <option value="3 Hours">3 Hours</option>
+                                    <option value="6 Hours">6 Hours</option>
+                                    <option value="12 Hours">12 Hours</option>
+                                    <option value="24 Hours">24 Hours</option>
+                                    <option value="1 Day">1 Day</option>
+                                    <option value="2 Days">2 Days</option>
+                                    <option value="3 Days">3 Days</option>
+                                    <option value="4 Days">4 Days</option>
+                                    <option value="5 Days">5 Days</option>
+                                    <option value="6 Days">6 Days</option>
+                                    <option value="1 Week">1 Week</option>
+                                    <option value="2 Weeks">2 Weeks</option>
+                                    <option value="3 Weeks">3 Weeks</option>
+                                    <option value="1 Month">1 Month</option>
+                                    <option value="3 Months">3 Months</option>
+                                    <option value="6 Months">6 Months</option>
+                                    <option value="9 Months">9 Months</option>
+                                    <option value="1 Year">1 Year</option>
+                                    <option value="2 Years">2 Years</option>
+                                </select>
+                            </span>
+                            <span class="tradeformgroup">
+                                <label for="ROI">Daily ROI (%)</label>
+                                <input class="form-control" type="text" name="roi" value="" id="roi" readonly>
+                            </span>
+                        </div> -->
+                        <span class="tradeformgroup">
+                            <label for="duration">Duration</label>
+                            <select name="duration"class="form-control" id="duration" required>
+                                <option value="">Select Duration</option>
+                                <option value="30 Minutes">30 Minutes</option>
+                                <option value="1 Hour">1 Hour</option>
+                                <option value="2 Hours">2 Hours</option>
+                                <option value="3 Hours">3 Hours</option>
+                                <option value="6 Hours">6 Hours</option>
+                                <option value="12 Hours">12 Hours</option>
+                                <option value="24 Hours">24 Hours</option>
+                                <option value="1 Day">1 Day</option>
+                                <option value="2 Days">2 Days</option>
+                                <option value="3 Days">3 Days</option>
+                                <option value="4 Days">4 Days</option>
+                                <option value="5 Days">5 Days</option>
+                                <option value="6 Days">6 Days</option>
+                                <option value="1 Week">1 Week</option>
+                                <option value="2 Weeks">2 Weeks</option>
+                                <option value="3 Weeks">3 Weeks</option>
+                                <option value="1 Month">1 Month</option>
+                                <option value="3 Months">3 Months</option>
+                                <option value="6 Months">6 Months</option>
+                                <option value="9 Months">9 Months</option>
+                                <option value="1 Year">1 Year</option>
+                                <option value="2 Years">2 Years</option>
+                            </select>
+                        </span>
+                        <span class="tradeformgroup">
+                            <label for="investedamount">Amount ($)</label>
+                            <input class="form-control" type="number" placeholder="Amount" name="investedamount" value="" id="investedamount" required>
+                        </span>
+
+                        <div class="tradeformdoublegroup">
+                            <span class="tradeformgroup">
+                                <label for="takeprofit">Take Profit ($)</label>
+                                <input class="form-control" type="number" placeholder="Set TP" name="takeprofit" id="takeprofit">
+                            </span>
+                            <span class="tradeformgroup">
+                                <label for="stoploss">Stop Loss ($)</label>
+                                <input class="form-control" type="number" placeholder="Set SL" name="stoploss" value="" id="stoploss">
+                            </span>
+                        </div>
+                        <span class="tradeformgroup">
+                            <label for="ordertype">Order Type</label>
+                            <select name="ordertype"class="form-control" id="ordertype" required>
+                                <option value="Buy">Buy</option>
+                                <option value="Sell">Sell</option>
+            
+                            </select>
+                        </span>
+
+                        <div class="tradeformdoublegroup mt-2">
+                            <!-- <input type="submit" class="tradebtn btn btn-success tradeformgroup" value="Buy" name="ordertype" required>
+                            <input type="submit" class="tradebtn btn btn-danger tradeformgroup" value="Sell" name="ordertype" required> -->
+
+
+                            <!-- <button class="tradebtn btn btn-danger tradeformgroup">Place Trade</button> -->
+                        </div>
+                        <button class="tradebtn btn btn-primary tradeformgroup">Place Trade</button>
+
+                        
+                    </form>
+                </div>
+
+                <div id="assetwidgetbox">
+                    <div class="tradingview-widget-container">
+                        <div id="tradingview_1a2b3c4d"></div>
+                        <script src="https://s3.tradingview.com/tv.js"></script>
+                        <script>
+                        new TradingView.widget(
+                        {
+                        "width": "100%",
+                        "height": "100%",
+                        "symbol": "BINANCE:BTCUSD",
+                        "interval": "D",
+                        "timezone": "Etc/UTC",
+                        "theme": "light",
+                        "style": "1",
+                        "locale": "en",
+                        "toolbar_bg": "rgba(0, 0, 0, 0)",
+                        "enable_publishing": false,
+                        "allow_symbol_change": true,
+                        "container_id": "tradingview_1a2b3c4d"
+                        }
+                        );
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="investmentbox">
+        <div class="innerinvestmentbox">
+            <div class="boxtitle">
+                <h6>Opened Trades</h6>
+            </div>
+            <div class="activeinvestment">
+                <% if (dashboardtrade.length === 0 ) { %>
+                    <p>You have no opened trade.</p>
+                <% } else { %>
+                    <% for (investment of dashboardtrade) { %>
+                        <a href="/dashboard/traded-asset/<%= investment.id %>" class="investment">
+                            <span>
+                                <p><%= investment.investmentType%></p>
+                                <small>Trade Type</small>
+                            </span>
+
+                            <span>
+                                <p><%= investment.tradedCurrency%></p>
+                                <small>Traded Asset</small>
+                            </span>
+
+                            <span>
+                                <p class="investmentpricetag">$<%= investment.investedamount.toLocaleString()%></p>
+                                <small>Amount Traded</small>
+                            </span>
+
+                            <span>
+                                <p class="investmentpricetag">$<%= investment.investmentprofit.toLocaleString()%></p>
+                                <small>Profit</small>
+                            </span>
+
+                        </a>
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+  
+    
+
+<div id="widgetbox">
+    <div id="innerwidgetbox">
+        <div class="widgets">
+            <h6>Market Overview</h6>
+            <%- include('../partials/marketdatawidget')%>
+           
+        </div>
+
+        <div class="widgets">
+                <h6>Economic Calender</h6>
+                <%- include('../partials/economiccalendarwidget')%>
+          
+        </div>
+    </div>
+</div>
+
+<div class="widgetcontainer">
+    <div class="innerwidgetcontainer">
+       
+
+        <div class="widbox">
+                            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <div class="tradingview-widget-copyright"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                {
+                "feedMode": "all_symbols",
+                "isTransparent": true,
+                "displayMode": "regular",
+                "width": "100%",
+                "height": "100%",
+                "colorTheme": "light",
+                "locale": "en"
+            }
+                </script>
+            </div>
+            <!-- TradingView Widget END -->
+        </div>
+    </div>
+</div>
+
+
+<!-- MODALS -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <small>Our system will automatically convert your USD into selected asset.</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('investedamount').addEventListener('input', validateInputs);
+document.getElementById('takeprofit').addEventListener('input', validateInputs);
+document.getElementById('stoploss').addEventListener('input', validateInputs);
+
+function validateInputs() {
+    const investedAmount = parseFloat(document.getElementById('investedamount').value);
+    const takeProfit = parseFloat(document.getElementById('takeprofit').value);
+    const stopLoss = parseFloat(document.getElementById('stoploss').value);
+
+    const margin = investedAmount * 0.05;
+    
+    // Reset border colors
+    document.getElementById('stoploss').style.borderColor = '';
+    document.getElementById('stoploss').style.boxShadow = '';
+    document.getElementById('takeprofit').style.borderColor = '';
+    document.getElementById('takeprofit').style.boxShadow = '';
+    
+    // Validate Stop Loss
+    if (!isNaN(stopLoss) && stopLoss > investedAmount - margin) {
+        document.getElementById('stoploss').style.borderColor = 'red';
+        document.getElementById('stoploss').style.boxShadow = '0 0 5px 5px rgba(255, 0, 0, 0.759)';
+    }
+    
+    // Validate Take Profit
+    if (!isNaN(takeProfit) && takeProfit <= investedAmount + margin) {
+        document.getElementById('takeprofit').style.borderColor = 'red';
+        document.getElementById('takeprofit').style.boxShadow = '0 0 5px 5px rgba(255, 0, 0, 0.759)';
+    }
+}
+
+</script>
+
+<!-- <script>
+    const planSelect = document.getElementById('plan');
+    planSelect.addEventListener('change', handlePlanChange);
+
+    function handlePlanChange(event) {
+  const selectedPlan = event.target.value;
+
+  fetch(`/api/plans/${selectedPlan}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data); 
+      console.log(data.duration, data.roi, data.minamount, data.maxamount); // Log individual values
+      
+      document.getElementById('duration').value = data.duration;
+      document.getElementById('roi').value = data.roi;
+      document.getElementById('minamount').value = '$' + data.minamount.toLocaleString();
+      document.getElementById('maxamount').value = '$' + data.maxamount.toLocaleString();
+    })
+    .catch(error => {
+      console.error('Error fetching plan data:', error);
+    });
+}
+
+
+</script> -->
+<script>
+    const sliderContainer = document.getElementById('slidercontainer');
+    const indicators = document.querySelectorAll('.indicator');
+    const sliderContainers = document.querySelectorAll('.slidercontainers');
+
+let isDown = false;
+let startX;
+let scrollLeft;
+
+sliderContainer.addEventListener('mousedown', (e) => {
+    isDown = true;
+    sliderContainer.classList.add('active');
+    startX = e.pageX - sliderContainer.offsetLeft;
+    scrollLeft = sliderContainer.scrollLeft;
+});
+
+sliderContainer.addEventListener('mouseleave', () => {
+    isDown = false;
+    sliderContainer.classList.remove('active');
+});
+
+sliderContainer.addEventListener('mouseup', () => {
+    isDown = false;
+    sliderContainer.classList.remove('active');
+});
+
+sliderContainer.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - sliderContainer.offsetLeft;
+    const walk = (x - startX) * 2; // Adjust the scroll speed
+    sliderContainer.scrollLeft = scrollLeft - walk;
+});
+
+// For touch devices
+sliderContainer.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].pageX - sliderContainer.offsetLeft;
+    scrollLeft = sliderContainer.scrollLeft;
+});
+
+sliderContainer.addEventListener('touchmove', (e) => {
+    const x = e.touches[0].pageX - sliderContainer.offsetLeft;
+    const walk = (x - startX) * 2; // Adjust the scroll speed
+    sliderContainer.scrollLeft = scrollLeft - walk;
+});
+
+
+
+sliderContainer.addEventListener('scroll', () => {
+    let containerWidth = sliderContainer.offsetWidth;
+    let scrollLeft = sliderContainer.scrollLeft;
+    let activeIndex = Math.round(scrollLeft / containerWidth);
+
+    indicators.forEach((indicator, index) => {
+        if (index === activeIndex) {
+            indicator.classList.add('active');
+        } else {
+            indicator.classList.remove('active');
+        }
+    });
+});
+
+indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+        sliderContainer.scrollLeft = index * sliderContainers[0].offsetWidth;
+    });
+});
+
+
+
+</script>
+
+<script>
+    const preferredCryptos = [
+      'bitcoin', 'ethereum', 'litecoin', 'tether', 'usd-coin',
+      'ripple', 'binancecoin', 'dogecoin', 'lido-staked-ether',
+      'cardano', 'osmosis', 'solana', 'tron', 'matic-network',
+      'shiba-inu', 'binance-usd', 'dai', 'bitcoin-cash', 'polkadot',
+      'wrapped-bitcoin'
+    ];
+
+    axios.get(`https://api.coingecko.com/api/v3/coins/markets?ids=${preferredCryptos.join(',')}&vs_currency=usd&order=market_cap_desc&sparkline=true`)
+      .then(response => {
+        const cryptoData = response.data;
+        const cryptoListContainer = document.getElementById('crypto-list');
+
+        cryptoData.forEach(crypto => {
+          const cryptoLink = document.createElement('a');
+          cryptoLink.href = `/currency/${crypto.id}`;
+          cryptoLink.classList.add('currencylinks');
+
+          const cryptoItem = document.createElement('div');
+          cryptoItem.classList.add('cryptolistbox');
+
+          const cryptoImgBox = document.createElement('div');
+          cryptoImgBox.classList.add('cryptoimgbox', 'cryptoinfo');
+          const img = document.createElement('img');
+          img.src = crypto.image;
+          cryptoImgBox.appendChild(img);
+
+          const cryptoNameBox = document.createElement('div');
+          cryptoNameBox.classList.add('cryptonamebox', 'cryptoinfo');
+          const h6 = document.createElement('h6');
+          h6.textContent = crypto.name;
+          const small = document.createElement('small');
+          small.textContent = crypto.symbol.toUpperCase();
+          cryptoNameBox.appendChild(h6);
+          cryptoNameBox.appendChild(small);
+
+          const cryptoSpikeBox = document.createElement('div');
+          cryptoSpikeBox.classList.add('cryptospikebox', 'cryptoinfo');
+          const canvas = document.createElement('canvas');
+          canvas.id = `chart-${crypto.id}`;
+          canvas.width = 100;
+          canvas.height = 50;
+          cryptoSpikeBox.appendChild(canvas);
+
+          const cryptoPriceBox = document.createElement('div');
+          cryptoPriceBox.classList.add('cryptopricebox', 'cryptoinfo');
+          const h6Price = document.createElement('h6');
+          h6Price.textContent = `$ ${crypto.current_price}`;
+          const smallPrice = document.createElement('small');
+          const priceChange24h = crypto.price_change_percentage_24h;
+          smallPrice.textContent = `${priceChange24h > 0 ? '+' : ''}${priceChange24h.toFixed(2)}%`;
+          smallPrice.classList.add(priceChange24h > 0 ? 'positive-change' : 'negative-change');
+          cryptoPriceBox.appendChild(h6Price);
+          cryptoPriceBox.appendChild(smallPrice);
+
+        cryptoItem.appendChild(cryptoImgBox);
+          cryptoItem.appendChild(cryptoNameBox);
+          cryptoItem.appendChild(cryptoSpikeBox);
+          cryptoItem.appendChild(cryptoPriceBox);
+
+          cryptoLink.appendChild(cryptoItem);
+          cryptoListContainer.appendChild(cryptoLink);
+
+          const ctx = document.getElementById(`chart-${crypto.id}`).getContext('2d');
+          const sparkline = crypto.sparkline_in_7d.price;
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: Array.from({ length: sparkline.length }, (_, i) => i.toString()),
+              datasets: [{
+                data: sparkline,
+                borderColor: priceChange24h > 0 ? 'green' : 'red',
+                backgroundColor: 'transparent',
+                borderWidth: 1,
+                pointRadius: 0
+              }]
+            },
+            options: {
+              responsive: false,
+              maintainAspectRatio: false,
+              scales: {
+                x: {
+                  display: false
+                },
+                y: {
+                  display: false
+                }
+              },
+              elements: {
+                line: {
+                  tension: 0
+                }
+              },
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  enabled: false
+                }
+              }
+            }
+          });
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching crypto data:', error);
+      });
+  </script>
+
+<script>
+    // Function to convert USD to Bitcoin
+    function convertToBitcoin(usdAmount, callback) {
+       // API endpoint for real-time conversion
+       const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd';
+
+       // Make an AJAX request to fetch the exchange rate
+       $.getJSON(url, function (data) {
+           const exchangeRate = data.bitcoin.usd; // Get the exchange rate
+           const bitcoinAmount = usdAmount / exchangeRate; // Convert USD to Bitcoin
+           callback(bitcoinAmount); // Invoke the callback with the converted amount
+       });
+   }
+
+   // Function to update the crypto balance
+   function updateCryptoBalance() {
+       const usdBalance = parseFloat($('.usdbalance').text());
+       convertToBitcoin(usdBalance, function (bitcoinAmount) {
+           $('.cryptobalance').text(bitcoinAmount.toFixed(8)); // Update the cryptobalance span
+       });
+   }
+
+   // Call the updateCryptoBalance function initially
+   updateCryptoBalance();
+ </script>
+
+  <script src="/script/app.js"></script>
+</body>
+</html>

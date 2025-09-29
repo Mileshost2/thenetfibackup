@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Info</title>
+    <link rel="stylesheet" href="/stylesheets/admin/investmentinfo.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-line-chart headericon"></i> <small>Trade Info</small></span>
+                <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+          </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="acctsumbox">
+            <div id="inneracctsumbox">
+                <div class="acctsum">
+                    <span>
+                        <p>Trade ID:</p>
+                        <small><%= trade.id %></small> 
+                    </span>
+                    <span>
+                        <p>Wallet Type:</p>
+                        <small><%= trade.tradeCurrency %></small>
+                    </span>
+                    <span>
+                        <p>Wallet Address:</p>
+                        <small><%= trade.cryptoAddress %></small> 
+                    </span>
+                    <span>
+                        <p>Wallet Balance:</p>
+                        <small>$<%= trade.currencyWallet.toLocaleString() %></small>
+                    </span>
+
+                    <span>
+                        <p>Client Name:</p>
+                        <small><%= client.firstname%> <%= client.lastname%></small>
+                    </span>
+
+                    <span>
+                        <p>Client Email:</p>
+                        <small><%= client.email%></small>
+                    </span>
+
+                 
+                    
+                </div>
+    
+                <div class="acctsum">
+                    <% if (trade.status === 'Inactive'){ %> 
+                        <span>
+                            <p>Last Invested Amount:</p>
+                            <small>$<%= trade.lastinvestedamount.toLocaleString() %></small>
+                        </span>
+                        <span>
+                            <p>Last Trade Profits:</p>
+                            <small>$<%= trade.lastinvestmentprofit.toLocaleString() %></small>
+                        </span>
+                    <% } else if (trade.status === 'Active'){ %> 
+                        <span>
+                            <p>Invested Amount:</p>
+                            <small>$<%= trade.currentinvestedamount.toLocaleString() %></small>
+                        </span>
+                        <span>
+                            <p>Profits:</p>
+                            <small>$<%= trade.currentinvestmentprofit.toLocaleString() %></small>
+                        </span>
+                        <span>
+                            <p>Total Income:</p>
+                            <small>$<%= totalincome.toLocaleString() %></small>
+                        </span>
+                    <% } %> 
+                    
+                    <span>
+                        <p>Trade Status:</p>
+                        <% if (trade.status === 'Pending') { %> 
+                            <small class="unverifiedstat"><%= trade.status %></small>
+                        <% } else if (trade.status === 'Inactive'){ %> 
+                            <small class="verifiedstat"><%= trade.status %></small>
+                        <% } else if (trade.status === 'Active'){ %> 
+                            <small class="pendingstat"><%= trade.status %></small>
+                        <% } %> 
+                        
+                    </span>
+                    <span class="action">
+                        <% if (trade.status == 'Active') { %> 
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle actionboxbutton1" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Add profits to current trade.
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                  <li>
+                                    <form action="/admin/admin.trade/<%= client.id%>/<%= trade.id%>?_method=PUT" method="post" class="addfundsform">
+                                        <input type="number" placeholder="Amount to be added" class="addfundsforminput" name="addprofits" required>
+                                        <button class="btn btn-success" >Add Profits</button>
+                                    </form>
+                                  </li>
+                                </ul>
+                            </div>
+                        <% } %> 
+    
+                        <% if (trade.status == 'Active') { %> 
+                            <div>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" id="end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    End Trade
+                                </button>
+                  
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">End Trade</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Do you wish to end this trade?</p>
+                                                <form action="/admin/admin.trade/<%= client.id%>/<%= trade.id%>/endtrade?_method=PUT" method="post" >
+                                                    <button class="btn btn-danger">End Trade</button>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } else if (trade.status == 'Inactive') { %> 
+                            <button type="button" class="btn btn-primary">
+                                Trade Inactive
+                            </button>
+                        <% } else { %> 
+                            <button type="button" class="btn btn-primary">
+                                Trade Pending
+                            </button>
+                        <% } %> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>69Management - FAQs</title>
+    <style>
+        /* Style for the entire carousel container */
+        .faq-carousel {
+            overflow: hidden;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        /* Style for each individual FAQ question and answer */
+        .faq-item {
+            display: none;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            margin-bottom: 10px;
+        }
+
+        /* Style for the active (visible) FAQ item */
+        .faq-item.active {
+            display: block;
+        }
+
+        /* Style for the carousel navigation buttons */
+        .carousel-btn {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ccc;
+            font-size: 20px;
+            padding: 10px;
+        }
+
+        .carousel-btn.prev {
+            left: 0;
+        }
+
+        .carousel-btn.next {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>69Management - Frequently Asked Questions</h1>
+    <div class="faq-carousel">
+        </div>
+    <button class="carousel-btn prev">&laquo;</button>
+    <button class="carousel-btn next">&raquo;</button>
+
+    <script>
+        // Function to create a new FAQ item
+        function createFaqItem(question, answer) {
+            const faqItem = document.createElement('div');
+            faqItem.classList.add('faq-item');
+            faqItem.innerHTML = `<h3><span class="math-inline">\{question\}</h3\><p\></span>{answer}</p>`;
+            return faqItem;
+        }
+
+        // Random crypto-related questions and answers
+        const faqData = [
+            { question: "What is cryptocurrency?", answer: "Cryptocurrency is a digital or virtual payment system that uses cryptography for security. It is decentralized, meaning it's not controlled by any government or financial institution." },
+            { question: "How do I buy cryptocurrency?", answer: "There are many cryptocurrency exchanges where you can buy and sell cryptocurrencies. You can use traditional payment methods like bank transfers or credit cards on some exchanges." },
+            { question: "Is cryptocurrency safe?", answer: "Cryptocurrency can be a risky investment, and there is always a chance of losing money. It's important to do your research before investing in any cryptocurrency." },
+            { question: "What is blockchain technology?", answer: "Blockchain is a distributed ledger technology that allows for secure, transparent, and tamper-proof recording of data. Cryptocurrencies are built on top of blockchain technology." },
+            { question: "What is mining?", answer: "Mining is the process of validating cryptocurrency transactions and adding them to the blockchain. Miners use specialized computers to solve complex mathematical problems and are rewarded with cryptocurrency for their work." },
+            { question: "What is a wallet?", answer: "A cryptocurrency wallet is a software application that allows you to store, send, and receive cryptocurrencies. There are different types of wallets, such as hot wallets (connected to the internet) and cold wallets (offline storage)."},
+            { question: "What is the future of cryptocurrency?", answer: "The future of cryptocurrency is uncertain, but it has the potential to revolutionize the way we think about money and payments." },
+            { question: "Where can I learn more about cryptocurrency?", answer: "There are many resources available online and offline to learn more about cryptocurrency. You can find articles, videos, and courses from reputable sources." }
+        ];
+
+        // Select the FAQ carousel container
+        const faqCarousel = document.querySelector('.faq-carousel');
+
+        // Loop through the FAQ data and create FAQ items
+        faqData.forEach(data => {
+            const faqItem = createFaqItem(data.question, data.answer);
+            faqCarousel.appendChild(faqItem);
+        });
+
+       // Get references to the carousel buttons
+       const prevBtn = document.querySelector('.carousel-btn.prev');
+        const nextBtn = document.querySelector('.carousel-btn.next');
+
+        // Set initial active item (first item by default)
+        let activeIndex = 0;
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems[activeIndex].classList.add('active');
+
+        // Function to show the previous FAQ item
+        function prevFaq() {
+            faqItems[activeIndex].classList.remove('active');
+            activeIndex = (activeIndex - 1 + faqItems.length) % faqItems.length;
+            faqItems[activeIndex].classList.add('active');
+        }
+
+        // Function to show the next FAQ item
+        function nextFaq() {
+            faqItems[activeIndex].classList.remove('active');
+            activeIndex = (activeIndex + 1) % faqItems.length;
+            faqItems[activeIndex].classList.add('active');
+        }
+
+        // Add click event listeners to the carousel buttons
+        prevBtn.addEventListener('click', prevFaq);
+        nextBtn.addEventListener('click', nextFaq);
+    </script>
+</body>
+</html>

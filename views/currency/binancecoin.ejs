@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binance Coin</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/stylesheets/user/coin.css">
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+<div class="contentbox">
+    
+
+    <div id="header">
+        <div id="headerinner">
+            <span class="headerinnerspan"> <small>Binance Coin</small></span>
+            <span class="headerinnerspan"><a href="/dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+        </div>
+    </div>
+
+    <div id="coinbox">
+        <div id="crypto-list"></div>
+    </div>
+
+    <div class="cryptowidget">
+      <div class="tradingview-widget-container">
+        <div id="tradingview_1a2b3c4d"></div>
+        <script src="https://s3.tradingview.com/tv.js"></script>
+        <script>
+        new TradingView.widget(
+        {
+          "width": "100%",
+          "height": "100%",
+          "symbol": "BINANCE:BNBUSD",
+          "interval": "D",
+          "timezone": "Etc/UTC",
+          "theme": "light",
+          "style": "1",
+          "locale": "en",
+          "toolbar_bg": "rgba(0, 0, 0, 0)",
+          "enable_publishing": false,
+          "allow_symbol_change": true,
+          "container_id": "tradingview_1a2b3c4d"
+        }
+        );
+        </script>
+      </div>
+      
+      
+   </div>
+
+
+    
+
+</div>
+    
+</body>
+</html>

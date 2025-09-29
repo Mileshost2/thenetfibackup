@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+        </style>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+<link rel="stylesheet" href="/stylesheets/usernavbar.css">
+</head>
+<body>
+    <div id="navbarcontainer">
+        <div class="logobox">
+            <img src="/img/logo.png" id="logo" alt="Logo">
+        </div>
+
+        <div id="navinner">
+            <span class="navcontrolbox">
+                <i class="fa fa-bars navtoggle" aria-hidden="true"></i>
+        
+                <div class="dropdown profiledropdown">
+                    <button class="btn btn-secondary dropdown-toggle dropdownBtn" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <% if (admin.profilepicture.length === 0) { %> 
+                        <img src="/img/user.png" alt="" class="profilepic">
+                    <% } else { %> 
+                        <img src="<%= admin.profilepicture[0].url %> " class="profilepic" alt="">
+                    <% } %> 
+                    <small class="profilename"><%= admin.firstname %></small>
+                    </button>
+                    
+                    <ul class="dropdown-menu dropdown-menu-dark dropdownMenu" aria-labelledby="dropdownMenuButton2">
+                        
+                    <li><a class="dropdown-item" href="/admin/admin.profile"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    
+                    <span style="visibility: hidden;">
+                        <%- partial('../partials/darkmode')%>
+                    </span>
+                    </ul>
+                </div>
+
+            </span>
+            
+
+           
+        </div>
+
+    </div>
+
+    <div class="modal fade transbg" id="logout" tabindex="-1" aria-labelledby="logoutLabel" aria-hidden="true">
+        <div class="modal-dialog transbg">
+        <div class="modal-content transbg">
+            <div class="modal-body transbg">
+                <form action="/admin.logout" class="" method="get" id="logoutform">
+                    <button type="submit" class="btn btn-danger mt-2">Proceed to Logout <i class="fas fa-sign-out-alt"></i></button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+
+   
+    <div class="navbar">
+        <div class="navcontent">
+            <div class="sidebarlogobox">
+                <img src="/img/logo.png" id="sidebarlogo" alt="Logo">
+
+                <i class="fa-solid fa-times navtoggle"></i>
+            </div>
+            <span class="profilepicbox">
+                <% if (admin.profilepicture.length === 0) { %> 
+                    <img src="/img/user.png" alt="" class="">
+                <% } else { %> 
+                    <img src="<%= admin.profilepicture[0].url %> " class="" alt="">
+                <% } %> 
+                <small><%= admin.firstname %> <%= admin.lastname %></small>
+            </span>
+
+            <a href="/admin/admin.dashboard " class="navlinks" > <i class="fas fa-project-diagram links-icons"></i> <span>Dashboard</span></a>
+
+              <a href="/admin/admin.clients"  class="navlinks"><i class="fas fa-user links-icons"></i> <span>Clients</span></a>
+              <a href="/admin/admin.verificationrequests"  class="navlinks"><i class="fas fa-check-circle links-icons"></i> <span>Verify Clients</span></a>
+              <span class="accordionspan">
+                <button class="accordion"><i class="fa-solid fa-money-bill-transfer links-icons"></i> <span>Deposit</span></button>
+                <div class="panel">
+                    <a href="/admin/admin.deposit-req"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Deposit Requests</span></a>
+                    <a href="/admin/admin.deposit-history"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Deposit History</span></a>
+                    <a href="/admin/admin.depositmethods"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Deposit Methods</span></a>
+                </div>
+              </span>
+              <span class="accordionspan">
+                <button class="accordion"><i class="fa-solid fa-wallet links-icons"></i> <span>Withdrawal</span></button>
+                <div class="panel">
+                    <a href="/admin/admin.withdrawal-req"  class="navlinks"><i class="fa-solid fa-chevron-circle-up  links-icons"></i> Withdrawal Requests</a>
+                    <a href="/admin/admin.withdrawal-history"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Withdrawal History</span></a>
+                </div>
+              </span>
+              <span class="accordionspan">
+                <button class="accordion"><i class="fas fa-donate links-icons"></i> <span>Trade Center</span></button>
+                <div class="panel">
+                    <a href="/admin/admin.opened-trades"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Opened Trades</span></a>
+                    <a href="/admin/admin.closed-trades"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Closed Trades</span></a>
+                    <!-- <a href="/admin/admin.investmentplans"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Trading Plans</span></a> -->
+                </div>
+              </span>
+              <span class="accordionspan">
+                <button class="accordion"><i class="fas fa-list-alt links-icons"></i> <span>Plans</span></button>
+                <div class="panel">
+                    <a href="/admin/admin.upgrade-plans"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Upgrade Plans</span></a>
+                    <a href="/admin/admin.signal-plans"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Signal Plans</span></a>
+                    <a href="/admin/admin.investment-plans"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Investment Plans</span></a>
+                </div>
+              </span>
+              <!-- <a href="/admin/admin.reviews"  class="navlinks"><i class="fa fa-star links-icons"></i> <span>Reviews</span></a> -->
+              <a href="/admin/admin.experts"  class="navlinks"><i class="fas fa-users links-icons"></i> <span>Expert Traders</span></a>
+              <!-- <a href="/admin/admin.referral-dashboard"  class="navlinks"><i class="fas fa-users links-icons"></i> <span>Referral Dashboard</span></a> -->
+              <!-- <a href="/admin/admin.wallets"  class="navlinks"><i class="fas fa-users links-icons"></i> <span>Wallets</span></a> -->
+              <!-- <a href="/admin/admin.news"  class="navlinks"><i class="fas fa-newspaper links-icons"></i> <span>News</span></a> -->
+              <!-- <a href="/admin.logout"  class="navlinks"><i class="fas fa-sign-out-alt links-icons"></i> <span>Logout</span></a> -->
+
+        </div>
+    </div>
+
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("navactive");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+            } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+        }
+    </script>
+    <script>
+        document.getElementById('toggleButton').addEventListener('click', function() {
+          var icon = document.getElementById('toggleIcon');
+          var container = document.getElementById('iconContainer');
+          if (icon.classList.contains('fa-bars')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+            container.style.display = 'flex';
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            container.style.display = 'none';
+          }
+        });
+      </script>
+
+        
+      
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

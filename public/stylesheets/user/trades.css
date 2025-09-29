@@ -1,0 +1,92 @@
+/* #pageintrobox {
+    width: 100%;
+    padding: 10px;
+}
+
+#innerpageintrobox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#innerpageintrobox p {
+    margin: 0;
+} */
+
+
+.investmentbox {
+    width: 100%;
+    padding: 10px;
+}
+
+.innerinvestmentbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    margin-bottom: 40px;
+}
+
+.investment {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 5px;
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-decoration: none;
+    color: var(--foreground);
+}
+
+.investment:hover {
+    color: rgb(255, 119, 0);
+}
+
+.investment span {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px;
+}
+
+/* .investmentpricetag {
+    color: rgb(9, 179, 170);
+} */
+
+.investment p {
+    font-size: 0.9em;
+    margin: 5px;
+}
+
+.investment small {
+    color: rgb(24, 193, 173);
+    font-size: 0.8em;
+}
+
+@media (max-width:760px) {
+    #assetinner {
+        flex-direction: column-reverse;
+    }
+    #tradebox {
+        width: 100%;
+        margin-top: 10px;
+    }
+    #assetwidgetbox {
+        width: 100%;
+        height: 300px;
+    }
+}
+
+@media (max-width:430px) {
+    .investment p {
+        font-size: 0.7em;
+    }
+    
+    .investment small {
+        font-size: 0.6em;
+    }
+}

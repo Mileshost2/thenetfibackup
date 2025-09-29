@@ -1,0 +1,260 @@
+body {
+    padding: 0;
+    margin: 0;
+    /* background-color: #26394d !important; */
+}
+
+#div1 {
+    display: flex;
+    flex-direction: row;
+}
+
+#div1box {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    width: 90%;
+    align-items: center;
+}
+
+.mainicon {
+    color: white;
+    background-color: dodgerblue;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 0 20px;
+    font-size: 1.6em;
+}
+
+#div1boxinner {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#div1boxinner p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+#div1boxinner a {
+    color: var( --foreground);
+    text-decoration: none;
+}
+
+.dashspan {
+    color: grey;
+}
+
+#deposit {
+    margin-top: 20px;
+    /* margin-left: 40px; */
+}
+
+#deposit h2 {
+    font-family: 'Oswald', sans-serif;
+}
+
+.fa-dollar-sign {
+    color: rgb(23, 97, 209);
+
+}
+
+#amount {
+    margin: 15px 0;
+    width: 100%;
+    padding: 20px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+#amount h2 {
+    font-family: 'Oswald', sans-serif;
+}
+
+#wallet {
+    margin: 15px 0;
+    width: 100%;
+    padding: 20px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+#walletbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#wallet h2 {
+    font-family: 'Oswald', sans-serif;
+}
+
+#wallet img {
+    width: 150px;
+}
+
+#walletinnerbox {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#walletinnerbox p {
+    font-family: 'Oswald', sans-serif;
+    color: dodgerblue;
+}
+
+#walletdetails span {
+    background: rgb(9, 125, 240);
+    transition: 0.7s;
+}
+
+#walletdetails button {
+    background-color: rgb(9, 125, 240);
+    color: white;
+    transition: 0.7s;
+}
+
+#walletdetails button:hover {
+    background-color: rgb(8, 92, 175);
+}
+
+#proof {
+    margin: 15px 0;
+    width: 100%;
+    padding: 20px;
+}
+
+#submitproof button {
+    background-color: rgb(9, 125, 240);
+    color: white;
+    transition: 0.7s;
+}
+
+#submitproof button:hover {
+    background-color: rgb(231, 14, 14);
+}
+
+/* @media (max-width: 580px) {
+    #amount, #wallet, #proof {
+        width: 100%;
+    }
+} */
+
+#depositbox2 {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#depositmethodbox {
+    width: 100%;
+    align-self: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0 20px;
+}
+
+.depositmethodboxclass {
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    width: 500px;
+    border: 1.5px solid rgb(255, 143, 14);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Oswald', sans-serif;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.depositmethodboxclass p {
+    margin: 0;
+}
+
+.depositmethodboxclass span {
+    margin: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+    word-break: break-word;
+}
+
+.depositimgbox {
+    border-top: 1.4px solid grey;
+    border-bottom: 1.4px solid grey;
+    padding: 5px;
+}
+
+.depositimg {
+    width: 150px;
+}
+
+.depositmethodimg {
+    width: 100%;
+}
+
+.depositmethodboxaction {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+.depositmethodboxaction button {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.modalbtn {
+    width: 100%;
+    margin: 5px 0;
+}
+
+
+.formbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.formbox form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.formbox input {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.formbox select {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.formbox button {
+    background-color: dodgerblue;
+    color: white;
+    padding: 5px;
+    margin: 5px 0;
+}

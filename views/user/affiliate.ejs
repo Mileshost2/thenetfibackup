@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral Dashboard</title>
+    <link rel="stylesheet" href="/stylesheets/user/affiliate.css">
+    <style>
+        .activereflink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activereflink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"> <small>Referral Dashboard</small> <i class="fa-solid fa-users headericon"></i></span>
+            </div>
+        </div>
+
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="acctsumbox">
+
+            <div class="dashboardboxcontainer">
+                <div class="dashboardboxes" style="background-color:#08c265;">
+                    <span class="dashboardboxes-span1">
+                        <i class="fas fa-wallet dashboardboxes-iconimg"></i>
+                        <span class="dashboardboxes-span2">
+                            <p>
+                                <% if (user.wallet === 0) { %> 
+                                    <small>$0.00</small>
+                                <% } else { %> 
+                                    <small>$<%= user.wallet.toLocaleString() %></small>
+                                <% } %> 
+                            </p>
+                            <small>Account Balance</small>
+                        </span>
+                    </span>
+                </div>
+                
+                <div class="dashboardboxes" style="background-color:#2980b9;">
+                    <span class="dashboardboxes-span1">
+                        <i class="fas fa-chart-line dashboardboxes-iconimg"></i>
+                        <span class="dashboardboxes-span2">
+                            <p>
+                                <% if (user.referralincomes === 0) { %> 
+                                    <small>$0.00</small>
+                                <% } else { %> 
+                                    <small>$<%= user.referralincomes.toLocaleString() %></small>
+                                <% } %> 
+                            </p>
+                            <small>Referral Income</small>
+                        </span>
+                    </span>
+                </div>
+
+                <div class="dashboardboxes" style="background-color:#e5240e;">
+                    <span class="dashboardboxes-span1">
+                        <i class="fas fa-users dashboardboxes-iconimg"></i>
+                        <span class="dashboardboxes-span2">
+                            <p><small><%= user.referrals.length %></small></p>
+                            <small>Number of Referrals</small>
+                        </span>
+                    </span>
+                </div>
+
+                <button class="dashboardboxes transferbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                     Transfer Incomes to Wallet 
+               </button>
+
+               <!-- Modal -->
+               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <% if (user.referralincomes === 0) { %> 
+                            <small>No balance available for payout.</small>
+                        <% } else { %> 
+                            <small>$<%= user.referralincomes.toLocaleString() %> is available for payout
+                                <br>Clicking continue would tranfer your total referral earnings to your main account's wallet from which 
+                                you can withdraw it.
+                            </small>
+
+                            <form action="/dashboard/referral-dashboard?_method=PUT" class="refboxclasses" method="post" >
+                                <button class="btn btn-success mt-3">Continue</button>
+                            </form>
+                        <% } %> 
+                        
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+   
+
+        <div id="div2">
+            <div id="div2box">
+                <p>Refer a Friend</p>
+                <div class="div2boxinner">
+                    <p>Our Affiliate Program helps our clients to earn from refferring others to join our platform.
+                    <br> Every deposit of your referral will bring you a reward in the amount of 10% and $50 for Referral Registration.
+                    <br> You would be able to transfer your referral earnings from your referral wallet to your account main wallet.</p>
+                </div>
+    
+                <div class="div2boxinner">
+                    <span>Referral Link:</span>
+                  
+                    <div class="input-group div2boxinputgroup">
+                        <input type="text" class="form-control" value="<%=process.env.WEB_URL%>/register/<%= user.id%>" id="copy" readonly>
+                        <button class="btn btn-success" onclick="myFunction()">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="deposithistory">
+            <div id="deposithistorybox">
+             <p>REFERRAL HISTORY</p>
+             <div id="tablecontainer">
+                 <table id="historytable">
+                     <thead>
+                       <tr>
+                         <th>S/N</th>
+                         <th>First Name</th>
+                         <th>Last Name</th>
+                       </tr>
+                     </thead>
+          
+                     <tbody>
+                        <% if (user.referrals.length > 0) { %> 
+                            <% for (let referral of user.referrals) { %> 
+                                <tr>
+                                    <td><li></td>
+                                    <td><%= referral.firstname %></td>
+                                    <td><%= referral.lastname %> </td>
+                                </tr>
+                            <% } %> 
+                        
+                        <% } else { %>
+                            <td colspan="3">You don't have any referral yet. Copy your referral link and share them with your friends and family.</td>
+                        <% } %>  
+                     </tbody>
+                   </table>
+             </div>
+            </div>
+         </div>
+
+
+       
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

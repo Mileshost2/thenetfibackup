@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal Info</title>
+    <link rel="stylesheet" href="/stylesheets/admin/confirmdeposit.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-money-bill-transfer headericon"></i> <small>Withdrawal Info</small></span>
+                <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+          </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        
+
+        <div id="depositbox">
+            <div id="depositmethodbox">
+                    <div class="depositmethodboxclass">
+                        <div class="depositviewtitle">
+                            <p>Withdrawal request of $<%= withdrawal.amount.toLocaleString() %> by <%= client.firstname %> </p>
+                        </div>
+                        <span>
+                            <p>Transaction Date:</p>
+                            <small><%= withdrawal.transactiondate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %> <%= withdrawal.transactiondate.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= withdrawal.transactiondate.toISOString().split('T')[0] %>.</small>
+                        </span>
+    
+                        <span>
+                            <p>Client's Name:</p> 
+                            <small><%= client.firstname%> <%= client.lastname%></small>
+                        </span>
+    
+                        <span>
+                            <p>Client's Email:</p>
+                            <small><%= client.email %></small>
+                        </span>
+                        <span>
+                            <p>Amount:</p>
+                            <small>$<%= withdrawal.amount.toLocaleString() %></small>
+                        </span>
+                        <span>
+                            <p>Transaction Method:</p>
+                            <small><%= withdrawal.transactionmethod %></small>
+                        </span>
+
+                        <%  if (withdrawal.transactionmethod === 'Bank Transfer' ) { %>
+                            <span>
+                                <p>Bank Name:</p>
+                                <small><%= withdrawal.bankname %></small>
+                            </span>
+                            <span>
+                                <p>Account Number:</p>
+                                <small><%= withdrawal.accountnumber %></small>
+                            </span>
+                            <span>
+                                <p>Routing Code:</p>
+                                <small><%= withdrawal.routingcode %></small>
+                            </span>
+                            <span>
+                                <p>Routing Number:</p>
+                                <small><%= withdrawal.routingnumber %></small>
+                            </span>
+                        <% } else { %>
+                            <span>
+                                <p>Client's <%= withdrawal.transactionmethod %> Address:</p>
+                                <small><%= withdrawal.withdrawaddress %></small>
+                            </span>
+                        <% } %>
+
+                        
+    
+                        <span>
+                            <p>Status:</p>
+                            <small class="accounttype"><%= withdrawal.status %></small>
+                        </span>
+
+    
+                        
+                        <span class="depositmethodboxaction">
+                            <% if (withdrawal.status !== 'Successful') { %> 
+    
+                                <!-- Button trigger modal -->
+                                <!-- <button type="button" class="btn btn-secondary depositbtn" data-bs-toggle="modal" data-bs-target="#editD">
+                                    <i class="fa-solid fa-pen"></i> Change Withdrawal Address
+                                </button> -->
+
+                               <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#verifyD">
+                                   <i class="fa-solid fa-check"></i> Verify
+                               </button>
+       
+                               <button type="button" class="btn btn-danger depositbtn" data-bs-toggle="modal" data-bs-target="#declineD">
+                                   <i class="fa-solid fa-xmark"></i> Decline
+                               </button>
+       
+                           <% } %>
+                        </span>
+
+                         <!-- Modal -->
+                         <!-- <div class="modal fade" id="editD" tabindex="-1" aria-labelledby="editDLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="editDLabel">Change Withdrawal Address</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/admin/admin.withdrawal-req/<%= client.id %>/edit/<%= withdrawal.id %>?_method=PUT" method="post" class="verifyform">
+                                        <input type="text" class="form-control" name="withdrawaddress" value="<%= withdrawal.withdrawaddress %>" required>
+                                        <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                    </form> 
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                            </div>
+                        </div> -->
+
+                        <div class="modal fade" id="verifyD" tabindex="-1" aria-labelledby="verifyDLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="verifyDLabel">APPROVE WITHDRAWAL</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Click the button below to approve this withdrawal request
+                                    <form action="/admin/admin.withdrawal-req/<%= client.id %>/verify/<%= withdrawal.id %>?_method=PUT" method="post" class="verifyform">
+                                        <button type="submit" class="btn btn-primary">Verify</button>
+                                    </form> 
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="declineD" tabindex="-1" aria-labelledby="declineDLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="declineDLabel">DECLINE WITHDRAWAL</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Click the button below to decline this withdrawal.
+                                    <form action="/admin/admin.withdrawal-req/<%= client.id %>/decline/<%= withdrawal.id %>?_method=PUT" method="post" class="verifyform">
+                                        <button type="submit" class="btn btn-primary">Decline</button>
+                                    </form> 
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                
+                 
+                
+            </div>
+        </div>
+
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

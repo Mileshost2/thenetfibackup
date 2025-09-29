@@ -1,0 +1,257 @@
+#navbar {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-family: "Courier Prime", monospace;
+    transition: 0.5s;
+}
+
+.navbar {
+    background-color: transparent;
+    position: fixed !important;
+    z-index: 200;
+}
+
+.navbar-scrolled {
+    background-color: black; /* Black background on scroll */
+  }
+
+/* #logobox {
+    width: 200px;
+} */
+
+.navlogo {
+    width: 110px;
+}
+
+#navlinksbox {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navlinks {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+    transition: 0.5s;
+}
+
+.mobilenavlinks {
+    color: white;
+    text-decoration: none;
+    margin: 5px;
+    transition: 0.5s;
+}
+
+.navlinks:hover, .mobilenavlinks:hover {
+    transform: scale(1.05);
+    color: white;
+}
+
+#mobilenav {
+    width: 60px;
+    /* display: flex; */
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    display: none;
+    margin-right: 20px;
+}
+
+.tgBtn {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.tgBtn i {
+    color: white;
+}
+
+#iconContainer {
+    display: none;
+    position: fixed;
+    top: 70px; /* Adjust as needed */
+    right: 20px;
+    background-color: rgb(35, 35, 35); /* Optional: for better visibility */
+    color: black !important;
+    border: 1px solid #000000; /* Optional: for better visibility */
+    padding: 10px 30px; /* Optional: for better spacing */
+    z-index: 1000; /* Ensure it is above other elements */
+  }
+  .icon-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black !important;
+  }
+  .icon-column i {
+    margin: 10px 0;
+    color: black !important;
+    /* font-size: 24px; */
+  }
+
+#authmodal {
+    z-index: 100;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    display: none;
+}
+
+#innerauthmodal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 150px;
+    width: 100%;
+}
+
+.authBtn {
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(30, 105, 255);
+    border-radius: 5px;
+    text-align: center;
+    transition: 0.5s;
+    width: 70%;
+}
+
+.authBtn:hover {
+    transform: scale(1.05);
+    color: white;
+}
+
+.authBtn i {
+    margin-left: 5px;
+}
+
+
+@media (max-width:690px) {
+    #navlinksbox {
+        display: none;
+    }
+    #mobilenav {
+        display: flex;
+    }
+}
+
+
+
+
+#footer {
+    width: 100%;
+    padding: 20px;
+    background-color: black;
+    font-family: "Courier Prime", monospace;
+    color: white;
+}
+
+.innerfooter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footerlogo {
+    width: 70px;
+    margin: 10px 0;
+}
+
+.footercoloredtext {
+    color: rgb(255, 204, 0);
+}
+
+.footersocialbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.footersocialbox a {
+    text-decoration: none;
+    color: white;
+    margin: 5px;
+    transition: 0.5s;
+}
+
+.footersocialbox a:hover {
+    text-decoration: none;
+    color: white;
+    transform: scale(1.05);
+}
+
+.footersocialbox img {
+    width: 18px;
+}
+
+#footer p {
+    text-align: center;
+    font-size: 0.7em;
+}
+
+#footerlinkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#footerlinkbox a {
+    margin: 5px;
+    text-decoration: underline;
+}
+
+
+
+/* prealoader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Ensure preloader is on top */
+}
+  
+.preloaderimg {
+    width: 100px;
+    animation: fade 2s ease-in-out infinite alternate;
+  }
+  
+  /* #main-content {
+    display: none;
+  } */
+  
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  

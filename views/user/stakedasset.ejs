@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pool</title>
+    <link rel="stylesheet" href="/stylesheets/admin/investmentinfo.css">
+    <style>
+        .activetradelink {
+            color: var(--bottomnavactivecolor) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- partial('../partials/usernav')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><small>Pool Info</small> <i class="fa-solid fa-line-chart headericon"></i> </span>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="depositbox">
+            <div id="depositmethodbox">
+                    <div class="depositmethodboxclass">
+                        <span>
+                            <p>Pool ID:</p>
+                            <small><%= investment.id %></small>
+                        </span>
+                        <span>
+                            <p>Date</p>
+                            <small><%= investment.startDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %>, <%= investment.startDate.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= investment.startDate.toISOString().split('T')[0] %> </small>
+                        </span>
+                        <span>
+                            <p>Pool Type:</p>
+                            <small><%= investment.investmentType %></small>
+                        </span>
+                        <span>
+                            <p>Asset:</p>
+                            <small><%= investment.tradedCurrency %></small>
+                        </span>
+                        <span>
+                            <p>Duration of Trade:</p>
+                            <small><%= investment.duration %></small>
+                        </span>
+                        <span>
+                            <p>USD Amount worth of <%= investment.tradedCurrency %> Staked:</p>
+                            <small>$<%= investment.investedamount.toLocaleString() %></small>
+                        </span>
+                        <span>
+                            <p>Profits:</p>
+                            <small>$<%= investment.investmentprofit.toLocaleString() %></small>
+                        </span>
+                        <span>
+                            <p>Estimated Expected Income:</p>
+                            <small>$<%= investment.expectedincome.toLocaleString() %></small>
+                        </span>
+                        <span>
+                            <p>Pool Status:</p>
+                            <% if (investment.status === 'Pending') { %> 
+                                <small class="unverifiedstat"><%= investment.status %></small>
+                            <% } else if (investment.status === 'Completed'){ %> 
+                                <small class="verifiedstat"><%= investment.status %></small>
+                            <% } else if (investment.status === 'Active'){ %> 
+                                <small class="pendingstat"><%= investment.status %></small>
+                            <% } %> 
+                            
+                        </span>
+    
+                        
+                    </div>
+            </div>
+        </div>
+       
+
+       
+
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

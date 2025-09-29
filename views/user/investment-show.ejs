@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade</title>
+    <link rel="stylesheet" href="/stylesheets/admin/investmentinfo.css">
+    <style>
+        .activetradelink {
+            color: var(--bottomnavactivecolor) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- partial('../partials/usernav')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><small>Trade Info</small> <i class="fa-solid fa-line-chart headericon"></i> </span>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <!-- <div id="gifbox">
+            <div id="innergifbox">
+                <div class="gif">
+                    <% if (investment.status === 'Completed'){ %> 
+                        <img src="/img/money.gif" alt="">
+                    <% } else if (investment.status === 'Active'){ %> 
+                        <img src="/img/rocket.gif" alt=""> 
+                    <% } %> 
+                    
+                </div>
+    
+            </div>
+        </div> -->
+
+        <div id="depositbox">
+            <div id="depositmethodbox">
+                    <div class="depositmethodboxclass">
+                        <span>
+                            <p>Trade ID:</p>
+                            <small><%= investment.id %></small>
+                        </span>
+                        <span>
+                            <p>Date</p>
+                            <small><%= investment.startDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %>, <%= investment.startDate.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= investment.startDate.toISOString().split('T')[0] %> </small>
+                        </span>
+                        <span>
+                            <p>Trade Type:</p>
+                            <small><%= investment.investmentType %></small>
+                        </span>
+                        <span>
+                            <p>Asset:</p>
+                            <small><%= investment.tradedCurrency %></small>
+                        </span>
+    
+                        <span>
+                            <p>Order Type:</p> 
+                            <small><%= investment.packagetype %></small>
+                        </span>
+    
+                        <span>
+                            <p>Duration of Trade:</p>
+                            <small><%= investment.duration %></small>
+                        </span>
+                        <!-- <span>
+                            <p>Return of Investment (ROI):</p>
+                            <small><%= investment.roi %></small>
+                        </span> -->
+                        <span>
+                            <p>Amount Traded:</p>
+                            <small>$<%= investment.investedamount.toLocaleString() %></small>
+                        </span>
+                        <span>
+                            <p>Profits:</p>
+                            <small>$<%= investment.investmentprofit.toLocaleString() %></small>
+                        </span>
+                        <span>
+                            <p>Trade Status:</p>
+                            <% if (investment.status === 'Pending') { %> 
+                                <small class="unverifiedstat"><%= investment.status %></small>
+                            <% } else if (investment.status === 'Completed'){ %> 
+                                <small class="verifiedstat"><%= investment.status %></small>
+                            <% } else if (investment.status === 'Active'){ %> 
+                                <small class="pendingstat"><%= investment.status %></small>
+                            <% } %> 
+                            
+                        </span>
+    
+                        
+                    </div>
+            </div>
+        </div>
+
+
+        <div id="trackercontentbox">
+            <div class="history " id="activityDiv">
+               <div class="historybox">
+                   <p>TRADE ACTIVITY</p>
+                   <div class="tablecontainer">
+                       <table class="historytable">
+                           <thead>
+                             <tr>
+                               <th>S/N</th>
+                               <th>Date</th>
+                               <th>Action</th>
+                               <th>Amount</th>
+                               <!-- <th>Status</th> -->
+                             </tr>
+                           </thead>
+                
+                           <tbody>
+                               <% if (tradeactivity.length < 1 ) { %>
+                                   <td colspan="4">No data for this trade yet.</td>
+                               <% } else { %>
+                                   <% for (let data of tradeactivity) {%>
+                                       <tr>
+                                         <td><li></td>
+                                          <td><%= data.date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %> <%= data.date.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= data.date.toISOString().split('T')[0] %> </td>
+                                         <td><%= data.action %> </td>
+                                         <td>$<%= data.amount.toLocaleString() %></td>
+                                         <!-- <td>
+                                              <% if (data.status === 'Pending') { %>
+                                                   <b class="pendingstatus"><%= data.status %></b>
+                                              <% } else if (data.status === 'Successful'){ %>
+                                                  <b class="activestatus"><%= data.status %></b>
+                                              <% } else if (data.status === 'Unsuccessful'){ %>
+                                                      <b class="inactivestatus"><%= data.status %></b>
+                                              <% } %> 
+                                         </td> -->
+                                       </tr>
+                                       <% } %> 
+                               <% } %> 
+                           </tbody>
+                         </table>
+                   </div>
+                  </div>
+            </div>
+       </div>
+       
+
+       
+
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

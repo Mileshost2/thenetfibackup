@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw Funds</title>
+    <link rel="stylesheet" href="/stylesheets/user/withdrawal.css">
+    <style>
+        .activewithdrawallink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activewithdrawallink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-wallet headericon"></i> <small>Withdraw</small></span>
+                <span class="headerinnerspan"><a href="/dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+        </div>
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="depositbox2">
+                <div id="depositmethodbox">
+                        
+                        <div class="depositmethodboxclass">
+
+                            <span>
+                                <p>Amount:</p> 
+                                <small>$<%= withdraw.amount.toLocaleString() %></small>
+                            </span>
+                            <span>
+                                <p>Base Curency:</p>
+                                <% if (user.wallet === 0) { %> 
+                                    <small>$0.00</small>
+                                <% } else if (user.basecurrency === 'USD') { %> 
+                                    <small>$<%= user.wallet.toLocaleString() %></small>
+                                <% } else { %>
+                                    <input type="number" id="usdAmount" value="<%= user.wallet %>" style="display: none;">
+                                    <input id="baseCurrency" type="text" value="<%= user.basecurrency %>" style="display: none;">
+                                    <small class="convertedAmount pricetag"></small>
+                                <% } %>  
+                            </span>
+
+                            <span>
+                                <p>Withdrawal Method:</p> 
+                                <small><%= withdraw.transactionmethod %></small>
+                            </span>
+                                <span class="formbox">
+                                    <p>Enter Your <%= withdraw.transactionmethod %> Wallet Address:</p>
+                                    <form action="/dashboard/withdrawal/<%= withdraw.id %>?_method=PUT" method="post">
+                                        <!-- <span class="input-group-text" id="inputGroup-sizing-default">Wallet</span> -->
+                                        <input type="text" name="withdrawaddress" placeholder="Wallet Address" class="form-control" required>
+                                        <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                                      
+                                    </form>
+                                </span>
+                                      
+                        </div>
+                </div>
+        </div>
+
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+    <script>
+        // Get data from EJS tags
+    const usdAmount = <%= user.wallet %>;
+    const baseCurrency = "<%= user.basecurrency %>";
+  
+    convertCurrency(); // Convert currency initially
+  
+    function convertCurrency() {
+      const usdAmount = parseFloat(document.getElementById("usdAmount").value);
+      const baseCurrency = document.getElementById("baseCurrency").value;
+      
+      fetch(`https://v6.exchangerate-api.com/v6/f845ca1e3b9a39c90cfc4eb5/latest/USD`)
+        .then(response => response.json())
+        .then(data => {
+          const conversionRate = data.conversion_rates[baseCurrency];
+          const convertedAmount = usdAmount * conversionRate;
+          const currencySymbol = getCurrencySymbol(baseCurrency);
+  
+          // document.getElementById("convertedAmount").innerHTML = `${currencySymbol}${convertedAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+  
+          
+          const convertedAmountElements = document.querySelectorAll(".convertedAmount");
+        // Loop through each element and update its content
+          convertedAmountElements.forEach(element => {
+              element.innerHTML = `${currencySymbol}${convertedAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+          });
+  
+      })
+        .catch(error => console.error('Error fetching exchange rates:', error));
+    }
+  
+    
+      // Function to get currency symbol based on currency code
+      function getCurrencySymbol(currencyCode) {
+        // Mapping of currency codes to currency symbols
+        const currencySymbols = {
+          'USD': '$',
+          'EUR': '€',
+          'GBP': '£',
+          'JPY': '¥',
+          'CAD': '$',
+          'AUD': '$',
+          'CHF': 'CHF',
+          'CNY': '¥',
+          'INR': '₹',
+          'HKD': 'HK$'
+          // Add more currency symbols as needed
+        };
+        return currencySymbols[currencyCode] || ''; // Return the currency symbol or empty string if not found
+      }
+    </script>
+</body>
+</html>

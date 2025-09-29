@@ -1,0 +1,469 @@
+body {
+    padding: 0;
+    margin: 0;
+    /* background-color: #26394d !important; */
+}
+
+.modal, .modal-header {
+    color: black;
+}
+
+#overviewbox {
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+}
+
+.overviewinnerbox {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.overviewboxes {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.473), 0 11px 6px -7px rgba(0, 0, 0, 0.418);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.466), 0 11px 6px -7px rgba(0, 0, 0, 0.445);
+    color: var(--foreground);
+    width: 180px;
+    height: 100px;
+}
+
+.overviewboxes i {
+    margin: 5px;
+}
+
+.overviewboxes a {
+    color: var(--foreground);
+    text-decoration: none;
+}
+.overviewboxes a:hover {
+    text-decoration: underline;
+    color: var(--foreground);
+}
+
+.inneroverviewboxes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    margin: 0 5px;
+}
+
+.bgRed {
+    background-color: rgb(255, 21, 21);
+}
+
+.bgOrange {
+    background-color: orange;
+}
+
+.bgOrangeRed {
+    background-color: orangered;
+}
+
+.bgDogeBlue {
+    background-color: dodgerblue;
+}
+
+.bgGreen {
+    background-color: green;
+}
+
+.bgBlue {
+    background-color: rgb(31, 34, 248);
+}
+
+.bgPalePurple {
+    background-color: rgb(252, 145, 243);
+}
+
+.bgPurple {
+    background-color: purple;
+}
+
+@media (max-width:700px) {
+    .overviewboxes {
+        width: 200px;
+    }
+    .overviewinnerbox {
+        width: 90%;
+        padding: 0;
+    }
+}
+
+@media (max-width:490px) {
+    .overviewboxes {
+        width: 180px;
+    }
+    .overviewinnerbox {
+        width: 94%;
+    }
+}
+
+@media (max-width:424px) {
+    .overviewboxes {
+        width: 140px;
+        padding: 4px;
+    }
+    .overviewinnerbox {
+        width: 96%;
+    }
+}
+
+@media (max-width:330px) {
+    .overviewboxes {
+        width: 80%;
+    }
+}
+
+/* #div1 {
+    display: flex;
+    flex-direction: row;
+}
+
+#div1box {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    width: 90%;
+    align-items: center;
+}
+
+.mainicon {
+    color: white;
+    background-color: dodgerblue;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 0 20px;
+    font-size: 1.6em;
+}
+
+#div1boxinner {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#div1boxinner p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+#div1boxinner a {
+    color: var( --foreground);
+    text-decoration: none;
+}
+
+.dashspan {
+    color: grey;
+} */
+
+#div2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+#div2box {
+    padding: 10px;
+    width: 94%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+}
+
+#div2box p {
+    
+    margin: 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var( --foreground);
+}
+
+.depositbtn {
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    background-color: transparent !important;
+    border: 1px solid var( --clr-dodgerblueColorToWhite) !important;
+    color: var( --clr-dodgerblueColorToWhite) !important;
+    transition: 0.4s !important;
+    margin: 10px 0;
+}
+
+.fa-plus {
+    color: var( --clr-dodgerblueColorToWhite) !important;
+    margin: 0 5px;
+}
+
+.depositbtn:hover {
+    background-color: rgb(8, 105, 202) !important;
+    border: 1px solid rgb(8, 105, 202) !important;
+    color: white !important;
+    /* color: white !important; */
+}
+
+.depositbtn:hover .fa-plus {
+    color: white !important;
+}
+
+#depositform {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+#depositform p {
+    text-align: center;
+    color: black;
+}
+
+#depositform span {
+    width: 94%;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid black;
+}
+
+.depositformselect {
+    width: 94%;
+    margin: 10px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    /* color: var(--foreground); */
+}
+
+.depositformselect option {
+    color: black;
+}
+
+.depositforminput {
+    flex-grow: 1;
+    margin: 10px;
+    border: none;
+    outline: none;
+    /* color: var(--foreground); */
+    background-color: transparent;
+}
+
+.depositforminput::placeholder {
+    /* color: var(--foreground); */
+}
+
+#depositform button {
+    color: white;
+    background-color: rgb(23, 97, 209);
+    padding: 8px 16px;
+    transition: 0.5s;
+    display: block;
+    width: 100px;
+    border: none;
+    border-radius: 4px;
+}
+
+#depositform button:hover {
+    background-color: rgb(192, 15, 15);
+}
+
+
+.deposithistory {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+
+.deposithistorybox {
+    width: 94%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+    padding: 30px 20px;
+}
+
+.deposithistory p {
+    color: var( --foreground);
+}
+
+.tablecontainer {
+    width: 100%;
+    overflow-x: auto;
+    font-size: 0.85em;
+}
+
+.historytable {
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+    font-size:0.8em;
+}
+
+
+.historytable thead th {
+    position: sticky;
+    background-color: transparent;
+    top: 0;
+    border-bottom: 1px solid var( --clr-tableBorderColor);
+    padding: 10px 20px;
+    font-weight: lighter;
+    /* border-right: 1px solid black; */
+}
+
+.historytable td {
+    border-bottom: 1px solid var( --clr-tableBorderColor);
+    padding: 10px 20px;
+    font-weight: lighter;
+}
+
+/*
+.historytable tr:nth-child(even) {
+    color: black;
+}
+
+.historytable tr:nth-child(odd) {
+    color: black;
+} */
+
+/* .historytable tr:hover td {
+    color: rgb(35, 113, 190);
+    cursor: pointer;
+    background-color: floralwhite;
+} */
+
+
+
+.uploadproofbtn {
+    background-color: rgb(211, 21, 21);
+    color: white !important;
+    border: none;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    white-space: nowrap;   
+}
+
+.uploadproofbtn:hover {
+    background-color: rgb(141, 10, 10);
+}
+
+@media (max-width:500px) {
+    #deposit {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0;
+    }
+}
+
+#authbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#innerauthbox {
+    width: 600px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+}
+
+#innerauthbox h2 {
+    color: var(--foreground);
+}
+
+.authform {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   
+}
+
+.authformgroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+    color: var(--foreground);
+}
+
+.authforminput {
+    border-radius: 6px;
+    padding: 10px 5px;
+    background-color: rgba(255, 255, 255, 0.623);
+}
+
+.authbtn {
+    padding: 10px 5px;
+    width: 100%;
+    border-radius: 6px;
+    background-color: rgb(12, 102, 192);
+    margin-top: 10px;
+    border: none;
+    color: white;
+}
+
+.authbtn:hover {
+    background-color: rgb(8, 66, 124);
+}
+
+
+@media (max-width: 700px) {
+    #innerauthbox {
+        width: 94%;
+    }
+}
+
+.attendancebtn {
+    margin-top: 10px;
+    width: 100%;
+}

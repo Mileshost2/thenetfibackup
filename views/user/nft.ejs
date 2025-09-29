@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFT</title>
+    <link rel="stylesheet" href="/stylesheets/user/nft.css">
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+ 
+
+    <div class="contentbox">
+        
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"> <small>NFT Center</small> <i class="fa-solid fa-line-chart headericon"></i></span>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="nftbox">
+            <div id="innernftbox">
+                <img src="/img/eth.png" class="nftimg" alt="">
+                <h4>Log into your wallet</h4>
+                <p>Connect to any WalletConnect supported wallet to securely store your digital
+                    goods and cryptocurrencies and to also be able to receive weekly NFT rewards.
+                </p>
+                <p>
+                    Link wallet now to get your first NFT reward and resell on our NFT Marketplace 
+                </p>
+
+                
+                <span class="choicespan">
+                    <!-- <button onclick="connectWallet()" class="scanbtn">Scan QR Code</button> -->
+                    <!-- <a href="" class="scanbtn">Scan QR Code</a> -->
+                    <a href="/connect-wallet" class="manualbtn">Connect Manually</a>
+
+                    <a href="/nft/scan-qrcode" class="connectbtn">Scan QR Code</a>
+
+                </span>
+            </div>
+        </div>
+
+       
+
+       
+    
+    </div>
+    
+   
+    
+    <script src="/script/app.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/walletconnect@1.7.8/dist/esm/index.min.js"></script>
+
+    <script src="/script/walletConnect.js"></script> -->
+</body>
+</html>

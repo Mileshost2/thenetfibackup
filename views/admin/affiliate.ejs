@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral Dashboard</title>
+    <link rel="stylesheet" href="/stylesheets/admin/affiliate.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-users headericon"></i> <small>Referral Dashboard</small></span>
+                <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+          </div>
+
+          <div id="div2">
+            <div id="div2box">
+                <span id="div2boxheader">
+                    <p>List of all account managers and their referrals.</p>
+
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addmodal">
+                        <i class="fa-solid fa-plus"></i> 
+                    </button>
+                
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="addmodal" tabindex="-1" aria-labelledby="addmodalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="deposittypebox">
+                                    <b>Enter Manager Details</b>
+                                    <form action="/admin/add-manager" method="post" class="modalform">
+                                        <span>
+                                            <input type="text" name="fullname" id="" placeholder="Fullname">
+                                        </span>
+                                        <span>
+                                            <input type="email" name="email" id="" placeholder="Email">
+                                        </span>
+                                        <span>
+                                            <input type="tel" name="phonenumber" id="" placeholder="Phone Number">
+                                        </span>
+                                        <button class="btn btn-primary modalformbtn">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </span>
+                <ol>
+                    <% for (let manager of managers) { %> 
+                       <div class="list">
+                        <span class="listspan">
+                            <small>Name:</small>
+                            <small><%= manager.fullname %></small>
+                        </span>
+                        <span  class="listspan">
+                            <small>Email:</small>
+                            <small><%= manager.email %></small>
+                        </span>
+                        <span  class="listspan">
+                            <small>Tel:</small>
+                            <small><%= manager.phonenumber %></small>
+                        </span>
+                        <span  class="listspan">
+                            <small>Code:</small>
+                            <small><%= manager.accesscode %></small>
+                        </span>
+
+                        <span class="referralbox">
+                            <small>Referrals:</small>
+
+                            <% if (manager.referrals.length > 0) { %> 
+                                <ol>
+                                    <% for (let referral of manager.referrals) { %>
+                                        <li><%= referral.firstname %> <%= referral.lastname %></li>
+                                    <% } %>
+                                </ol>
+                            <% } else { %>
+                                    <span>No referral yet.</span>
+                            <% } %>
+                        </span>
+                        
+                        
+                       </div>
+                    <% } %>
+                </ol> 
+            </div>
+        </div>
+
+        <div id="div3">
+            <div id="div3box">
+                <p id="div3boxheader">List of all clients and their referrals.</p>
+                <ol>
+                    <% for (let client of clients) { %> 
+                       <div class="list">
+                        <li><%= client.firstname %> <%= client.lastname %>  </li> 
+                        <p>Referrals:</p>
+                        <% if (client.referrals.length > 0) { %> 
+                        <ol>
+                            <% for (let referral of client.referrals) { %>
+                                <li><%= referral.firstname %> <%= referral.lastname %></li>
+                            <% } %>
+                        </ol>
+                        <% } else { %>
+                            <span>No referral yet.</span>
+                        <% } %>
+                       </div>
+                    <% } %>
+                </ol> 
+            </div>
+        </div>
+
+
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

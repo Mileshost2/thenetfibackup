@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify User</title>
+    <link rel="stylesheet" href="/stylesheets/admin/confirmdeposit.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-user headericon"></i> <small>Verify User</small></span>
+                <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+          </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        
+
+        <div id="depositbox">
+            <div id="depositmethodbox">
+                    <div class="depositmethodboxclass">
+                        <span>
+                            <p>Client's Name:</p> 
+                            <small><%= client.firstname%> <%= client.lastname%></small>
+                        </span>
+    
+                        <span>
+                            <p>Client's Email:</p>
+                            <small><%= client.email %></small>
+                        </span>
+
+                        <span>
+                            <p>Verification Document:</p>
+                            <small><%= client.documenttype %></small>
+                        </span>
+    
+                        <span class="depositimgbox">
+                            <% for (let img of client.verificationdocument) { %> 
+                                <img src="<%= img.url %> " class="depositimg" alt="proof">
+                              <% } %> 
+                        </span>
+    
+                        
+                        <span class="depositmethodboxaction">
+                             <!-- Button trigger modal -->
+                             <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#verifyD">
+                                <i class="fa-solid fa-check"></i> Verify
+                            </button>
+    
+                            <button type="button" class="btn btn-danger depositbtn" data-bs-toggle="modal" data-bs-target="#declineD">
+                                <i class="fa-solid fa-xmark"></i> Decline
+                            </button>
+                        </span>
+
+                         <!-- Modal -->
+                        <div class="modal fade" id="verifyD" tabindex="-1" aria-labelledby="verifyDLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="verifyDLabel">VERIFY USER</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Click the button below to verify this user
+                                    <form action="/admin/admin.verificationrequests/<%= client.id %>/?_method=PUT" method="post" class="verifyform">
+                                        
+
+                                        <button type="submit" class="btn btn-primary">Proceed</button>
+                                    </form> 
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="declineD" tabindex="-1" aria-labelledby="declineDLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="declineDLabel">DECLINE VERIFICATION</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Click the button below to decline this verification.
+                                    <form action="/admin/admin.verificationrequests/<%= client.id %>/decline?_method=PUT" method="post" class="verifyform">
+                                        <button type="submit" class="btn btn-danger">Decline</button>
+                                    </form> 
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                 
+                
+            </div>
+        </div>
+
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

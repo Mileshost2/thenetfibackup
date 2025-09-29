@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post News</title>
+    <link rel="stylesheet" href="/stylesheets/admin/post.css">
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-newspaper headericon"></i> <small>Post News</small></span>
+                <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+          </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <% function capitalizeFirstLetter(word) {
+            return word.charAt(0).toUpperCase() + word.slice(1);
+            } 
+
+            function capitalizeEachWord(sentence) {
+                return sentence.split(' ').map(capitalizeFirstLetter).join(' ');
+            } 
+        %>
+
+        <div class="deposithistory">
+           <div class="deposithistorybox">
+            <p>Post news.</p>
+            
+            <form class="tablecontainer" id="newtaskform" action="/admin/admin.post-news" method="post" enctype="multipart/form-data">
+
+                <span class="authformgroup" style="margin: 10px 0;">
+                    <label for="title">News Title</label>
+                   <input type="text" id="title" class="authforminput" style="margin: 5px 0;" name="title" required>
+                </span>
+
+                <span class="authformgroup" style="margin: 10px 0;">
+                    <label for="description">News Info</label>
+                    <textarea id="description" cols="30" rows="10" class="authforminput" style="margin: 5px 0;" name="description" required></textarea>
+                </span>
+
+                <span class="authformgroup" style="margin: 10px 0;">
+                    <label for="postpictures">News Images</label>
+                   <input type="file" id="postpictures" class="authforminput" style="margin: 5px 0;" name="postpictures" multiple>
+                </span>
+
+                <span class="authformgroup" style="margin: 10px 0;">
+                    <label for="date">News Date</label>
+                   <input type="datetime-local" id="date" class="authforminput" style="margin: 5px 0;" name="date" required>
+                </span>
+
+                <button type="submit" class="btn btn-primary attendancebtn">Submit</button>
+            </form>
+           </div>
+        </div>
+        
+
+        
+    
+    </div>
+    
+    <script src="/script/app.js"></script>
+</body>
+</html>

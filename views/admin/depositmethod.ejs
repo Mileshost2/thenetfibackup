@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Methods</title>
+    <link rel="stylesheet" href="/stylesheets/admin/depositmethod.css">
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-money-bill-transfer headericon"></i> <small>Deposit Method</small></span>
+                <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+          </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="div2">
+            <div id="div2box">
+                <div class="div2boxinner">
+                    <p>Deposit Methods</p>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#depositMethod">
+                        <i class="fa-solid fa-plus"></i> New Deposit Method
+                    </button>
+                </div>
+                <small>This is the crypto wallet addresses that appears when the user wants to make a direct deposit to their account.</small>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="depositMethod" tabindex="-1" aria-labelledby="depositMethodLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="depositMethodLabel">DEPOSIT METHOD</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/admin/admin.depositmethods" class="depositform" method="post" enctype="multipart/form-data">
+                                <p>Add a new deposit method.</p>
+                                <input type="text" placeholder="Type of Deposit*" name="depositmethodname" class="depositforminput" required>
+                                <input type="text" placeholder="Deposit Address*" name="depositaddress" class="depositforminput" required>
+                                <div class="formqr" >
+                                    <p>Deposit QR Code Image:</p>
+                                    <input type="file" name="depositqrcode">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="depositbox2">
+            <% if (deposits.length > 0 ) { %>
+                <div id="depositmethodbox">
+                    <% for (var x = 0; x < deposits.length; x++) { %>
+                        
+                        <div class="depositmethodboxclass">
+
+                            <span>
+                                <p>Deposit Type:</p> 
+                                <small class="accounttype"><%= deposits[x].depositmethodname %> </small>
+                            </span>
+
+                            <span>
+                                <p>Deposit Address:</p>
+                                <small><%= deposits[x].depositaddress %></small>
+                            </span>
+
+                            <span class="depositimgbox">
+                                <% for (let img of deposits[x].depositqrcode) { %> 
+                                    <img src="<%= img.url %> " class="depositmethodimg" alt="">
+                                <% } %> 
+                            </span>
+                            <span class="depositmethodboxaction">
+                                
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editFormModal<%= x %>">
+                                        <i class="fa-solid fa-pen"></i> Edit
+                                    </button>
+
+                                    
+            
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<%= x %>">
+                                    <i class="fa-solid fa-trash"></i> Delete
+                                </button>
+                            </span>
+
+                            <div class="modal fade" id="editFormModal<%= x %>" tabindex="-1" aria-labelledby="editFormModal<%= x %>Label" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="editFormModal<%= x %>Label">Edit <%= deposits[x].depositmethodname %> Payment Method</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/admin/admin.depositmethods/<%= deposits[x].id %>?_method=PUT" method="post" class="editdepositmethodform">
+                                            <div class="editformlabel">
+                                                <p>Type of Deposit:</p>
+                                                <input type="text" id="depositmethodname" value="<%=deposits[x].depositmethodname%>" name="depositmethodname" class="depositforminput" required>
+                                            </div>
+                                            <div class="editformlabel">
+                                                <p>Deposit Address:</p>
+                                                <input type="text" id="depositaddress" value="<%=deposits[x].depositaddress%>" name="depositaddress" class="depositforminput" required>
+                                            </div>
+                                            <!-- <div class="editformlabel">
+                                                <p>Deposit QR Code:</p>
+                                                <input type="file" id="depositqrcode" class="depositforminput" name="depositqrcode">
+                                            </div> -->
+                                            <button type="submit" class="btn btn-success modalbtn">Save Changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="deleteModal<%= x %>" tabindex="-1" aria-labelledby="deleteModal<%= x %>Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModal<%= x %>Label">Delete <%= deposits[x].depositmethodname %> Payment Method</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/admin/admin.depositmethods/<%= deposits[x].id %>?_method=DELETE" method="post" class="delete">
+                                                <button class="btn btn-danger modalbtn">Proceed to Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+
+
+                             
+                            
+                        </div>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <div class="null">
+                    <p>No deposit method yet.</p>
+                </div>
+            <% } %>
+        </div>
+
+
+     
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

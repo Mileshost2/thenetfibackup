@@ -1,0 +1,249 @@
+body {
+    padding: 0;
+    margin: 0;
+    /* background-color: #26394d !important; */
+}
+
+/* #pageintrobox {
+  width: 100%;
+  padding: 10px;
+}
+
+#innerpageintrobox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#innerpageintrobox p {
+  margin: 0;
+} */
+
+#balbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    font-family: 'Teko', sans-serif;
+}
+
+#innerbalbox {
+    width: 100%;
+    /* height: 140px; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.balspan {
+    padding: 5px 20px;
+    width: 180px;
+    /* flex-grow: 1; */
+    color: var( --foreground);
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 20%), 0 11px 6px -7px rgba(0, 0, 0, 20%);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 20%), 0 11px 6px -7px rgba(0, 0, 0, 20%);
+    border-radius: 5px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.balspan b {
+  font-size: 0.8em;
+}
+
+.innerbalspan b {
+    font-size: 0.9em;
+  }
+
+.innerbalspan {
+    width: 100%;
+    display: flex;
+    /* flex-direction: column;
+    align-items: flex-start; */
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.balinfo i {
+    margin: 0 4px;
+    font-size: 0.8em;
+}
+
+@media (max-width:500px) {
+    .balspan {
+        width: 43%;
+    }
+}
+@media (max-width:430px) {
+    .innerbalspan {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .balspan {
+      padding: 5px 10px;
+  }
+  .balspan b {
+    font-size: 0.7em;
+  }
+  
+  .balinfo i {
+      font-size: 0.7em;
+  }
+      
+}
+@media (max-width:330px) {
+    .balspan {
+       width: 45%;
+        margin: 5px;
+    }
+}
+@media (max-width:300px) {
+    .balspan {
+       width: 100%;
+    }
+    .innerbalspan {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+#widgetbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  #innerwidgetbox {
+    width: 100%; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+  
+  }
+
+  #crypto-list {
+    width: 100%; 
+    
+    
+  }
+
+  .cryptolistheader {
+    padding: 5px;
+  }
+  
+  .cryptolistbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 6px;
+    background-color: var(--clr-borderBoxColor);
+  }
+
+  .cryptolistbox h6 {
+    color: var(--foreground);
+  }
+
+  .cryptolistheader b {
+    font-size: 0.8em;
+  }
+
+  .currencylinks {
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  /* .cryptoinfo {
+    padding: 10px;
+    } */
+  
+  .cryptoimgbox {
+    width: 30px;
+    margin: 0 5px;
+  }
+
+  .cryptoimgbox img {
+    width: 100%;
+  }
+
+  .cryptonamebox {
+    width: 128px;
+  }
+
+  .cryptospikebox {
+    width: 140px;
+  }
+
+  .cryptopricebox {
+    width: 98px;
+  }
+
+  .positive-change {
+    color: green;
+  }
+
+  .negative-change {
+    color: red;
+  }
+
+
+  .activestatus {
+    background-color: rgb(12, 121, 230);
+    padding: 3px 5px;
+    border-radius: 4px;
+    color: white;
+  }
+
+  .inactivestatus {
+    background-color: rgb(241, 4, 4);
+    padding: 3px 5px;
+    border-radius: 4px;
+    color: white;
+  }
+
+   @media (max-width:590px) {
+    .cryptoimgbox {
+        width: 30px;
+    }
+    #crypto-list h6 {
+        font-size: 0.8em;
+    }
+    
+    #crypto-list small {
+        font-size: 0.7em;
+    }
+    
+  }
+
+  @media (max-width:490px) {
+    .cryptonamebox {
+        width: 70px;
+      }
+    
+    
+      .cryptopricebox {
+        width: 70px;
+      }
+  }

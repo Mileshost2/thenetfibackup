@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+        </style>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+<link rel="stylesheet" href="/stylesheets/usernavbar.css">
+
+</head>
+<body>
+    <div id="navbar">
+        <div id="innernavbar"><!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Navbar</title>
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+                    </style>
+                <!-- CSS only -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+            <link rel="stylesheet" href="/stylesheets/usernavbar.css">
+            
+            </head>
+            <body>
+                <div id="navbar">
+                    <div id="innernavbar">
+                        <div id="navbarlogobox">
+                            <img src="/img/bluelogo.png" class="navbarlogo" alt="logo">
+                        </div>
+                        <div id="nav">
+                            <!-- <div class="container">
+                                
+                              </div> -->
+                              <button id="toggleButton" class="btn btn-primary">
+                                <i id="toggleIcon" class="fas fa-bars"></i>
+                              </button>
+            
+                              <div id="iconContainer" class="icon-column">
+            
+                                <span class="borderbottom">
+                                    <a href="/dashboard/referral-dashboard" class="hoverscale"><i class="fas fa-users"></i>  <small>Referrals</small></a>
+                                </span>
+            
+                                <span class="borderbottom">
+                                    <span class="gr hoverscale"><%- include('../partials/darkmode')%>  <small>Dark/Light Mode</small></span>
+                                </span>
+            
+                                <span class="hoverscale" data-bs-toggle="modal" data-bs-target="#logout"><i class="fas fa-sign-out-alt"></i>  <small>Logout</small></span>
+                              </div>
+            
+                                <!-- <i class="fa fa-bars navicons bartoggle" ></i> -->
+                            
+                                <a href="/dashboard/support" class="navlink linkscale"><i class="fas fa-headset"></i></a>
+                                <a href="/notifications" class="navlink linkscale notificationcounter">
+                                    <i class="fas fa-bell"></i>
+                                    <% if (unreadmsg.length > 0) { %>
+                                        <span class="badge"><%= unreadmsg.length %></span>
+                                    <% } %>
+                                </a>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="modal fade transbg" id="logout" tabindex="-1" aria-labelledby="logoutLabel" aria-hidden="true">
+                    <div class="modal-dialog transbg">
+                    <div class="modal-content transbg">
+                        <div class="modal-body transbg">
+                            <form action="/logout" class="" method="get" id="logoutform">
+                                <button type="submit" class="btn btn-danger mt-2">Proceed to Logout <i class="fas fa-sign-out-alt"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            
+                <div id="bottomnav" class="bottomnav">
+                    <div id="bottomnavinner">
+                        <span class="bottomnavspan">
+                            
+                            <a href="/dashboard" class="bottomnavlinks activedashboardlink"><i class="fas fa-home bottomnavicons activedashboardlink" ></i> Home</a>
+                        </span>
+                        <span class="bottomnavspan">
+                            
+                            <a href="/dashboard/trade-center" class="bottomnavlinks activetradelink"><i class="fas fa-exchange-alt bottomnavicons activetradelink" ></i> Trades</a>
+                        </span>
+                        <span class="bottomnavspan">
+                            
+                            <a href="/dashboard/wallet" class="bottomnavlinks activewalletlink"><i class="fa fa-wallet bottomnavicons activewalletlink" ></i> Wallet</a>
+                            <!-- <a href="/dashboard/crypto-staking" class="bottomnavlinks"><i class="fab fa-ethereum bottomnavicons" ></i> Staking</a> -->
+            
+                        </span>
+                        <span class="bottomnavspan">
+                            <!-- <a href="/dashboard/referral-dashboard" class="bottomnavlinks activereflink"><i class="fas fa-users bottomnavicons activereflink" ></i> Ref</a> -->
+            
+                            <a href="/profile" class="bottomnavlinks activeprofilelink"><i class="fas fa-user bottomnavicons activeprofilelink" ></i> Profile</a>
+                        </span>
+                    </div>
+                </div>
+                
+            
+            
+            <script>
+                    const bottombar = document.querySelector(".bottomnav");
+                    const bottombars = document.querySelector(".bartoggle");
+                    // const toggleOn = document.getElementsById(".fa-toggle-on");
+                    // const content = document.getElementsById(".contentbox");
+            
+                    // js script to toogle bottombar on and off
+            
+                    bottombars.addEventListener("click", function() {
+                        bottombar.classList.toggle("hide-bottomnav");
+                        // bottombar.classList.toggle("show-navbar");
+                        // content.classList.toggle("fullcontentbox");
+                        // toggleOn.classList.toggle("fa-toggle-on");
+                        // toggleOn.classList.toggle("fa-toggle-off");
+                    });
+            </script>
+            <script>
+                document.getElementById('toggleButton').addEventListener('click', function() {
+                  var icon = document.getElementById('toggleIcon');
+                  var container = document.getElementById('iconContainer');
+                  if (icon.classList.contains('fa-bars')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                    container.style.display = 'flex';
+                  } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    container.style.display = 'none';
+                  }
+                });
+              </script>
+            
+            <script>
+                const noreviewDiv = document.querySelector('.flashbox'); // Select the div
+                setTimeout(() => {
+                  noreviewDiv.style.display = 'none';
+                }, 5000); // Hide after 5 seconds (5000 milliseconds)
+              </script>
+              
+              <!-- <script>
+                function hideElementAfterDelay(flashbox, delay) {
+                  setTimeout(() => {
+                    document.getElementsByClassName(flashbox).classList.add('hidden');
+                  }, delay);
+                }
+                  hideElementAfterDelay('success-alert', 5000);
+                hideElementAfterDelay('error-alert', 5000);
+              </script> -->
+              
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+            </body>
+            </html>
+            <div id="navbarlogobox">
+                <img src="/img/logo.png" class="navbarlogo" alt="logo">
+            </div>
+            <div id="nav">
+                <div class="container">
+                    <button id="toggleButton" class="btn btn-primary">
+                      <i id="toggleIcon" class="fas fa-bars"></i>
+                    </button>
+                    <div id="iconContainer" class="icon-column">
+                        <%- include('../partials/darkmode')%>
+
+                        <a href="/profile" class="hoverscale"><i class="fas fa-cog"></i></a>
+
+
+                      <span class="hoverscale" data-bs-toggle="modal" data-bs-target="#logout"><i class="fas fa-sign-out-alt"></i></span>
+                    </div>
+                  </div>
+
+                    <!-- <i class="fa fa-bars navicons bartoggle" ></i> -->
+                
+                    <a href="/dashboard/support" class="navlink hoverscale"><i class="fas fa-headset"></i></a>
+                    <a href="/notifications" class="navlink hoverscale notificationcounter">
+                        <i class="fas fa-bell"></i>
+                        <% if (unreadmsg.length > 0) { %>
+                            <span class="badge"><%= unreadmsg.length %></span>
+                        <% } %>
+                    </a>
+   
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade transbg" id="logout" tabindex="-1" aria-labelledby="logoutLabel" aria-hidden="true">
+        <div class="modal-dialog transbg">
+        <div class="modal-content transbg">
+            <div class="modal-body transbg">
+                <form action="/logout" class="" method="get" id="logoutform">
+                    <button type="submit" class="btn btn-danger mt-2">Proceed to Logout <i class="fas fa-sign-out-alt"></i></button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div id="bottomnav" class="bottomnav">
+        <div id="bottomnavinner">
+            <span class="bottomnavspan">
+                
+                <a href="/dashboard" class="bottomnavlinks activedashboardlink"><i class="fas fa-home bottomnavicons activedashboardlink" ></i> Home</a>
+            </span>
+            <span class="bottomnavspan">
+                
+                <a href="/dashboard/trade-center" class="bottomnavlinks activetradelink"><i class="fas fa-exchange-alt bottomnavicons activetradelink" ></i> Trades</a>
+            </span>
+            <span class="bottomnavspan">
+                
+                <a href="/dashboard/wallet" class="bottomnavlinks activewalletlink"><i class="fa fa-wallet bottomnavicons activewalletlink" ></i> Wallet</a>
+                <!-- <a href="/dashboard/crypto-staking" class="bottomnavlinks"><i class="fab fa-ethereum bottomnavicons" ></i> Staking</a> -->
+
+            </span>
+            <span class="bottomnavspan">
+                
+                <a href="/profile" class="bottomnavlinks activeprofilelink"><i class="fas fa-user bottomnavicons activeprofilelink" ></i> Profile</a>
+            </span>
+        </div>
+    </div>
+    
+
+
+<script>
+        const bottombar = document.querySelector(".bottomnav");
+        const bottombars = document.querySelector(".bartoggle");
+        // const toggleOn = document.getElementsById(".fa-toggle-on");
+        // const content = document.getElementsById(".contentbox");
+
+        // js script to toogle bottombar on and off
+
+        bottombars.addEventListener("click", function() {
+            bottombar.classList.toggle("hide-bottomnav");
+            // bottombar.classList.toggle("show-navbar");
+            // content.classList.toggle("fullcontentbox");
+            // toggleOn.classList.toggle("fa-toggle-on");
+            // toggleOn.classList.toggle("fa-toggle-off");
+        });
+</script>
+<script>
+    document.getElementById('toggleButton').addEventListener('click', function() {
+      var icon = document.getElementById('toggleIcon');
+      var container = document.getElementById('iconContainer');
+      if (icon.classList.contains('fa-bars')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+        container.style.display = 'flex';
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+        container.style.display = 'none';
+      }
+    });
+  </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+/*
+ * Theme Name: Counsolve
+ * Author: Theme Kalia
+ * Author URI: http://themeforest.net/user/themekalia
+ * Theme URI: https://wp1.themevibrant.com/newwp/counsolve
+ * Description: Counsolve is a modern, clean business consulting WordPress theme. It is designed for use by businesses and agencies in various sectors, such as marketing consulting, advertising consultation, financial consulting,  investment consultation and accountant consulting. Additionally it can be used to create websites for small and medium-sized companies and agencies in various sectors. Create your website with the powerful Elementor Drag and Drop Page Builder and see the real-time changes in the front-end live editor. If you’re looking for high-quality designed themes with more extra features for your service, so Counsolve theme is the best choice for you to release your website within a very fast time. Below you will see the main features of why Counsolve will fit your website.
+ * Version: 1.1
+ * License: This theme or plugin is comprised of two parts. (1) the PHP code and integrated HTML are licensed under the General Public License (GPL). You will find a copy of the GPL in the same directory as this text file. (2) All other parts, but not limited to the CSS code, images, and design are licensed according to the license purchased from Envato.  Read more about licensing here: http://themeforest.net/licenses
+ * License URI: license.txt
+ * Tags: blog, two-columns, left-sidebar, accessibility-ready, custom-background, custom-colors, custom-header, custom-logo, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready
+ * Text Domain: counsolve
+ * Tested up to: 5.0
+ * Requires PHP: 7.0
+*/
+.wp-caption {
+	margin-bottom: 2px;
+}
+
+.wp-caption-text {
+	margin-bottom: 5px;
+}
+
+.screen-reader-text {
+	margin-bottom: 12px;
+}
+
+.gallery-caption {
+	margin-bottom: 2px;
+}
+
+.bypostauthor {
+	margin-bottom: 2px;
+}
+
+.alignleft {
+	float: left;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	max-width: 100%;
+}
+
+.alignright {
+	float: right !important;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	max-width: 100%;
+}
+
+.aligncenter {
+	display: block;
+	margin: 0 auto 20px;
+}
+
+.col-md-4 .funfact-meta > i {
+	right: 27px;
+}
+
+.mycustom-pricing {
+	background-color: #090909 !important;
+}
+
+.on-hover {
+	display: none;
+	animation: fadeOut 0.5s;
+}
+
+.hver:hover .on-hover {
+	display: block;
+	animation: fadeIn 0.5s;
+}
+

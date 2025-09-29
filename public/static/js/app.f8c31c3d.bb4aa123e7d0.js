@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkpython_webpack_boilerplate=self.webpackChunkpython_webpack_boilerplate||[]).push([[143],{546:function(n,e,o){var t=o(450),w=o.n(t),i=o(306),d=o(250);window.htmx=w(),window.Swiper=d.Z,window.Alpine=i.Z,i.Z.start(),window.Swiper=d.Z,window.document.addEventListener("DOMContentLoaded",(function(){window.console.log("dom ready 1")}))}},function(n){n.O(0,[259],(function(){return 546,n(n.s=546)})),n.O()}]);
+//# sourceMappingURL=app.f8c31c3d.js.map

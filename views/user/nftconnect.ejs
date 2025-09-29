@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFT</title>
+    <link rel="stylesheet" href="/stylesheets/user/nft.css">
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+ 
+
+    <div class="contentbox">
+        
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"> <small>NFT Center</small> <i class="fa-solid fa-line-chart headericon"></i></span>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="scanbox">
+            <div id="innerscanbox">
+                <div class="scancaptionbox">
+                    <small>Open your wallet on your mobile phone and scan the QR Code to connect automatically.</small>
+                </div>
+                <% if (qrCodeImage) { %>
+                    <div id="qrcode-modal">
+                      <img src="<%= qrCodeImage %>" class="qrimg" alt="QR Code">
+                    </div>
+                    
+                    <!-- <button id="open-modal-btn">Open QR Code Modal</button> -->
+                
+                    <!-- <script>
+                      document.getElementById('open-modal-btn').addEventListener('click', function() {
+                        document.getElementById('qrcode-modal').style.display = 'block';
+                      });
+                    </script> -->
+                  <% } %>
+                <!-- <form id="callback-form" action="/callback" method="GET">
+                    <button type="submit">Complete Connection</button>
+                  </form> -->
+            </div>
+        </div>
+
+       
+
+       
+    
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        //   document.getElementById('qrcode-modal').style.display = 'block';
+        //   Redirect to the callback URL automatically
+          setTimeout(function() {
+            window.location.href = '/callback?code=<%= connectionCode %>';
+          }, 30000); 
+        });
+      </script>
+    <script src="/script/app.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/walletconnect@1.7.8/dist/esm/index.min.js"></script>
+
+    <script src="/script/walletConnect.js"></script> -->
+</body>
+</html>

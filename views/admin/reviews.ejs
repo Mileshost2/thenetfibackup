@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+    <link rel="stylesheet" href="/stylesheets/admin/experttraders.css">
+    <style>
+        .activeexpertlink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activeexpertlink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+
+        <div id="pageintrobox">
+            <div id="innerpageintrobox">
+                <h5>Reviews</h5>
+                <p>Add reviews to the homepage.</p>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="methodbox">
+            <div id="innermethodbox">
+                <!-- <h6>Methods</h6> -->
+                <div id="transactionformbox">
+                    <!-- <span class="transactionformboxintro">Depositmethods</span> -->
+                    <form action="/admin/admin.review" method="post" id="transactionform" enctype="multipart/form-data">
+                        <small>Fill the form to create a new review.</small>
+                        
+                        <span class="transactionformgroup">
+                            <label for="fullname">Full Name:</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Full Name" aria-label="Full Name" aria-describedby="" required>
+        
+                            </div> 
+                        </span>
+
+                        <span class="transactionformgroup">
+                            <label for="fullname">Title:</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Title" aria-label="Title" aria-describedby="" required>
+        
+                            </div> 
+                        </span>
+
+                        <span class="transactionformgroup">
+                            <label for="review">Reviews:</label>
+                            <div class="input-group mb-3">
+                                <textarea name="review" id="review" placeholder="Type review here" class="form-control" required></textarea>
+        
+                            </div> 
+                        </span>
+                        <span class="transactionformgroup">
+                            <label for="">Reviewer Image:</label>
+                            <div class="custom-file-upload">
+                                <label for="file-input">
+                                    <i class="fas fa-upload"></i>
+                                    <span>Click to upload a file.</span>
+                                    <span>Max size 1mb.</span>
+                                    <span>(PNG or JPG)</span>
+                                </label>
+                                <input type="file" accept=".png, .jpg, .jpeg" name="passport" class="" id="file-input" required>
+                                <p id="file-name" style="margin-top: 3px;"></p>
+                                <p id="file-error" style="color: red; display: none;">File size must be less than 1MB.</p>
+
+                            </div>
+                            
+                            
+
+                              
+                        </span>
+                        
+                        <button type="submit" class="btn btn-primary mt-3">Create Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="tradersbox">
+            <div id="innertradersbox">
+                <h6>Reviews</h6>
+
+                <div id="traderslist">
+                    <% for (let i=0; i<reviews.length; i++) { %>
+                        <div class="tradercard">
+                            <div class="tradercardsection1">
+                                <% for (let img of reviews[i].passport) { %> 
+                                    <img src="<%= img.url %> " class="traderlogo" alt="logo">
+                                <% } %> 
+                                <p><%= reviews[i].fullname %></p>
+                            </div>
+
+                            <div class="mt-2">
+                                <small>Title:</small>
+                                <p><%= reviews[i].title %></p>
+                            </div>
+
+                            <div class="mt-2">
+                                <small>Reviews:</small>
+                                <p><%= reviews[i].review %></p>
+                            </div>
+                            
+                            <div class="traderactionbox mt-3">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTrader<%= i %>">
+                                    Edit Review
+                               </button>
+
+                               <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteTrader<%= i %>">
+                                Delete Review
+                           </button>
+
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="editTrader<%= i %>" tabindex="-1" aria-labelledby="editTrader<%= i %>Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <form action="/admin/admin.reviews/<%= reviews[i].id %>/edit?_method=PUT" class="" method="post">
+                                                <span class="transactionformgroup">
+                                                    <label for="fullname">Full Name:</label>
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Full Name" value="<%= reviews[i].fullname %>" aria-label="Full Name" aria-describedby="" required>
+                                
+                                                    </div> 
+                                                </span>
+
+                                                <span class="transactionformgroup">
+                                                    <label for="fullname">Title:</label>
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="<%= reviews[i].title %>" aria-label="Title" aria-describedby="" required>
+                                
+                                                    </div> 
+                                                </span>
+
+                                                <span class="transactionformgroup">
+                                                    <label for="review">Reviews:</label>
+                                                    <div class="input-group mb-3">
+                                                        <textarea name="review" id="review" placeholder="Type review here" class="form-control" required><%= reviews[i].review %></textarea>
+                                
+                                                    </div> 
+                                                </span>
+
+                                                
+                                                <button type="submit" class="btn btn-primary mt-2">Save Changes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal fade" id="deleteTrader<%= i %>" tabindex="-1" aria-labelledby="deleteTrader<%= i %>Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <form action="/admin/admin.reviews/<%= reviews[i].id %>/delete?_method=DELETE" class="" method="post">
+                                                
+                                                <button type="submit" class="btn btn-danger mt-2">Proceed to delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+
+      
+    
+    </div>
+    
+
+    <script>
+        document.getElementById('file-input').addEventListener('change', function() {
+        const file = this.files[0]; // Get the first file
+        const maxSize = 1 * 1024 * 1024; // 1MB in bytes
+        const fileNameElement = document.getElementById('file-name');
+        const fileErrorElement = document.getElementById('file-error');
+    
+        if (file) {
+            if (file.size > maxSize) {
+                fileErrorElement.style.display = 'block'; // Show error message
+                this.value = ''; // Clear the file input
+                fileNameElement.textContent = ''; // Clear the file name display
+            } else {
+                fileErrorElement.style.display = 'none'; // Hide error message
+                fileNameElement.textContent = `Selected file: ${file.name}`; // Show the file name
+            }
+        } else {
+            fileNameElement.textContent = ''; // Clear the file name display if no file is selected
+        }
+    });
+    
+    </script>
+    <script src="/script/app.js"></script>
+</body>
+</html>

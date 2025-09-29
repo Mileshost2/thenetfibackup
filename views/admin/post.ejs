@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <link rel="stylesheet" href="/stylesheets/admin/post.css">
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-newspaper headericon"></i> <small>News</small></span>
+                <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+          </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="div2">
+            <div id="div2box">
+                <form action="" method="post" id="searchform" class="d-flex">
+                    <input class="form-control me-2 border-primary" type="email" name="findEvent" placeholder="Search for an event" aria-label="Search" required>
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+
+
+        <div id="overviewbox">
+            <div class="overviewinnerbox">
+    
+                <div class="overviewboxes bgOrangeRed">
+                    <i class="fa-solid fa-newspaper"></i>
+                    <div class="inneroverviewboxes">
+                        <span><%= allnews.length %></span>
+                        <small>Total News</small>
+                    </div>
+                </div>
+    
+                <!-- <div class="overviewboxes bgDogeBlue">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <div class="inneroverviewboxes">
+                        <span>1</span>
+                    <small>Upcoming Events</small>
+                    </div>
+                </div>
+    
+                <div class="overviewboxes bgBlue">
+                    <i class="fa-solid fa-line-chart"></i>
+                    <div class="inneroverviewboxes">
+                        <span>9</span>
+                    <small>Past Events</small>
+                    </div>
+                </div> -->
+
+                <a href="/admin/admin.post-news" class="overviewboxes bgOrange" >
+                    <i class="fas fa-check-circle"></i> Post News
+                </a>
+    
+            </div>
+        </div>
+
+        <div class="deposithistory">
+           <div class="deposithistorybox">
+            <p>News</p>
+            <div class="tablecontainer">
+                <table class="historytable">
+                    <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Date</th>
+                          <th>Title</th>
+                          <th>View</th>
+                        </tr>
+                      </thead>
+          
+                      <tbody>
+
+                        <% for (let i = 0; i < allnews.length; i++) { %> 
+                          <tr>
+                            <td><%= [i+1] %> </td>
+                            <td><%= allnews[i].date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %> <%= allnews[i].date.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= allnews[i].date.toISOString().split('T')[0] %></td>
+                            <td><%= allnews[i].title %></td>
+                            
+                            <td><a href="/admin/admin.view-news/<%= allnews[i].id %>" class="view btn btn-primary">View</a></td>
+                          </tr>
+                          <% } %> 
+                      </tbody>
+                  </table>
+            </div>
+           </div>
+        </div>
+
+
+ 
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

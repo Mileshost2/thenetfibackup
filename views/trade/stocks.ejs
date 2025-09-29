@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Stocks</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/user/forex.css">
+    <style>
+      .activestocktradelink {
+          background-color: var(--activesidebarlink) !important;
+          color: var(--background) !important;
+          padding: 5px !important;
+          margin: 0 5px !important;
+          width: 95% !important;
+          border-radius: 5px;
+      }
+
+      .activestocktradelink .links-icons {
+          background-color: transparent !important;
+          color: var(--background) !important;
+      }
+  </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+  <div class="contentbox">
+    <div id="pageintrobox">
+      <div id="innerpageintrobox">
+          <h5>Stocks</h5>
+          <p>Earn profits from trading stocks.</p>
+          
+      </div>
+    </div>
+
+    <% if(success && success.length) { %>
+      <div class="flashbox">
+                <div class="flashboxsuccess-alert">
+                    <%= success %> 
+                    <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    
+                </div>
+      </div>
+    <% } %>          
+        
+    <% if(error && error.length) { %>
+      <div class="flashbox">
+                    <div class="flashboxerror-alert">
+                        <%= error %> 
+                        <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        
+                    </div>
+      </div>
+    <% } %>
+
+    <div id="widgetbox">
+        <div id="innerwidgetbox">
+            <div id="stock-container" class="cryptolistheader">
+                <b>Top Stocks:</b>
+
+                <a href="/trade/google" class="stock">
+                  <span class="stockinfo">
+                      <span class="stockimgbox">
+                          <img src="/img/stocks/google.png" alt="stock">
+                      </span>
+                      <span class="stockname">
+                          <p>Alphabet Inc.</p>
+                          <small>GOOG</small>
+                      </span>
+                  </span>
+                  <span class="stockprice">
+                    <p>0.00</p>
+                      <!-- <p>${displayprice} <small>USD</small></p> -->
+                      <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+                  </span>
+                </a>
+                
+                <a href="/trade/apple" class="stock">
+                  <span class="stockinfo">
+                      <span class="stockimgbox">
+                          <img src="/img/stocks/apple.svg" alt="stock">
+                      </span>
+                      <span class="stockname">
+                          <p>Apple Inc.</p>
+                          <small>AAPL</small>
+                      </span>
+                  </span>
+                  <span class="stockprice">
+                    <p>0.00</p>
+                      <!-- <p>${displayprice} <small>USD</small></p> -->
+                      <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+                  </span>
+              </a>
+
+              <a href="/trade/microsoft" class="stock">
+                <span class="stockinfo">
+                    <span class="stockimgbox">
+                        <img src="/img/stocks/microsoft.png" alt="stock">
+                    </span>
+                    <span class="stockname">
+                        <p>Microsoft Corporation</p>
+                        <small>MSFT</small>
+                    </span>
+                </span>
+                <span class="stockprice">
+                  <p>0.00</p>
+                    <!-- <p>${displayprice} <small>USD</small></p> -->
+                    <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+                </span>
+            </a>
+          
+              <a href="/trade/tesla" class="stock">
+                <span class="stockinfo">
+                    <span class="stockimgbox">
+                        <img src="/img/stocks/tesla.png" alt="stock">
+                    </span>
+                    <span class="stockname">
+                        <p>Tesla INC</p>
+                        <small>TSLA</small>
+                    </span>
+                </span>
+                <span class="stockprice">
+                  <p>0.00</p>
+                    <!-- <p>${displayprice} <small>USD</small></p> -->
+                    <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+                </span>
+            </a>
+
+            <a href="/trade/amazon" class="stock">
+              <span class="stockinfo">
+                  <span class="stockimgbox">
+                      <img src="/img/stocks/amazon.png" alt="stock">
+                  </span>
+                  <span class="stockname">
+                      <p>Amazon.com, Inc.</p>
+                      <small>AMZN</small>
+                  </span>
+              </span>
+              <span class="stockprice">
+                <p>0.00</p>
+                  <!-- <p>${displayprice} <small>USD</small></p> -->
+                  <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+              </span>
+          </a>
+
+            <a href="/trade/pepsi" class="stock">
+              <span class="stockinfo">
+                  <span class="stockimgbox">
+                      <img src="/img/stocks/pepsi.png" alt="stock">
+                  </span>
+                  <span class="stockname">
+                      <p>PepsiCo Inc.</p>
+                      <small>PEP</small>
+                  </span>
+              </span>
+              <span class="stockprice">
+                <p>0.00</p>
+                  <!-- <p>${displayprice} <small>USD</small></p> -->
+                  <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+              </span>
+          </a>
+
+          <a href="/trade/fedex" class="stock">
+            <span class="stockinfo">
+                <span class="stockimgbox">
+                    <img src="/img/stocks/fedex.png" alt="stock">
+                </span>
+                <span class="stockname">
+                    <p>FedEx Corporation</p>
+                    <small>FDX</small>
+                </span>
+            </span>
+            <span class="stockprice">
+              <p>0.00</p>
+                <!-- <p>${displayprice} <small>USD</small></p> -->
+                <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+            </span>
+        </a>
+
+        <a href="/trade/ups" class="stock">
+          <span class="stockinfo">
+              <span class="stockimgbox">
+                  <img src="/img/stocks/ups.png" alt="stock">
+              </span>
+              <span class="stockname">
+                  <p>United Parcel Service, Inc.</p>
+                  <small>UPS</small>
+              </span>
+          </span>
+          <span class="stockprice">
+            <p>0.00</p>
+              <!-- <p>${displayprice} <small>USD</small></p> -->
+              <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+          </span>
+      </a>
+
+        <a href="/trade/disney" class="stock">
+          <span class="stockinfo">
+              <span class="stockimgbox">
+                  <img src="/img/stocks/disney.png" alt="stock">
+              </span>
+              <span class="stockname">
+                  <p>Walt Disney Company (The)</p>
+                  <small>DIS</small>
+              </span>
+          </span>
+          <span class="stockprice">
+            <p>0.00</p>
+              <!-- <p>${displayprice} <small>USD</small></p> -->
+              <!-- <p>${displaystock24hourspricechangepercentage}</p> -->
+          </span>
+      </a>
+            </div>
+        </div>
+    </div>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+  <script src="/script/app.js"></script>
+</body>
+</html>

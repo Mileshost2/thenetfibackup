@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TheNetFi || Sign In</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+
+ <link rel="stylesheet" href="/stylesheets/login.css">
+</head>
+<body>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="active"> Sign In </h2>
+      <h2 class="inactive underlineHover"><a href="/register">Sign Up</a> </h2>
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img src="/img/logo.png" id="icon" alt="User Icon" />
+      </div>
+
+      <div class="flashbox">
+        <% if(success && success.length) { %>
+               <div class="flashboxsuccess-alert">
+                   <%= success %> 
+                   <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                   
+               </div>
+           <% } %> 
+       
+           <% if(error && error.length) { %>
+                   <div class="flashboxerror-alert">
+                       <%= error %> 
+                       <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+           <% } %> 
+           
+    </div>
+  
+      <!-- Login Form -->
+      <form action="/login" method="post" onsubmit="handleFormSubmit(this)">
+        <input type="email" id="email" class="fadeIn second" name="email" placeholder="Email Address" required>
+        <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password" required>
+        <!-- <input type="submit" class="fadeIn fourth" value="Log In"> -->
+        <button type="submit" class="fadeIn fourth" id="submitBtn">
+            Log In
+        </button>
+      </form>
+  
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="/forgotpassword">Forgot Password?</a>
+      </div>
+  
+    </div>
+  </div>
+  
+
+  <%- partial('./partials/livechatwidget')%>
+
+  <script>
+    function handleFormSubmit(form) {
+        const submitButton = document.getElementById('submitBtn');
+        // Disable the button
+        submitButton.disabled = true;
+
+        // Change button text to a loading spinner
+        submitButton.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Logging in...';
+        
+        // Allow the form to be submitted
+        return true;
+    }
+</script>
+</body>
+</html>

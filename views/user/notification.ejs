@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="/stylesheets/user/notifications.css">
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"> <small>Notifications</small>  <i class="fab fa-telegram headericon"></i></span>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div class="headerbox">
+            <div class="innerheaderbox">
+                <span class="headerboxes-span1">
+                    <i class="fas fa-bell headerboxes-iconimg"></i>
+                    <span class="headerboxes-span2">
+                        <p>
+                            <%= msg.length %>
+                        </p>
+                        <small>Total Notifications</small>
+                    </span>
+                </span>
+
+                <span class="headerboxes-span1">
+                    <i class="fas fa-envelope headerboxes-iconimg"></i>
+                    <span class="headerboxes-span2">
+                        <p>
+                            <%= unreadmsg.length %>
+                        </p>
+                        <small>Unopened</small>
+                    </span>
+                </span>
+
+                <span class="headerboxes-span1">
+                    <i class="fas fa-envelope-open headerboxes-iconimg"></i>
+                    <span class="headerboxes-span2">
+                        <p>
+                            <%= openedmsg.length %>
+                        </p>
+                        <small>Opened</small>
+                    </span>
+                </span>
+            </div>
+        </div>
+
+    
+
+        <div class="notificationbox">
+            <div class="innernotificationbox">
+                <h6>Notifications</h6>
+                <% for (let i = 0; i < msg.length; i++) { %>
+                    <a href="/dashboard/notification/<%= msg[i].id %>" class="notification">
+                        <span class="notificationwrap">
+                            <span class="rightwrap">
+                                <p><%= msg[i].title %></p>
+                                <small><%= msg[i].notificationdate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit'}) %> <%= msg[i].notificationdate.toLocaleDateString('en-US', { weekday: 'short'}) %>, <%= msg[i].notificationdate.toISOString().split('T')[0] %>.</small>
+                            </span>
+                            <span class="leftwrap">
+                                <% if (msg[i].status === 'Read') { %> 
+                                    <i class="fas fa-envelope-open headerboxes-iconimg"></i>
+                                <% } else { %> 
+                                    <i class="fas fa-envelope headerboxes-iconimg"></i>
+                                <% } %> 
+                                <!-- <i class="fas fa-circle text-green"></i> -->
+                            </span>
+                        </span>
+                    </a>
+                <% } %>
+            </div>
+        </div>
+
+    
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

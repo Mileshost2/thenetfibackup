@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/stylesheets/user/coin.css">
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+<div class="contentbox">
+    
+
+    <div id="header">
+        <div id="headerinner">
+            <span class="headerinnerspan"> <small>Bitcoin</small></span>
+            <span class="headerinnerspan"><a href="/dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+        </div>
+    </div>
+
+    <div id="coinbox">
+        <div id="crypto-list"></div>
+    </div>
+
+    <div class="cryptowidget">
+      <div class="tradingview-widget-container">
+        <div id="tradingview_1a2b3c4d"></div>
+        <script src="https://s3.tradingview.com/tv.js"></script>
+        <script>
+        new TradingView.widget(
+        {
+          "width": "100%",
+          "height": "100%",
+          "symbol": "BINANCE:BTCUSD",
+          "interval": "D",
+          "timezone": "Etc/UTC",
+          "theme": "light",
+          "style": "1",
+          "locale": "en",
+          "toolbar_bg": "rgba(0, 0, 0, 0)",
+          "enable_publishing": false,
+          "allow_symbol_change": true,
+          "container_id": "tradingview_1a2b3c4d"
+        }
+        );
+        </script>
+      </div>
+      
+      
+   </div>
+
+  <!-- <script>
+    const preferredCryptos = ['bitcoin'];
+
+    axios.get(`https://api.coingecko.com/api/v3/coins/markets?ids=${preferredCryptos.join(',')}&vs_currency=usd&order=market_cap_desc&sparkline=true`)
+      .then(response => {
+        const cryptoData = response.data;
+        const cryptoListContainer = document.getElementById('crypto-list');
+
+        cryptoData.forEach(crypto => {
+          const cryptoItem = document.createElement('div');
+          cryptoItem.classList.add('coininfobox');
+
+          const coinInfoElem = document.createElement('span');
+          coinInfoElem.classList.add('coinboxspans');
+          const coinNameElem = document.createElement('b');
+          coinNameElem.innerHTML = `${crypto.name} <small>( ${crypto.symbol.toUpperCase()} )</small>`;
+          coinInfoElem.appendChild(coinNameElem);
+
+          const coinPriceElem = document.createElement('span');
+          coinPriceElem.classList.add('coinboxspans');
+          const h6Price = document.createElement('h6');
+          coinPriceElem.appendChild(h6Price);
+
+          const priceChangeElem = document.createElement('small');
+          priceChangeElem.id = 'price-change';
+          coinPriceElem.appendChild(priceChangeElem);
+
+          const chartElem = document.createElement('canvas');
+          chartElem.id = `chart-${crypto.id}`;
+          chartElem.classList.add('coinchart');
+        //   chartElem.width = 200;
+        //   chartElem.height = 100;
+
+          const priceChangeBox = document.createElement('span');
+          priceChangeBox.classList.add('coinboxspans', 'coinchartbox');
+          priceChangeBox.appendChild(chartElem);
+
+          cryptoItem.appendChild(coinInfoElem);
+          cryptoItem.appendChild(coinPriceElem);
+          cryptoItem.appendChild(priceChangeBox);
+
+          cryptoListContainer.appendChild(cryptoItem);
+
+          let chart = null;
+
+          const priceChangeBtns = [
+            { label: '1H', interval: 1 },
+            { label: '1D', interval: 24 },
+            { label: '1W', interval: 168 },
+            { label: '1M', interval: 720 },
+            { label: '1Y', interval: 8760 }
+          ];
+
+          const btnContainer = document.createElement('div');
+          btnContainer.classList.add('pricechgbtn-container');
+
+          priceChangeBtns.forEach(btnData => {
+            const btn = document.createElement('button');
+            btn.classList.add('price-change-btn');
+            
+            btn.textContent = btnData.label;
+            btn.setAttribute('data-interval', btnData.interval);
+
+            btn.addEventListener('click', handlePriceChangeBtnClick);
+
+            btnContainer.appendChild(btn);
+          });
+
+          cryptoItem.appendChild(btnContainer);
+
+          function handlePriceChangeBtnClick(e) {
+            const interval = e.target.getAttribute('data-interval');
+            const activeBtn = document.querySelector('.price-change-btn.active');
+
+            if (activeBtn) {
+              activeBtn.classList.remove('active');
+            }
+
+            e.target.classList.add('active');
+            fetchPriceChangeData(interval);
+          }
+
+          function fetchPriceChangeData(interval) {
+            const now = Date.now() / 1000;
+            const from = now - (interval * 3600);
+
+            axios.get(`https://api.coingecko.com/api/v3/coins/${crypto.id}/market_chart/range?vs_currency=usd&from=${from}&to=${now}`)
+              .then(response => {
+                const marketData = response.data.prices;
+                const prices = marketData.map(price => price[1]);
+
+                const priceChange = (prices[prices.length - 1] - prices[0]) / prices[0] * 100;
+const priceChangeElem = document.getElementById('price-change');
+                priceChangeElem.textContent = `${priceChange.toFixed(2)}%`;
+                priceChangeElem.classList.remove('positive-change', 'negative-change');
+                priceChangeElem.classList.add(priceChange > 0 ? 'positive-change' : 'negative-change');
+
+                const data = {
+                  labels: marketData.map(price => new Date(price[0]).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })),
+                  datasets: [{
+                    data: prices,
+                    borderColor: priceChange > 0 ? 'green' : 'red',
+                    backgroundColor: priceChange > 0 ? 'rgba(0, 128, 0, 0.2)' : 'rgba(255, 0, 0, 0.2)',
+                    borderWidth: 1,
+                    pointRadius: 0
+                  }]
+                };
+
+                const options = {
+                  responsive: false,
+                  maintainAspectRatio: false,
+                  scales: {
+                    x: {
+                      display: false
+                    },
+                    y: {
+                      display: false
+                    }
+                  },
+                  elements: {
+                    line: {
+                      tension: 0
+                    }
+                  },
+                  plugins: {
+                    legend: {
+                      display: false
+                    },
+                    tooltip: {
+                      enabled: false
+                    }
+                  }
+                };
+
+                // Clear existing chart
+                if (chart) {
+                  chart.destroy();
+                }
+
+                chart = new Chart(chartElem, {
+                  type: 'line',
+                  data: data,
+                  options: options
+                });
+              })
+              .catch(error => {
+                console.error('Error fetching price change data:', error);
+              });
+          }
+
+          // Initially fetch and display 1-hour price change data
+          fetchPriceChangeData(1);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching crypto data:', error);
+      });
+  </script> -->
+
+    
+
+</div>
+    
+</body>
+</html>

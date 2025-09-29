@@ -1,0 +1,182 @@
+
+#imgbox {
+    width: 100%;
+    padding: 20px;
+}
+
+#innerimgbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#innerimgbox img {
+    width: 300px;
+}
+
+.imgcaptions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 5px;
+}
+
+@media (max-width:500px) {
+    #innerimgbox img {
+        width: 50%;
+    }
+}
+
+
+.kycformbox {
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+}
+
+.innerkycformbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.kycform {
+    width: 700px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.473), 0 11px 6px -7px rgba(0, 0, 0, 0.418);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.466), 0 11px 6px -7px rgba(0, 0, 0, 0.445);
+    background-color: var(--clr-borderBoxColor) !important;
+    color: var(--foreground) !important;
+    border-radius: 5px;
+}
+
+.kycformgroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+}
+
+
+/* Hide the actual file input */
+#file-input {
+    display: none;
+}
+
+#file-input2 {
+    display: none;
+}
+
+/* Style the label to look like a div */
+.custom-file-upload label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    padding: 40px 0;
+    border: 1px dashed var(--foreground);
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+@media (max-width:800px) {
+    .kycform {
+        width: 100%;
+    }
+}
+
+
+/* .profileform {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+} */
+
+.separateformdiv {
+    margin: 10px 0;
+}
+
+.formgroup {
+    padding: 5px 0 !important;
+}
+
+.formgroup label {
+    font-size: 0.8em;
+}
+
+.profileformgroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.formgroup label {
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.profileforminput {
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px dashed var(--foreground);
+    /* border-bottom: 1px solid black; */
+    background-color: transparent;
+    color: var(--foreground);
+}
+
+
+.profileformselect {
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px dashed var(--foreground);
+    /* border-bottom: 1px solid black; */
+    background-color: transparent;
+    color: var(--foreground);
+}
+
+.profileformselect option {
+    color: black;
+}
+
+.profileforminput::placeholder {
+    color: grey;
+}
+
+/* .profileformselect {
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    color: var(--foreground);
+} */
+
+
+.profilebtnbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 20px 10px;
+}
+
+.profilebtn {
+    background-color: rgb(80, 78, 78);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    margin: 5px;
+}

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Traders</title>
+    <link rel="stylesheet" href="/stylesheets/admin/experttraders.css">
+    <style>
+        .activeexpertlink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activeexpertlink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+
+        <div id="pageintrobox">
+            <div id="innerpageintrobox">
+                <h5>Expert Traders</h5>
+                <p>Expert traders for copy-trading.</p>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="methodbox">
+            <div id="innermethodbox">
+                <!-- <h6>Methods</h6> -->
+                <div id="transactionformbox">
+                    <!-- <span class="transactionformboxintro">Depositmethods</span> -->
+                    <form action="/admin/admin.experts" method="post" id="transactionform" enctype="multipart/form-data">
+                        <small>Fill the form to create a new expert trader profile.</small>
+                        
+                        <span class="transactionformgroup">
+                            <label for="fullname">Full Name:</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Full Name" aria-label="Full Name" aria-describedby="" required>
+        
+                            </div> 
+                        </span>
+                        
+
+                        <span class="transactionformgroup">
+                            <label for="email">Email Address:</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Email Address" aria-label="Email Address" aria-describedby="" required>
+        
+                            </div> 
+                        </span>
+
+                        <span class="transactionformgroup">
+                            <label for="numberofsubscribers">Number of Subscribers:</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" id="numberofsubscribers" name="numberofsubscribers" placeholder="Number of Subscribers" aria-label="Number of Subscribers" aria-describedby="" required>
+        
+                            </div> 
+                        </span>
+
+                        <span class="transactionformgroup">
+                            <label for="wins">Number of Wins:</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" id="wins" name="wins" placeholder="Number of Wins" aria-label="Number of Wins" aria-describedby="" required>
+        
+                            </div> 
+                        </span>
+
+                        <span class="transactionformgroup">
+                            <label for="winrate">Win Rate %:</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="winrate" name="winrate" placeholder="Win Rate %" aria-label="Win Rate %" aria-describedby="" required>
+        
+                            </div> 
+                        </span>
+
+                        <span class="transactionformgroup">
+                            <label for="losses">Losses:</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" id="losses" name="losses" placeholder="Losses" aria-label="Losses" aria-describedby="" required>
+        
+                            </div> 
+                        </span>
+
+                        <span class="transactionformgroup">
+                            <label for="profitshare">Profit Share %:</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="profitshare" name="profitshare" placeholder="Profit Share" aria-label="Profit Share" aria-describedby="" required>
+        
+                            </div> 
+                        </span>
+                        <span class="transactionformgroup">
+                            <label for="">Trader Logo:</label>
+                            <div class="custom-file-upload">
+                                <label for="file-input">
+                                    <i class="fas fa-upload"></i>
+                                    <span>Click to upload a file.</span>
+                                    <span>Max size 1mb.</span>
+                                    <span>(PNG or JPG)</span>
+                                </label>
+                                <input type="file" accept=".png, .jpg, .jpeg" name="passport" class="" id="file-input" required>
+                                <p id="file-name" style="margin-top: 3px;"></p>
+                                <p id="file-error" style="color: red; display: none;">File size must be less than 1MB.</p>
+
+                            </div>
+                            
+                            
+
+                              
+                        </span>
+                        
+                        <button type="submit" class="btn btn-primary mt-3">Create Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="tradersbox">
+            <div id="innertradersbox">
+                <h6>Expert Traders</h6>
+
+                <div id="traderslist">
+                    <% for (let i=0; i<experttraders.length; i++) { %>
+                        <div class="tradercard">
+                            <div class="tradercardsection1">
+                                <% for (let img of experttraders[i].passport) { %> 
+                                    <img src="<%= img.url %> " class="traderlogo" alt="logo">
+                                <% } %> 
+                                <p><%= experttraders[i].fullname %></p>
+                            </div>
+                            <div class="tradercardsection3">
+                                <p><%= experttraders[i].numberofsubscribers %> Subscribers</p>
+                            </div>
+
+                            <div class="tradercardsection2">
+                                <span>
+                                    <p><%= experttraders[i].wins %></p>
+                                    <small>Wins</small>
+                                </span>
+                                <span>
+                                    <p><%= experttraders[i].losses %></p>
+                                    <small>Losses</small>
+                                </span>
+                                <span>
+                                    <p><%= experttraders[i].winrate %></p>
+                                    <small>Win Rate</small>
+                                </span>
+                                <span>
+                                    <p><%= experttraders[i].profitshare %></p>
+                                    <small>Profit Share</small>
+                                </span>
+                            </div>
+                            
+                            <div class="traderactionbox">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTrader<%= i %>">
+                                            Edit Profile
+                                    </button>
+
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteTrader<%= i %>">
+                                        Delete Profile
+                                    </button>
+
+
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="editTrader<%= i %>" tabindex="-1" aria-labelledby="editTrader<%= i %>Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <form action="/admin/admin.experts/<%= experttraders[i].id %>/edit?_method=PUT" class="" method="post">
+                                                        <span class="transactionformgroup">
+                                                            <label for="fullname">Full Name:</label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Full Name" value="<%= experttraders[i].fullname %>" aria-label="Full Name" aria-describedby="" required>
+                                        
+                                                            </div> 
+                                                        </span>
+
+                                                        <span class="transactionformgroup">
+                                                            <label for="email">Email Address:</label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="text" class="form-control" id="email" name="email" placeholder="Email Address" value="<%= experttraders[i].email %>" aria-label="Email Address" aria-describedby="" required>
+                                        
+                                                            </div> 
+                                                        </span>
+
+                                                        <span class="transactionformgroup">
+                                                            <label for="numberofsubscribers">Number of Subscribers:</label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="numberofsubscribers" name="numberofsubscribers" placeholder="Number of Subscribers" value="<%= experttraders[i].numberofsubscribers %>" aria-label="Number of Subscribers" aria-describedby="" required>
+                                        
+                                                            </div> 
+                                                        </span>
+                                
+                                                        <span class="transactionformgroup">
+                                                            <label for="wins">Number of Wins:</label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="wins" name="wins" placeholder="Number of Wins" value="<%= experttraders[i].wins %>" aria-label="Number of Wins" aria-describedby="" required>
+                                        
+                                                            </div> 
+                                                        </span>
+                                
+                                                        <span class="transactionformgroup">
+                                                            <label for="winrate">Win Rate %:</label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="text" class="form-control" id="winrate" name="winrate" placeholder="Win Rate %" value="<%= experttraders[i].winrate %>" aria-label="Win Rate %" aria-describedby="" required>
+                                        
+                                                            </div> 
+                                                        </span>
+                                
+                                                        <span class="transactionformgroup">
+                                                            <label for="losses">Losses:</label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="losses" name="losses" placeholder="Losses" aria-label="Losses" value="<%= experttraders[i].losses %>" aria-describedby="" required>
+                                        
+                                                            </div> 
+                                                        </span>
+                                
+                                                        <span class="transactionformgroup">
+                                                            <label for="profitshare">Profit Share %:</label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="text" class="form-control" id="profitshare" name="profitshare" placeholder="Profit Share" value="<%= experttraders[i].profitshare %>"  aria-label="Profit Share" aria-describedby="" required>
+                                        
+                                                            </div> 
+                                                        </span>
+                                                        <button type="submit" class="btn btn-primary mt-2">Save Changes</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <div class="modal fade" id="deleteTrader<%= i %>" tabindex="-1" aria-labelledby="deleteTrader<%= i %>Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <form action="/admin/admin.experts/<%= experttraders[i].id %>/delete?_method=DELETE" class="" method="post">
+                                                
+                                                <button type="submit" class="btn btn-danger mt-2">Proceed to delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+
+      
+    
+    </div>
+    
+
+    <script>
+        document.getElementById('file-input').addEventListener('change', function() {
+        const file = this.files[0]; // Get the first file
+        const maxSize = 1 * 1024 * 1024; // 1MB in bytes
+        const fileNameElement = document.getElementById('file-name');
+        const fileErrorElement = document.getElementById('file-error');
+    
+        if (file) {
+            if (file.size > maxSize) {
+                fileErrorElement.style.display = 'block'; // Show error message
+                this.value = ''; // Clear the file input
+                fileNameElement.textContent = ''; // Clear the file name display
+            } else {
+                fileErrorElement.style.display = 'none'; // Hide error message
+                fileNameElement.textContent = `Selected file: ${file.name}`; // Show the file name
+            }
+        } else {
+            fileNameElement.textContent = ''; // Clear the file name display if no file is selected
+        }
+    });
+    
+    </script>
+    <script src="/script/app.js"></script>
+</body>
+</html>

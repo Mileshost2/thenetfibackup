@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Staking</title>
+    <link rel="stylesheet" href="/stylesheets/admin/investmentinfo.css"></head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-line-chart headericon"></i> <small>Crypto Staking</small></span>
+                <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+          </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+        <div id="acctsumbox">
+            <div id="inneracctsumbox">
+                <div class="acctsum">
+                    <span>
+                        <p>Staking Contract ID:</p>
+                        <small><%= asset.id %></small> 
+                    </span>
+                    <span>
+                        <p>Asset Staked:</p> 
+                        <small class="accounttype"><%= asset.cryptoAmountStaked %> <%= asset.cryptoType %></small>
+                    </span>
+                    <span>
+                        <p>USD Equivalent:</p>
+                        <small>$<%= asset.usdAmountStaked.toLocaleString() %></small>
+                    </span>
+                    <span>
+                        <p>Staking Duration:</p>
+                        <small><%= asset.duration %></small>
+                    </span>
+                    <span>
+                        <p>Service Charge:</p>
+                        <small><%= asset.charges %></small>
+                    </span>
+                    <span>
+                        <p>Client Name:</p>
+                        <small><%= client.firstname%> <%= client.lastname%></small>
+                    </span>
+
+                    <span>
+                        <p>Client Email:</p>
+                        <small><%= client.email%></small>
+                    </span>
+                    
+                </div>
+    
+                <div class="acctsum">
+                    <span>
+                        <p>Status:</p>
+                        <% if (asset.status === 'Pending') { %> 
+                            <small class="unverifiedstat"><%= asset.status %></small>
+                        <% } else if (asset.status === 'Completed'){ %> 
+                            <small class="verifiedstat"><%= asset.status %></small>
+                        <% } else if (asset.status === 'Active'){ %> 
+                            <small class="pendingstat"><%= asset.status %></small>
+                        <% } %> 
+                        
+                    </span>
+                   
+                    <span>
+                        <p>Expected Daily Earnings:</p>
+                        <small>$<%= asset.profitroi.toLocaleString() %></small>
+                    </span>
+                    <span>
+                        <p>Total Earnings:</p>
+                        <small> $<%= asset.investmentprofit.toLocaleString() %></small>
+                    </span>
+
+                    
+                    <span>
+                        <p>Staking Contract Started:</p>
+                        <small><%= asset.createdAt%></small>
+                    </span>
+                    <span>
+                        <% if (asset.status === 'Pending') { %> 
+                            <p>Staking Contract Ends:</p>
+                        <% } else if (asset.status === 'Completed'){ %> 
+                            <p>Staking Contract Ended:</p>
+                        <% } else if (asset.status === 'Active'){ %> 
+                            <p>Staking Contract Ends:</p>
+                        <% } %> 
+
+                        
+                        <small><%= asset.endDate %></small>
+                    </span>
+                    <span class="action">
+                        <% if (asset.status == 'Active') { %> 
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle actionboxbutton1" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Add profits to current stake.
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                  <li>
+                                    <form action="/admin/admin.staked-asset/<%= client.id%>/<%= asset.id%>?_method=PUT" method="post" class="addfundsform">
+                                        <input type="number" placeholder="Amount to be added" class="addfundsforminput" name="addprofits" required>
+                                        <button class="btn btn-success" >Add Profits</button>
+                                    </form>
+                                  </li>
+                                </ul>
+                            </div>
+                        <% } %> 
+    
+                        <% if (asset.status == 'Active') { %> 
+                            <div>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" id="end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    End Stake
+                                </button>
+                  
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">End Stake</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Do you wish to end this staking contract?</p>
+                                                <form action="/admin/admin.staked-asset/<%= client.id%>/<%= asset.id%>/endcontract?_method=PUT" method="post" >
+                                                    <button class="btn btn-danger">End Contract</button>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } else if (asset.status == 'Completed') { %> 
+                            <button type="button" class="btn btn-primary">
+                                Staking Contract Completed
+                            </button>
+                        <% } else { %> 
+                            <button type="button" class="btn btn-primary">
+                                Staking Contract Pending!
+                            </button>
+                        <% } %> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+       
+
+    
+    </div>
+    
+ 
+    <script src="/script/app.js"></script>
+</body>
+</html>

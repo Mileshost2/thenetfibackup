@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Stocks</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/user/forex.css">
+    <style>
+      .activestocktradelink {
+          background-color: var(--activesidebarlink) !important;
+          color: var(--background) !important;
+          padding: 5px !important;
+          margin: 0 5px !important;
+          width: 95% !important;
+          border-radius: 5px;
+      }
+
+      .activestocktradelink .links-icons {
+          background-color: transparent !important;
+          color: var(--background) !important;
+      }
+  </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+  <div class="contentbox">
+    <div id="header">
+        <div id="headerinner">
+            <span class="headerinnerspan"> <small>Trade Stocks</small> <i class="fas fa-wallet headericon"></i></span>
+        </div>
+    </div>
+
+    <% if(success && success.length) { %>
+      <div class="flashbox">
+                <div class="flashboxsuccess-alert">
+                    <%= success %> 
+                    <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    
+                </div>
+      </div>
+    <% } %>          
+        
+    <% if(error && error.length) { %>
+      <div class="flashbox">
+                    <div class="flashboxerror-alert">
+                        <%= error %> 
+                        <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        
+                    </div>
+      </div>
+    <% } %>
+
+    <div id="widgetbox">
+        <div id="innerwidgetbox">
+            <div id="stock-container" class="cryptolistheader">
+                <b>Top Stocks:</b>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- <a class="stock">
+        <span class="stockinfo">
+            <span class="stockimgbox">
+                <img src="${displaystockimg}" alt="">
+            </span>
+            <span class="stockname">
+                <p>${displaystockfullname}</p>
+                <small>${displaystocknameabbrevation}</small>
+            </span>
+        </span>
+        <span class="stockprice">
+            <p>${displayprice} <small>USD</small></p>
+            <p>${displaystock24hourspricechangepercentage}</p>
+        </span>
+    </a> -->
+
+
+
+
+
+
+
+
+
+<script>
+    const apiKey = 'QCSPTXA2DSEC5HE0'; // Replace with your API key
+const topStocks = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'NVDA', 'BABA', 'JPM', 'V', 'JNJ', 'UNH', 'PG', 'HD', 'DIS', 'MA', 'BAC', 'XOM', 'BRK-B', 'CVX']; // Replace with your desired stocks
+
+function fetchStockData() {
+    const stockContainer = document.getElementById('stock-container');
+    stockContainer.innerHTML = '';
+
+    topStocks.forEach(stock => {
+        const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock}&apikey=${apiKey}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const stockData = data['Global Quote'];
+                const stockPrice = stockData['05. price'];
+                const priceChangePercentage = stockData['10. change percent'];
+
+                const stockElement = document.createElement('a');
+                stockElement.classList.add('stock');
+
+                const stockInfo = document.createElement('span');
+                stockInfo.classList.add('stockinfo');
+
+                // Assuming you have images for each stock
+                const stockImg = document.createElement('img');
+                stockImg.src = `stock_images/${stock}.png`; // Replace with your image path
+                stockImg.alt = stock;
+
+                const stockName = document.createElement('span');
+                stockName.classList.add('stockname');
+                const stockFullName = document.createElement('p');
+                stockFullName.textContent = stockData['01. symbol']; // Assuming you have full names
+                const stockAbbreviation = document.createElement('small');
+                stockAbbreviation.textContent = stockData['01. symbol'];
+                stockName.appendChild(stockFullName);
+                stockName.appendChild(stockAbbreviation);
+
+                const stockPriceInfo = document.createElement('span');
+                stockPriceInfo.classList.add('stockprice');
+                const priceElement = document.createElement('p');
+                priceElement.textContent = `${stockPrice} USD`;
+                const priceChange = document.createElement('p');
+                priceChange.textContent = priceChangePercentage;
+                stockPriceInfo.appendChild(priceElement);
+                stockPriceInfo.appendChild(priceChange);
+
+                stockInfo.appendChild(stockImg);
+                stockInfo.appendChild(stockName);
+                stockElement.appendChild(stockInfo);
+                stockElement.appendChild(stockPriceInfo);
+
+                stockContainer.appendChild(stockElement);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    });
+}
+
+fetchStockData();
+
+</script>
+  <script src="/script/app.js"></script>
+</body>
+</html>

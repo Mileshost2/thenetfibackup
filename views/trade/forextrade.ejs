@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Forex Pairs</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/user/forex.css">
+    <style>
+      .activeforextradelink {
+          background-color: var(--activesidebarlink) !important;
+          color: var(--background) !important;
+          padding: 5px !important;
+          margin: 0 5px !important;
+          width: 95% !important;
+          border-radius: 5px;
+      }
+
+      .activeforextradelink .links-icons {
+          background-color: transparent !important;
+          color: var(--background) !important;
+      }
+  </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+  <div class="contentbox">
+    <div id="pageintrobox">
+      <div id="innerpageintrobox">
+          <h5>Forex</h5>
+          <p>Earn profits from trading Forex Pairs.</p>
+          
+      </div>
+    </div>
+
+    <% if(success && success.length) { %>
+      <div class="flashbox">
+                <div class="flashboxsuccess-alert">
+                    <%= success %> 
+                    <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    
+                </div>
+      </div>
+    <% } %>          
+        
+    <% if(error && error.length) { %>
+      <div class="flashbox">
+                    <div class="flashboxerror-alert">
+                        <%= error %> 
+                        <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        
+                    </div>
+      </div>
+    <% } %>
+
+    <div id="widgetbox">
+        <div id="innerwidgetbox">
+            <div id="currency-container" class="cryptolistheader">
+                <b>Top Forex Pairs:</b>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- <a class="currency">
+        <span class="currencyimgbox">
+            <img src="${displaybasecurrencyimg}" alt="">
+            <p>${displaycurrencypairs}</p>
+        </span>
+        <span class="currencyprice">
+            <p>${displayprice}</p>
+        </span>
+    </a> -->
+
+
+
+
+
+
+<script>
+    const apiKey = 'd92788cf8915bf9175829158'; // Replace with your ExchangeRate-API.com API key
+const baseUrl = 'https://v6.exchangerate-api.com/v6/';
+const flagApiBaseUrl = 'https://flagcdn.com/';
+
+const currencyToCountry = {
+  'USD': 'us',
+  'EUR': 'eu',
+  'JPY': 'jp',
+  'GBP': 'gb',
+  'CHF': 'ch',
+  'AUD': 'au',
+  'NZD': 'nz',
+  'CAD': 'ca'
+};
+
+const currencyPairs = [
+  ['EUR', 'USD'],
+  ['EUR', 'JPY'],
+  ['GBP', 'USD'],
+  ['USD', 'JPY'],
+  ['USD', 'CAD'],
+  ['EUR', 'GBP'],
+  ['EUR', 'CHF'],
+  ['AUD', 'USD'],
+  ['USD', 'CHF'],
+  ['NZD', 'USD'],
+  ['GBP', 'CHF'],
+  ['NZD', 'JPY'],
+  ['NZD', 'CHF'],
+  ['EUR', 'CAD'],
+  ['AUD', 'CAD'],
+  ['GBP', 'JPY'],
+  ['AUD', 'NZD'],
+  ['AUD', 'JPY'],
+  ['EUR', 'AUD']
+];
+
+function fetchCurrencyData() {
+  const currencyContainer = document.getElementById('currency-container');
+
+  currencyPairs.forEach(([baseCurrency, quoteCurrency]) => {
+    const url = `${baseUrl}${apiKey}/latest/${baseCurrency}`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const rate = data.conversion_rates[quoteCurrency];
+        const baseCountryCode = currencyToCountry[baseCurrency];
+        const quoteCountryCode = currencyToCountry[quoteCurrency];
+
+        const currencyLink = document.createElement('a');
+        currencyLink.href = `/trade/${baseCurrency.toLocaleLowerCase()}-${quoteCurrency.toLocaleLowerCase()}`;
+        currencyLink.classList.add('currency');
+
+        const currencyImgBox = document.createElement('span');
+        currencyImgBox.classList.add('currencyimgbox');
+        const img = document.createElement('img');
+        img.src = `${flagApiBaseUrl}/20x15/${baseCountryCode}.png`;
+        img.alt = `${baseCountryCode} flag`;
+        const pairP = document.createElement('p');
+        // pairP.textContent = `${baseCurrency}/USD`;
+        pairP.textContent = `${baseCurrency}/${quoteCurrency}`;
+        currencyImgBox.appendChild(img);
+        currencyImgBox.appendChild(pairP);
+
+        const currencyPrice = document.createElement('span');
+        currencyPrice.classList.add('currencyprice');
+        const priceP = document.createElement('p');
+        priceP.textContent = rate.toFixed(4);
+        currencyPrice.appendChild(priceP);
+
+        currencyLink.appendChild(currencyImgBox);
+        currencyLink.appendChild(currencyPrice);
+
+        currencyContainer.appendChild(currencyLink);
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  });
+}
+
+fetchCurrencyData();
+
+</script>
+
+
+
+
+   
+
+
+
+  <script src="/script/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Plans</title>
+    <link rel="stylesheet" href="/stylesheets/user/tradeplans.css">
+    <!-- <style>
+        .activetradelink {
+            color: var(--bottomnavactivecolor) !important;
+        }
+    </style> -->
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+
+        <div id="pageintrobox">
+            <div id="innerpageintrobox">
+                <h5>Trade</h5>
+                <p>Start earning through copy trading.</p>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="tradeformbox">
+            <div id="innertradeformbox">
+                <h6>Trade <%= wallet.tradeCurrency %></h6>
+                <h6>Enter an amount, duration, takeprofit, stoploss and place the trade.</h6>
+                <div id="tradeforminner">
+                    <div class="button-container" id="tradebtnbox">
+                        <button id="buybtn" class="tradebtn" onclick="showContainer('buy-form', 'buybtn')">Buy</button>
+                        <button id="sellbtn" class="tradebtn" onclick="showContainer('sell-form', 'sellbtn')">Sell</button>
+                    </div>
+                    
+                    <div id="tradebox">
+                        <form action="/trade/<%= wallet.id %>/activate-trade" method="post"  class="tradeform" id="buy-form">
+                            <span class="orderspan">Buy Order</span>
+                            <span class="tradeformgroup">
+                                <label for="duration">Duration</label>
+                                <select name="duration"class="form-control" id="duration" required>
+                                    <option value="">Select Duration</option>
+                                    <option value="30 Minutes">30 Minutes</option>
+                                    <option value="1 Hour">1 Hour</option>
+                                    <option value="2 Hours">2 Hours</option>
+                                    <option value="3 Hours">3 Hours</option>
+                                    <option value="6 Hours">6 Hours</option>
+                                    <option value="12 Hours">12 Hours</option>
+                                    <option value="1 Day">1 Day</option>
+                                    <option value="2 Days">2 Days</option>
+                                    <option value="3 Days">3 Days</option>
+                                    <option value="4 Days">4 Days</option>
+                                    <option value="5 Days">5 Days</option>
+                                    <option value="6 Days">6 Days</option>
+                                    <option value="1 Week">1 Week</option>
+                                    <option value="2 Weeks">2 Weeks</option>
+                                    <option value="3 Weeks">3 Weeks</option>
+                                    <option value="1 Month">1 Month</option>
+                                    <option value="3 Months">3 Months</option>
+                                    <option value="6 Months">6 Months</option>
+                                    <option value="9 Months">9 Months</option>
+                                    <option value="1 Year">1 Year</option>
+                                    <option value="2 Years">2 Years</option>
+                                </select>
+                            </span>
+                            <span class="tradeformgroup">
+                                <label for="investedamount">Amount ($)</label>
+                                <input class="form-control" type="number" placeholder="Amount" name="investedamount" value="" id="investedamount" required>
+                            </span>
+    
+                            <div class="tradeformdoublegroup">
+                                <span class="tradeformgroup">
+                                    <label for="takeprofit">Take Profit ($)</label>
+                                    <input class="form-control" type="number" placeholder="Set TP" name="takeprofit" id="takeprofit">
+                                </span>
+                                <span class="tradeformgroup">
+                                    <label for="stoploss">Stop Loss ($)</label>
+                                    <input class="form-control" type="number" placeholder="Set SL" name="stoploss" value="" id="stoploss">
+                                </span>
+                            </div>
+                            <input type="hidden" class="" value="Buy" name="ordertype" required readonly>
+                            <!-- <span class="tradeformgroup">
+                                <label for="ordertype">Order Type</label>
+                                <select name="ordertype"class="form-control" id="ordertype" required>
+                                    <option value="Buy">Buy</option>
+                                    <option value="Sell">Sell</option>
+                
+                                </select>
+                            </span> -->
+    
+                            <button class="submitbtn btn btn-primary">Trade</button>
+    
+                            
+                        </form>
+
+                        <form action="/trade/<%= wallet.id %>/activate-trade" method="post"  class="tradeform" id="sell-form">
+                            <span class="orderspan">Sell Order</span>
+                            <span class="tradeformgroup">
+                                <label for="duration2">Duration</label>
+                                <select name="duration"class="form-control" id="duration2" required>
+                                    <option value="">Select Duration</option>
+                                    <option value="30 Minutes">30 Minutes</option>
+                                    <option value="1 Hour">1 Hour</option>
+                                    <option value="2 Hours">2 Hours</option>
+                                    <option value="3 Hours">3 Hours</option>
+                                    <option value="6 Hours">6 Hours</option>
+                                    <option value="12 Hours">12 Hours</option>
+                                    <option value="1 Day">1 Day</option>
+                                    <option value="2 Days">2 Days</option>
+                                    <option value="3 Days">3 Days</option>
+                                    <option value="4 Days">4 Days</option>
+                                    <option value="5 Days">5 Days</option>
+                                    <option value="6 Days">6 Days</option>
+                                    <option value="1 Week">1 Week</option>
+                                    <option value="2 Weeks">2 Weeks</option>
+                                    <option value="3 Weeks">3 Weeks</option>
+                                    <option value="1 Month">1 Month</option>
+                                    <option value="3 Months">3 Months</option>
+                                    <option value="6 Months">6 Months</option>
+                                    <option value="9 Months">9 Months</option>
+                                    <option value="1 Year">1 Year</option>
+                                    <option value="2 Years">2 Years</option>
+                                </select>
+                            </span>
+                            <span class="tradeformgroup">
+                                <label for="investedamount2">Amount ($)</label>
+                                <input class="form-control" type="number" placeholder="Amount" name="investedamount" value="" id="investedamount2" required>
+                            </span>
+    
+                            <div class="tradeformdoublegroup">
+                                <span class="tradeformgroup">
+                                    <label for="takeprofit2">Take Profit ($)</label>
+                                    <input class="form-control" type="number" placeholder="Set TP" name="takeprofit" id="takeprofit2">
+                                </span>
+                                <span class="tradeformgroup">
+                                    <label for="stoploss2">Stop Loss ($)</label>
+                                    <input class="form-control" type="number" placeholder="Set SL" name="stoploss" value="" id="stoploss2">
+                                </span>
+                            </div>
+
+                            <input type="hidden" class="" value="Sell" name="ordertype" required readonly>
+    
+                            <button class="submitbtn btn btn-primary">Trade</button>
+    
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+       
+    
+    </div>
+    
+    <script>
+        document.getElementById('investedamount').addEventListener('input', validateInputs);
+        document.getElementById('takeprofit').addEventListener('input', validateInputs);
+        document.getElementById('stoploss').addEventListener('input', validateInputs);
+
+        document.getElementById('investedamount2').addEventListener('input', validateInputs2);
+        document.getElementById('takeprofit2').addEventListener('input', validateInputs2);
+        document.getElementById('stoploss2').addEventListener('input', validateInputs2);
+    
+        function validateInputs() {
+            const investedAmount = parseFloat(document.getElementById('investedamount').value);
+            const takeProfit = parseFloat(document.getElementById('takeprofit').value);
+            const stopLoss = parseFloat(document.getElementById('stoploss').value);
+    
+            const margin = investedAmount * 0.05;
+            
+            // Reset border colors
+            document.getElementById('stoploss').style.borderColor = '';
+            document.getElementById('stoploss').style.boxShadow = '';
+            document.getElementById('takeprofit').style.borderColor = '';
+            document.getElementById('takeprofit').style.boxShadow = '';
+            
+            // Validate Stop Loss
+            if (!isNaN(stopLoss) && stopLoss > investedAmount - margin) {
+                document.getElementById('stoploss').style.borderColor = 'red';
+                document.getElementById('stoploss').style.boxShadow = '0 0 5px 5px rgba(255, 0, 0, 0.759)';
+            }
+            
+            // Validate Take Profit
+            if (!isNaN(takeProfit) && takeProfit <= investedAmount + margin) {
+                document.getElementById('takeprofit').style.borderColor = 'red';
+                document.getElementById('takeprofit').style.boxShadow = '0 0 5px 5px rgba(255, 0, 0, 0.759)';
+            }
+        }
+    
+        function validateInputs2() {
+            const investedAmount2 = parseFloat(document.getElementById('investedamount2').value);
+            const takeProfit2 = parseFloat(document.getElementById('takeprofit2').value);
+            const stopLoss2 = parseFloat(document.getElementById('stoploss2').value);
+    
+            const margin2 = investedAmount2 * 0.05;
+            
+            // Reset border colors
+            document.getElementById('stoploss2').style.borderColor = '';
+            document.getElementById('stoploss2').style.boxShadow = '';
+            document.getElementById('takeprofit2').style.borderColor = '';
+            document.getElementById('takeprofit2').style.boxShadow = '';
+            
+            // Validate Stop Loss
+            if (!isNaN(stopLoss2) && stopLoss2 > investedAmount2 - margin2) {
+                document.getElementById('stoploss2').style.borderColor = 'red';
+                document.getElementById('stoploss2').style.boxShadow = '0 0 5px 5px rgba(255, 0, 0, 0.759)';
+            }
+            
+            // Validate Take Profit
+            if (!isNaN(takeProfit2) && takeProfit2 <= investedAmount2 + margin2) {
+                document.getElementById('takeprofit2').style.borderColor = 'red';
+                document.getElementById('takeprofit2').style.boxShadow = '0 0 5px 5px rgba(255, 0, 0, 0.759)';
+            }
+        }
+    
+    </script>
+    
+    <script>
+        function showContainer(containerId, buttonId) {
+        // Get all asset containers
+        const containers = document.querySelectorAll('.tradeform');
+    
+        // Hide all containers
+        containers.forEach(container => {
+            container.style.display = 'none';
+        });
+    
+        // Show the selected container
+        document.getElementById(containerId).style.display = 'flex';
+    
+        // Remove active class from all buttons
+        const buttons = document.querySelectorAll('.button-container button');
+        buttons.forEach(button => {
+            button.classList.remove('active');
+        });
+    
+        // Add active class to the clicked button
+        document.getElementById(buttonId).classList.add('active');
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        showContainer('buy-form', 'buybtn');
+    });
+    </script>
+    <script src="/script/app.js"></script>
+</body>
+</html>

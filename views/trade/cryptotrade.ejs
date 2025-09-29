@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Crypto</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/user/wallet.css">
+    <style>
+      .activecryptotradelink {
+          background-color: var(--activesidebarlink) !important;
+          color: var(--background) !important;
+          padding: 5px !important;
+          margin: 0 5px !important;
+          width: 95% !important;
+          border-radius: 5px;
+      }
+
+      .activecryptotradelink .links-icons {
+          background-color: transparent !important;
+          color: var(--background) !important;
+      }
+  </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+  <div class="contentbox">
+    <!-- <div id="header">
+        <div id="headerinner">
+            <span class="headerinnerspan"> <small>Trade Crypto</small> <i class="fas fa-wallet headericon"></i></span>
+        </div>
+    </div> -->
+    <div id="pageintrobox">
+      <div id="innerpageintrobox">
+          <h5>Crypto</h5>
+          <p>Earn profits from trading crypto.</p>
+          
+      </div>
+    </div>
+
+    <% if(success && success.length) { %>
+      <div class="flashbox">
+                <div class="flashboxsuccess-alert">
+                    <%= success %> 
+                    <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    
+                </div>
+      </div>
+    <% } %>          
+        
+    <% if(error && error.length) { %>
+      <div class="flashbox">
+                    <div class="flashboxerror-alert">
+                        <%= error %> 
+                        <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        
+                    </div>
+      </div>
+    <% } %>
+
+    <div id="widgetbox">
+        <div id="innerwidgetbox">
+            <div id="crypto-list">
+                <div class="cryptolistheader">
+                    <b>All cryptocurrencies available for trading:</b>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <script>
+      // Function to convert USD to Bitcoin
+      function convertToBitcoin(usdAmount, callback) {
+          // API endpoint for real-time conversion
+          const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd';
+  
+          // Make an AJAX request to fetch the exchange rate
+          $.getJSON(url, function (data) {
+              const exchangeRate = data.bitcoin.usd; // Get the exchange rate
+              const bitcoinAmount = usdAmount / exchangeRate; // Convert USD to Bitcoin
+              callback(bitcoinAmount); // Invoke the callback with the converted amount
+          });
+      }
+  
+      // Function to update the crypto balance
+      function updateCryptoBalance() {
+          const usdBalance = parseFloat($('.usdbalance').text());
+          convertToBitcoin(usdBalance, function (bitcoinAmount) {
+              $('.cryptobalance').text(bitcoinAmount.toFixed(8)); // Update the cryptobalance span
+          });
+      }
+  
+      // Call the updateCryptoBalance function initially
+      updateCryptoBalance();
+
+
+      // Function to convert USD to Ethereum
+    function convertToEthereum(ethusdAmount, callback) {
+        // API endpoint for real-time conversion
+        const url = 'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd';
+
+        // Make an AJAX request to fetch the exchange rate
+        $.getJSON(url, function (data) {
+            const exchangeRate = data.ethereum.usd; // Get the exchange rate
+            const ethereumAmount = ethusdAmount / exchangeRate; // Convert USD to ethereum
+            callback(ethereumAmount); // Invoke the callback with the converted amount
+        });
+    }
+
+    // Function to update the crypto balance
+    function updateETHBalance() {
+        const ethusdAmount = parseFloat($('.ethusdAmount').text());
+        convertToEthereum(ethusdAmount, function (ethereum) {
+            $('.ethbalance').text(ethereum.toFixed(6)); // Update the cryptobalance span
+        });
+    }
+
+    // Call the updateCryptoBalance function initially
+    updateETHBalance();
+
+     // Function to convert USD to Litecoin
+     function convertToLitecoin(ltcusdAmount, callback) {
+        // API endpoint for real-time conversion
+        const url = 'https://api.coingecko.com/api/v3/simple/price?ids=litecoin&vs_currencies=usd';
+
+        // Make an AJAX request to fetch the exchange rate
+        $.getJSON(url, function (data) {
+            const exchangeRate = data.litecoin.usd; // Get the exchange rate
+            const litecoinAmount = ltcusdAmount / exchangeRate; // Convert USD to litecoin
+            callback(litecoinAmount); // Invoke the callback with the converted amount
+        });
+    }
+
+    // Function to update the crypto balance
+    function updateLTCBalance() {
+        const ltcusdAmount = parseFloat($('.ltcusdAmount').text());
+        convertToLitecoin(ltcusdAmount, function (litecoin) {
+            $('.ltcbalance').text(litecoin.toFixed(6)); // Update the cryptobalance span
+        });
+    }
+
+    // Call the updateCryptoBalance function initially
+    updateLTCBalance();
+
+  </script>
+
+    <script>
+      //   const preferredCryptos = [
+      //     'bitcoin', 'ethereum', 'litecoin', 'tether', 'usd-coin',
+      // 'ripple', 'binancecoin', 'dogecoin', 'lido-staked-ether',
+      // 'cardano', 'osmosis', 'solana', 'tron', 'matic-network',
+      // 'shiba-inu', 'binance-usd', 'dai', 'bitcoin-cash', 'polkadot',
+      // 'wrapped-bitcoin'
+      //   ];
+      const preferredCryptos = [
+          'bitcoin', 'ethereum', 'litecoin', 'solana', 'matic-network', 'cardano', 'dogecoin', 'ripple', 'polkadot'
+        ];
+    
+        axios.get(`https://api.coingecko.com/api/v3/coins/markets?ids=${preferredCryptos.join(',')}&vs_currency=usd&order=market_cap_desc&sparkline=true`)
+          .then(response => {
+            const cryptoData = response.data;
+            const cryptoListContainer = document.getElementById('crypto-list');
+    
+            cryptoData.forEach(crypto => {
+              const cryptoLink = document.createElement('a');
+              cryptoLink.href = `/trade/${crypto.id}`;
+              cryptoLink.classList.add('currencylinks');
+    
+              const cryptoItem = document.createElement('div');
+              cryptoItem.classList.add('cryptolistbox');
+    
+              const cryptoImgBox = document.createElement('div');
+              cryptoImgBox.classList.add('cryptoimgbox', 'cryptoinfo');
+              const img = document.createElement('img');
+              img.src = crypto.image;
+              cryptoImgBox.appendChild(img);
+    
+              const cryptoNameBox = document.createElement('div');
+              cryptoNameBox.classList.add('cryptonamebox', 'cryptoinfo');
+              const h6 = document.createElement('h6');
+              h6.textContent = crypto.name;
+              const small = document.createElement('small');
+              small.textContent = crypto.symbol.toUpperCase();
+              cryptoNameBox.appendChild(h6);
+              cryptoNameBox.appendChild(small);
+    
+              const cryptoSpikeBox = document.createElement('div');
+              cryptoSpikeBox.classList.add('cryptospikebox', 'cryptoinfo');
+              const canvas = document.createElement('canvas');
+              canvas.id = `chart-${crypto.id}`;
+              canvas.width = 100;
+              canvas.height = 50;
+              cryptoSpikeBox.appendChild(canvas);
+    
+              const cryptoPriceBox = document.createElement('div');
+              cryptoPriceBox.classList.add('cryptopricebox', 'cryptoinfo');
+              const h6Price = document.createElement('h6');
+              h6Price.textContent = `$ ${crypto.current_price}`;
+              const smallPrice = document.createElement('small');
+              const priceChange24h = crypto.price_change_percentage_24h;
+              smallPrice.textContent = `${priceChange24h > 0 ? '+' : ''}${priceChange24h.toFixed(2)}%`;
+              smallPrice.classList.add(priceChange24h > 0 ? 'positive-change' : 'negative-change');
+              cryptoPriceBox.appendChild(h6Price);
+              cryptoPriceBox.appendChild(smallPrice);
+    
+            //   cryptoLink.appendChild(cryptoImgBox);
+            //   cryptoLink.appendChild(cryptoNameBox);
+            //   cryptoLink.appendChild(cryptoSpikeBox);
+            //   cryptoLink.appendChild(cryptoPriceBox);
+    
+            //   cryptoItem.appendChild(cryptoLink);
+            //   cryptoListContainer.appendChild(cryptoItem);
+    
+            cryptoItem.appendChild(cryptoImgBox);
+              cryptoItem.appendChild(cryptoNameBox);
+              cryptoItem.appendChild(cryptoSpikeBox);
+              cryptoItem.appendChild(cryptoPriceBox);
+    
+              cryptoLink.appendChild(cryptoItem);
+              cryptoListContainer.appendChild(cryptoLink);
+    
+              const ctx = document.getElementById(`chart-${crypto.id}`).getContext('2d');
+              const sparkline = crypto.sparkline_in_7d.price;
+              new Chart(ctx, {
+                type: 'line',
+                data: {
+                  labels: Array.from({ length: sparkline.length }, (_, i) => i.toString()),
+                  datasets: [{
+                    data: sparkline,
+                    borderColor: priceChange24h > 0 ? 'green' : 'red',
+                    backgroundColor: 'transparent',
+                    borderWidth: 1,
+                    pointRadius: 0
+                  }]
+                },
+                options: {
+                  responsive: false,
+                  maintainAspectRatio: false,
+                  scales: {
+                    x: {
+                      display: false
+                    },
+                    y: {
+                      display: false
+                    }
+                  },
+                  elements: {
+                    line: {
+                      tension: 0
+                    }
+                  },
+                  plugins: {
+                    legend: {
+                      display: false
+                    },
+                    tooltip: {
+                      enabled: false
+                    }
+                  }
+                }
+              });
+            });
+          })
+          .catch(error => {
+            console.error('Error fetching crypto data:', error);
+          });
+      </script>
+
+
+
+  <script src="/script/app.js"></script>
+</body>
+</html>

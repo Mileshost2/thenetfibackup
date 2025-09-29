@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate</title>
+    <link rel="stylesheet" href="/stylesheets/user/realestate.css">
+    <style>
+        .activerealestatelink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activerealestatelink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+
+        <div id="pageintrobox">
+            <div id="innerpageintrobox">
+                <h5>Real Estate</h5>
+                <p>Invest in projects and earn passive income.</p>
+                
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="projectsbox">
+            <div id="innerprojectsbox">
+                <div id="projectactionbox1">
+                    <h6>Projects</h6>
+        
+                    <div class="button-container">
+                        <button id="btn-opened" onclick="showContainer('opened-container', 'btn-opened')">Opened</button>
+                        <button id="btn-closed" onclick="showContainer('closed-container', 'btn-closed')">Closed</button>
+                        <button id="btn-running" onclick="showContainer('running-container', 'btn-running')">Running</button>
+                    </div>
+                </div>
+
+
+                <div class="projectslist" id="opened-container">
+
+                    <div class="projectcard">
+                        <div class="projectcardsection1">
+                            <img src="/img/project6.png" class="projectimg" alt="project">
+                        </div>
+                        <div class="projectcardwriteup">
+                            <h5>Go Store In Nashville</h5>
+                        </div>
+                        <div class="projectcardwriteup">
+                            <p>                                
+                                Class A self-storage development in one of Nashville's fastest growing suburbs with constrained supply and a high barrier to entry.                                </p>
+                        </div>
+                        
+                        <div class="projectcardspangroup">
+                            <span>
+                                <p>$50K</p>
+                                <small>Minimum</small>
+                            </span>
+                            <span>
+                                <p>15% Daily</p>
+                                <small>ROI</small>
+                            </span>
+                            <span>
+                                <p>Fixed Income</p>
+                                <small>Strategy</small>
+                            </span>
+                        </div>
+                        
+                        <div class="projectactionbox">
+                            <a href="/dashboard/project-1" class="btn btn-secondary projectactionboxbtn viewbtn">View Project</a>
+                            <button type="button" class="btn btn-primary projectactionboxbtn" data-bs-toggle="modal" data-bs-target="#investModal6">
+                                Invest Now
+                            </button>
+
+                            <div class="modal fade" id="investModal6" tabindex="-1" aria-labelledby="investModal6Label" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <form action="/dashboard/real-estate" method="post" id="stakeform">
+
+                                                <div class="stakeformgroup mt-2">
+                                                    <label for="project">Project: </label>
+                                                    <input class="form-control" type="text" placeholder="Project" name="currency" value="Go Store In Nashville" id="project" required readonly>
+                                                </div>
+
+                                                <input type="number" value="50000" name="minamount" hidden readonly required>
+
+                                                <div class="stakeformgroup mt-2">
+                                                    <label for="investedamount6">Amount ($): </label>
+                                                    <input class="form-control" type="number" placeholder="Amount" name="amount" value="" id="investedamount6" required>
+                                                </div>
+
+                                                <div class="stakeinfo">
+                                                    <p>Account Balance:</p>
+                                                    <p>$<%= user.wallet.toLocaleString() %></p>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <label for="duration6">Duration:</label>
+                                                    <select name="duration"class="form-control" id="duration6" required>
+                                                        <option value="">Select Duration</option>
+                                                        <option value="3 Months">3 Months</option>
+                                                        <option value="6 Months">6 Months</option>
+                                                        <option value="9 Months">9 Months</option>
+                                                        <option value="1 Year">1 Year</option>
+                                                        <option value="2 Years">2 Years</option>
+                                                        <option value="3 Years">3 Years</option>
+                                                        <option value="4 Years">4 Years</option>
+                                                        <option value="5 Years">5 Years</option>
+                                                        <option value="6 Years">6 Years</option>
+                                                        <option value="7 Years">7 Years</option>
+                                                        <option value="8 Years">8 Years</option>
+                                                        <option value="9 Years">9 Years</option>
+                                                        <option value="10 Years">10 Years</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <label for="roi6">ROI (%) </label>
+                                                    <input class="form-control" type="text" placeholder="" name="roi" value="15% Daily" id="roi6" required readonly>
+                                                </div>
+
+                                                <div class="stakeformgroup">
+                                                    <span>Total returns + initial capital ($):</span>
+                                                    <input type="amount" class="form-control" id="expectedincome6" name="expectedincome" placeholder="Expected Income" aria-label="Expected Income" required readonly>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary mt-3 w-100">Proceed</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                        <div class="projectcard">
+                            <div class="projectcardsection1">
+                                <img src="/img/project1.png" class="projectimg" alt="project">
+                            </div>
+                            <div class="projectcardwriteup">
+                                <h5>Bridge Labs at Pegasus Park</h5>
+                            </div>
+                            <div class="projectcardwriteup">
+                                <p>                                
+                                    Life science re-development within a thriving new biotech-focused campus in Dallas, recognized as one of the top emerging life science markets.
+                                </p>
+                            </div>
+                            
+                            <div class="projectcardspangroup">
+                                <span>
+                                    <p>$62K</p>
+                                    <small>Minimum</small>
+                                </span>
+                                <span>
+                                    <p>19% Daily</p>
+                                    <small>ROI</small>
+                                </span>
+                                <span>
+                                    <p>Fixed Income</p>
+                                    <small>Strategy</small>
+                                </span>
+                            </div>
+                            
+                            <div class="projectactionbox">
+                                <a href="/dashboard/project-2" class="btn btn-secondary projectactionboxbtn viewbtn">View Project</a>
+
+                                    <button type="button" class="btn btn-primary projectactionboxbtn" data-bs-toggle="modal" data-bs-target="#investModal1">
+                                        Invest Now
+                                    </button>
+
+                                    <div class="modal fade" id="investModal1" tabindex="-1" aria-labelledby="investModal1Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <form action="/dashboard/real-estate" method="post" id="stakeform">
+        
+                                                        <div class="stakeformgroup mt-2">
+                                                            <label for="project">Project: </label>
+                                                            <input class="form-control" type="text" placeholder="Project" name="currency" value="Bridge Labs at Pegasus Park" id="project" required readonly>
+                                                        </div>
+
+                                                        <input type="number" value="62000" name="minamount" hidden readonly required>
+        
+                                                        <div class="stakeformgroup mt-2">
+                                                            <label for="currency">Amount ($): </label>
+                                                            <input class="form-control" type="number" placeholder="Amount" name="amount" value="" id="investedamount" required>
+                                                        </div>
+        
+                                                        <div class="stakeinfo">
+                                                            <p>Account Balance:</p>
+                                                            <p>$<%= user.wallet.toLocaleString() %></p>
+                                                        </div>
+        
+                                                        <div class="stakeformgroup">
+                                                            <label for="duration">Duration:</label>
+                                                            <select name="duration"class="form-control" id="duration" required>
+                                                                <option value="">Select Duration</option>
+                                                                <option value="3 Months">3 Months</option>
+                                                                <option value="6 Months">6 Months</option>
+                                                                <option value="9 Months">9 Months</option>
+                                                                <option value="1 Year">1 Year</option>
+                                                                <option value="2 Years">2 Years</option>
+                                                                <option value="3 Years">3 Years</option>
+                                                                <option value="4 Years">4 Years</option>
+                                                                <option value="5 Years">5 Years</option>
+                                                                <option value="6 Years">6 Years</option>
+                                                                <option value="7 Years">7 Years</option>
+                                                                <option value="8 Years">8 Years</option>
+                                                                <option value="9 Years">9 Years</option>
+                                                                <option value="10 Years">10 Years</option>
+                                                            </select>
+                                                        </div>
+        
+                                                        <div class="stakeformgroup">
+                                                            <label for="roi">ROI (%) </label>
+                                                            <input class="form-control" type="text" placeholder="" name="roi" value="19% Daily" id="roi" required readonly>
+                                                        </div>
+        
+                                                        <div class="stakeformgroup">
+                                                            <span>Total returns + initial capital ($):</span>
+                                                            <input type="amount" class="form-control" id="expectedincome" name="expectedincome" placeholder="Expected Income" aria-label="Expected Income" required readonly>
+                                                        </div>
+        
+                                                        <button type="submit" class="btn btn-primary mt-3 w-100">Proceed</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+
+                            </div>
+
+                        </div>
+
+                        <div class="projectcard">
+                            <div class="projectcardsection1">
+                                <img src="/img/project2.png" class="projectimg" alt="project">
+                            </div>
+                            <div class="projectcardwriteup">
+                                <h5>Fabian Labs, Palo Alto</h5>
+                            </div>
+                            <div class="projectcardwriteup">
+                                <p>                                
+                                    Two-building life science conversion in the heart of Silicon Valley and minutes from Stanford University, one of the top U.S. research institutions.                                </p>
+                            </div>
+                            
+                            <div class="projectcardspangroup">
+                                <span>
+                                    <p>$69K</p>
+                                    <small>Minimum</small>
+                                </span>
+                                <span>
+                                    <p>21% Daily</p>
+                                    <small>ROI</small>
+                                </span>
+                                <span>
+                                    <p>Growth & Income</p>
+                                    <small>Strategy</small>
+                                </span>
+                            </div>
+                            
+                            <div class="projectactionbox">
+                                <a href="/dashboard/project-3" class="btn btn-secondary projectactionboxbtn viewbtn">View Project</a>
+
+                                <button type="button" class="btn btn-primary projectactionboxbtn" data-bs-toggle="modal" data-bs-target="#investModal2">
+                                    Invest Now
+                                </button>
+
+                                <div class="modal fade" id="investModal2" tabindex="-1" aria-labelledby="investModal2Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <form action="/dashboard/real-estate" method="post" id="stakeform">
+    
+                                                    <div class="stakeformgroup mt-2">
+                                                        <label for="project">Project: </label>
+                                                        <input class="form-control" type="text" placeholder="Project" name="currency" value="Fabian Labs, Palo Alto" id="project" required readonly>
+                                                    </div>
+
+                                                    <input type="number" value="69000" name="minamount" hidden readonly required>
+    
+                                                    <div class="stakeformgroup mt-2">
+                                                        <label for="investedamount2">Amount ($): </label>
+                                                        <input class="form-control" type="number" placeholder="Amount" name="amount" value="" id="investedamount2" required>
+                                                    </div>
+    
+                                                    <div class="stakeinfo">
+                                                        <p>Account Balance:</p>
+                                                        <p>$<%= user.wallet.toLocaleString() %></p>
+                                                    </div>
+    
+                                                    <div class="stakeformgroup">
+                                                        <label for="duration2">Duration:</label>
+                                                        <select name="duration"class="form-control" id="duration2" required>
+                                                            <option value="">Select Duration</option>
+                                                            <option value="3 Months">3 Months</option>
+                                                            <option value="6 Months">6 Months</option>
+                                                            <option value="9 Months">9 Months</option>
+                                                            <option value="1 Year">1 Year</option>
+                                                            <option value="2 Years">2 Years</option>
+                                                            <option value="3 Years">3 Years</option>
+                                                            <option value="4 Years">4 Years</option>
+                                                            <option value="5 Years">5 Years</option>
+                                                            <option value="6 Years">6 Years</option>
+                                                            <option value="7 Years">7 Years</option>
+                                                            <option value="8 Years">8 Years</option>
+                                                            <option value="9 Years">9 Years</option>
+                                                            <option value="10 Years">10 Years</option>
+                                                        </select>
+                                                    </div>
+    
+                                                    <div class="stakeformgroup">
+                                                        <label for="roi2">ROI (%) </label>
+                                                        <input class="form-control" type="text" placeholder="" name="roi" value="21% Daily" id="roi2" required readonly>
+                                                    </div>
+    
+                                                    <div class="stakeformgroup">
+                                                        <span>Total returns + initial capital ($):</span>
+                                                        <input type="amount" class="form-control" id="expectedincome2" name="expectedincome" placeholder="Expected Income" aria-label="Expected Income" required readonly>
+                                                    </div>
+    
+                                                    <button type="submit" class="btn btn-primary mt-3 w-100">Proceed</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    
+
+                            </div>
+
+                        </div>
+
+                        <div class="projectcard">
+                            <div class="projectcardsection1">
+                                <img src="/img/project3.png" class="projectimg" alt="project">
+                            </div>
+                            <div class="projectcardwriteup">
+                                <h5>Palmetto Industrial Park</h5>
+                            </div>
+                            <div class="projectcardwriteup">
+                                <p>                                
+                                    Acquisition of a newly constructed three-building industrial property, already garnering interest from prospective tenants.                                </p>
+                            </div>
+                            
+                            <div class="projectcardspangroup">
+                                <span>
+                                    <p>$77K</p>
+                                    <small>Minimum</small>
+                                </span>
+                                <span>
+                                    <p>24% Daily</p>
+                                    <small>ROI</small>
+                                </span>
+                                <span>
+                                    <p>Fixed Income</p>
+                                    <small>Strategy</small>
+                                </span>
+                            </div>
+                            
+                            <div class="projectactionbox">
+                                <a href="/dashboard/project-4" class="btn btn-secondary projectactionboxbtn viewbtn">View Project</a>
+
+                                <button type="button" class="btn btn-primary projectactionboxbtn" data-bs-toggle="modal" data-bs-target="#investModal3">
+                                    Invest Now
+                                </button>
+
+                                <div class="modal fade" id="investModal3" tabindex="-1" aria-labelledby="investModal3Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <form action="/dashboard/real-estate" method="post" id="stakeform">
+    
+                                                    <div class="stakeformgroup mt-2">
+                                                        <label for="project">Project: </label>
+                                                        <input class="form-control" type="text" placeholder="Project" name="currency" value="Palmetto Industrial Park" id="project" required readonly>
+                                                    </div>
+
+                                                    <input type="number" value="77000" name="minamount" hidden readonly required>
+    
+                                                    <div class="stakeformgroup mt-2">
+                                                        <label for="investedamount3">Amount ($): </label>
+                                                        <input class="form-control" type="number" placeholder="Amount" name="amount" value="" id="investedamount3" required>
+                                                    </div>
+    
+                                                    <div class="stakeinfo">
+                                                        <p>Account Balance:</p>
+                                                        <p>$<%= user.wallet.toLocaleString() %></p>
+                                                    </div>
+    
+                                                    <div class="stakeformgroup">
+                                                        <label for="duration3">Duration:</label>
+                                                        <select name="duration"class="form-control" id="duration3" required>
+                                                            <option value="">Select Duration</option>
+                                                            <option value="3 Months">3 Months</option>
+                                                            <option value="6 Months">6 Months</option>
+                                                            <option value="9 Months">9 Months</option>
+                                                            <option value="1 Year">1 Year</option>
+                                                            <option value="2 Years">2 Years</option>
+                                                            <option value="3 Years">3 Years</option>
+                                                            <option value="4 Years">4 Years</option>
+                                                            <option value="5 Years">5 Years</option>
+                                                            <option value="6 Years">6 Years</option>
+                                                            <option value="7 Years">7 Years</option>
+                                                            <option value="8 Years">8 Years</option>
+                                                            <option value="9 Years">9 Years</option>
+                                                            <option value="10 Years">10 Years</option>
+                                                        </select>
+                                                    </div>
+    
+                                                    <div class="stakeformgroup">
+                                                        <label for="roi3">ROI (%) </label>
+                                                        <input class="form-control" type="text" placeholder="" name="roi" value="24% Daily" id="roi3" required readonly>
+                                                    </div>
+    
+                                                    <div class="stakeformgroup">
+                                                        <span>Total returns + initial capital ($):</span>
+                                                        <input type="amount" class="form-control" id="expectedincome3" name="expectedincome" placeholder="Expected Income" aria-label="Expected Income" required readonly>
+                                                    </div>
+    
+                                                    <button type="submit" class="btn btn-primary mt-3 w-100">Proceed</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+
+                            </div>
+
+                        </div>
+
+                        <div class="projectcard">
+                            <div class="projectcardsection1">
+                                <img src="/img/project4.png" class="projectimg" alt="project">
+                            </div>
+                            <div class="projectcardwriteup">
+                                <h5>Hilton Philadelphia City Avenue</h5>
+                            </div>
+                            <div class="projectcardwriteup">
+                                <p>                                
+                                    Discounted acquisition of a recently renovated hotel property in Philadelphia with below-market, assumable debt.                                </p>
+                            </div>
+                            
+                            <div class="projectcardspangroup">
+                                <span>
+                                    <p>$90K</p>
+                                    <small>Minimum</small>
+                                </span>
+                                <span>
+                                    <p>27% Daily</p>
+                                    <small>ROI</small>
+                                </span>
+                                <span>
+                                    <p>Growth & Income</p>
+                                    <small>Strategy</small>
+                                </span>
+                            </div>
+                            
+                            <div class="projectactionbox">
+                                <a href="/dashboard/project-5" class="btn btn-secondary projectactionboxbtn viewbtn">View Project</a>
+
+                                <button type="button" class="btn btn-primary projectactionboxbtn" data-bs-toggle="modal" data-bs-target="#investModal4">
+                                    Invest Now
+                                </button>
+
+                                <div class="modal fade" id="investModal4" tabindex="-1" aria-labelledby="investModal4Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <form action="/dashboard/real-estate" method="post" id="stakeform">
+    
+                                                    <div class="stakeformgroup mt-2">
+                                                        <label for="project">Project: </label>
+                                                        <input class="form-control" type="text" placeholder="Project" name="currency" value="Hilton Philadelphia City Avenue" id="project" required readonly>
+                                                    </div>
+
+                                                    <input type="number" value="90000" name="minamount" hidden readonly required>
+    
+                                                    <div class="stakeformgroup mt-2">
+                                                        <label for="investedamount4">Amount ($): </label>
+                                                        <input class="form-control" type="number" placeholder="Amount" name="amount" value="" id="investedamount4" required>
+                                                    </div>
+    
+                                                    <div class="stakeinfo">
+                                                        <p>Account Balance:</p>
+                                                        <p>$<%= user.wallet.toLocaleString() %></p>
+                                                    </div>
+    
+                                                    <div class="stakeformgroup">
+                                                        <label for="duration4">Duration:</label>
+                                                        <select name="duration"class="form-control" id="duration4" required>
+                                                            <option value="">Select Duration</option>
+                                                            <option value="3 Months">3 Months</option>
+                                                            <option value="6 Months">6 Months</option>
+                                                            <option value="9 Months">9 Months</option>
+                                                            <option value="1 Year">1 Year</option>
+                                                            <option value="2 Years">2 Years</option>
+                                                            <option value="3 Years">3 Years</option>
+                                                            <option value="4 Years">4 Years</option>
+                                                            <option value="5 Years">5 Years</option>
+                                                            <option value="6 Years">6 Years</option>
+                                                            <option value="7 Years">7 Years</option>
+                                                            <option value="8 Years">8 Years</option>
+                                                            <option value="9 Years">9 Years</option>
+                                                            <option value="10 Years">10 Years</option>
+                                                        </select>
+                                                    </div>
+    
+                                                    <div class="stakeformgroup">
+                                                        <label for="roi4">ROI (%) </label>
+                                                        <input class="form-control" type="text" placeholder="" name="roi" value="27% Daily" id="roi4" required readonly>
+                                                    </div>
+    
+                                                    <div class="stakeformgroup">
+                                                        <span>Total returns + initial capital ($):</span>
+                                                        <input type="amount" class="form-control" id="expectedincome4" name="expectedincome" placeholder="Expected Income" aria-label="Expected Income" required readonly>
+                                                    </div>
+    
+                                                    <button type="submit" class="btn btn-primary mt-3 w-100">Proceed</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="projectcard">
+                            <div class="projectcardsection1">
+                                <img src="/img/project5.png" class="projectimg" alt="project">
+                            </div>
+                            <div class="projectcardwriteup">
+                                <h5>The Mirage - Texas State Student Housing</h5>
+                            </div>
+                            <div class="projectcardwriteup">
+                                <p>                                
+                                    A Texas State University student housing acquisition assuming below-market fixed-rate debt, with a renovation and rebranding strategy to seek higher rents and NOI.                                </p>
+                            </div>
+                            
+                            <div class="projectcardspangroup">
+                                <span>
+                                    <p>$102K</p>
+                                    <small>Minimum</small>
+                                </span>
+                                <span>
+                                    <p>29% Daily</p>
+                                    <small>ROI</small>
+                                </span>
+                                <span>
+                                    <p>Fixed Income</p>
+                                    <small>Strategy</small>
+                                </span>
+                            </div>
+                            
+                            <div class="projectactionbox">
+                                <a href="/dashboard/project-6" class="btn btn-secondary projectactionboxbtn viewbtn">View Project</a>
+
+                                <button type="button" class="btn btn-primary projectactionboxbtn" data-bs-toggle="modal" data-bs-target="#investModal5">
+                                    Invest Now
+                                </button>
+
+                                <div class="modal fade" id="investModal5" tabindex="-1" aria-labelledby="investModal5Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <form action="/dashboard/real-estate" method="post" id="stakeform">
+    
+                                                    <div class="stakeformgroup mt-2">
+                                                        <label for="project">Project: </label>
+                                                        <input class="form-control" type="text" placeholder="Project" name="currency" value="The Mirage" id="project" required readonly>
+                                                    </div>
+
+                                                    <input type="number" value="102000" name="minamount" hidden readonly required>
+    
+                                                    <div class="stakeformgroup mt-2">
+                                                        <label for="investedamount5">Amount ($): </label>
+                                                        <input class="form-control" type="number" placeholder="Amount" name="amount" value="" id="investedamount5" required>
+                                                    </div>
+    
+                                                    <div class="stakeinfo">
+                                                        <p>Account Balance:</p>
+                                                        <p>$<%= user.wallet.toLocaleString() %></p>
+                                                    </div>
+    
+                                                    <div class="stakeformgroup">
+                                                        <label for="duration5">Duration:</label>
+                                                        <select name="duration"class="form-control" id="duration5" required>
+                                                            <option value="">Select Duration</option>
+                                                            <option value="3 Months">3 Months</option>
+                                                            <option value="6 Months">6 Months</option>
+                                                            <option value="9 Months">9 Months</option>
+                                                            <option value="1 Year">1 Year</option>
+                                                            <option value="2 Years">2 Years</option>
+                                                            <option value="3 Years">3 Years</option>
+                                                            <option value="4 Years">4 Years</option>
+                                                            <option value="5 Years">5 Years</option>
+                                                            <option value="6 Years">6 Years</option>
+                                                            <option value="7 Years">7 Years</option>
+                                                            <option value="8 Years">8 Years</option>
+                                                            <option value="9 Years">9 Years</option>
+                                                            <option value="10 Years">10 Years</option>
+                                                        </select>
+                                                    </div>
+    
+                                                    <div class="stakeformgroup">
+                                                        <label for="roi5">ROI (%) </label>
+                                                        <input class="form-control" type="text" placeholder="" name="roi" value="29% Daily" id="roi5" required readonly>
+                                                    </div>
+    
+                                                    <div class="stakeformgroup">
+                                                        <span>Total returns + initial capital ($):</span>
+                                                        <input type="amount" class="form-control" id="expectedincome5" name="expectedincome" placeholder="Expected Income" aria-label="Expected Income" required readonly>
+                                                    </div>
+    
+                                                    <button type="submit" class="btn btn-primary mt-3 w-100">Proceed</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                       
+                </div>
+
+                <div class="projectslist" id="closed-container">
+                    <div class="projectcard">
+                        <div class="projectcardsection1">
+                            <img src="/img/closedproject1.png" class="projectimg" alt="project">
+                        </div>
+                        <div class="projectcardwriteup">
+                            <h5>Tesla Build-to-Suit Orlando</h5>
+                        </div>
+                        <div class="projectcardwriteup">
+                            <p>                                
+                                
+
+                                Development of a custom-built dealership and service center for Tesla, a Fortune 100 company with $850B market cap.                            </p>
+                        </div>
+                        
+                        <div class="projectcardspangroup">
+                            <span>
+                                <p>$18K</p>
+                                <small>Minimum</small>
+                            </span>
+                            <span>
+                                <p>10% Daily</p>
+                                <small>ROI</small>
+                            </span>
+                            <span>
+                                <p>Fixed Income</p>
+                                <small>Strategy</small>
+                            </span>
+                        </div>
+                        
+                        <div class="projectactionbox">
+                            <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="">
+                                Project Closed
+                            </button>
+
+                                
+
+                        </div>
+
+                    </div>
+
+                    <div class="projectcard">
+                        <div class="projectcardsection1">
+                            <img src="/img/closedproject2.png" class="projectimg" alt="project">
+                        </div>
+                        <div class="projectcardwriteup">
+                            <h5>Andover R&D Portfolio</h5>
+                        </div>
+                        <div class="projectcardwriteup">
+                            <p>                                
+                                
+
+                                Two fully leased flex R&D buildings located in Greater Boston's technology corridor, targeting strong quarterly cash flow.*                        </div>
+                        
+                        <div class="projectcardspangroup">
+                            <span>
+                                <p>$16K</p>
+                                <small>Minimum</small>
+                            </span>
+                            <span>
+                                <p>13% Daily</p>
+                                <small>ROI</small>
+                            </span>
+                            <span>
+                                <p>Growth & Income</p>
+                                <small>Strategy</small>
+                            </span>
+                        </div>
+                        
+                        <div class="projectactionbox">
+                            <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="">
+                                Project Closed
+                            </button>
+
+                                
+
+                        </div>
+
+                    </div>
+
+                    <div class="projectcard">
+                        <div class="projectcardsection1">
+                            <img src="/img/closedproject3.png" class="projectimg" alt="project">
+                        </div>
+                        <div class="projectcardwriteup">
+                            <h5>Centra NYC</h5>
+                        </div>
+                        <div class="projectcardwriteup">
+                            <p>                                
+                                
+
+                                Unique off-market recapitalization opportunity for a fully leased luxury apartment high-rise in Midtown Manhattan, just steps from Grand Central Station.                        </div>
+                        
+                        <div class="projectcardspangroup">
+                            <span>
+                                <p>$23K</p>
+                                <small>Minimum</small>
+                            </span>
+                            <span>
+                                <p>18% Daily</p>
+                                <small>ROI</small>
+                            </span>
+                            <span>
+                                <p>Fixed Income</p>
+                                <small>Strategy</small>
+                            </span>
+                        </div>
+                        
+                        <div class="projectactionbox">
+                            <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="">
+                                Project Closed
+                            </button>
+
+                                
+
+                        </div>
+
+                    </div>
+
+                    <div class="projectcard">
+                        <div class="projectcardsection1">
+                            <img src="/img/closedproject4.png" class="projectimg" alt="project">
+                        </div>
+                        <div class="projectcardwriteup">
+                            <h5>Forestview Crest Townhomes</h5>
+                        </div>
+                        <div class="projectcardwriteup">
+                            <p>                                
+                                
+
+                                Opportunistic acquisition of a newly constructed build-to-rent townhome community upon completion, located in suburban Charlotte, one of the Sunbelt's fastest-growing metros.                        </div>
+                        
+                        <div class="projectcardspangroup">
+                            <span>
+                                <p>$45K</p>
+                                <small>Minimum</small>
+                            </span>
+                            <span>
+                                <p>25% Daily</p>
+                                <small>ROI</small>
+                            </span>
+                            <span>
+                                <p>Growth & Income</p>
+                                <small>Strategy</small>
+                            </span>
+                        </div>
+                        
+                        <div class="projectactionbox">
+                            <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="">
+                                Project Closed
+                            </button>
+
+                                
+
+                        </div>
+
+                    </div>
+
+                    <div class="projectcard">
+                        <div class="projectcardsection1">
+                            <img src="/img/closedproject5.png" class="projectimg" alt="project">
+                        </div>
+                        <div class="projectcardwriteup">
+                            <h5>Wynhouse Miami</h5>
+                        </div>
+                        <div class="projectcardwriteup">
+                            <p>                                
+                                
+
+                                Amenity-rich, Class A multifamily development in the heart of Wynwood, one of Miami's most sought-after neighborhoods for young professionals.                        </div>
+                        
+                        <div class="projectcardspangroup">
+                            <span>
+                                <p>$19K</p>
+                                <small>Minimum</small>
+                            </span>
+                            <span>
+                                <p>!5% Daily</p>
+                                <small>ROI</small>
+                            </span>
+                            <span>
+                                <p>Fixed Income</p>
+                                <small>Strategy</small>
+                            </span>
+                        </div>
+                        
+                        <div class="projectactionbox">
+                            <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="">
+                                Project Closed
+                            </button>
+
+                                
+
+                        </div>
+
+                    </div>
+
+                    <div class="projectcard">
+                        <div class="projectcardsection1">
+                            <img src="/img/closedproject6.png" class="projectimg" alt="project">
+                        </div>
+                        <div class="projectcardwriteup">
+                            <h5>Novi at Concord - Preferred Equity</h5>
+                        </div>
+                        <div class="projectcardwriteup">
+                            <p>                                
+                                
+
+                                Three luxury apartment buildings in advanced stages of development in downtown Concord, N.C., a fast-growing Charlotte suburb attracting billions in corporate investment.                        </div>
+                        
+                        <div class="projectcardspangroup">
+                            <span>
+                                <p>$23K</p>
+                                <small>Minimum</small>
+                            </span>
+                            <span>
+                                <p>15% Daily</p>
+                                <small>ROI</small>
+                            </span>
+                            <span>
+                                <p>Fixed Income</p>
+                                <small>Strategy</small>
+                            </span>
+                        </div>
+                        
+                        <div class="projectactionbox">
+                            <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="">
+                                Project Closed
+                            </button>
+
+                                
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="projectslist" id="running-container">
+                    <div class="investmentbox">
+                        <% if (projects.length === 0 ) { %>
+                            <p>You currently have no running project.</p>
+                        <% } else { %>
+                            <% for (investment of projects) { %>
+                                    <a href="/dashboard/project/<%= investment.id %>" class="investment">
+                                        <span>
+                                            <p><%= investment.tradedCurrency%></p>
+                                            <small>Project</small>
+                                        </span>
+            
+                                        <span>
+                                            <p class="investmentpricetag">$<%= investment.investedamount.toLocaleString()%></p>
+                                            <small>Invested Amount</small>
+                                        </span>
+            
+                                        <span>
+                                            <p class="investmentpricetag">$<%= investment.investmentprofit.toLocaleString()%></p>
+                                            <small>Profit</small>
+                                        </span>
+            
+                                    </a>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+      
+    
+    </div>
+    
+
+
+
+    <script>
+        document.getElementById('investedamount').addEventListener('input', calculateExpectedIncome);
+        document.getElementById('duration').addEventListener('change', calculateExpectedIncome);
+    
+        function calculateExpectedIncome() {
+            const amount = parseFloat(document.getElementById('investedamount').value);
+            const roi = parseFloat(document.getElementById('roi').value) / 100; // Convert percentage to decimal
+            const duration = document.getElementById('duration').value;
+    
+            if (!amount || !duration) {
+                document.getElementById('expectedincome').value = '';
+                return;
+            }
+    
+            let days = 0;
+            if (duration.includes('Days')) {
+                days = parseInt(duration);
+            } else if (duration.includes('Month')) {
+                days = parseInt(duration) * 30;
+            } else if (duration.includes('Year')) {
+                days = parseInt(duration) * 365;
+            }
+    
+            const expectedIncome = amount + (roi * amount * days);
+            document.getElementById('expectedincome').value = expectedIncome.toFixed(2); // Round to 2 decimal places
+        }
+    
+        document.getElementById('investedamount2').addEventListener('input', calculateExpectedIncome2);
+        document.getElementById('duration2').addEventListener('change', calculateExpectedIncome2);
+    
+        function calculateExpectedIncome2() {
+            const amount = parseFloat(document.getElementById('investedamount2').value);
+            const roi = parseFloat(document.getElementById('roi2').value) / 100; // Convert percentage to decimal
+            const duration = document.getElementById('duration2').value;
+    
+            if (!amount || !duration) {
+                document.getElementById('expectedincome2').value = '';
+                return;
+            }
+    
+            let days = 0;
+            if (duration.includes('Days')) {
+                days = parseInt(duration);
+            } else if (duration.includes('Month')) {
+                days = parseInt(duration) * 30;
+            } else if (duration.includes('Year')) {
+                days = parseInt(duration) * 365;
+            }
+    
+            const expectedIncome = amount + (roi * amount * days);
+            document.getElementById('expectedincome2').value = expectedIncome.toFixed(2); // Round to 2 decimal places
+        }
+    
+        document.getElementById('investedamount3').addEventListener('input', calculateExpectedIncome3);
+        document.getElementById('duration3').addEventListener('change', calculateExpectedIncome3);
+    
+        function calculateExpectedIncome3() {
+            const amount = parseFloat(document.getElementById('investedamount3').value);
+            const roi = parseFloat(document.getElementById('roi3').value) / 100; // Convert percentage to decimal
+            const duration = document.getElementById('duration3').value;
+    
+            if (!amount || !duration) {
+                document.getElementById('expectedincome3').value = '';
+                return;
+            }
+    
+            let days = 0;
+            if (duration.includes('Days')) {
+                days = parseInt(duration);
+            } else if (duration.includes('Month')) {
+                days = parseInt(duration) * 30;
+            } else if (duration.includes('Year')) {
+                days = parseInt(duration) * 365;
+            }
+    
+            const expectedIncome = amount + (roi * amount * days);
+            document.getElementById('expectedincome3').value = expectedIncome.toFixed(2); // Round to 2 decimal places
+        }
+    
+    
+        document.getElementById('investedamount4').addEventListener('input', calculateExpectedIncome4);
+        document.getElementById('duration4').addEventListener('change', calculateExpectedIncome4);
+    
+        function calculateExpectedIncome4() {
+            const amount = parseFloat(document.getElementById('investedamount4').value);
+            const roi = parseFloat(document.getElementById('roi4').value) / 100; // Convert percentage to decimal
+            const duration = document.getElementById('duration4').value;
+    
+            if (!amount || !duration) {
+                document.getElementById('expectedincome4').value = '';
+                return;
+            }
+    
+            let days = 0;
+            if (duration.includes('Days')) {
+                days = parseInt(duration);
+            } else if (duration.includes('Month')) {
+                days = parseInt(duration) * 30;
+            } else if (duration.includes('Year')) {
+                days = parseInt(duration) * 365;
+            }
+    
+            const expectedIncome = amount + (roi * amount * days);
+            document.getElementById('expectedincome4').value = expectedIncome.toFixed(2); // Round to 2 decimal places
+        }
+    
+
+        document.getElementById('investedamount5').addEventListener('input', calculateExpectedIncome5);
+        document.getElementById('duration5').addEventListener('change', calculateExpectedIncome5);
+    
+        function calculateExpectedIncome5() {
+            const amount = parseFloat(document.getElementById('investedamount5').value);
+            const roi = parseFloat(document.getElementById('roi5').value) / 100; // Convert percentage to decimal
+            const duration = document.getElementById('duration5').value;
+    
+            if (!amount || !duration) {
+                document.getElementById('expectedincome5').value = '';
+                return;
+            }
+    
+            let days = 0;
+            if (duration.includes('Days')) {
+                days = parseInt(duration);
+            } else if (duration.includes('Month')) {
+                days = parseInt(duration) * 30;
+            } else if (duration.includes('Year')) {
+                days = parseInt(duration) * 365;
+            }
+    
+            const expectedIncome = amount + (roi * amount * days);
+            document.getElementById('expectedincome5').value = expectedIncome.toFixed(2); // Round to 2 decimal places
+        }
+
+
+        document.getElementById('investedamount6').addEventListener('input', calculateExpectedIncome6);
+        document.getElementById('duration6').addEventListener('change', calculateExpectedIncome6);
+    
+        function calculateExpectedIncome6() {
+            const amount = parseFloat(document.getElementById('investedamount6').value);
+            const roi = parseFloat(document.getElementById('roi6').value) / 100; // Convert percentage to decimal
+            const duration = document.getElementById('duration6').value;
+    
+            if (!amount || !duration) {
+                document.getElementById('expectedincome6').value = '';
+                return;
+            }
+    
+            let days = 0;
+            if (duration.includes('Days')) {
+                days = parseInt(duration);
+            } else if (duration.includes('Month')) {
+                days = parseInt(duration) * 30;
+            } else if (duration.includes('Year')) {
+                days = parseInt(duration) * 365;
+            }
+    
+            const expectedIncome = amount + (roi * amount * days);
+            document.getElementById('expectedincome6').value = expectedIncome.toFixed(2); // Round to 2 decimal places
+        }
+    </script>
+    
+
+<script>
+    function showContainer(containerId, buttonId) {
+    // Get all asset containers
+    const containers = document.querySelectorAll('.projectslist');
+
+    // Hide all containers
+    containers.forEach(container => {
+        container.style.display = 'none';
+    });
+
+    // Show the selected container
+    document.getElementById(containerId).style.display = 'flex';
+
+    // Remove active class from all buttons
+    const buttons = document.querySelectorAll('.button-container button');
+    buttons.forEach(button => {
+        button.classList.remove('active');
+    });
+
+    // Add active class to the clicked button
+    document.getElementById(buttonId).classList.add('active');
+}
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showContainer('opened-container', 'btn-opened');
+    });
+</script>
+    <script>
+        document.getElementById('file-input').addEventListener('change', function() {
+        const file = this.files[0]; // Get the first file
+        const maxSize = 1 * 1024 * 1024; // 1MB in bytes
+        const fileNameElement = document.getElementById('file-name');
+        const fileErrorElement = document.getElementById('file-error');
+    
+        if (file) {
+            if (file.size > maxSize) {
+                fileErrorElement.style.display = 'block'; // Show error message
+                this.value = ''; // Clear the file input
+                fileNameElement.textContent = ''; // Clear the file name display
+            } else {
+                fileErrorElement.style.display = 'none'; // Hide error message
+                fileNameElement.textContent = `Selected file: ${file.name}`; // Show the file name
+            }
+        } else {
+            fileNameElement.textContent = ''; // Clear the file name display if no file is selected
+        }
+    });
+    
+    </script>
+    <script src="/script/app.js"></script>
+</body>
+</html>

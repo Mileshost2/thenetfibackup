@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Experts</title>
+    <link rel="stylesheet" href="/stylesheets/admin/experttraders.css">
+    <style>
+        .activeexpertlink {
+            background-color: var(--activesidebarlink) !important;
+            color: var(--background) !important;
+            padding: 5px !important;
+            margin: 0 5px !important;
+            width: 95% !important;
+            border-radius: 5px;
+        }
+
+        .activeexpertlink .links-icons {
+            background-color: transparent !important;
+            color: var(--background) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+
+        <div id="pageintrobox">
+            <div id="innerpageintrobox">
+                <h5>Copy Experts</h5>
+                <p>Earn returns from copying professional traders.</p>
+                
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="tradersbox">
+            <div id="innertradersbox">
+                <h6>Expert Traders</h6>
+
+                <div id="traderslist">
+                    <% for (let i=0; i<experttraders.length; i++) { %>
+                        <div class="tradercard">
+                            <div class="tradercardsection1">
+                                <% for (let img of experttraders[i].passport) { %> 
+                                    <img src="<%= img.url %> " class="traderlogo" alt="logo">
+                                <% } %> 
+                                <p><%= experttraders[i].fullname %></p>
+                                
+                            </div>
+                            <div class="tradercardsection3">
+                                <p><%= experttraders[i].numberofsubscribers %> Subscribers</p>
+
+                                <% if (user.accountManagerId === experttraders[i].id )  { %>
+                                    <span class="suscribedtag">Suscribed</span>
+                                <% } %>
+                            </div>
+
+                            <div class="tradercardsection2">
+                                <span>
+                                    <p><%= experttraders[i].wins %></p>
+                                    <small>Wins</small>
+                                </span>
+                                <span>
+                                    <p><%= experttraders[i].losses %></p>
+                                    <small>Losses</small>
+                                </span>
+                                <span>
+                                    <p><%= experttraders[i].winrate %></p>
+                                    <small>Win Rate</small>
+                                </span>
+                                <span>
+                                    <p><%= experttraders[i].profitshare %></p>
+                                    <small>Profit Share</small>
+                                </span>
+                            </div>
+                            
+                            <div class="traderactionbox">
+                                <% if (user.accountManagerId === experttraders[i].id )  { %>
+                                    <!-- <form action="/dashboard/copy-expert/<%= experttraders[i].id %>?_method=PUT" class="" method="post"> -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTrader<%= i %>">
+                                            Unsubscribe
+                                        </button>
+                                    <!-- </form> -->
+
+                                    <div class="modal fade" id="editTrader<%= i %>" tabindex="-1" aria-labelledby="editTrader<%= i %>Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content" style="background-color: transparent;">
+                                            <div class="modal-body">
+                                                <form action="/dashboard/copy-expert/<%= experttraders[i].id %>/unsubscribe?_method=PUT" method="post" id="div2form">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Proceed to Unsubscribe
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                <% } else { %>
+                                    <!-- <form action="/dashboard/copy-expert/<%= experttraders[i].id %>?_method=PUT" class="" method="post"> -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTrader<%= i %>">
+                                            Copy Trader
+                                        </button>
+                                   <!-- </form> -->
+    
+                                    <div class="modal fade" id="editTrader<%= i %>" tabindex="-1" aria-labelledby="editTrader<%= i %>Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content" style="background-color: transparent;">
+                                            <div class="modal-body">
+                                                <form action="/dashboard/copy-expert/<%= experttraders[i].id %>?_method=PUT" method="post" id="div2form">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Proceed to Copy this Trader
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+    
+                                <% } %>
+                               
+                            </div>
+
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+
+      
+    
+    </div>
+    
+
+    <script>
+        document.getElementById('file-input').addEventListener('change', function() {
+        const file = this.files[0]; // Get the first file
+        const maxSize = 1 * 1024 * 1024; // 1MB in bytes
+        const fileNameElement = document.getElementById('file-name');
+        const fileErrorElement = document.getElementById('file-error');
+    
+        if (file) {
+            if (file.size > maxSize) {
+                fileErrorElement.style.display = 'block'; // Show error message
+                this.value = ''; // Clear the file input
+                fileNameElement.textContent = ''; // Clear the file name display
+            } else {
+                fileErrorElement.style.display = 'none'; // Hide error message
+                fileNameElement.textContent = `Selected file: ${file.name}`; // Show the file name
+            }
+        } else {
+            fileNameElement.textContent = ''; // Clear the file name display if no file is selected
+        }
+    });
+    
+    </script>
+    <script src="/script/app.js"></script>
+</body>
+</html>

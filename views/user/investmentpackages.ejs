@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Plans</title>
+    <link rel="stylesheet" href="/stylesheets/user/investmentpackages.css">
+    <style>
+        .activetradelink {
+            color: var(--bottomnavactivecolor) !important;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/usernav')%>
+
+    <div class="contentbox">
+
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"> <small>Trading Plans</small> <i class="fa-solid fa-line-chart headericon"></i></span>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+        <div id="investmentplans">
+            <div id="investmentplansbox">
+                 <div id="investmentplansbox-head">
+                     <p>Select a trading plan to start earning.</p>
+                 </div>
+                 <div class="planscontainer">
+                     <% for (let i=0; i < tradingplans.length; i++) { %>
+                         <div class="planboxes">
+                            <span>
+                                <p>Package Name:</p> 
+                                <small class="accounttype"><%= tradingplans[i].packagename %></small>
+                            </span>
+
+                            <span>
+                                <p>Investment Duration:</p>
+                                <small><%= tradingplans[i].duration %></small>
+                            </span>
+                            <span>
+                                <p>Minimum Amount:</p>
+                                <small>$<%= tradingplans[i].minamount.toLocaleString()  %></small>
+                            </span>
+                            <span>
+                                <p>Maximum Amount:</p>
+                                <small>$<%= tradingplans[i].maxamount.toLocaleString()   %></small>
+                            </span>
+                            <span>
+                                <p>ROI:</p>
+                                <small><%= tradingplans[i].roi %> Per Hour</small>
+                            </span>
+                            
+                            <span>
+                                <p>Service Charge:</p>
+                                <small><%= tradingplans[i].charges %> of profits made.</small>
+                            </span>
+                            <span class="planboxaction">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#packageModal<%= [i] %>">
+                                    Select Package
+                                </button>
+
+                            </span>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="packageModal<%= [i] %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <p>You are about to select <%= tradingplans[i].packagename %> Plan.</p>
+                                            <p>
+                                                To activate this trading plan, please enter your desired amount to trade with 
+                                                which should be withinh  $<%= tradingplans[i].minamount.toLocaleString()  %> -  $ <%= tradingplans[i].maxamount.toLocaleString()  %>.
+                                            </p>
+
+                                            <form action="/dashboard/trading-plans/<%= tradingplans[i].id %>" method="post" class="activateform">
+                                                <input type="number" name="investedamount" class="activateforminput" placeholder="Enter Amount $" required>
+                                                <button class="btn btn-success modalbtn">Proceed</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                         </div>
+                     <% } %> 
+                 </div>
+            </div>
+         </div>
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

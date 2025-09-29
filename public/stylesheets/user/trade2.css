@@ -1,0 +1,467 @@
+body {
+    padding: 0;
+    margin: 0;
+    /* background-color: #26394d !important; */
+}
+
+.headercoinimg {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+}
+
+.bodycoinimg {
+    width: 17px;
+    height: 17px;
+    margin: 5px;
+}
+
+.coinimgbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#currencybox {
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    font-family: 'Teko', sans-serif;
+}
+
+#innercurrencybox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#currencychartbox {
+    width: 100%;
+    height: 500px;
+}
+
+.tradingview-widget-container {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+#currencyinfo {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.currencytradeinfo {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 20%), 0 11px 6px -7px rgba(0, 0, 0, 20%);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 20%), 0 11px 6px -7px rgba(0, 0, 0, 20%);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.tradeinfobox {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.tradeinfobox:nth-of-type(2) {
+    border-left: 3px solid rgb(7, 99, 190);
+    border-right: 3px solid rgb(7, 99, 190);
+}
+
+.tradestatus {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (max-width:770px) {
+    #currencychartbox {
+        width: 100%;
+        height: 400px;
+    }
+    .currencytradeinfo {
+        flex-wrap: wrap;
+    }
+    .tradeinfobox {
+        flex-grow: 1;
+        width: 50%;
+    }
+    .tradeinfobox:nth-of-type(2) {
+        border-left: 3px solid rgb(7, 99, 190);
+        border-right: none;
+    }
+    .tradeinfobox:nth-of-type(3) {
+        border-top: 3px solid rgb(7, 99, 190);
+    }
+}
+
+@media (max-width:500px) {
+    #currencychartbox {
+        width: 100%;
+        height: 300px;
+    }
+    .tradeinfobox {
+        width: 100%;
+    }
+    .tradeinfobox:nth-of-type(2) {
+        border-left: none;
+        border-top: 3px solid rgb(7, 99, 190);
+    }
+}
+
+
+
+/* #balbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    font-family: 'Teko', sans-serif;
+}
+
+#innerbalbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.balspan {
+    padding: 20px;
+    width: 200px;
+    flex-grow: 1;
+    color: var( --foreground);
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 20%), 0 11px 6px -7px rgba(0, 0, 0, 20%);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 20%), 0 11px 6px -7px rgba(0, 0, 0, 20%);
+    border-radius: 5px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    transition: transform 0.3s ease-in-out;
+}
+
+.balcontainer {
+    width: 100%;
+    padding: 5px 0;
+}
+
+.balcontainer:nth-of-type(2) {
+    border-top: 4px solid rgb(7, 99, 190);
+}
+
+.innerbalspan {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+} */
+
+.balinfo i {
+    margin: 0 4px;
+}
+
+  .activestatus {
+    background-color: rgb(12, 121, 230);
+    padding: 6px 10px;
+    border-radius: 4px;
+    color: white;
+  }
+
+  .inactivestatus {
+    background-color: rgb(241, 4, 4);
+    padding: 6px 10px;
+    border-radius: 4px;
+    color: white;
+  }
+
+  .pendingstatus {
+    background-color: rgb(65, 63, 63);
+    padding: 6px 10px;
+    border-radius: 4px;
+    color: white;
+  }
+
+  .actionbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    width: 100%;
+  }
+
+  .depositbtn {
+    /* display: flex;
+    flex-direction: column !important;
+    align-items: center !important; */
+    background-color: var(--background) !important;
+    color: var(--foreground) !important;
+    border: none !important;
+    margin: 5px;
+    padding: 10px 0 !important;
+    -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 20%), 0 11px 6px -7px rgba(0, 0, 0, 20%);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 20%), 0 11px 6px -7px rgba(0, 0, 0, 20%);
+    font-size: 0.75em !important;
+    flex-grow: 1 !important;
+    transition: 0.6s !important;
+  }
+
+  .depositbtn i, .depositbtn b {
+    /* display: block; */
+    margin: 4px;
+  }
+
+  .depositbtn:hover {
+    background-color: rgba(41, 40, 40, 0.473) !important;
+  }
+
+
+  /* @media (max-width:480px) {
+    #balbox {
+        padding: 10px;
+    }
+} */
+
+  @media (max-width:280px) {
+    .actionbox {
+        flex-direction: column;
+    }
+}
+
+.deposittypebox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    color: black;
+}
+
+.typespan {
+    width: 100%;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center
+}
+
+.orangelink {
+    width: 70%;
+    background-color: orangered;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.5s;
+    text-align: center;
+    font-weight: lighter;
+}
+
+.orangelink:hover {
+     color: white;
+    background-color: rgb(192, 58, 10);
+}
+
+.bluelink {
+    width: 70%;
+    background-color: rgb(14, 117, 221);
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.5s;
+    text-align: center;
+    font-weight: lighter;
+}
+
+.bluelink:hover {
+     color: white;
+    background-color: rgb(7, 86, 165);
+}
+
+.modalform {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.modalforminput {
+    width: 100%;
+    padding: 10px;
+}
+
+.modalformbtn {
+    width: 100%;
+    background-color: rgb(14, 117, 221);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    transition: 0.5s;
+    margin-top: 10px;
+}
+
+.modalformbtn:hover {
+     color: white;
+    background-color: rgb(7, 86, 165);
+}
+
+#trackerbox {
+    width: 100%;
+    padding: 20px 0;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
+
+#trackerbtnbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0 20px;
+}
+
+.trackerbtn {
+    background-color: rgb(80, 78, 78);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    margin: 5px;
+}
+
+
+#trackercontentbox {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.deposithistory {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 0.8em;
+}
+
+.deposithistorybox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+    padding: 30px 20px;
+}
+
+.deposithistory p {
+    color: white;
+}
+
+.tablecontainer {
+    width: 100%;
+    overflow-x: auto;
+    
+}
+
+.historytable {
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+    font-size:1em;
+}
+
+
+.historytable thead th {
+    position: sticky;
+    background-color: transparent;
+    top: 0;
+    border-bottom: 1px solid var( --clr-tableBorderColor);
+    padding: 10px 20px;
+    font-weight: lighter;
+    /* border-right: 1px solid black; */
+}
+
+.historytable td {
+    border-bottom: 1px solid var( --clr-tableBorderColor);
+    padding: 10px 20px;
+    font-weight: lighter;
+    white-space: nowrap;
+}
+
+/*
+.historytable tr:nth-child(even) {
+    color: black;
+}
+
+.historytable tr:nth-child(odd) {
+    color: black;
+} */
+
+/* .historytable tr:hover td {
+    color: rgb(35, 113, 190);
+    cursor: pointer;
+    background-color: floralwhite;
+} */
+
+.tablecontainer::-webkit-scrollbar{
+    width: 10px;
+}
+
+.tablecontainer::-webkit-scrollbar-track {
+    -webkit-box-shadow:inset 0 0 10px rgba(0, 0, 0, 0.459)
+}
+
+.tablecontainer::-webkit-scrollbar-thumb {
+    -webkit-box-shadow:inset 0 0 10px rgba(0, 0, 0, 0.534)
+}
+
+
+.linkbtn {
+    text-decoration: none;
+    color: white;
+    background-color: rgb(52, 219, 136);
+    transition: 0.5s;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+.linkbtn {
+    color: white !important;
+    background-color: rgb(24, 172, 98);
+}
+
+.hidden {
+    display: none;
+}
+
+.active {
+    background-color: grey;
+}

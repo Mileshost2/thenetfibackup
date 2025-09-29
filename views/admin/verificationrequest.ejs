@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Requests</title>
+    <link rel="stylesheet" href="/stylesheets/admin/deposithistory.css">
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+      <div id="header">
+        <div id="headerinner">
+            <span class="headerinnerspan"><i class="fa-solid fa-check headericon"></i> <small>Verification Requests</small></span>
+            <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+        </div>
+      </div>
+
+        <div class="flashbox">
+          <% if(success && success.length) { %>
+                 <div class="flashboxsuccess-alert">
+                     <%= success %> 
+                     <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                     
+                 </div>
+             <% } %> 
+         
+             <% if(error && error.length) { %>
+                     <div class="flashboxerror-alert">
+                         <%= error %> 
+                         <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                         
+                     </div>
+             <% } %> 
+             
+      </div>
+
+        <div class="deposithistory">
+           <div class="deposithistorybox">
+            <p>VERIFICATION REQUESTS </p>
+            
+                
+            <div class="tablecontainer">
+                <table class="historytable">
+                    <thead>
+                        <tr>
+                          <th></th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Document Type</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+          
+                      <tbody>
+                        <% if (clients.length > 0) { %> 
+                          <% for (let users of clients ) { %>
+                          <% if ( users.verificationstatus === 'Pending')  { %>
+                            <tr>
+                              <td><li></td>
+                              <td><%= users.firstname %> <%= users.lastname %></td>
+                              <td><%= users.email %></td>
+                              <td><%= users.documenttype %></td>
+                              <td>
+                                <a class="btn btn-success" href="/admin/admin.view-request/<%= users.id %>">View Request</a>
+                                  <!-- <form action="/admin/admin.verificationrequests/<%= users.id %>?_method=PUT" method="post" id="verifyform">
+                                      <button type="submit" id="verifyformbutton" class="btn btn-success">Verify</button>
+                                  </form> -->
+                              </td>
+                            </tr>
+                          <% } %> 
+                          <% } %> 
+                        <% } else { %> 
+                          <td colspan="5">No pending verification request.</td>
+                        <% } %>  
+                      </tbody>
+                  </table>
+            </div>
+
+            
+           </div>
+        </div>
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

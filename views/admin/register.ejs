@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zxx" dir="ltr">
+
+
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#e9e8f0" />
+    <!-- Site Properties -->
+    <title>TheNetFi - Sign Up</title>
+
+    <!-- Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+
+    <link rel="stylesheet" href="/stylesheets/homepage/uikit.min.css">
+    <link rel="stylesheet" href="/stylesheets/homepage/style.css">
+    <link rel="stylesheet" href="/stylesheets/homepage/auth.css">
+</head>
+
+<body class="darkbg">
+    <!-- preloader begin -->
+    <div id="preloader">
+        <img src="/img/logo2.png" style="width: 50px;" class="preloaderimg" alt="Logo">
+    </div>
+    <!-- preloader end -->
+    <main>
+        
+        <!-- section content begin -->
+        
+        <div class="uk-section uk-padding-remove-vertical" id="authbox">
+            <div class="uk-container uk-container-expand" style="padding: 0;">
+                <div class="uk-grid" data-uk-height-viewport="expand: true" style=" background-image: url(/img/crypto3.jpg); background-position: center; background-size: cover; background-repeat: no-repeat; background-color: black; ">
+                    <!-- <div class="uk-width-3-5@m uk-background-cover uk-background-center-right uk-visible@m uk-box-shadow-xlarge" style="background-image: url(/img/crypto3.jpg); padding: 0;">
+                        <div style="width:100%; height: 100%; background-color: rgba(0, 0, 0, 0.616); margin: 0; padding: 0;">
+                        </div>
+                    </div> -->
+                    <div class="uk-width-expand@m uk-flex uk-flex-middle width100" style="background-color: rgba(0, 0, 0, 0.616); justify-content: center;">
+                        <div class="uk-grid uk-flex-center width100" style="padding: 0 15px;">
+                            <div class="uk-width-3-5@m width100">
+                                <div id="authformdiv">
+                                    <!-- module logo begin -->
+                                    <div class="logodiv">
+                                        <a class="logolink" href="/">
+                                            <img class="logoimg" src="/img/logo2.png" data-src="/img/logo2.png" alt="logo" style="width: 50px;">
+                                        </a>
+                                    </div>
+                                    <!-- module logo begin -->
+                                   <div class="logocaptions">
+                                    <p class="uk-text-lead uk-margin-top uk-margin-remove-bottom authtitle">Sign Up</p>
+                                   </div>
+
+                                    <!-- module logo begin -->
+                                    
+                                    <!-- signup form begin -->
+                                    <div class="flashbox">
+                                        <% if(success && success.length) { %>
+                                               <div class="flashboxsuccess-alert">
+                                                   <%= success %> 
+                                                   <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                                   
+                                               </div>
+                                           <% } %> 
+                                       
+                                           <% if(error && error.length) { %>
+                                                   <div class="flashboxerror-alert">
+                                                       <%= error %> 
+                                                       <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                                       
+                                                   </div>
+                                           <% } %> 
+                                           
+                                    </div>
+                                    <form action="/secureadmin.register" method="post" class="uk-grid uk-form" id="authform" >
+                                        
+                                        <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                            <span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"></span>
+                                            <input class="uk-input uk-border-rounded" value="" type="text" name="firstname" placeholder="First Name *" required>
+                                        </div>
+                                        <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                            <span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"></span>
+                                            <input class="uk-input uk-border-rounded" value="" type="text" name="lastname" placeholder="Last Name *" required>
+                                        </div>
+                                        <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                            <span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"></span>
+                                            <input class="uk-input uk-border-rounded" value="" type="email" name="email" placeholder="Email *" required>
+                                        </div>
+                                        <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                            <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
+                                            <input class="uk-input uk-border-rounded" id="password" value="" type="password" name="password" placeholder="Password *" required>
+                                        </div>
+                                        <div class="uk-margin-small uk-width-1-1 uk-inline">
+                                            <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
+                                            <input class="uk-input uk-border-rounded" id="password" value="" type="password" name="confirmpassword" placeholder="Confirm Password *" required>
+                                        </div>
+
+                                        <div class="uk-margin-small uk-width-1-1">
+                                            <button class="uk-button uk-width-1-1 uk-button-primary uk-border-rounded uk-float-left bluebg" type="submit" name="submit">Register</button>
+                                        </div>
+                                    </form>
+                                    <!-- login form end -->
+                                    <!-- <p class="uk-heading-line uk-text-center"><span>Or sign in with</span></p>
+                                    <div class="uk-margin-medium-bottom uk-text-center">
+                                        <a class="uk-button uk-button-small uk-border-rounded in-brand-google" href="#"><i class="fab fa-google uk-margin-small-right"></i>Google</a>
+                                        <a class="uk-button uk-button-small uk-border-rounded in-brand-facebook" href="#"><i class="fab fa-facebook-f uk-margin-small-right"></i>Facebook</a>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- section content end -->
+    </main>
+    <!-- Javascript -->
+    <script>
+        window.addEventListener("load", function() {
+      const preloader = document.getElementById("preloader");
+      // const mainContent = document.getElementById("main-content");
+    
+      preloader.style.opacity = 0; // Fade out preloader smoothly
+      preloader.style.transition = "opacity 1s ease-out";
+    
+      setTimeout(function() {
+        preloader.style.display = "none";
+        // mainContent.style.display = "block";
+      }, 1000); // Delay removal for a second (adjust as needed)
+    });
+    
+      </script>
+    <script src="/scripts/js/vendors/uikit.min.js"></script>
+    <script src="/scripts/js/vendors/indonez.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+
+
+</html>

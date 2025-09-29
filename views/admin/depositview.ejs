@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Info</title>
+    <link rel="stylesheet" href="/stylesheets/admin/confirmdeposit.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="header">
+            <div id="headerinner">
+                <span class="headerinnerspan"><i class="fa-solid fa-money-bill-transfer headericon"></i> <small>Deposit Info</small></span>
+                <span class="headerinnerspan"><a href="/admin/admin.dashboard"><i class="fas fa-project-diagram headericon"></i></a></span>
+            </div>
+          </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        
+
+        <div id="depositbox">
+            <div id="depositmethodbox">
+                <% if (deposit.transactionType === 'Deposit') {%>
+                    <div class="depositmethodboxclass">
+                        <div class="depositviewtitle">
+                            <p>Deposit of $<%= deposit.amount.toLocaleString() %> by <%= depositor.firstname %> </p>
+                        </div>
+                        <span>
+                            <p>Transaction Date:</p>
+                            <small><%= deposit.transactiondate %></small>
+                        </span>
+    
+                        <span>
+                            <p>Depositor's Name:</p> 
+                            <small><%= depositor.firstname%> <%= depositor.lastname%></small>
+                        </span>
+    
+                        <span>
+                            <p>Depositor's Email:</p>
+                            <small><%= depositor.email %></small>
+                        </span>
+                        <span>
+                            <p>Amount Deposited:</p>
+                            <small>$<%= deposit.amount.toLocaleString() %></small>
+                        </span>
+                        <span>
+                            <p>Transaction Method:</p>
+                            <small><%= deposit.transactionmethod %></small>
+                        </span>
+                        <span>
+                            <p>Receiving Address:</p>
+                            <small><%= deposit.companywallet %></small>
+                        </span>
+    
+                        <span>
+                            <p>Status:</p>
+                            <small class="accounttype"><%= deposit.status %></small>
+                        </span>
+    
+                        <span class="depositimgbox">
+                            <% for (let img of deposit.transactionproof) { %> 
+                                <img src="<%= img.url %> " class="depositimg" alt="proof">
+                              <% } %> 
+                        </span>
+    
+                        
+                        <span class="depositmethodboxaction">
+                            <% if (deposit.status !== 'Successful') { %> 
+    
+                                <!-- Button trigger modal -->
+                               <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#verifyD">
+                                   <i class="fa-solid fa-check"></i> Verify
+                               </button>
+       
+                               <button type="button" class="btn btn-danger depositbtn" data-bs-toggle="modal" data-bs-target="#declineD">
+                                   <i class="fa-solid fa-xmark"></i> Decline
+                               </button>
+       
+                           <% } %>
+                        </span>
+
+                         <!-- Modal -->
+                        <div class="modal fade" id="verifyD" tabindex="-1" aria-labelledby="verifyDLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="verifyDLabel">VERIFY DEPOSIT</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Click the button below to verify this deposit
+                                    <form action="/admin/admin.deposit-req/<%= depositor.id %>/verify/<%= deposit.id %>?_method=PUT" method="post" class="verifyform">
+                                        
+                                        <input type="number" min="1" class="form-control mt-2 mb-2" placeholder="Enter amount to be deposited" name="depositedamount" required>
+
+                                        <button type="submit" class="btn btn-primary">Proceed</button>
+                                    </form> 
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="declineD" tabindex="-1" aria-labelledby="declineDLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="declineDLabel">DECLINE DEPOSIT</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Click the button below to decline this deposit.
+                                    <form action="/admin/admin.deposit-req/<%= depositor.id %>/decline/<%= deposit.id %>?_method=PUT" method="post" class="verifyform">
+                                        <button type="submit" class="btn btn-primary">Decline</button>
+                                    </form> 
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                <% } else if (deposit.transactionType === 'Upgrade Fee') { %>
+                    <div class="depositmethodboxclass">
+                        <div class="depositviewtitle">
+                            <p>Payment of $<%= deposit.amount.toLocaleString() %> by <%= depositor.firstname %> for  account upgrade to <%= deposit.narration %>. </p>
+                        </div>
+                        <span>
+                            <p>Transaction Date:</p>
+                            <small><%= deposit.transactiondate %></small>
+                        </span>
+    
+                        <span>
+                            <p>Depositor's Name:</p> 
+                            <small><%= depositor.firstname%> <%= depositor.lastname%></small>
+                        </span>
+    
+                        <span>
+                            <p>Depositor's Email:</p>
+                            <small><%= depositor.email %></small>
+                        </span>
+                        <span>
+                            <p>Amount Deposited:</p>
+                            <small>$<%= deposit.amount.toLocaleString() %></small>
+                        </span>
+                        <span>
+                            <p>Transaction Method:</p>
+                            <small><%= deposit.transactionmethod %></small>
+                        </span>
+                        <span>
+                            <p>Receiving Address:</p>
+                            <small><%= deposit.companywallet %></small>
+                        </span>
+    
+                        <span>
+                            <p>Status:</p>
+                            <small class="accounttype"><%= deposit.status %></small>
+                        </span>
+    
+                        <span class="depositimgbox">
+                            <% for (let img of deposit.transactionproof) { %> 
+                                <img src="<%= img.url %> " class="depositimg" alt="proof">
+                              <% } %> 
+                        </span>
+    
+                        
+                        <span class="depositmethodboxaction">
+                            <% if (deposit.status !== 'Successful') { %> 
+    
+                                <!-- Button trigger modal -->
+                               <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#verifyD">
+                                   <i class="fa-solid fa-check"></i> Approve
+                               </button>
+       
+                               <button type="button" class="btn btn-danger depositbtn" data-bs-toggle="modal" data-bs-target="#declineD">
+                                   <i class="fa-solid fa-xmark"></i> Decline
+                               </button>
+       
+                           <% } %>
+                        </span>
+
+                        <!-- Modal -->
+                            <div class="modal fade" id="verifyD" tabindex="-1" aria-labelledby="verifyDLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="verifyDLabel">VERIFY PAYMENT</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Click the button below to verify this payment and upgrade account.
+                                        <form action="/admin/upgrade-account/<%= depositor.id %>/verify/<%= deposit.id %>?_method=PUT" method="post" class="verifyform">
+                                            <button type="submit" class="btn btn-success">Approve</button>
+                                        </form> 
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="declineD" tabindex="-1" aria-labelledby="declineDLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="declineDLabel">DECLINE DEPOSIT</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Click the button below to decline this deposit.
+                                        <form action="/admin/admin.deposit-req/<%= depositor.id %>/decline/<%= deposit.id %>?_method=PUT" method="post" class="verifyform">
+                                            <button type="submit" class="btn btn-primary">Decline</button>
+                                        </form> 
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        
+                    </div>
+                <% } else if (deposit.transactionType === 'Signal Fee') {%>
+                    <div class="depositmethodboxclass">
+                        <div class="depositviewtitle">
+                            <p>Deposit of $<%= deposit.amount.toLocaleString() %> by <%= depositor.firstname %> for signal payment. </p>
+                        </div>
+                        <span>
+                            <p>Transaction Date:</p>
+                            <small><%= deposit.transactiondate %></small>
+                        </span>
+    
+                        <span>
+                            <p>Depositor's Name:</p> 
+                            <small><%= depositor.firstname%> <%= depositor.lastname%></small>
+                        </span>
+    
+                        <span>
+                            <p>Depositor's Email:</p>
+                            <small><%= depositor.email %></small>
+                        </span>
+                        <span>
+                            <p>Amount Deposited:</p>
+                            <small>$<%= deposit.amount.toLocaleString() %></small>
+                        </span>
+                        <span>
+                            <p>Transaction Method:</p>
+                            <small><%= deposit.transactionmethod %></small>
+                        </span>
+                        <span>
+                            <p>Receiving Address:</p>
+                            <small><%= deposit.companywallet %></small>
+                        </span>
+    
+                        <span>
+                            <p>Status:</p>
+                            <small class="accounttype"><%= deposit.status %></small>
+                        </span>
+    
+                        <span class="depositimgbox">
+                            <% for (let img of deposit.transactionproof) { %> 
+                                <img src="<%= img.url %> " class="depositimg" alt="proof">
+                              <% } %> 
+                        </span>
+    
+                        
+                        <span class="depositmethodboxaction">
+                            <% if (deposit.status !== 'Successful') { %> 
+    
+                                <!-- Button trigger modal -->
+                               <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#verifyD">
+                                   <i class="fa-solid fa-check"></i> Verify
+                               </button>
+       
+                               <button type="button" class="btn btn-danger depositbtn" data-bs-toggle="modal" data-bs-target="#declineD">
+                                   <i class="fa-solid fa-xmark"></i> Decline
+                               </button>
+       
+                           <% } %>
+                        </span>
+
+                         <!-- Modal -->
+                        <div class="modal fade" id="verifyD" tabindex="-1" aria-labelledby="verifyDLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="verifyDLabel">VERIFY DEPOSIT</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Click the button below to verify this payment and activate subscription.
+                                    <form action="/admin/admin.signal/<%= depositor.id %>/verify/<%= deposit.id %>?_method=PUT" method="post" class="verifyform">
+                                        <button type="submit" class="btn btn-primary">Verify</button>
+                                    </form> 
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="declineD" tabindex="-1" aria-labelledby="declineDLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="declineDLabel">DECLINE DEPOSIT</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Click the button below to decline this deposit.
+                                    <form action="/admin/admin.deposit-req/<%= depositor.id %>/decline/<%= deposit.id %>?_method=PUT" method="post" class="verifyform">
+                                        <button type="submit" class="btn btn-primary">Decline</button>
+                                    </form> 
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <% } else if (deposit.transactionType === 'Subscription Fee') {%>
+                        <div class="depositmethodboxclass">
+                            <div class="depositviewtitle">
+                                <p>Deposit of $<%= deposit.amount.toLocaleString() %> by <%= depositor.firstname %> for <%= deposit.narration %> subscription payment. </p>
+                            </div>
+                            <span>
+                                <p>Transaction Date:</p>
+                                <small><%= deposit.transactiondate %></small>
+                            </span>
+        
+                            <span>
+                                <p>Depositor's Name:</p> 
+                                <small><%= depositor.firstname%> <%= depositor.lastname%></small>
+                            </span>
+        
+                            <span>
+                                <p>Depositor's Email:</p>
+                                <small><%= depositor.email %></small>
+                            </span>
+                            <span>
+                                <p>Amount Deposited:</p>
+                                <small>$<%= deposit.amount.toLocaleString() %></small>
+                            </span>
+                            <span>
+                                <p>Transaction Method:</p>
+                                <small><%= deposit.transactionmethod %></small>
+                            </span>
+                            <span>
+                                <p>Receiving Address:</p>
+                                <small><%= deposit.companywallet %></small>
+                            </span>
+        
+                            <span>
+                                <p>Status:</p>
+                                <small class="accounttype"><%= deposit.status %></small>
+                            </span>
+        
+                            <span class="depositimgbox">
+                                <% for (let img of deposit.transactionproof) { %> 
+                                    <img src="<%= img.url %> " class="depositimg" alt="proof">
+                                  <% } %> 
+                            </span>
+        
+                            
+                            <span class="depositmethodboxaction">
+                                <% if (deposit.status !== 'Successful') { %> 
+        
+                                    <!-- Button trigger modal -->
+                                   <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#verifyD">
+                                       <i class="fa-solid fa-check"></i> Verify
+                                   </button>
+           
+                                   <button type="button" class="btn btn-danger depositbtn" data-bs-toggle="modal" data-bs-target="#declineD">
+                                       <i class="fa-solid fa-xmark"></i> Decline
+                                   </button>
+           
+                               <% } %>
+                            </span>
+    
+                             <!-- Modal -->
+                            <div class="modal fade" id="verifyD" tabindex="-1" aria-labelledby="verifyDLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="verifyDLabel">VERIFY DEPOSIT</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Click the button below to verify this payment and activate subscription.
+                                        <form action="/admin/admin.subscription/<%= depositor.id %>/verify/<%= deposit.id %>?_method=PUT" method="post" class="verifyform">
+                                            <button type="submit" class="btn btn-primary">Verify</button>
+                                        </form> 
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+    
+                            <!-- Modal -->
+                            <div class="modal fade" id="declineD" tabindex="-1" aria-labelledby="declineDLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="declineDLabel">DECLINE DEPOSIT</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Click the button below to decline this deposit.
+                                        <form action="/admin/admin.deposit-req/<%= depositor.id %>/decline/<%= deposit.id %>?_method=PUT" method="post" class="verifyform">
+                                            <button type="submit" class="btn btn-primary">Decline</button>
+                                        </form> 
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    <% } %>
+                 
+                
+            </div>
+        </div>
+
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>
