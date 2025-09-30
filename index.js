@@ -30,7 +30,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 // const dbUrl = 'mongodb://localhost:27017/thenetfi';
 
-const dbUrl = 'mongodb+srv://admin:Fa0rV83d5HG8WNsd@cluster0.3xzsq.mongodb.net/thenetfi?retryWrites=true&w=majority';
+const dbUrl = process.env.DB_URL;
 const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const MongoStore = require('connect-mongo');
