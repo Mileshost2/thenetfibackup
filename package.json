@@ -2,10 +2,10 @@
   "name": "fusionfinancialmarket",
   "version": "1.0.0",
   "description": "a trading broker",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "author": "miles",
   "license": "ISC",
